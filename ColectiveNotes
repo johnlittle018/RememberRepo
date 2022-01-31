@@ -1,0 +1,17 @@
+This is where we will store notes like usfull comands 
+
+
+
+
+python manage.py makemigrations polls
+by running makemigrations, you’re telling Django that you’ve made some changes to your models
+
+
+python manage.py migrate
+
+
+
+Change your models (in models.py).
+Run python manage.py makemigrations to create migrations for those changes
+Run python manage.py migrate to apply those changes to the database.
+
