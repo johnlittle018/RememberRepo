@@ -1,0 +1,39 @@
+for running server, go to folder directory and run "for now ignore migrations"
+py manage.py runserver
+
+
+
+// looks at the installed apps and creates any necessary database tables
+according to database settings
+py manage.py migrate
+
+
+when you create an app, it can be linked to for views, but database will not work 
+untill you add it to installed apps in settings.py
+
+
+
+Change your models (in models.py).
+Run python manage.py makemigrations to create migrations for those changes
+Run python manage.py migrate to apply those changes to the database.
+
+
+Allows you to run a python shell in anaconda terminal
+ py manage.py shell
+
+
+
+
+ manage.py migrate
+ manage.py makemigrations polls
+
+
+
+ for creating admin useres that can use the admin sight
+ py manage.py createsuperuser
+ 
+
+
+    Good page to find documentation
+ https://docs.djangoproject.com/en/3.2/genindex/
+
