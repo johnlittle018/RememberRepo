@@ -3,6 +3,13 @@ This is where we will store notes like usfull comands
 
 
 
+Admin info is as follows
+
+username: admin 
+Password: Jupiter987
+
+
+
 python manage.py makemigrations polls
 by running makemigrations, you’re telling Django that you’ve made some changes to your models
 

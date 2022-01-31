@@ -1,0 +1,18 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'Remember/style.css' %}">
+<!-- it is my understanding that stuff surounded with %____% is a way to put python code into html-->
+
+
+
+
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+       <!-- <li><a href="{% url 'Remember:detail' question.id %}">{{ question.question_text }}</a></li> -->
+        <li><a href="/Remember/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Remember are available.</p>
+{% endif %}
