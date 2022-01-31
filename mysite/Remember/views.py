@@ -60,6 +60,36 @@ def loginPage(request):
     return render(request, 'Remember/newPage.html')
 
 
+def pickPatient(request):
+
+    return render(request, 'Remember/newPage.html')
+
+
+## family and admin
+
+def makeQuestion(request):
+
+    return render(request, 'Remember/newPage.html')
+
+def editQuestionnaire(request):
+
+    return render(request, 'Remember/newPage.html')
+
+def editQuestion(request):
+
+    return render(request, 'Remember/newPage.html')
+
+
+
+
+## Patient and Admin
+
+def reviewResults(request):
+
+    return render(request, 'Remember/newPage.html')
+
+
+
 ## Stuff exclusive to patient
 def scrapBook(request):
 
@@ -75,11 +105,36 @@ def patientMenu(request):
     return render(request, 'Remember/newPage.html')
 
 
-def reviewResults(request):
+
+
+## Exclusive to Admin
+
+def adminMenu(request):
+
+    return render(request, 'Remember/newPage.html')
+
+def graphsData(request):
+
+    return render(request, 'Remember/newPage.html')
+
+def inviteFamily(request):
+
+    return render(request, 'Remember/newPage.html')
+
+def inviteAdmin(request):
+
+    return render(request, 'Remember/newPage.html')
+
+def setReminder(request):
 
     return render(request, 'Remember/newPage.html')
 
 
+## Exclusive to family
+
+def familyMainMenu(request):
+
+    return render(request, 'Remember/newPage.html')
 
 
 
