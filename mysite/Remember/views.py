@@ -49,6 +49,63 @@ def detail(request, question_id):
 
 
 
+## new stuff for Remember
+
+
+
+
+### Stuff for everyone
+def loginPage(request):
+
+    return render(request, 'Remember/newPage.html')
+
+
+## Stuff exclusive to patient
+def scrapBook(request):
+
+    return render(request, 'Remember/newPage.html')
+
+
+def takeQuestionnaire(request):
+
+    return render(request, 'Remember/newPage.html')
+
+def patientMenu(request):
+
+    return render(request, 'Remember/newPage.html')
+
+
+def reviewResults(request):
+
+    return render(request, 'Remember/newPage.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'Remember/results.html'
