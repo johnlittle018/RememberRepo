@@ -24,7 +24,7 @@ urlpatterns = [
     
     
     ## Stuff for Patient
-    path('scrapbook/', views.scrapBook, name='scrapbook'),
+    path('scrapbook/', views.scrapbook, name='scrapbook'), #changed Book to book
     path('takeQuestionnaire/', views.takeQuestionnaire, name='takeQuestionnaire'),
     path('patientMenu/', views.patientMenu, name='patientMenu'),
 
@@ -37,7 +37,7 @@ urlpatterns = [
     path('setReminder/', views.setReminder, name='setReminder'),
 
     ## Stuff for Family 
-    path('familyMainMenu/', views.familyMainMenu, name='familyMainMenu'),
+    path('familyMenu/', views.familyMenu, name='familyMenu'), #changed familyMainMenu to familyMenu to match previous notation
 
 
 

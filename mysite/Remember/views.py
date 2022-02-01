@@ -57,27 +57,27 @@ def detail(request, question_id):
 ### Stuff for everyone
 def loginPage(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/loginPage.html')
 
 
 def pickPatient(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/pickPatient.html')
 
 
 ## family and admin
 
 def makeQuestion(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/makeQuestion.html')
 
 def editQuestionnaire(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/editQuestionnaire.html')
 
 def editQuestion(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/editQuestion.html')
 
 
 
@@ -86,23 +86,23 @@ def editQuestion(request):
 
 def reviewResults(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/reviewResults.html')
 
 
 
 ## Stuff exclusive to patient
-def scrapBook(request):
+def scrapbook(request): #changed Book to book
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/patientEx/scrapbook.html')
 
 
 def takeQuestionnaire(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/patientEx/takeQuestionnaire.html')
 
 def patientMenu(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/patientEx/patientMenu.html')
 
 
 
@@ -111,30 +111,30 @@ def patientMenu(request):
 
 def adminMenu(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/adminEx/adminMenu.html')
 
 def graphsData(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/adminEx/graphsData.html')
 
 def inviteFamily(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/adminEx/inviteFamily.html')
 
 def inviteAdmin(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/adminEx/inviteAdmin.html')
 
 def setReminder(request):
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/adminEx/setReminder.html')
 
 
 ## Exclusive to family
 
-def familyMainMenu(request):
+def familyMenu(request): #changed familyMainMenu to familyMenu to be consistent with previous naming convention
 
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/familyEx/familyMenu.html')
 
 
 
