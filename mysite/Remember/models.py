@@ -5,7 +5,7 @@ from django.utils import timezone
 
 # Create your models here.
 
-class Reminder():
+class Reminder(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     time = models.DateTimeField()
     reminder_text = models.CharField(max_length=200)
@@ -14,7 +14,7 @@ class Reminder():
         return '{}\'s reminder, time:{}'.format(self.patient, self.reminder_text)
 
 
-class Patient():
+class Patient(models.Model):
     name = models.CharField(max_length=200)
     username = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
@@ -34,7 +34,7 @@ class User(models.Model):
         return 'user {}'.format(self.name)
 
 
-class PatientClearanceAbstraction
+class PatientClearanceAbstraction(models.Model):
     user = models.ForeignKey(User)
     patient = models.ForeignKey(Patient)
     clearanceLevel = models.IntegerField(default=0) #can use BooleanField, but this allows room for functional expansion
@@ -62,7 +62,7 @@ class Question(models.Model):
         return "%.25s" % '{}'.format(self.question_text) #first 25 characters of the question
 
 
-class Result():
+class Result(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     timeStarted = models.DateTimeField()
     timeEnded = models.DateTimeField()
