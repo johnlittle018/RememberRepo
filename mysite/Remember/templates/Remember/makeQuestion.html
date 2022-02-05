@@ -14,10 +14,6 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
             
-            .bs-example{
-                margin: 20px;        
-            }
-            
             .backButton{
                 width:51px;height:51px;
                 background: transparent url(/../../static/polls/images/backButton.png) no-repeat;
@@ -26,9 +22,13 @@
                 background-size: cover;
                 border: none;
             }
-            .settingsIcon{
 
+
+            .btn btn-secondary{
+                background-color: black;
+                width: 50%;
             }
+
 
             hr {
                 margin-top: 0rem;
@@ -65,6 +65,10 @@
                 transform: translate(-50%, -50%);
                 font-size: 0.8rem;
                 z-index: 1;
+            }
+
+            .btn.btn-secondary.dropdown-toggle {
+                background-color: lightgrey;  
             }
 
             .image-area img {
@@ -104,18 +108,11 @@
         </nav>
 
         <hr/>
-        <div class="d-flex flex-wrap">
+        <div class="d-flex justify-content-around">
             <div class="d-flex justify-content-start">
                 <div class="mr-auto p-2 bd-highlight">
                     <h1>
-                        New Question
-                    </h1>
-                </div>
-            </div>
-        <div class="d-flex justify-content-start">
-                <div class="mr-auto p-2 bd-highlight">
-                    <h1>
-                        for Grandma
+                        New Question for Grandma
                     </h1>
                 </div>
             </div>
@@ -125,19 +122,14 @@
             <div class="d-flex justify-content-center">
                 <div class="p-2 bd-highlight">
                     <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="p-2 bd-highlight">
-                            <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" width="60" class="mb-4">
-                        </div>
-                        <div class="p-2 bd-highlight">
-                            <div class="p-2 bd-highlight">                    <!-- Upload image input-->
-                                <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                                    <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
-                                    <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
-                                    <div class="input-group-append">
-                                        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
-                                    </div>
-                                </div>
+                        <div class="align-self-end">
+                            <div class="p-2 bd-highlight">
+                                <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" width="60">
                             </div>
+                        </div>
+                        <div class="p-2 bd-highlight">                    <!-- Upload image input-->
+                            <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
                         </div>
                     </div>
     
@@ -148,27 +140,27 @@
                     <form>
                         <div class="form-group">
                             <label for="photoDescription" class="text-white">Image Description</label>
-                            <textarea class="form-control" id="photoDescription" rows="3">Your Description</textarea>
+                            <textarea class="form-control" id="photoDescription" rows="3" placeholder="Your Description"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="question" class="text-white">Question:</label>
-                            <textarea class="form-control" id="question" rows="2">Your Question</textarea>
+                            <textarea class="form-control" id="question" rows="2" placeholder="Your Question"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerA" class="text-white">A: </label>
-                            <textarea class="form-control" id="answerA" rows="1">Answer A</textarea>
+                            <textarea class="form-control" id="answerA" rows="1" placeholder="Answer A"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerB" class="text-white">B: </label>
-                            <textarea class="form-control" id="answerB" rows="1">Answer B</textarea>
+                            <textarea class="form-control" id="answerB" rows="1" placeholder="Answer B"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerC" class="text-white">C: </label>
-                            <textarea class="form-control" id="answerC" rows="1">Answer C</textarea>
+                            <textarea class="form-control" id="answerC" rows="1" placeholder="Answer C"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerD" class="text-white">D: </label>
-                            <textarea class="form-control" id="answerD" rows="1">Answer D</textarea>
+                            <textarea class="form-control" id="answerD" rows="1" placeholder="Answer D"></textarea>
                         </div>
                         <label class="text-white">Pick Correct Answer </label>
                         <br>
