@@ -1,7 +1,10 @@
+{% load static %} 
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"> 
+
 <!doctype html>
 <html lang="en">
     <head>
-        <title>editQuestionnaire Page</title>
+        <title>Login</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,26 +13,120 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
-            
-            .bs-example{
-                margin: 20px;        
+
+            h1{
+                font: 400 100px/1.5 'Garamond', Helvetica, sans-serif;
+                color: white;
+                text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);
             }
+
+
+            h1.fadeIn span{
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInAnimation ease 3s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards
+            }
+
+            h1.fadeIn span:nth-of-type(2){
+            animation-delay: 1s;
+            }
+
+            .login-form {
+                opacity: 0;
+                transform: translateY(30px);
+                animation: fadeInAnimation ease 3s;
+                animation-iteration-count: 1;
+                animation-fill-mode: forwards;
+                animation-delay: 3s;
+            }
+
+            @keyframes fadeInAnimation{
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+
+            .container{
+                height: 150px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .login-form {
+                margin: auto;
+                width: 30%;
+                padding: 10px;
+            }
+
+            .login-form form {
+                height: 500px;
+                margin-bottom: 15px;
+                background: #f7f7f7;
+                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+                padding: 30px;
+            }
+
+            .login-form h2 {
+                margin: 0 0 15px;
+            }
+
+            .form-control, .btn {
+                min-height: 60px;
+                border-radius: 5px;
+            }
+
+            .form-group{
+                margin-top: 40px;
+            }
+
+            .btn {    
+                margin-top: 60px;  
+                font-size: 15px;
+                font-weight: bold;
+                min-height: 40px;
+            }
+
         </style>
     </head>
 
     <body>
         <header>
-
-            <h1>loginPage</h1>
+            <div class="container">
+                <h1 class="fadeIn">
+                <span>Welcome</span>
+                <span>to Remember</span>
+                </h1>
+            </div>   
             
         </header>
 
         <!-- All your html stuff here -->
 
-
-
-
-
+        <div class="d-flex justify-content-center">
+            <div class="login-form">
+                <form>
+                    <h2 class="text-center">Log in</h2>       
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="text" class="form-control" placeholder="Your Email" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" placeholder="Your Password" required="required">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                    </div>
+                </form>
+        </div>
+    </body>
+    
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
