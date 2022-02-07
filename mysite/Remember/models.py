@@ -41,9 +41,6 @@ class PatientClearanceAbstraction(models.Model):
     def __str__(self):
         return 'user {} has clearance {} with patient {}'.format(self.user, self.clearanceLevel, self.patient)
 
-
-
-
 class Result(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     timeStarted = models.DateTimeField()
@@ -62,16 +59,16 @@ class Quiz(models.Model):
         return '{}\'s quiz'.format(self.patient) #first 25 characters of the question
 
 class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    description = models.CharField(max_length=200)
+    question_text = models.CharField(max_length=200, default="")
+    description = models.CharField(max_length=200, default="")
     picture = models.FileField(upload_to='uploads/images/', max_length=200) #https://docs.djangoproject.com/en/1.10/ref/models/fields/#django.db.models.FileField
                                                                             #using FileField takes a little extra legwork comapred to CharField
                                                                             #upload_to can be set to any directory, and it can sort by upload date into subdirectories
                                                                             #also consider the ImageField datatype, which requires the Pillow library
-    a1 = models.CharField(max_length=200)
-    a2 = models.CharField(max_length=200)
-    a3 = models.CharField(max_length=200)
-    a4 = models.CharField(max_length=200)
+    a1 = models.CharField(max_length=200, default="")
+    a2 = models.CharField(max_length=200, default="")
+    a3 = models.CharField(max_length=200, default="")
+    a4 = models.CharField(max_length=200, default="")
     answer = models.IntegerField(default=0)
     lastSubAnswer = models.IntegerField(default=0)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
