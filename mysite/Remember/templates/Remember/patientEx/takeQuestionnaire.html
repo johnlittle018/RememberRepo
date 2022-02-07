@@ -1,7 +1,10 @@
+{% load static %} 
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"> 
+
 <!doctype html>
 <html lang="en">
     <head>
-        <title>editQuestionnaire Page</title>
+        <title></title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,27 +14,97 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
             
-            .bs-example{
-                margin: 20px;        
+ 
+            .exitButton{
+                width:51px;height:51px;
+                background: transparent url(/../../static/polls/images/exitButton.png) no-repeat;
+                background-color: transparent;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
             }
+
+            hr {
+                margin-top: 0rem;
+                margin-bottom: 1rem;
+                border: 0;
+                border-top: 5px solid rgba(0, 0, 0, .3);
+            }
+
+            h1{
+                color: white;
+                padding: 3%;
+            }
+
+            .photoImg{
+                border: 5px solid black;
+                width:50%;
+                height:50%;
+            }
+
+            .btn.btn-primary.btn-lg{
+                width:80%;
+                margin: .7%;
+                padding: 1%;
+                opacity: 1;
+                transition: .5s;
+            }
+
+
+
         </style>
     </head>
 
     <body>
         <header>
 
-            <h1>takeQuestionnaire</h1>
             
         </header>
 
         <!-- All your html stuff here -->
 
+        
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <button class="exitButton" onclick="history.back()"></button>
+            </a>
+        </nav>
 
+        <hr/>
 
+        <div class="d-flex justify-content-center">
+            <!--Code of the photo-->
+            <img src="/../../static/polls/images/codeHere.jfif" class="photoImg"> <br>
+        </div>
+        
+        <div class="d-flex justify-content-start">
+            <h1 style="padding-left: 10%;">
+                <!--Code of the corrsponding question-->
+                Who is this?
+            </h1>
+        </div>
+        <div class="d-flex flex-column bd-highlight mb-3">
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="answerSelected()">Block level button</button>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="answerSelected()" >Block level button</button>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="answerSelected()">Block level button</button>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="answerSelected()">Block level button</button>
+            </div>
+        </div>
+  
+        <!-- Optional JavaScript -->
 
+        <script>
+
+        </script>
 
         
-        <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

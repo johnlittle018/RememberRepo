@@ -4,10 +4,12 @@ from . import views
 
 app_name = 'Remember'
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    path('<int:pk>/', views.DetailView.as_view(), name='detail'),
-    path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
-    path('<int:question_id>/vote/', views.vote, name='vote'),
+
+
+    # path('', views.IndexView.as_view(), name='index'),
+    # path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+    # path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
+    # path('<int:question_id>/vote/', views.vote, name='vote'),
 
     
     ## Stuff for everyone
@@ -35,6 +37,8 @@ urlpatterns = [
     path('inviteFamily/', views.inviteFamily, name='inviteFamily'),
     path('inviteAdmin/', views.inviteAdmin, name='inviteAdmin'),
     path('setReminder/', views.setReminder, name='setReminder'),
+    path('adminPickPatient/', views.adminPickPatient, name='adminPickPatient'), # NEW
+
 
     ## Stuff for Family 
     path('familyMenu/', views.familyMenu, name='familyMenu'), #changed familyMainMenu to familyMenu to match previous notation
