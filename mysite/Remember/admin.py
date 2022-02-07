@@ -1,8 +1,19 @@
 from django.contrib import admin
 
-# Register your models here.
-from .models import Question, Choice
+from .models import Patient, Reminder, User, PatientClearanceAbstraction, Result, Quiz, Question
 
+# Register your models here.
+
+admin.site.register(Patient)
+admin.site.register(Reminder)
+admin.site.register(User)
+admin.site.register(PatientClearanceAbstraction)
+admin.site.register(Result)
+admin.site.register(Quiz)
+admin.site.register(Question)
+
+
+'''
 class ChoiceInline(admin.TabularInline):
     model = Choice
     extra = 3
@@ -19,6 +30,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
 admin.site.register(Question, QuestionAdmin)
 
+'''
 
 
 # simular to the code above, but this allows us to change order of the feild in the admin site.
