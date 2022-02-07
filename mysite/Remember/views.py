@@ -129,6 +129,10 @@ def setReminder(request):
 
     return render(request, 'Remember/adminEx/setReminder.html')
 
+def adminPickPatient(request):
+
+    return render(request, 'Remember/adminEx/adminPickPatient.html')
+
 
 ## Exclusive to family
 

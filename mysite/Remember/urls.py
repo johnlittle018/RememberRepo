@@ -35,6 +35,8 @@ urlpatterns = [
     path('inviteFamily/', views.inviteFamily, name='inviteFamily'),
     path('inviteAdmin/', views.inviteAdmin, name='inviteAdmin'),
     path('setReminder/', views.setReminder, name='setReminder'),
+    path('adminPickPatient/', views.adminPickPatient, name='adminPickPatient'), # NEW
+
 
     ## Stuff for Family 
     path('familyMenu/', views.familyMenu, name='familyMenu'), #changed familyMainMenu to familyMenu to match previous notation
