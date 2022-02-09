@@ -121,66 +121,75 @@
         <div class="col-lg-6 mx-auto">
             <div class="d-flex justify-content-center">
                 <div class="p-2 bd-highlight">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="align-self-end">
-                            <div class="p-2 bd-highlight">
-                                <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" width="60">
-                            </div>
-                        </div>
-                        <div class="p-2 bd-highlight">                    <!-- Upload image input-->
-                            <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
-                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
-                        </div>
-                    </div>
+                    
     
                     <!-- Optional Feature that previews the image uploaded-->
                     <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
                     <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
                     <br>
-                    <form>
+                    <form action="{% url 'Remember:submitQuestion' %}" method="post">
+                        {% csrf_token %}
+
+
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="align-self-end">
+                                <div class="p-2 bd-highlight">
+                                    <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" width="60">
+                                </div>
+                            </div>
+                            <div class="p-2 bd-highlight">                    <!-- Upload image input-->
+                                <input id="upload" type="file" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
+                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                            </div>
+                        </div>
+
+
+
+
+
                         <div class="form-group">
                             <label for="photoDescription" class="text-white">Image Description</label>
-                            <textarea class="form-control" id="photoDescription" rows="3" placeholder="Your Description"></textarea>
+                            <textarea class="form-control" id="photoDescription" name="pDescription" rows="3" placeholder="Your Description"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="question" class="text-white">Question:</label>
-                            <textarea class="form-control" id="question" rows="2" placeholder="Your Question"></textarea>
+                            <textarea class="form-control" id="question" name="question" rows="2" placeholder="Your Question"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerA" class="text-white">A: </label>
-                            <textarea class="form-control" id="answerA" rows="1" placeholder="Answer A"></textarea>
+                            <textarea class="form-control" id="AanswerA" name="answer1" rows="1" placeholder="Answer A"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerB" class="text-white">B: </label>
-                            <textarea class="form-control" id="answerB" rows="1" placeholder="Answer B"></textarea>
+                            <textarea class="form-control" id="answerB" name="answer2" rows="1" placeholder="Answer B"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerC" class="text-white">C: </label>
-                            <textarea class="form-control" id="answerC" rows="1" placeholder="Answer C"></textarea>
+                            <textarea class="form-control" id="answerC" name="answer3" rows="1" placeholder="Answer C"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerD" class="text-white">D: </label>
-                            <textarea class="form-control" id="answerD" rows="1" placeholder="Answer D"></textarea>
+                            <textarea class="form-control" id="answerD" name="answer4" rows="1" placeholder="Answer D"></textarea>
                         </div>
                         <label class="text-white">Pick Correct Answer </label>
                         <br>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons" name="CorrectAnswer123">
                             <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option1" autocomplete="off"> A
+                                <input type="radio" id="option1" name="toggle1" autocomplete="off"> A
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option2" autocomplete="off"> B
+                                <input type="radio" id="option2" name="toggle2" autocomplete="off"> B
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> C
+                                <input type="radio" id="option3" name="toggle3" autocomplete="off"> C
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> D
+                                <input type="radio" id="option3" name="toggle4" autocomplete="off"> D
                             </label>
-                          </div>
+                        </div>
                           <br>
                           <br>
-                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="submit" value="submitQuestion" class="btn btn-primary">Submit</button>
 
                     </form>
 

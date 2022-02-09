@@ -11,13 +11,22 @@ urlpatterns = [
     # path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     # path('<int:question_id>/vote/', views.vote, name='vote'),
 
+
+
+
     
     ## Stuff for everyone
     path('loginPage/', views.loginPage, name='loginPage'),
+    
+    path('login/', views.login, name='login'),
+
     path('pickPatient/', views.pickPatient, name='pickPatient'),
 
     ## Family and admin
     path('makeQuestion/', views.makeQuestion, name='makeQuestion'),
+
+    path('submitQuestion/', views.submitQuestion, name='submitQuestion'),
+
     path('editQuestionnaire/', views.editQuestionnaire, name='editQuestionnaire'),
     path('editQuestion/', views.editQuestion, name='editQuestion'),
 
