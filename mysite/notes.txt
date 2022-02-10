@@ -1,3 +1,7 @@
+POST.dict() retruns all values I can full from a feild. 
+
+
+
 for running server, go to folder directory and run "for now ignore migrations"
 py manage.py runserver
 

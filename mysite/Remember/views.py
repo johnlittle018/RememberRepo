@@ -60,6 +60,13 @@ def loginPage(request):
     return render(request, 'Remember/loginPage.html')
 
 
+def login(request):
+
+    print("Hello World")
+
+    return render(request, 'Remember/newPage.html')
+
+
 def pickPatient(request):
 
     return render(request, 'Remember/pickPatient.html')
