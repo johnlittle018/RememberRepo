@@ -79,6 +79,9 @@
             h1{
                 color: white;
             }
+
+
+
         </style>
     </head>
 
@@ -144,8 +147,9 @@
                         </div>
 
 
-
-
+                        <div class="form-group">
+                            <textarea name="makeShiftName" id="makeShift" style="display: none"></textarea>
+                        </div>
 
                         <div class="form-group">
                             <label for="photoDescription" class="text-white">Image Description</label>
@@ -174,37 +178,50 @@
                         <label class="text-white">Pick Correct Answer </label>
                         <br>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons" name="CorrectAnswer123">
-                            <label class="btn btn-secondary">
-                                <input type="radio" id="option1" name="toggle1" autocomplete="off"> A
+                            <label class="btn btn-secondary" id="label1">
+                                <input type="radio" id="option1" name="toggle" value="A" autocomplete="off"> A
                             </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" id="option2" name="toggle2" autocomplete="off"> B
+                            <label class="btn btn-secondary" id="label2">
+                                <input type="radio" id="option2" name="toggle" value="B" autocomplete="off"> B
                             </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" id="option3" name="toggle3" autocomplete="off"> C
+                            <label class="btn btn-secondary" id="label3">
+                                <input type="radio" id="option3" name="toggle" value="C" autocomplete="off"> C
                             </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" id="option3" name="toggle4" autocomplete="off"> D
+                            <label class="btn btn-secondary" id="label4">
+                                <input type="radio" id="option3" name="toggle" value="D" autocomplete="off"> D
                             </label>
                         </div>
-                          <br>
-                          <br>
-                          <button type="submit" value="submitQuestion" class="btn btn-primary">Submit</button>
+                        <br>
+                        <br>
+                        <button type="submit" value="submitQuestion" class="btn btn-primary">Submit</button>
 
+                        <h1 id="selectedAnswer">Here</h1>
                     </form>
-
                 </div>
             </div>
         </div>
 
             
 
-        <!-- Optional JavaScript -->
+        <!-- Optional JavaScript
+        jQuery.noConflict();
+        $('#optionTrue').closest('.btn').button('toggle');
+         -->
 
         <script>
+            
+            
+            /*
+            $(document).on('click', '.btn-group button', function (e) {
+                $(this).addClass('on').parent().siblings().find('button').removeClass('on');
+            });
+            */
+
             /*  ==========================================
                 SHOW UPLOADED IMAGE
             * ========================================== */
+
+            /*
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
@@ -216,16 +233,21 @@
                     reader.readAsDataURL(input.files[0]);
                 }
             }
+            */
 
+            /*
             $(function () {
                 $('#upload').on('change', function () {
                     readURL(input);
                 });
             });
 
+            */
+
             /*  ==========================================
                 SHOW UPLOADED IMAGE NAME
             * ========================================== */
+            /*
             var input = document.getElementById( 'upload' );
             var infoArea = document.getElementById( 'upload-label' );
 
@@ -235,6 +257,37 @@
             var fileName = input.files[0].name;
             infoArea.textContent = 'File name: ' + fileName;
             }
+            */
+
+
+            /* 
+
+            console.log(label1)
+            console.log(label2)
+            console.log(label3)
+            console.log(label4)
+
+            document.getElementsByName("selectedAnswer").innerHTML = "A";
+            */
+
+            /*
+            const toggle1Updater = document.getElementByName("toggle1")
+            const toggle2Updater = document.getElementByName("toggle2")
+            const toggle3Updater = document.getElementByName("toggle3")
+            const toggle4Updater = document.getElementByName("toggle4")
+
+            toggle1Updater.addEventListener('click', event => {
+                console.log("A is WORKING!!")
+            });
+            */
+
+            /*
+            const button = document.getElementById("exampleBtn");
+            button.addEventListener('click', event => {
+                console.log("YAY");
+                button.textContent = `Click count: ${event.detail}`;
+            });
+            */
 
         </script>
 

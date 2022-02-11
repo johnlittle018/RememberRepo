@@ -101,21 +101,28 @@ def submitQuestion(request):
     answer4 = request.POST['answer4']
     print(answer4)
 
-    toggle1 = request.POST['toggle1']
-    print(toggle1)
+
+
+
+
+    # toggle1 = request.POST['toggle1']
+    # print(toggle1)
     
-    toggle2 = request.POST['toggle2']
-    print(toggle2)
+    # toggle2 = request.POST['toggle2']
+    # print(toggle2)
     # toggle3 = request.POST['toggle3']
     # toggle4 = request.POST['toggle4']
 
-
+    # selectedAnswer = request.POST['selectedAnswer']
+    # print(selectedAnswer)
 
 
 
     #answer = request.POST['CorrectAnswer123']
     #print(answer)
     
+    temp1 = request.POST.dict()
+    print(temp1)
 
 
     #Quize 
