@@ -4,6 +4,7 @@
 
 
 
+import email
 from django.http import Http404
 from django.http import HttpResponse
 from django.utils import timezone
@@ -14,46 +15,9 @@ from django.views import generic
 from django.urls import reverse
 
 
-
-
+# importing models from our database. 
+from .models import Patient, Reminder, User, PatientClearanceAbstraction, Result, Quiz, Question
 # from .models import Choice, Question
-
-
-# class IndexView(generic.ListView):
-#     template_name = 'Remember/index.html'
-#     context_object_name = 'latest_question_list'
-
-#     def get_queryset(self):
-#         """
-#         Return the last five published questions (not including those set to be
-#         published in the future).
-#         """
-#         return Question.objects.filter( pub_date__lte=timezone.now() ).order_by('-pub_date')[:5]
-
-# class DetailView(generic.DetailView):
-#     model = Question
-#     template_name = 'Remember/detail.html'
-    
-#     def get_queryset(self):
-#         """
-#         Excludes any questions that aren't published yet.
-#         """
-#         return Question.objects.filter(pub_date__lte = timezone.now())
-
-
-# def detail(request, question_id):
-
-#     try:  # try allows the program to keep going with a error
-#         question = Question.objects.get(pk=question_id)
-#     except Question.DoesNotExist: 
-#         raise Http404("Question does not exist")
-#     return render(request, 'Remember/j.html', {'question': question})
-
-
-
-
-
-## new stuff for Remember
 
 
 
@@ -61,21 +25,42 @@ from django.urls import reverse
 ### Stuff for everyone
 def loginPage(request):
 
-    print("load Login Page")
     return render(request, 'Remember/loginPage.html')
 
-def login(request):
-    print("This is the login Funciton")
-
-
-    return render(request, 'Remember/pickPatient.html')
-
 
 def login(request):
 
-    print("Hello World")
+    print("This is the login function")
 
-    return render(request, 'Remember/newPage.html')
+    userName = request.POST['Email']
+    print(userName)
+
+    userPassword = request.POST['password']
+    print(userPassword)
+
+    # Checking our users
+    if User.objects.filter(username = userName).exists():
+        ourUser = User.objects.filter(username = userName)
+        print("User is in the system.")
+        if ourUser[0].password == userPassword:
+            print("Password is good") 
+            return HttpResponseRedirect(reverse('Remember:pickPatient'))
+
+    # Checking our Patients
+    if Patient.objects.filter(username = userName).exists():
+        ourPatient = Patient.objects.filter(username = userName)
+        print("User is in the system.")
+        if ourPatient[0].password == userPassword:
+            print("Password is good") 
+            return HttpResponseRedirect(reverse('Remember:patientMenu'))
+            
+
+    return render(request, 'Remember/loginPage.html', {
+            'error_message': "You have entered the wrong username or password, please try again",
+        })
+
+
+   
 
 
 def pickPatient(request):
@@ -87,60 +72,7 @@ def pickPatient(request):
 
 def makeQuestion(request):
 
-    print("Loading Make quesitonPage")
-
-
     return render(request, 'Remember/makeQuestion.html')
-
-def submitQuestion(request):
-    
-    print("Submit a question text has been clicked")
-
-    photoDescription = request.POST['pDescription']
-    question = request.POST['question']
-    print(question)
-    answer1 = request.POST['answer1']
-    print(answer1)
-    answer2 = request.POST['answer2']
-    print(answer2)
-    answer3 = request.POST['answer3']
-    print(answer3)
-    answer4 = request.POST['answer4']
-    print(answer4)
-
-
-
-
-
-    # toggle1 = request.POST['toggle1']
-    # print(toggle1)
-    
-    # toggle2 = request.POST['toggle2']
-    # print(toggle2)
-    # toggle3 = request.POST['toggle3']
-    # toggle4 = request.POST['toggle4']
-
-    # selectedAnswer = request.POST['selectedAnswer']
-    # print(selectedAnswer)
-
-
-
-    #answer = request.POST['CorrectAnswer123']
-    #print(answer)
-    
-    temp1 = request.POST.dict()
-    print(temp1)
-
-
-    #Quize 
-    #picture
-    # picture = request.post['uploadedPic']
-    # print(picture)
-
-    pass
-
-    return render(request, 'Remember/newPage.html')
-
 
 def editQuestionnaire(request):
 
@@ -225,6 +157,35 @@ def familyMenu(request): #changed familyMainMenu to familyMenu to be consistent 
 
 
 
+# class IndexView(generic.ListView):
+#     template_name = 'Remember/index.html'
+#     context_object_name = 'latest_question_list'
+
+#     def get_queryset(self):
+#         """
+#         Return the last five published questions (not including those set to be
+#         published in the future).
+#         """
+#         return Question.objects.filter( pub_date__lte=timezone.now() ).order_by('-pub_date')[:5]
+
+# class DetailView(generic.DetailView):
+#     model = Question
+#     template_name = 'Remember/detail.html'
+    
+#     def get_queryset(self):
+#         """
+#         Excludes any questions that aren't published yet.
+#         """
+#         return Question.objects.filter(pub_date__lte = timezone.now())
+
+
+# def detail(request, question_id):
+
+#     try:  # try allows the program to keep going with a error
+#         question = Question.objects.get(pk=question_id)
+#     except Question.DoesNotExist: 
+#         raise Http404("Question does not exist")
+#     return render(request, 'Remember/j.html', {'question': question})
 
 
 
