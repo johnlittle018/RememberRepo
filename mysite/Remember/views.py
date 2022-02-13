@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.views import generic
 from django.urls import reverse
+from sqlalchemy import null
 
 
 # importing models from our database. 
@@ -73,6 +74,59 @@ def pickPatient(request):
 def makeQuestion(request):
 
     return render(request, 'Remember/makeQuestion.html')
+
+def submitQuestion(request):
+
+    print("This is the submitQuestion function")
+
+    #print(request.POST.dict())
+
+    myImage = open('./uploads/images/images2/Bison.png')
+
+    myQuiz = Quiz.objects.filter(patient = 1)
+
+    #print(myQuiz[0].patient)
+
+
+
+
+    photoDiscription = request.POST['pDescription']
+    #print(photoDiscription)
+
+    question = request.POST['question']
+    #print(question)
+
+    question = request.POST['question']
+    #print(question)
+
+    answer1 = request.POST['answer1']
+    #print(answer1)
+
+    answer2 = request.POST['answer2']
+    #print(answer2)
+
+    answer3 = request.POST['answer3']
+    #print(answer3)
+
+    answer4 = request.POST['answer4']
+    #print(answer4)
+
+    correctAnswer = request.POST.get('toggle', null)
+    #print(correctAnswer)
+
+    if correctAnswer == null:
+        print("User did not click a correct answer")
+    else:
+        b = Question(question_text=question, description=photoDiscription, picture=myImage.name, a1=answer1, a2=answer2, a3=answer3, a4=answer4, answer=int(correctAnswer), lastSubAnswer=0, quiz=myQuiz[0] )
+        print(b.picture)
+        b.save()
+
+
+
+
+    
+
+    return render(request, 'Remember/newPage.html')
 
 def editQuestionnaire(request):
 
