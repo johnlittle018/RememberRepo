@@ -4,6 +4,7 @@
 
 
 
+import email
 from django.http import Http404
 from django.http import HttpResponse
 from django.utils import timezone
@@ -12,44 +13,11 @@ from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.views import generic
 from django.urls import reverse
+
+
+# importing models from our database. 
+from .models import Patient, Reminder, User, PatientClearanceAbstraction, Result, Quiz, Question
 # from .models import Choice, Question
-
-
-# class IndexView(generic.ListView):
-#     template_name = 'Remember/index.html'
-#     context_object_name = 'latest_question_list'
-
-#     def get_queryset(self):
-#         """
-#         Return the last five published questions (not including those set to be
-#         published in the future).
-#         """
-#         return Question.objects.filter( pub_date__lte=timezone.now() ).order_by('-pub_date')[:5]
-
-# class DetailView(generic.DetailView):
-#     model = Question
-#     template_name = 'Remember/detail.html'
-    
-#     def get_queryset(self):
-#         """
-#         Excludes any questions that aren't published yet.
-#         """
-#         return Question.objects.filter(pub_date__lte = timezone.now())
-
-
-# def detail(request, question_id):
-
-#     try:  # try allows the program to keep going with a error
-#         question = Question.objects.get(pk=question_id)
-#     except Question.DoesNotExist: 
-#         raise Http404("Question does not exist")
-#     return render(request, 'Remember/j.html', {'question': question})
-
-
-
-
-
-## new stuff for Remember
 
 
 
@@ -62,9 +30,37 @@ def loginPage(request):
 
 def login(request):
 
-    print("Hello World")
+    print("This is the login function")
 
-    return render(request, 'Remember/newPage.html')
+    userName = request.POST['Email']
+    print(userName)
+
+    userPassword = request.POST['password']
+    print(userPassword)
+
+    # Checking our users
+    if User.objects.filter(username = userName).exists():
+        ourUser = User.objects.filter(username = userName)
+        print("User is in the system.")
+        if ourUser[0].password == userPassword:
+            print("Password is good") 
+            return HttpResponseRedirect(reverse('Remember:pickPatient'))
+
+    # Checking our Patients
+    if Patient.objects.filter(username = userName).exists():
+        ourPatient = Patient.objects.filter(username = userName)
+        print("User is in the system.")
+        if ourPatient[0].password == userPassword:
+            print("Password is good") 
+            return HttpResponseRedirect(reverse('Remember:patientMenu'))
+            
+
+    return render(request, 'Remember/loginPage.html', {
+            'error_message': "You have entered the wrong username or password, please try again",
+        })
+
+
+   
 
 
 def pickPatient(request):
@@ -161,6 +157,35 @@ def familyMenu(request): #changed familyMainMenu to familyMenu to be consistent 
 
 
 
+# class IndexView(generic.ListView):
+#     template_name = 'Remember/index.html'
+#     context_object_name = 'latest_question_list'
+
+#     def get_queryset(self):
+#         """
+#         Return the last five published questions (not including those set to be
+#         published in the future).
+#         """
+#         return Question.objects.filter( pub_date__lte=timezone.now() ).order_by('-pub_date')[:5]
+
+# class DetailView(generic.DetailView):
+#     model = Question
+#     template_name = 'Remember/detail.html'
+    
+#     def get_queryset(self):
+#         """
+#         Excludes any questions that aren't published yet.
+#         """
+#         return Question.objects.filter(pub_date__lte = timezone.now())
+
+
+# def detail(request, question_id):
+
+#     try:  # try allows the program to keep going with a error
+#         question = Question.objects.get(pk=question_id)
+#     except Question.DoesNotExist: 
+#         raise Http404("Question does not exist")
+#     return render(request, 'Remember/j.html', {'question': question})
 
 
 
