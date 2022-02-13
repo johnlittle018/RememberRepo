@@ -24,6 +24,15 @@
                 border: none;
             }
 
+            .logo{
+                width:83.1px; height: 72px; 
+                /* Original size width: 374; height: 324 */
+                background: transparent url(/../../static/polls/images/RememberLogoSized.png) no-repeat;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
+            }
+
 
             .btn btn-secondary{
                 background-color: black;
@@ -64,6 +73,19 @@
                 cursor: pointer;
             }
 
+            .pictureStyle{
+                min-height: 150px;
+                max-width: 200px;
+                width: 30vw;
+                height:auto;
+            }
+
+            .scaleImage{
+                object-fit:contain;
+                background: transparent url(/../../static/polls/images/codeHere.png) no-repeat;
+                background-size: cover;
+            }
+
         </style>
     </head>
 
@@ -79,6 +101,9 @@
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="#">
                 <button class="backButton" onclick="history.back()"></button>
+            </a>
+            <a href="">
+                <div class="logo"></div>
             </a>
             <form class="form-inline">
                 <div class="btn-group">
@@ -102,88 +127,90 @@
                     </h1>
                 </div>
             </div>
+            <!-- GUI for Profile Picture
             <div class="d-flex justify-content-end">
                 <form class="form-inline">
-                        <img src="/../../static/polls/images/codeHere.jfif" style="width:90px;height:60px"> <!--Intended to be the profile pic --> 
+                        <img src="/../../static/polls/images/codeHere.png" style="width:8vw;height:8vw">
                 </form>
             </div>
+            -->
         </div>
-        
-        <div class="d-flex justify-content-center">
-            <div class="d-flex align-content-center flex-wrap">
-
-                <div class="p-2 bd-highlight">
-                    <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center">
-                        <img src="/../../static/polls/images/codeHere.jfif" style="width:180px;height:120px"> <br> 
+    
+        <div class="d-flex justify-content-center align-content-center flex-wrap">
+            <div class="p-2 bd-highlight">
+                <button type="button" class="pictureButton">
+                    <div class="d-flex justify-content-center scaleImage">
+                        <div class="pictureStyle"></div> <br> 
                         <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                    </div>
+                    <label for="pictureButton" style="padding-left: 5px;">Garrett Bridgham</label>
+                </button>
+            </div>
+
+            <div class="p-2 bd-highlight">
+                <div class="d-flex bd-highlight">
+                    <button type="button" class="pictureButton">
+                        <div class="d-flex justify-content-center scaleImage">
+                            <div class="pictureStyle"></div> <br>
                         </div>
-                        <label for="pictureButton" style="padding-left: 5px;">Garret Bridgham</label>
+                        <label for="pictureButton" style="padding-left: 5px;">Jack Little</label>
                     </button>
                 </div>
+            </div>
 
-                <div class="p-2 bd-highlight">
-                    <div class="d-flex bd-highlight">
-                        <button type="button" class="pictureButton">
-                            <img src="/../../static/polls/images/codeHere.jfif" style="width:180px;height:120px"> <br>
-                            <label for="pictureButton" style="padding-left: 5px;">Jack Little</label>
-                        </button>
-                    </div>
+            <div class="p-2 bd-highlight">
+                <div class="d-flex bd-highlight">
+                    <button type="button" class="pictureButton">
+                        <div class="d-flex justify-content-center scaleImage">
+                            <div class="pictureStyle"></div> <br>
+                        </div>
+                        <label for="pictureButton" style="padding-left: 5px;">Omokhefe Ilalokhoin</label>
+                    </button>
                 </div>
+            </div>
 
-                <div class="p-2 bd-highlight">
-                    <div class="d-flex bd-highlight">
-                        <button type="button" class="pictureButton">
-                            <img src="/../../static/polls/images/codeHere.jfif" style="border-width: 3px;border-color: black;width:180px;height:120px"> <br>
-                            <label for="pictureButton" style="padding-left: 5px;">Omokhefe Ilalokhoin</label>
-                        </button>
-                    </div>
+            <div class="p-2 bd-highlight">
+                <div class="d-flex bd-highlight">
+                    <button type="button" class="pictureButton">
+                        <div class="d-flex justify-content-center scaleImage">
+                            <div class="pictureStyle"></div> <br>
+                        </div>
+                        <label for="pictureButton" style="padding-left: 5px;">Andrew Didycz</label>
+                    </button>
                 </div>
+            </div>
 
-                <div class="p-2 bd-highlight">
-                    <div class="d-flex bd-highlight">
-                        <button type="button" class="pictureButton">
-                            <img src="/../../static/polls/images/codeHere.jfif" style="width:180px;height:120px"> <br>
-                            <label for="pictureButton" style="padding-left: 5px;">Andrew Didycz</label>
-                        </button>
-                    </div>
+            <div class="p-2 bd-highlight">
+                <div class="d-flex bd-highlight">
+                    <button type="button" class="pictureButton">
+                        <div class="d-flex justify-content-center scaleImage">
+                            <div class="pictureStyle"></div> <br>
+                        </div>
+                        <label for="pictureButton" style="padding-left: 5px;">Andy Bridgham</label>
+                    </button>
                 </div>
+            </div>
 
-                <div class="p-2 bd-highlight">
-                    <div class="d-flex bd-highlight">
-                        <button type="button" class="pictureButton">
-                            <img src="/../../static/polls/images/codeHere.jfif" style="width:180px;height:120px"> <br>
-                            <label for="pictureButton" style="padding-left: 5px;">Andy Bridgham</label>
-                        </button>
-                    </div>
+            <div class="p-2 bd-highlight">
+                <div class="d-flex bd-highlight">
+                    <button type="button" class="pictureButton">
+                        <div class="d-flex justify-content-center scaleImage">
+                            <div class="pictureStyle"></div> <br>
+                        </div>
+                        <label for="pictureButton" style="padding-left: 5px;">Jazlyn Bridgham</label>
+                    </button>
                 </div>
+            </div>
 
-                <div class="p-2 bd-highlight">
-                    <div class="d-flex bd-highlight">
-                        <button type="button" class="pictureButton">
-                            <img src="/../../static/polls/images/codeHere.jfif" style="width:180px;height:120px"> <br>
-                            <label for="pictureButton" style="padding-left: 5px;">Jazlyn Bridgham</label>
-                        </button>
-                    </div>
+            <div class="p-2 bd-highlight">
+                <div class="d-flex bd-highlight">
+                    <button type="button" class="pictureButton">
+                        <div class="d-flex justify-content-center scaleImage">
+                            <div class="pictureStyle"></div> <br>
+                        </div>
+                        <label for="pictureButton" style="padding-left: 5px;">Kylo Bridgham</label>
+                    </button>
                 </div>
-
-                <div class="p-2 bd-highlight">
-                    <div class="d-flex bd-highlight">
-                        <button type="button" class="pictureButton">
-                            <img src="/../../static/polls/images/codeHere.jfif" style="width:180px;height:120px"> <br>
-                            <label for="pictureButton" style="padding-left: 5px;">Kylo Bridgham</label>
-                        </button>
-                    </div>
-                </div>
-                <div class="p-2 bd-highlight">
-                    <div class="d-flex bd-highlight">
-                        <button type="button" class="pictureButton">
-                            <img src="/../../static/polls/images/codeHere.jfif" style="width:180px;height:120px"> <br>
-                            <label for="pictureButton" style="padding-left: 5px;">Xander Bridgham</label>
-                        </button>
-                    </div>
-                </div>
-
             </div>
         </div>
         <!-- Optional JavaScript -->

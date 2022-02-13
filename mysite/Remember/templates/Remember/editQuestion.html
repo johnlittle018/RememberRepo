@@ -1,4 +1,4 @@
- {% load static %} 
+{% load static %} 
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"> 
 
 <!doctype html>
@@ -14,10 +14,6 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
             
-            .bs-example{
-                margin: 20px;        
-            }
-            
             .backButton{
                 width:51px;height:51px;
                 background: transparent url(/../../static/polls/images/backButton.png) no-repeat;
@@ -26,9 +22,21 @@
                 background-size: cover;
                 border: none;
             }
-            .settingsIcon{
 
+            .logo{
+                width:83.1px; height: 72px; 
+                /* Original size width: 374; height: 324 */
+                background: transparent url(/../../static/polls/images/RememberLogoSized.png) no-repeat;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
             }
+
+            .btn btn-secondary{
+                background-color: black;
+                width: 50%;
+            }
+
 
             hr {
                 margin-top: 0rem;
@@ -36,6 +44,51 @@
                 border: 0;
                 border-top: 5px solid rgba(0, 0, 0, .3);
             }
+
+            #upload {
+                opacity: 0;
+            }
+
+            #upload-label {
+                position: absolute;
+                top: 50%;
+                left: 1rem;
+                transform: translateY(-50%);
+            }
+
+            .image-area {
+                border: 2px dashed rgba(255, 255, 255, 0.7);
+                padding: 1rem;
+                position: relative;
+            }
+
+            .image-area::before {
+                content: 'Uploaded image result';
+                color: #fff;
+                font-weight: bold;
+                text-transform: uppercase;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 0.8rem;
+                z-index: 1;
+            }
+
+            .btn.btn-secondary.dropdown-toggle {
+                background-color: lightgrey;  
+            }
+
+            .image-area img {
+                z-index: 2;
+                position: relative;
+            }
+
+            h1{
+                color: white;
+            }
+
+
 
         </style>
     </head>
@@ -53,6 +106,9 @@
             <a class="navbar-brand" href="#">
                 <button class="backButton" onclick="history.back()"></button>
             </a>
+            <a href="">
+                <div class="logo"></div>
+            </a>
             <form class="form-inline">
                 <div class="btn-group">
                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -62,17 +118,189 @@
                       <button class="dropdown-item" type="button">Logout</button>
                     </div>
                   </div>
-              </form>
-          </nav>
+            </form>
+        </nav>
 
-           <hr/>
-          
+        <hr/>
+        <div class="d-flex justify-content-around">
+            <div class="d-flex justify-content-start">
+                <div class="mr-auto p-2 bd-highlight">
+                    <h1>
+                        Edit Question for Grandma
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mx-auto">
+            <div class="d-flex justify-content-center">
+                <div class="p-2 bd-highlight">
+                    
+    
+                    <!-- Optional Feature that previews the image uploaded-->
+                    <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+                    <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                    <br>
+                    <form action="{% url 'Remember:submitQuestion' %}" method="post">
+                        {% csrf_token %}
 
 
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="align-self-end">
+                                <div class="p-2 bd-highlight">
+                                    <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" width="60">
+                                </div>
+                            </div>
+                            <div class="p-2 bd-highlight">                    <!-- Upload image input-->
+                                <input id="upload" type="file" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
+                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <textarea name="makeShiftName" id="makeShift" style="display: none"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="photoDescription" class="text-white">Image Description</label>
+                            <textarea class="form-control" id="photoDescription" name="pDescription" rows="3" placeholder="Your Description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="question" class="text-white">Question:</label>
+                            <textarea class="form-control" id="question" name="question" rows="2" placeholder="Your Question"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="answerA" class="text-white">A: </label>
+                            <textarea class="form-control" id="AanswerA" name="answer1" rows="1" placeholder="Answer A"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="answerB" class="text-white">B: </label>
+                            <textarea class="form-control" id="answerB" name="answer2" rows="1" placeholder="Answer B"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="answerC" class="text-white">C: </label>
+                            <textarea class="form-control" id="answerC" name="answer3" rows="1" placeholder="Answer C"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="answerD" class="text-white">D: </label>
+                            <textarea class="form-control" id="answerD" name="answer4" rows="1" placeholder="Answer D"></textarea>
+                        </div>
+                        <label class="text-white">Pick Correct Answer </label>
+                        <br>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons" name="CorrectAnswer123">
+                            <label class="btn btn-secondary" id="label1">
+                                <input type="radio" id="option1" name="toggle" value="A" autocomplete="off"> A
+                            </label>
+                            <label class="btn btn-secondary" id="label2">
+                                <input type="radio" id="option2" name="toggle" value="B" autocomplete="off"> B
+                            </label>
+                            <label class="btn btn-secondary" id="label3">
+                                <input type="radio" id="option3" name="toggle" value="C" autocomplete="off"> C
+                            </label>
+                            <label class="btn btn-secondary" id="label4">
+                                <input type="radio" id="option3" name="toggle" value="D" autocomplete="off"> D
+                            </label>
+                        </div>
+                        <br>
+                        <br>
+                        <button type="submit" value="submitQuestion" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+            
+
+        <!-- Optional JavaScript
+        jQuery.noConflict();
+        $('#optionTrue').closest('.btn').button('toggle');
+         -->
+
+        <script>
+            
+            
+            /*
+            $(document).on('click', '.btn-group button', function (e) {
+                $(this).addClass('on').parent().siblings().find('button').removeClass('on');
+            });
+            */
+
+            /*  ==========================================
+                SHOW UPLOADED IMAGE
+            * ========================================== */
+
+            /*
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#imageResult')
+                            .attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            */
+
+            /*
+            $(function () {
+                $('#upload').on('change', function () {
+                    readURL(input);
+                });
+            });
+
+            */
+
+            /*  ==========================================
+                SHOW UPLOADED IMAGE NAME
+            * ========================================== */
+            /*
+            var input = document.getElementById( 'upload' );
+            var infoArea = document.getElementById( 'upload-label' );
+
+            input.addEventListener( 'change', showFileName );
+            function showFileName( event ) {
+            var input = event.srcElement;
+            var fileName = input.files[0].name;
+            infoArea.textContent = 'File name: ' + fileName;
+            }
+            */
+
+
+            /* 
+
+            console.log(label1)
+            console.log(label2)
+            console.log(label3)
+            console.log(label4)
+
+            document.getElementsByName("selectedAnswer").innerHTML = "A";
+            */
+
+            /*
+            const toggle1Updater = document.getElementByName("toggle1")
+            const toggle2Updater = document.getElementByName("toggle2")
+            const toggle3Updater = document.getElementByName("toggle3")
+            const toggle4Updater = document.getElementByName("toggle4")
+
+            toggle1Updater.addEventListener('click', event => {
+                console.log("A is WORKING!!")
+            });
+            */
+
+            /*
+            const button = document.getElementById("exampleBtn");
+            button.addEventListener('click', event => {
+                console.log("YAY");
+                button.textContent = `Click count: ${event.detail}`;
+            });
+            */
+
+        </script>
 
         
-        <!-- Optional JavaScript -->
-      
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

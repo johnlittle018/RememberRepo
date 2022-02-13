@@ -4,5 +4,7 @@ li a {
 }
 
 body {
-    background: white url("images/background.gif") no-repeat;
+    background: black url("images/backgroundImg.png") repeat;
+    background-size: 100% auto;
+    background-repeat: repeat-y;
 }

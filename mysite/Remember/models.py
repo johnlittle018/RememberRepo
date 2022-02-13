@@ -53,7 +53,7 @@ class Result(models.Model):
         return '{} completed at {}'.format(self.patient, self.timeEnded)
 
 class Quiz(models.Model):
-    patient = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, unique=True)
 
     def __str__(self):
         return '{}\'s quiz'.format(self.patient) #first 25 characters of the question

@@ -118,3 +118,13 @@ Here is a bunch of examples of html features being styled by bootstrap
 
 Used this to remove background off images
 https://www.remove.bg/upload
+
+GUIs Worked On:                 In order by Jira
+1. Questionnaire Page           takeQuestionnaire
+2. Admin Pick Patient           adminPickPatient
+3. Pick Patient                 pickPatient
+4. Make a Question Page         makeQuestion
+5. Edit Question Page           editQuestion
+6. Invite Family and Friends    inviteFamily
+7. Invite Admin                 inviteAdmin
+8. Edit Questionnaire           editQuestionnaire

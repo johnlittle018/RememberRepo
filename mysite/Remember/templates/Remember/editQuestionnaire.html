@@ -1,7 +1,10 @@
+{% load static %} 
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"> 
+
 <!doctype html>
 <html lang="en">
     <head>
-        <title>editQuestionnaire Page</title>
+        <title></title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,27 +14,760 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
             
-            .bs-example{
-                margin: 20px;        
+ 
+            .backButton{
+                width:51px;height:51px;
+                background: transparent url(/../../static/polls/images/backButton.png) no-repeat;
+                background-color: transparent;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
             }
+            
+            .logo{
+                width:83.1px; height: 72px; 
+                /* Original size width: 374; height: 324 */
+                background: transparent url(/../../static/polls/images/RememberLogoSized.png) no-repeat;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
+            }
+
+            .settings.btn.btn-secondary.dropdown-toggle{
+                background-color: grey;
+                width: 50%;
+            }
+
+            .settings.btn.btn-secondary{
+                background-color: white;
+                width: 50%;
+            }
+
+            .btn.btn-primary.btn-lg{
+                background-color: darkslateblue;
+                border: 3px solid black;
+            }
+
+            hr {
+                margin-top: 0rem;
+                margin-bottom: 1rem;
+                border: 0;
+                border-top: 5px solid rgba(0, 0, 0, .3);
+            }
+
+            h1{
+                color: white;
+                padding: 3%;
+            }
+
+            .boxContent{
+                color:black;
+                padding:0px;
+                margin:0px;
+            }
+
+            h5{
+                padding-left: 3%;
+                color: grey
+            }
+
+            p{
+                color: white;
+                padding:0%;
+                margin:0%;
+            }
+            .container{
+                border: 5px solid black;
+                background-color: aliceblue;
+                padding: 1%;
+            }
+            .photoImg{
+                border: 5px solid black;
+                width:100%;
+                height: auto;
+            }
+            .moreBtn{
+                background: transparent url(/../../static/polls/images/moreBtn.png) no-repeat;
+                background-color: transparent;
+                background-size:cover;
+            }
+
+            .btn-secondary{
+                background-color: transparent;
+                border: none;
+                box-shadow: none;
+            }
+
+            .d-flex.justify-content-start{
+                padding:0px;
+                margin:0px;
+            }
+
+            .rounded-circle{
+                max-width:10vw;
+
+            }
+            .btn.btn-secondary.rounded-circle{
+                max-width: 70px;
+                max-height: 70px;
+                width:10vw;
+                height: 10vw;
+            }
+
+
+            
+
+
+
+
         </style>
     </head>
 
     <body>
         <header>
 
-            <h1>editQuestionnaire</h1>
             
         </header>
 
         <!-- All your html stuff here -->
 
+        
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <button class="backButton" onclick="history.back()"></button>
+            </a>
+            <a href="">
+                <div class="logo"></div>
+            </a>
+            <form class="form-inline">
+                <div class="btn-group">
+                    <button type="button" class="settings btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="/../../static/polls/images/settingsIcon.png" style=width:42px;height:42px>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <button class="dropdown-item" type="button">Logout</button>
+                    </div>
+                </div>
+            </form>
+        </nav>
+        <hr/>
+        <!--For the length, the order goes top, right, bottom, left-->
+        <div class="d-flex" style="padding: 0vw 5vw 0vw 5vw">
+            <div class="mr-auto p-2 justify-content-start align-self-center">
+                <h1>
+                    Person's Questionnaire
+                </h1>
+            </div>
+            <div class="p-2 align-self-center">
+                <button type="button" class="btn btn-primary btn-lg">
+                    Make Question
+                </button>
+            </div>
+          </div>
+        
 
+        <div class="container">
+            <div class="row flex-nowrap">
+                <div class="col-3 justify-content-center align-self-center">
+                    <img src="/../../static/polls/images/codeHere.png" class="photoImg"> 
+                    <!--<img src="/../../static/polls/images/wideImg.jfif" class="photoImg"> -->
+                    <!--<img src="/../../static/polls/images/iphoneImg.jpg" class="photoImg"> -->
+                    <br>
+                </div>
+                <div class="col-7">
+                    <div class="d-flex justify-content-start">
+                        <h5>
+                            Question 1 
+                        </h5>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <h3 class="boxContent">
+                            Who is this?
+                        </h3>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>Description of Photo: </strong>
+                            "Actual Description Actual Description Actual Description Actual Description Actual Description "
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>A:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to A"
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>B:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to B"
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>C:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to C"
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>D:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to D"
+                        </p>
+                    </div>
 
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>Correct Answer:</strong>
+                            "Actual Correct Answer"
+                        </p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex justify-content-end">
+                        <form class="form-inline">
+                            <div class="btn-group">
+                                <!-- for background box then: class="btn btn-secondary dropdown"-->
+                                <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <button class="dropdown-item" type="button">Edit Question</button>
+                                    <button class="dropdown-item" type="button">Delete Question</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        </br>
 
         
+        <div class="container">
+            <div class="row flex-nowrap">
+                <div class="col-3 justify-content-center align-self-center">
+                    <img src="/../../static/polls/images/codeHere.png" class="photoImg"> 
+                    <!--<img src="/../../static/polls/images/wideImg.jfif" class="photoImg"> -->
+                    <!--<img src="/../../static/polls/images/iphoneImg.jpg" class="photoImg"> -->
+                    <br>
+                </div>
+                <div class="col-7">
+                    <div class="d-flex justify-content-start">
+                        <h5>
+                            Question 1 
+                        </h5>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <h3 class="boxContent">
+                            Who is this?
+                        </h3>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>Description of Photo: </strong>
+                            "Actual Description Actual Description Actual Description Actual Description Actual Description "
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>A:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to A"
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>B:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to B"
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>C:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to C"
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>D:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to D"
+                        </p>
+                    </div>
+
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>Correct Answer:</strong>
+                            "Actual Correct Answer"
+                        </p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex justify-content-end">
+                        <form class="form-inline">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <button class="dropdown-item" type="button">Edit Question</button>
+                                    <button class="dropdown-item" type="button">Delete Question</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </br>
+    
+        <div class="container">
+            <div class="row flex-nowrap">
+                <div class="col-3 justify-content-center align-self-center">
+                    <img src="/../../static/polls/images/codeHere.png" class="photoImg"> 
+                    <!--<img src="/../../static/polls/images/wideImg.jfif" class="photoImg"> -->
+                    <!--<img src="/../../static/polls/images/iphoneImg.jpg" class="photoImg"> -->
+                    <br>
+                </div>
+                <div class="col-7">
+                    <div class="d-flex justify-content-start">
+                        <h5>
+                            Question 1 
+                        </h5>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <h3 class="boxContent">
+                            Who is this?
+                        </h3>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>Description of Photo: </strong>
+                            "Actual Description Actual Description Actual Description Actual Description Actual Description "
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>A:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to A"
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>B:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to B"
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>C:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to C"
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>D:</strong> &nbsp;
+                        </p>
+                        <p class="boxContent">
+                            "Answer to D"
+                        </p>
+                    </div>
+
+                    <div class="d-flex justify-content-start">
+                        <p class="boxContent">
+                            <strong>Correct Answer:</strong>
+                            "Actual Correct Answer"
+                        </p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex justify-content-end">
+                        <form class="form-inline">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <button class="dropdown-item" type="button">Edit Question</button>
+                                    <button class="dropdown-item" type="button">Delete Question</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </br>
+    
+    <div class="container">
+        <div class="row flex-nowrap">
+            <div class="col-3 justify-content-center align-self-center">
+                <img src="/../../static/polls/images/codeHere.png" class="photoImg"> 
+                <!--<img src="/../../static/polls/images/wideImg.jfif" class="photoImg"> -->
+                <!--<img src="/../../static/polls/images/iphoneImg.jpg" class="photoImg"> -->
+                <br>
+            </div>
+            <div class="col-7">
+                <div class="d-flex justify-content-start">
+                    <h5>
+                        Question 1 
+                    </h5>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <h3 class="boxContent">
+                        Who is this?
+                    </h3>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>Description of Photo: </strong>
+                        "Actual Description Actual Description Actual Description Actual Description Actual Description "
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>A:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to A"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>B:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to B"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>C:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to C"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>D:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to D"
+                    </p>
+                </div>
+
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>Correct Answer:</strong>
+                        "Actual Correct Answer"
+                    </p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-end">
+                    <form class="form-inline">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button">Edit Question</button>
+                                <button class="dropdown-item" type="button">Delete Question</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        
+    </br>
+        
+    <div class="container">
+        <div class="row flex-nowrap">
+            <div class="col-3 justify-content-center align-self-center">
+                <img src="/../../static/polls/images/codeHere.png" class="photoImg"> 
+                <!--<img src="/../../static/polls/images/wideImg.jfif" class="photoImg"> -->
+                <!--<img src="/../../static/polls/images/iphoneImg.jpg" class="photoImg"> -->
+                <br>
+            </div>
+            <div class="col-7">
+                <div class="d-flex justify-content-start">
+                    <h5>
+                        Question 1 
+                    </h5>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <h3 class="boxContent">
+                        Who is this?
+                    </h3>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>Description of Photo: </strong>
+                        "Actual Description Actual Description Actual Description Actual Description Actual Description "
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>A:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to A"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>B:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to B"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>C:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to C"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>D:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to D"
+                    </p>
+                </div>
+
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>Correct Answer:</strong>
+                        "Actual Correct Answer"
+                    </p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-end">
+                    <form class="form-inline">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button">Edit Question</button>
+                                <button class="dropdown-item" type="button">Delete Question</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </br>
+        
+    <div class="container">
+        <div class="row flex-nowrap">
+            <div class="col-3 justify-content-center align-self-center">
+                <img src="/../../static/polls/images/codeHere.png" class="photoImg"> 
+                <!--<img src="/../../static/polls/images/wideImg.jfif" class="photoImg"> -->
+                <!--<img src="/../../static/polls/images/iphoneImg.jpg" class="photoImg"> -->
+                <br>
+            </div>
+            <div class="col-7">
+                <div class="d-flex justify-content-start">
+                    <h5>
+                        Question 1 
+                    </h5>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <h3 class="boxContent">
+                        Who is this?
+                    </h3>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>Description of Photo: </strong>
+                        "Actual Description Actual Description Actual Description Actual Description Actual Description "
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>A:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to A"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>B:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to B"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>C:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to C"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>D:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to D"
+                    </p>
+                </div>
+
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>Correct Answer:</strong>
+                        "Actual Correct Answer"
+                    </p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-end">
+                    <form class="form-inline">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button">Edit Question</button>
+                                <button class="dropdown-item" type="button">Delete Question</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </br>
+        
+    <div class="container">
+        <div class="row flex-nowrap">
+            <div class="col-3 justify-content-center align-self-center">
+                <img src="/../../static/polls/images/codeHere.png" class="photoImg"> 
+                <!--<img src="/../../static/polls/images/wideImg.jfif" class="photoImg"> -->
+                <!--<img src="/../../static/polls/images/iphoneImg.jpg" class="photoImg"> -->
+                <br>
+            </div>
+            <div class="col-7">
+                <div class="d-flex justify-content-start">
+                    <h5>
+                        Question 1 
+                    </h5>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <h3 class="boxContent">
+                        Who is this?
+                    </h3>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>Description of Photo: </strong>
+                        "Actual Description Actual Description Actual Description Actual Description Actual Description "
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>A:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to A"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>B:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to B"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>C:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to C"
+                    </p>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>D:</strong> &nbsp;
+                    </p>
+                    <p class="boxContent">
+                        "Answer to D"
+                    </p>
+                </div>
+
+                <div class="d-flex justify-content-start">
+                    <p class="boxContent">
+                        <strong>Correct Answer:</strong>
+                        "Actual Correct Answer"
+                    </p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-end">
+                    <form class="form-inline">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button">Edit Question</button>
+                                <button class="dropdown-item" type="button">Delete Question</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center align-self-center" style="padding: 5vw 5vw 5vw 5vw">
+            <button type="button" class="btn btn-primary btn-lg">
+                Make Question
+            </button>
+    </div>
+
         <!-- Optional JavaScript -->
+
+        <script>
+        </script>
+
+        
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

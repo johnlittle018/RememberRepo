@@ -1,7 +1,10 @@
+{% load static %} 
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"> 
+
 <!doctype html>
 <html lang="en">
     <head>
-        <title>editQuestionnaire Page</title>
+        <title></title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,27 +14,123 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
             
-            .bs-example{
-                margin: 20px;        
+ 
+            .exitButton{
+                width:51px;height:51px;
+                background: transparent url(/../../static/polls/images/exitButton.png) no-repeat;
+                background-color: transparent;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
             }
+
+            .logo{
+                width:83.1px; height: 72px; 
+                /* Original size width: 374; height: 324 */
+                background: transparent url(/../../static/polls/images/RememberLogoSized.png) no-repeat;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
+            }
+
+            hr {
+                margin-top: 0rem;
+                margin-bottom: 1rem;
+                border: 0;
+                border-top: 5px solid rgba(0, 0, 0, .3);
+            }
+
+            h1{
+                color: white;
+                padding: 3%;
+            }
+            h2{
+                color: black;
+                padding: 2%;
+                font-weight: bold;
+            }
+
+            .container{
+                background-color: aliceblue;
+                padding: 1%;
+            }
+
+
         </style>
     </head>
 
     <body>
         <header>
 
-            <h1>inviteFamily</h1>
             
         </header>
 
         <!-- All your html stuff here -->
 
+        
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <button class="exitButton" onclick="history.back()"></button>
+            </a>
+            <a href="">
+                <div class="logo"></div>
+            </a>
+            <p style="width: 80px">
+                
+            </p>
+        </nav>
 
+        <hr/>
+        
+        <div class="d-flex justify-content-start">
+            <h1 style="padding-left: 10%;">
+                Invite Family Members and Friends
+            </h1>
+        </div>
+        
+        <div class="container">
+            <!-- Content here -->
+            <div class="d-flex justify-content-start">
+                <h2 style="padding-left: 10%;">
+                    Create Account
+                </h1>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">First Name</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
 
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Last Name</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Username</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
 
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Password</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <button type="submit" value="submitQuestion" class="btn btn-primary">Submit</button>
+        </div>
+        <!-- Optional JavaScript -->
+
+        <script>
+
+        </script>
 
         
-        <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
