@@ -25,7 +25,7 @@ from .models import Patient, Reminder, User, PatientClearanceAbstraction, Result
 ### Stuff for everyone
 def loginPage(request):
 
-    return render(request, 'Remember/loginPage.html', {'error_message': ""})
+    return render(request, 'Remember/loginPage.html')
 
 
 def login(request):
