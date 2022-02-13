@@ -23,6 +23,14 @@
                 border: none;
             }
 
+            .logo{
+                width:83.1px; height: 72px; 
+                /* Original size width: 374; height: 324 */
+                background: transparent url(/../../static/polls/images/RememberLogoSized.png) no-repeat;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
+            }
 
             .btn btn-secondary{
                 background-color: black;
@@ -97,6 +105,9 @@
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="#">
                 <button class="backButton" onclick="history.back()"></button>
+            </a>
+            <a href="">
+                <div class="logo"></div>
             </a>
             <form class="form-inline">
                 <div class="btn-group">
@@ -194,8 +205,6 @@
                         <br>
                         <br>
                         <button type="submit" value="submitQuestion" class="btn btn-primary">Submit</button>
-
-                        <h1 id="selectedAnswer">Here</h1>
                     </form>
                 </div>
             </div>
