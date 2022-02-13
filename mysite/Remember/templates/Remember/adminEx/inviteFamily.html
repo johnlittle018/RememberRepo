@@ -1,5 +1,5 @@
 {% load static %} 
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"> 
+<link rel="stylesheet" type="text/css" href="{% static 'remember/style.css' %}"> 
 
 <!doctype html>
 <html lang="en">
@@ -17,7 +17,7 @@
  
             .exitButton{
                 width:51px;height:51px;
-                background: transparent url(/../../static/polls/images/exitButton.png) no-repeat;
+                background: transparent url(/../../static/remember/images/exitButton.png) no-repeat;
                 background-color: transparent;
                 mix-blend-mode: multiply;
                 background-size: cover;
@@ -27,7 +27,7 @@
             .logo{
                 width:83.1px; height: 72px; 
                 /* Original size width: 374; height: 324 */
-                background: transparent url(/../../static/polls/images/RememberLogoSized.png) no-repeat;
+                background: transparent url(/../../static/remember/images/RememberLogoSized.png) no-repeat;
                 mix-blend-mode: multiply;
                 background-size: cover;
                 border: none;
@@ -53,6 +53,41 @@
             .container{
                 background-color: aliceblue;
                 padding: 1%;
+            }
+
+            #upload {
+                opacity: 0;
+            }
+
+            #upload-label {
+                position: absolute;
+                top: 50%;
+                left: 1rem;
+                transform: translateY(-50%);
+            }
+
+            .image-area {
+                border: 2px dashed rgba(255, 255, 255, 0.7);
+                padding: 1rem;
+                position: relative;
+            }
+
+            .image-area::before {
+                content: 'Uploaded image result';
+                color: #fff;
+                font-weight: bold;
+                text-transform: uppercase;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 0.8rem;
+                z-index: 1;
+            }
+
+            .image-area img {
+                z-index: 2;
+                position: relative;
             }
 
 
@@ -95,32 +130,61 @@
                     Create Account
                 </h1>
             </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm d-flex justify-content-center">
+                        <div class="p-2 bd-highlight">
+                            <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" width="60">
+                        </div>
+                    </div>
+                    <div class="col-sm d-flex justify-content-center">
+                        Two of two columns
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row bd-highlight mb-3">
+                <div class="align-self-end">
+                    <div class="p-2 bd-highlight">
+                        <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" width="60">
+                    </div>
+                </div>
+                <div class="p-2 bd-highlight">                    <!-- Upload image input-->
+                    <input id="upload" type="file" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
+                    <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                </div>
+            </div>
+            <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+            <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+            <br>
+            
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">First Name</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="First Name">
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Last Name</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Username">
             </div>
             
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Username</span>
+                <span class="input-group-text" id="basic-addon1">Email Address</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Email Address">
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Password</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Password">
             </div>
             <button type="submit" value="submitQuestion" class="btn btn-primary">Submit</button>
         </div>

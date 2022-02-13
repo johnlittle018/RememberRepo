@@ -1,5 +1,5 @@
 {% load static %} 
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"> 
+<link rel="stylesheet" type="text/css" href="{% static 'remember/style.css' %}"> 
 
 <!doctype html>
 <html lang="en">
@@ -16,7 +16,7 @@
             
             .backButton{
                 width:51px;height:51px;
-                background: transparent url(/../../static/polls/images/backButton.png) no-repeat;
+                background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
                 background-color: transparent;
                 mix-blend-mode: multiply;
                 background-size: cover;
@@ -26,7 +26,7 @@
             .logo{
                 width:83.1px; height: 72px; 
                 /* Original size width: 374; height: 324 */
-                background: transparent url(/../../static/polls/images/RememberLogoSized.png) no-repeat;
+                background: transparent url(/../../static/remember/images/RememberLogoSized.png) no-repeat;
                 mix-blend-mode: multiply;
                 background-size: cover;
                 border: none;
@@ -112,7 +112,7 @@
             <form class="form-inline">
                 <div class="btn-group">
                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/../../static/polls/images/settingsIcon.png" style=width:42px;height:42px>
+                        <img src="/../../static/remember/images/settingsIcon.png" style=width:42px;height:42px>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                       <button class="dropdown-item" type="button">Logout</button>
@@ -138,9 +138,6 @@
                     
     
                     <!-- Optional Feature that previews the image uploaded-->
-                    <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
-                    <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-                    <br>
                     <form action="{% url 'Remember:submitQuestion' %}" method="post">
                         {% csrf_token %}
 
@@ -157,14 +154,13 @@
                             </div>
                         </div>
 
-
-                        <div class="form-group">
-                            <textarea name="makeShiftName" id="makeShift" style="display: none"></textarea>
-                        </div>
+                        <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+                        <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                        <br>
 
                         <div class="form-group">
                             <label for="photoDescription" class="text-white">Image Description</label>
-                            <textarea class="form-control" id="photoDescription" name="pDescription" rows="3" placeholder="Your Description"></textarea>
+                            <textarea class="form-control" id="photoDescription" name="photoDescription" rows="3" placeholder="Your Description"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="question" class="text-white">Question:</label>
