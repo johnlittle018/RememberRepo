@@ -1,7 +1,10 @@
+{% load static %} 
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"> 
+
 <!doctype html>
 <html lang="en">
     <head>
-        <title>editQuestionnaire Page</title>
+        <title>Patient Main Menu</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,23 +13,107 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
-            
-            .bs-example{
-                margin: 20px;        
+
+            .navbar{
+                opacity: 0.5;
             }
+            
+            h1{
+                color: white;
+                font-family: 'Sans serif', Helvetica, sans-serif;
+                font-size: calc(2.3vw + 2.3vh);
+                padding-left: 140%;
+            }
+
+            .btn.btn-secondary.dropdown-toggle {
+                background-color: transparent; 
+                border: none;
+            }
+
+            img{
+                width: 100%;
+                height: auto;
+            }
+
+            .caption{
+                background-color: white;
+                height: 15%;
+                padding-left: 5px;
+                font-size: larger;
+                opacity: 0.7;
+            }
+            
+        
         </style>
     </head>
 
     <body>
         <header>
 
-            <h1>patientMenu</h1>
-            
         </header>
 
         <!-- All your html stuff here -->
 
+        <nav class="navbar navbar-light bg-light justify-content-end">
+            <form class="form-inline">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="/../../static/polls/images/settingsIcon.png" style="width:42px;height:42px;">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <button class="dropdown-item" type="button">Logout</button>
+                    </div>
+                  </div>
+            </form>
+        </nav>
 
+        <div class="d-flex">
+            <div class="mr-auto m-3 bd-highlight">
+                <h1>
+                   Menu
+                </h1>
+            </div>
+        </div>
+
+        <div class="container d-flex justify-content-center">
+            <div class="row">
+                <div class="col-md-4">
+                  <div class="thumbnail">
+                      <a href=""><img src="/../../static/polls/images/codeHere.jfif" alt="" ></a>
+                      <div class="caption">
+                        <p>Take Quiz</p>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="thumbnail">
+                      <a href=""><img src="/../../static/polls/images/codeHere.jfif" alt="" ></a>
+                      <div class="caption">
+                        <p>Scrapbook</p>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="thumbnail">
+                      <a href=""><img src="/../../static/polls/images/codeHere.jfif" alt="" ></a>
+                      <div class="caption">
+                        <p>Review results</p>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <a href=""><img src="/../../static/polls/images/codeHere.jfif" alt="" ></a>
+                        <div class="caption">
+                          <p>Review reminders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
 
 
 
