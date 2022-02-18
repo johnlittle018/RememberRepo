@@ -145,3 +145,8 @@ I updated the bootstrap css sheets and updated the actual bootstrap libraries wi
 
 Things to think about 
 Adding sticky-top to navigation class (would need to add a border to the bottom(instead of horizontal rule <hr>))
+
+left-padding for back arrow (maybe give background and make it a circle)
+Fix select correct answer btn
+Decide color for nav bar and settings button
+Navbar could be scrollable, on mobile if it's not going to go away it could take up too much space
