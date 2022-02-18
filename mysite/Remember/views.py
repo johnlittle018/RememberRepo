@@ -14,6 +14,7 @@ from django.template import loader
 from django.views import generic
 from django.urls import reverse
 from sqlalchemy import null
+from sympy import re
 
 
 # importing models from our database. 
@@ -45,28 +46,82 @@ def login(request):
         print("User is in the system.")
         if ourUser[0].password == userPassword:
             print("Password is good") 
-            return HttpResponseRedirect(reverse('Remember:pickPatient'))
-
+            return pickPatient(request, ourUser[0].id)
+            #return HttpResponseRedirect(reverse('Remember:pickPatient', args=(ourUser[0].id,)))
+    
     # Checking our Patients
-    if Patient.objects.filter(username = userName).exists():
+    elif Patient.objects.filter(username = userName).exists():
         ourPatient = Patient.objects.filter(username = userName)
         print("User is in the system.")
         if ourPatient[0].password == userPassword:
             print("Password is good") 
             return HttpResponseRedirect(reverse('Remember:patientMenu'))
             
-
-    return render(request, 'Remember/loginPage.html', {
-            'error_message': "You have entered the wrong username or password, please try again",
-        })
+    else:
+        return render(request, 'Remember/loginPage.html', {
+                'error_message': "You have entered the wrong username or password, please try again",
+            })
 
 
    
 
 
-def pickPatient(request):
+def pickPatient(request, user_id):
 
-    return render(request, 'Remember/pickPatient.html')
+    print('This is the pick a patient view')
+
+
+    currentUser = User.objects.get(pk = user_id)
+
+    usersRelations = PatientClearanceAbstraction.objects.filter(user = currentUser)
+
+    print(usersRelations)
+
+    #pCA is short for Patient clearance Abstraction
+    return render(request, 'Remember/pickPatient.html', {'pCA' : usersRelations})
+
+
+
+
+# Function for when a patient is picked
+def pickedPatient(request):
+
+    print('This is the Picked Patient Function')
+
+    # print(request.POST.dict())
+
+
+    relationID = request.POST['relation']
+    #print(relationID)
+
+    currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
+
+
+
+    ## this is where we check if we are relation 1 or 2 
+    ## Relation 1 sends you to the family menu
+    ## Relation 2 sends you to the admin menu
+    if currentUser.clearanceLevel == 1:
+        print("This is a family member")
+        return familyMenu(request, currentUser.id)
+    elif currentUser.clearanceLevel == 2:
+        print("This is an admin")
+        return adminMenu(request, currentUser.id)
+
+    else:
+        print("ERRRRROOORRR!!!!!!!!")
+
+   
+
+
+
+    return render(request, 'Remember/newPage.html')
+
+
+
+
+
+
 
 
 ## family and admin
@@ -166,9 +221,11 @@ def patientMenu(request):
 
 ## Exclusive to Admin
 
-def adminMenu(request):
+def adminMenu(request, relationID):
 
-    return render(request, 'Remember/adminEx/adminMenu.html')
+    currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
+
+    return render(request, 'Remember/adminEx/adminMenu.html', {'userRelation' : currentUser})
 
 def graphsData(request):
 
@@ -193,9 +250,11 @@ def adminPickPatient(request):
 
 ## Exclusive to family
 
-def familyMenu(request): #changed familyMainMenu to familyMenu to be consistent with previous naming convention
+def familyMenu(request, relationID): #changed familyMainMenu to familyMenu to be consistent with previous naming convention
 
-    return render(request, 'Remember/familyEx/familyMenu.html')
+    currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
+
+    return render(request, 'Remember/familyEx/familyMenu.html', {'userRelation' : currentUser})
 
 
 

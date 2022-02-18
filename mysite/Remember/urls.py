@@ -22,6 +22,8 @@ urlpatterns = [
 
     path('pickPatient/', views.pickPatient, name='pickPatient'),
 
+    path('pickedPatient/', views.pickedPatient, name='pickedPatient'),
+
     ## Family and admin
     path('makeQuestion/', views.makeQuestion, name='makeQuestion'),
 
