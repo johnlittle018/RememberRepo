@@ -10,8 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <style>
             
  
@@ -34,7 +34,7 @@
             }
 
             .settings.btn.btn-secondary.dropdown-toggle{
-                background-color: grey;
+                background-color: lightgrey;
                 width: 50%;
             }
 
@@ -88,12 +88,10 @@
             }
             .moreBtn{
                 background: transparent url(/../../static/remember/images/moreBtn.png) no-repeat;
-                background-color: transparent;
                 background-size:cover;
             }
 
             .btn-secondary{
-                background-color: transparent;
                 border: none;
                 box-shadow: none;
             }
@@ -139,32 +137,27 @@
             <a href="">
                 <div class="logo"></div>
             </a>
-            <form class="form-inline">
-                <div class="btn-group">
-                    <button type="button" class="settings btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/../../static/remember/images/settingsIcon.png" style=width:42px;height:42px>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <button class="dropdown-item" type="button">Logout</button>
-                    </div>
-                </div>
-            </form>
+            <div class="dropdown" style="padding-right:1vw;">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/../../static/remember/images/settingsIcon.png" style="width:42px;height:42px;">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+            </div>
         </nav>
         <hr/>
         <!--For the length, the order goes top, right, bottom, left-->
-        <div class="d-flex" style="padding: 0vw 5vw 0vw 5vw">
-            <div class="mr-auto p-2 justify-content-start align-self-center">
-                <h1>
-                    Person's Questionnaire
-                </h1>
-            </div>
-            <div class="p-2 align-self-center">
+        <div class="d-flex justify-content-around" style="padding: 0vw 5vw 0vw 5vw">
+            <h1>
+                Person's Questionnaire
+            </h1>
+            <div class="justify-content-end align-self-center">
                 <button type="button" class="btn btn-primary btn-lg">
                     Make Question
                 </button>
             </div>
-          </div>
-        
+        </div>
 
         <div class="container">
             <div class="row flex-nowrap">
@@ -233,16 +226,13 @@
                 </div>
                 <div class="col">
                     <div class="d-flex justify-content-end">
-                        <form class="form-inline">
-                            <div class="btn-group">
-                                <!-- for background box then: class="btn btn-secondary dropdown"-->
-                                <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <button class="dropdown-item" type="button">Edit Question</button>
-                                    <button class="dropdown-item" type="button">Delete Question</button>
-                                </div>
-                            </div>
-                        </form>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
+                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -318,16 +308,13 @@
                 </div>
                 <div class="col">
                     <div class="d-flex justify-content-end">
-                        <form class="form-inline">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <button class="dropdown-item" type="button">Edit Question</button>
-                                    <button class="dropdown-item" type="button">Delete Question</button>
-                                </div>
-                            </div>
-                        </form>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
+                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -402,16 +389,13 @@
                 </div>
                 <div class="col">
                     <div class="d-flex justify-content-end">
-                        <form class="form-inline">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <button class="dropdown-item" type="button">Edit Question</button>
-                                    <button class="dropdown-item" type="button">Delete Question</button>
-                                </div>
-                            </div>
-                        </form>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
+                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -487,16 +471,13 @@
             </div>
             <div class="col">
                 <div class="d-flex justify-content-end">
-                    <form class="form-inline">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Edit Question</button>
-                                <button class="dropdown-item" type="button">Delete Question</button>
-                            </div>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
+                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
+                            </ul>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -572,16 +553,13 @@
             </div>
             <div class="col">
                 <div class="d-flex justify-content-end">
-                    <form class="form-inline">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Edit Question</button>
-                                <button class="dropdown-item" type="button">Delete Question</button>
-                            </div>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
+                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
+                            </ul>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -657,16 +635,13 @@
             </div>
             <div class="col">
                 <div class="d-flex justify-content-end">
-                    <form class="form-inline">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Edit Question</button>
-                                <button class="dropdown-item" type="button">Delete Question</button>
-                            </div>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
+                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
+                            </ul>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -742,16 +717,13 @@
             </div>
             <div class="col">
                 <div class="d-flex justify-content-end">
-                    <form class="form-inline">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-secondary moreBtn rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Edit Question</button>
-                                <button class="dropdown-item" type="button">Delete Question</button>
-                            </div>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
+                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
+                            </ul>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -770,7 +742,6 @@
         
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>
