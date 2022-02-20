@@ -5,6 +5,7 @@
 
 
 import email
+import time
 from django.http import Http404
 from django.http import HttpResponse
 from django.utils import timezone
@@ -15,6 +16,7 @@ from django.views import generic
 from django.urls import reverse
 from sqlalchemy import null
 from sympy import re
+
 
 
 # importing models from our database. 
@@ -31,6 +33,8 @@ def loginPage(request):
 
 
 def login(request):
+
+    print(request.POST.dict())
 
     print("This is the login function")
 
@@ -88,7 +92,7 @@ def pickedPatient(request):
 
     print('This is the Picked Patient Function')
 
-    # print(request.POST.dict())
+    print(request.POST.dict())
 
 
     relationID = request.POST['relation']
@@ -128,7 +132,21 @@ def pickedPatient(request):
 
 def makeQuestion(request):
 
+    print("This is the make a question page")
+
+
+
+    print(request.POST.dict())
+
+    time.sleep(2.4)
+
+    # currentUser = request.POST['relation']
+
+    # print(currentUser)
+
     return render(request, 'Remember/makeQuestion.html')
+
+
 
 def submitQuestion(request):
 
@@ -184,6 +202,8 @@ def editQuestionnaire(request):
     
     print("This is the edit questionaire page")
 
+    print(request.POST.dict())
+
     relationID = request.POST['relation']
 
     
@@ -192,11 +212,11 @@ def editQuestionnaire(request):
     print(currentUser.patient.name)
 
     myQuiz = Quiz.objects.filter(patient = currentUser.patient)
-    print(myQuiz[0])
+
 
     myQuestions = Question.objects.filter(quiz = myQuiz[0]) 
 
-    print(myQuestions[0].a1)
+
 
     
 
@@ -210,7 +230,11 @@ def editQuestionnaire(request):
 
 def editQuestion(request):
 
-    return render(request, 'Remember/editQuestion.html')
+    print("This is edit question")
+
+    print(request.POST.dict())
+
+    return render(request, 'Remember/makeQuestion.html')
 
 
 
