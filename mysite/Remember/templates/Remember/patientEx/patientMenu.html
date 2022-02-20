@@ -13,33 +13,55 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
-
-            .navbar{
-                opacity: 0.5;
+            
+            .backButton{
+                width:51px;height:51px;
+                background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
+                background-color: transparent;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
             }
             
-            h1{
-                color: white;
-                font-family: 'Sans serif', Helvetica, sans-serif;
-                font-size: calc(2.3vw + 2.3vh);
-                padding-left: 140%;
-            }
-
-            .btn.btn-secondary.dropdown-toggle {
-                background-color: transparent; 
+            .logo{
+                width:83.1px; height: 72px; 
+                /* Original size width: 374; height: 324 */
+                background: transparent url(/../../static/remember/images/RememberLogoSized.png) no-repeat;
+                mix-blend-mode: multiply;
+                background-size: cover;
                 border: none;
             }
 
+            
+            .btn.btn-secondary.dropdown-toggle {
+                background-color: lightgrey;  
+            }
+
+        
+
+            h1{
+                color: white;
+                font-family: 'Sans serif', Helvetica, sans-serif;
+                font-size: calc(2.5vw + 2.5vh);
+            }
+
+        
             img{
                 width: 100%;
                 height: auto;
+                
+            }
+
+            .thumbnail a {
+                text-decoration: none;
+                color: black;
             }
 
             .caption{
                 background-color: white;
                 height: 15%;
                 padding-left: 5px;
-                font-size: larger;
+                font-size: 1.5em;
                 opacity: 0.7;
             }
             
@@ -54,67 +76,80 @@
 
         <!-- All your html stuff here -->
 
-        <nav class="navbar navbar-light bg-light justify-content-end">
-            <form class="form-inline">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/../../static/remember/images/settingsIcon.png" style="width:42px;height:42px;">
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <button class="dropdown-item" type="button">Logout</button>
-                    </div>
-                  </div>
-            </form>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <button class="backButton" onclick="history.back()"></button>
+            </a>
+            <a href="">
+                <div class="logo"></div>
+            </a>
+            <div class="dropdown" style="padding-right:1vw;">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/../../static/remember/images/settingsIcon.png" style="width:42px;height:42px;">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+            </div>
         </nav>
 
-        <div class="d-flex">
-            <div class="mr-auto m-3 bd-highlight">
-                <h1>
-                   Menu
-                </h1>
+
+        <div class="d-flex flex-column bd-highlight mb-3">
+            
+            <div class="container">
+                <div class="mr-auto mb-2 mt-2 p-2 bd-highlight">
+                    <h1>
+                        Menu
+                    </h1> 
+                </div>             
             </div>
-        </div>
-
-        <div class="container d-flex justify-content-center">
-            <div class="row">
-                <div class="col-md-4">
-                  <div class="thumbnail">
-                      <a href=""><img src="/../../static/remember/images/codeHere.jfif" alt="" ></a>
-                      <div class="caption">
-                        <p>Take Quiz</p>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="thumbnail">
-                      <a href=""><img src="/../../static/remember/images/codeHere.jfif" alt="" ></a>
-                      <div class="caption">
-                        <p>Scrapbook</p>
-                      </div>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="thumbnail">
-                      <a href=""><img src="/../../static/remember/images/codeHere.jfif" alt="" ></a>
-                      <div class="caption">
-                        <p>Review results</p>
-                      </div>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href=""><img src="/../../static/remember/images/codeHere.jfif" alt="" ></a>
+            
+            <div class="container d-flex">
+                <div class="row">      
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                        <a href=""><img src="/../../static/remember/images/codeHere.png" alt="" >
                         <div class="caption">
-                          <p>Review reminders</p>
+                            <p>Take Quiz</p>
+                        </div>
+                        </a>
                         </div>
                     </div>
-                </div>
-            </div>    
-        </div>
 
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href=""><img src="/../../static/remember/images/codeHere.png" alt="" >
+                            <div class="caption">
+                            <p>Scrapbook</p>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                        
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href=""><img src="/../../static/remember/images/codeHere.png" alt="" >
+                            <div class="caption">
+                            <p>Review Results</p>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href=""><img src="/../../static/remember/images/codeHere.png" alt="" >
+                            <div class="caption">
+                            <p>Review Reminders</p>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+
+        
+        </div>     
 
 
         
