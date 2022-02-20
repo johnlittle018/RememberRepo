@@ -143,8 +143,6 @@ def submitQuestion(request):
     #print(myQuiz[0].patient)
 
 
-
-
     photoDiscription = request.POST['pDescription']
     #print(photoDiscription)
 
@@ -176,16 +174,39 @@ def submitQuestion(request):
         print(b.picture)
         b.save()
 
+    return render(request, 'Remember/newPage.html')
 
 
+
+
+
+def editQuestionnaire(request):
+    
+    print("This is the edit questionaire page")
+
+    relationID = request.POST['relation']
+
+    
+    currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
+
+    print(currentUser.patient.name)
+
+    myQuiz = Quiz.objects.filter(patient = currentUser.patient)
+    print(myQuiz[0])
+
+    myQuestions = Question.objects.filter(quiz = myQuiz[0]) 
+
+    print(myQuestions[0].a1)
 
     
 
-    return render(request, 'Remember/newPage.html')
+    
 
-def editQuestionnaire(request):
+    return render(request, 'Remember/editQuestionnaire.html', {'userRelation' : currentUser, 'questions' : myQuestions})
 
-    return render(request, 'Remember/editQuestionnaire.html')
+
+
+
 
 def editQuestion(request):
 

@@ -150,584 +150,101 @@
         <!--For the length, the order goes top, right, bottom, left-->
         <div class="d-flex justify-content-around" style="padding: 0vw 5vw 0vw 5vw">
             <h1>
-                Person's Questionnaire
+            {{userRelation.patient.name}} Questionnaire
             </h1>
             <div class="justify-content-end align-self-center">
-                <button type="button" class="btn btn-primary btn-lg">
+                <button type="submit" value="pickedPatient" class="btn btn-primary btn-lg">
                     Make Question
                 </button>
             </div>
         </div>
 
-        <div class="container">
-            <div class="row flex-nowrap">
-                <div class="col-3 justify-content-center align-self-center">
-                    <img src="/../../static/remember/images/codeHere.png" class="photoImg"> 
-                    <!--<img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> -->
-                    <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
-                    <br>
-                </div>
-                <div class="col-7">
-                    <div class="d-flex justify-content-start">
-                        <h5>
-                            Question 1 
-                        </h5>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <h3 class="boxContent">
-                            Who is this?
-                        </h3>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>Description of Photo: </strong>
-                            "Actual Description Actual Description Actual Description Actual Description Actual Description "
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>A:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to A"
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>B:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to B"
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>C:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to C"
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>D:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to D"
-                        </p>
-                    </div>
+        {% for question in questions %}        
 
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>Correct Answer:</strong>
-                            "Actual Correct Answer"
-                        </p>
+            <div class="container">
+                <div class="row flex-nowrap">
+                    <div class="col-3 justify-content-center align-self-center">
+                        <img src={{question.picture}} class="photoImg"> 
+                        <!-- <img src="/../../static/remember/images/codeHere.png" class="photoImg">  -->
+                        <!--<img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> -->
+                        <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
+                        <br>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="d-flex justify-content-end">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
-                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
-                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
-                            </ul>
+                    <div class="col-7">
+                        
+                        <div class="d-flex justify-content-start">
+                            <h3 class="boxContent">
+                                {{question.question_text}}
+                            </h3>
+                        </div>
+                        <div class="d-flex justify-content-start">
+                            <p class="boxContent">
+                                <strong>Description of Photo: </strong>
+                                {{question.description}}
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-start">
+                            <p class="boxContent">
+                                <strong>A:</strong> &nbsp;
+                            </p>
+                            <p class="boxContent">
+                                {{question.a1}}
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-start">
+                            <p class="boxContent">
+                                <strong>B:</strong> &nbsp;
+                            </p>
+                            <p class="boxContent">
+                                {{question.a2}}
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-start">
+                            <p class="boxContent">
+                                <strong>C:</strong> &nbsp;
+                            </p>
+                            <p class="boxContent">
+                                {{question.a3}}
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-start">
+                            <p class="boxContent">
+                                <strong>D:</strong> &nbsp;
+                            </p>
+                            <p class="boxContent">
+                                {{question.a4}}
+                            </p>
+                        </div>
+
+                        <div class="d-flex justify-content-start">
+                            <p class="boxContent">
+                                <strong>Correct Answer:</strong>
+                                {{question.answer}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-end">
+                            <div class="dropdown">
+                                <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Edit Question</a></li>
+                                <li><a class="dropdown-item" href="#">Delete Question</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+        {% endfor %}
 
         </br>
 
         
-        <div class="container">
-            <div class="row flex-nowrap">
-                <div class="col-3 justify-content-center align-self-center">
-                    <img src="/../../static/remember/images/codeHere.png" class="photoImg"> 
-                    <!--<img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> -->
-                    <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
-                    <br>
-                </div>
-                <div class="col-7">
-                    <div class="d-flex justify-content-start">
-                        <h5>
-                            Question 1 
-                        </h5>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <h3 class="boxContent">
-                            Who is this?
-                        </h3>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>Description of Photo: </strong>
-                            "Actual Description Actual Description Actual Description Actual Description Actual Description "
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>A:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to A"
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>B:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to B"
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>C:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to C"
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>D:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to D"
-                        </p>
-                    </div>
-
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>Correct Answer:</strong>
-                            "Actual Correct Answer"
-                        </p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="d-flex justify-content-end">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
-                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
-                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        </br>
-    
-        <div class="container">
-            <div class="row flex-nowrap">
-                <div class="col-3 justify-content-center align-self-center">
-                    <img src="/../../static/remember/images/codeHere.png" class="photoImg"> 
-                    <!--<img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> -->
-                    <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
-                    <br>
-                </div>
-                <div class="col-7">
-                    <div class="d-flex justify-content-start">
-                        <h5>
-                            Question 1 
-                        </h5>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <h3 class="boxContent">
-                            Who is this?
-                        </h3>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>Description of Photo: </strong>
-                            "Actual Description Actual Description Actual Description Actual Description Actual Description "
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>A:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to A"
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>B:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to B"
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>C:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to C"
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>D:</strong> &nbsp;
-                        </p>
-                        <p class="boxContent">
-                            "Answer to D"
-                        </p>
-                    </div>
-
-                    <div class="d-flex justify-content-start">
-                        <p class="boxContent">
-                            <strong>Correct Answer:</strong>
-                            "Actual Correct Answer"
-                        </p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="d-flex justify-content-end">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
-                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
-                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
-    </br>
-    
-    <div class="container">
-        <div class="row flex-nowrap">
-            <div class="col-3 justify-content-center align-self-center">
-                <img src="/../../static/remember/images/codeHere.png" class="photoImg"> 
-                <!--<img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> -->
-                <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
-                <br>
-            </div>
-            <div class="col-7">
-                <div class="d-flex justify-content-start">
-                    <h5>
-                        Question 1 
-                    </h5>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <h3 class="boxContent">
-                        Who is this?
-                    </h3>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>Description of Photo: </strong>
-                        "Actual Description Actual Description Actual Description Actual Description Actual Description "
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>A:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to A"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>B:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to B"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>C:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to C"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>D:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to D"
-                    </p>
-                </div>
-
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>Correct Answer:</strong>
-                        "Actual Correct Answer"
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="d-flex justify-content-end">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
-                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
-                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
-                            </ul>
-                        </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-        
-    </br>
-        
-    <div class="container">
-        <div class="row flex-nowrap">
-            <div class="col-3 justify-content-center align-self-center">
-                <img src="/../../static/remember/images/codeHere.png" class="photoImg"> 
-                <!--<img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> -->
-                <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
-                <br>
-            </div>
-            <div class="col-7">
-                <div class="d-flex justify-content-start">
-                    <h5>
-                        Question 1 
-                    </h5>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <h3 class="boxContent">
-                        Who is this?
-                    </h3>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>Description of Photo: </strong>
-                        "Actual Description Actual Description Actual Description Actual Description Actual Description "
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>A:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to A"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>B:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to B"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>C:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to C"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>D:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to D"
-                    </p>
-                </div>
-
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>Correct Answer:</strong>
-                        "Actual Correct Answer"
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="d-flex justify-content-end">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
-                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
-                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
-                            </ul>
-                        </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
-    </br>
-        
-    <div class="container">
-        <div class="row flex-nowrap">
-            <div class="col-3 justify-content-center align-self-center">
-                <img src="/../../static/remember/images/codeHere.png" class="photoImg"> 
-                <!--<img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> -->
-                <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
-                <br>
-            </div>
-            <div class="col-7">
-                <div class="d-flex justify-content-start">
-                    <h5>
-                        Question 1 
-                    </h5>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <h3 class="boxContent">
-                        Who is this?
-                    </h3>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>Description of Photo: </strong>
-                        "Actual Description Actual Description Actual Description Actual Description Actual Description "
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>A:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to A"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>B:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to B"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>C:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to C"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>D:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to D"
-                    </p>
-                </div>
 
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>Correct Answer:</strong>
-                        "Actual Correct Answer"
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="d-flex justify-content-end">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
-                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
-                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
-                            </ul>
-                        </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    </br>
-        
-    <div class="container">
-        <div class="row flex-nowrap">
-            <div class="col-3 justify-content-center align-self-center">
-                <img src="/../../static/remember/images/codeHere.png" class="photoImg"> 
-                <!--<img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> -->
-                <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
-                <br>
-            </div>
-            <div class="col-7">
-                <div class="d-flex justify-content-start">
-                    <h5>
-                        Question 1 
-                    </h5>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <h3 class="boxContent">
-                        Who is this?
-                    </h3>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>Description of Photo: </strong>
-                        "Actual Description Actual Description Actual Description Actual Description Actual Description "
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>A:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to A"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>B:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to B"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>C:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to C"
-                    </p>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>D:</strong> &nbsp;
-                    </p>
-                    <p class="boxContent">
-                        "Answer to D"
-                    </p>
-                </div>
-
-                <div class="d-flex justify-content-start">
-                    <p class="boxContent">
-                        <strong>Correct Answer:</strong>
-                        "Actual Correct Answer"
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="d-flex justify-content-end">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary moreBtn rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
-                              <li><a class="dropdown-item" href="#">Edit Question</a></li>
-                              <li><a class="dropdown-item" href="#">Delete Question</a></li>
-                            </ul>
-                        </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="d-flex justify-content-center align-self-center" style="padding: 5vw 5vw 5vw 5vw">
             <button type="button" class="btn btn-primary btn-lg">
                 Make Question

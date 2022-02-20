@@ -44,6 +44,11 @@ urlpatterns = [
 
     ## Stuff for Admin 
     path('adminMenu/', views.adminMenu, name='adminMenu'),
+
+
+
+
+
     path('graphsData/', views.graphsData, name='graphsData'),
     path('inviteFamily/', views.inviteFamily, name='inviteFamily'),
     path('inviteAdmin/', views.inviteAdmin, name='inviteAdmin'),
