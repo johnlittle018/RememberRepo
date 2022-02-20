@@ -1,7 +1,10 @@
+{% load static %} 
+<link rel="stylesheet" type="text/css" href="{% static 'remember/style.css' %}"> 
+
 <!doctype html>
 <html lang="en">
     <head>
-        <title>editQuestionnaire Page</title>
+        <title>Scrapbook</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,30 +14,146 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
             
-            .bs-example{
-                margin: 20px;        
+            .backButton{
+                width:51px;height:51px;
+                background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
+                background-color: transparent;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
             }
+            
+            .logo{
+                width:83.1px; height: 72px; 
+                /* Original size width: 374; height: 324 */
+                background: transparent url(/../../static/remember/images/RememberLogoSized.png) no-repeat;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
+            }
+
+            .btn.btn-secondary.dropdown-toggle {
+                background-color: lightgrey;  
+            }
+
+            h1{
+                color: white;
+                font-family: 'Sans serif', Helvetica, sans-serif;
+                font-size: calc(2.5vw + 2.5vh);
+            }
+
+            img{
+                width: 100%;
+                height: auto;
+                
+            }
+
+            .scrapbook{
+                padding: 2%;
+                background-color: white;
+            }
+
+            .carousel-caption-description p{
+                font-size: larger;
+                color: black;
+            }
+
+            button{
+                border-style: none;
+                background-color: transparent;
+                padding-top: 20%;
+
+            }
+    
         </style>
     </head>
 
     <body>
         <header>
 
-            <h1>scrapbook</h1>
             
         </header>
 
         <!-- All your html stuff here -->
 
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <button class="backButton" onclick="history.back()"></button>
+            </a>
+            <a href="">
+                <div class="logo"></div>
+            </a>
+            <div class="dropdown" style="padding-right:1vw;">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/../../static/remember/images/settingsIcon.png" style="width:42px;height:42px;">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
 
+        <div class="d-flex flex-column bd-highlight mb-3">
+            
+            <div class="container">
+                <div class="mr-auto mb-2 mt-2 p-2 bd-highlight">
+                    <h1>
+                       Scrapbook
+                    </h1> 
+                </div>             
+            </div>
+            
+            <div class="container d-flex justify-content-center">  
+                
+                <div id="carouselExampleControls" class="carousel slide col-8 scrapbook" data-interval="false">
+                    <div class="thumbnail carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="/../../static/remember/images/codeHere.png" alt="...">
+                        <div class="carousel-caption-description">
+                            <h3>Description</h3>
+                            <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                            <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                            <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                            
+                            <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                            <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                            <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                            
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <img src="/../../static/remember/images/codeHere.png" alt="...">
+                        <div class="carousel-caption-description">
+                            <h3>Description</h3>
+                            <p>Description 2</p>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <img src="/../../static/remember/images/codeHere.png" alt="...">
+                        <div class="carousel-caption-description">
+                            <h3>Description</h3>
+                            <p>Description 3</p>
+                        </div>
+                      </div>
+                    </div>
+                </div> 
+                  
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
 
-
+           
+              
+        </div>
 
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>
