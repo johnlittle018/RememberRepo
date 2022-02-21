@@ -136,6 +136,7 @@
                     <form action="{% url 'Remember:submitQuestion' %}" method="post">
                         {% csrf_token %}
 
+                        
 
                         <div class="d-flex flex-row bd-highlight mb-3">
                             <div class="align-self-end">
@@ -160,7 +161,7 @@
                         </div>
                         <div class="form-group">
                             <label for="question" class="text-white">Question:</label>
-                            <textarea class="form-control" id="question" required="required" name="question" rows="2" placeholder="Your Question"></textarea>
+                            <textarea class="form-control" id="question" required="required" name="theQuestion" rows="2" placeholder="Your Question"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerA" class="text-white">A: </label>
@@ -194,6 +195,9 @@
                                 <input type="radio" id="option3" name="toggle" value="4" autocomplete="off"> D
                             </label>
                         </div>
+
+                        <input type="hidden" name="relation" value="{{userRelation.id}}">
+                        <input type="hidden" name="quize" value="{{quize.id}}">
                         <br>
                         <br>
                         <button type="submit" value="submitQuestion" class="btn btn-primary">Submit</button>

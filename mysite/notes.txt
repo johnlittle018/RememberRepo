@@ -41,3 +41,16 @@ Allows you to run a python shell in anaconda terminal
     Good page to find documentation
  https://docs.djangoproject.com/en/3.2/genindex/
 
+
+
+
+ Programing Notes
+
+ Jack: 
+
+ Everything is programed for admin at the moment, not also for a family member. 
+ Images are not yet incorperated. 
+ Nothing is being check for correctnes, that should be done latter when we are also implememnting security.
+ 
+
+

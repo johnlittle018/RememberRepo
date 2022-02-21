@@ -119,7 +119,7 @@
             <div class="d-flex justify-content-start">
                 <div class="mr-auto p-2 bd-highlight">
                     <h1>
-                        Edit Question for Grandma
+                        Edit Question for {{userRelation.patient.name}}
                     </h1>
                 </div>
             </div>
@@ -159,7 +159,7 @@
                     
     
                     <!-- Optional Feature that previews the image uploaded-->
-                    <form action="{% url 'Remember:submitQuestion' %}" method="post">
+                    <form action="{% url 'Remember:resubmitQuestion' %}" method="post">
                         {% csrf_token %}
 
 
@@ -176,52 +176,110 @@
                         </div>
 
                         <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
-                        <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                        <!-- <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div> -->
                         <br>
 
                         <div class="form-group">
                             <label for="photoDescription" class="text-white">Image Description</label>
-                            <textarea class="form-control" id="photoDescription" name="photoDescription" rows="3" placeholder="Your Description"></textarea>
+                            <textarea class="form-control" id="photoDescription" name="pDescription" rows="3" >{{question.description}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="question" class="text-white">Question:</label>
-                            <textarea class="form-control" id="question" name="question" rows="2" placeholder="Your Question"></textarea>
+                            <textarea class="form-control" id="question" name="theQuestion" rows="2" placeholder="Your Question">{{question.question_text}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerA" class="text-white">A: </label>
-                            <textarea class="form-control" id="AanswerA" name="answer1" rows="1" placeholder="Answer A"></textarea>
+                            <textarea class="form-control" id="AanswerA" name="answer1" rows="1"  placeholder="Answer A">{{question.a1}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerB" class="text-white">B: </label>
-                            <textarea class="form-control" id="answerB" name="answer2" rows="1" placeholder="Answer B"></textarea>
+                            <textarea class="form-control" id="answerB" name="answer2" rows="1" placeholder="Answer B">{{question.a2}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerC" class="text-white">C: </label>
-                            <textarea class="form-control" id="answerC" name="answer3" rows="1" placeholder="Answer C"></textarea>
+                            <textarea class="form-control" id="answerC" name="answer3" rows="1" placeholder="Answer C">{{question.a3}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerD" class="text-white">D: </label>
-                            <textarea class="form-control" id="answerD" name="answer4" rows="1" placeholder="Answer D"></textarea>
+                            <textarea class="form-control" id="answerD" name="answer4" rows="1" placeholder="Answer D">{{question.a4}}</textarea>
                         </div>
                         <label class="text-white">Pick Correct Answer </label>
                         <br>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons" name="CorrectAnswer123">
-                            <label class="btn btn-secondary" id="label1">
-                                <input type="radio" id="option1" name="toggle" value="A" autocomplete="off"> A
-                            </label>
-                            <label class="btn btn-secondary" id="label2">
-                                <input type="radio" id="option2" name="toggle" value="B" autocomplete="off"> B
-                            </label>
-                            <label class="btn btn-secondary" id="label3">
-                                <input type="radio" id="option3" name="toggle" value="C" autocomplete="off"> C
-                            </label>
-                            <label class="btn btn-secondary" id="label4">
-                                <input type="radio" id="option3" name="toggle" value="D" autocomplete="off"> D
-                            </label>
+                            
+                            <!-- {% for x in "1234" %}
+
+                                {% if x == question.answer %}
+                                <label class="btn btn-secondary" id="label1">
+                                    <input type="radio" id="option1" name="toggle" value="1" autocomplete="off"> A
+                                </label>
+                                {% endif %}
+                                
+                            {% endfor %}
+
+
+                            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %} -->
+                            
+                            
+
+                            {% if 1 == question.answer %}
+                                <label class="btn btn-secondary" id="label1">
+                                    <input type="radio" id="option1" name="toggle" value="1"  autocomplete="off"> A
+                                </label>
+                            {% endif %}
+
+                            {% if 1 != question.answer %}
+                                <label class="btn btn-secondary" id="label1">
+                                    <input type="radio" id="option1" name="toggle" value="1" autocomplete="off"> A
+                                </label>
+                            {% endif %}
+
+
+                            {% if 2 == question.answer %}
+                                <label class="btn btn-secondary" id="label1">
+                                    <input type="radio" id="option1" name="toggle" value="2" active autocomplete="off"> B
+                                </label>
+                            {% endif %}
+
+                            {% if 2 != question.answer %}
+                                <label class="btn btn-secondary" id="label1">
+                                    <input type="radio" id="option1" name="toggle" value="2" autocomplete="off"> B
+                                </label>
+                            {% endif %}
+
+                            {% if 3 == question.answer %}
+                                <label class="btn btn-secondary" id="label1">
+                                    <input type="radio" id="option1" name="toggle" value="3" autocomplete="off"> C
+                                </label>
+                            {% endif %}
+
+                            {% if 3 != question.answer %}
+                                <label class="btn btn-secondary" id="label1">
+                                    <input type="radio" id="option1" name="toggle" value="3" autocomplete="off"> C
+                                </label>
+                            {% endif %}
+
+                            {% if 4 == question.answer %}
+                                <label class="btn btn-secondary" id="label1">
+                                    <input type="radio" id="option1" name="toggle" value="4" autocomplete="off"> D
+                                </label>
+                            {% endif %}
+
+                            {% if 4 != question.answer %}
+                                <label class="btn btn-secondary" id="label1">
+                                    <input type="radio" id="option1" name="toggle" value="4" autocomplete="off"> D
+                                </label>
+                            {% endif %}
+
+                            
+
                         </div>
-                        <br>
-                        <br>
-                        <button type="submit" value="submitQuestion" class="btn btn-primary">Submit</button>
+                        
+                        <input type="hidden" name="question" value="{{question.id}}">
+                        <input type="hidden" name="relation" value="{{userRelation.id}}">
+
+                       
+                        <button type="submit" value="resubmitQuestion" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>

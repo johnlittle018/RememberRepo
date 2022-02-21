@@ -29,6 +29,11 @@ urlpatterns = [
 
     path('submitQuestion/', views.submitQuestion, name='submitQuestion'),
 
+    path('resubmitQuestion/', views.resubmitQuestion, name='resubmitQuestion'),
+
+    path('removeQuestion/', views.removeQuestion, name='removeQuestion'),
+
+
     path('editQuestionnaire/', views.editQuestionnaire, name='editQuestionnaire'),
     path('editQuestion/', views.editQuestion, name='editQuestion'),
 

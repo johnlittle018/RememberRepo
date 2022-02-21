@@ -133,66 +133,136 @@ def pickedPatient(request):
 def makeQuestion(request):
 
     print("This is the make a question page")
-
-
-
+    
     print(request.POST.dict())
 
-    time.sleep(2.4)
+    relationID = request.POST['relation']
 
-    # currentUser = request.POST['relation']
+    
+    currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
 
-    # print(currentUser)
+    
 
-    return render(request, 'Remember/makeQuestion.html')
+    quizes = Quiz.objects.filter(patient = currentUser.patient)
+
+    myQuize = quizes[0]
+
+    
+
+    return render(request, 'Remember/makeQuestion.html' , {'userRelation' : currentUser, 'quize' : myQuize})
 
 
 
 def submitQuestion(request):
 
+    relationID = request.POST['relation']
+    quizID = request.POST['quize']
+
+
+    myQuiz = Quiz.objects.get(pk = quizID)
+
     print("This is the submitQuestion function")
 
-    #print(request.POST.dict())
+    print(request.POST.dict())
 
     myImage = open('./uploads/images/images2/Bison.png')
 
-    myQuiz = Quiz.objects.filter(patient = 1)
+    #myQuiz = Quiz.objects.filter(patient = 1)
 
-    #print(myQuiz[0].patient)
+    
+    photoDiscription = request.POST['pDescription']
+  
+    question = request.POST['theQuestion']
+    
+    answer1 = request.POST['answer1']
+ 
+    answer2 = request.POST['answer2']
+    
+    answer3 = request.POST['answer3']
+ 
+    answer4 = request.POST['answer4']
+  
+    correctAnswer = request.POST.get('toggle', null)
+    
+
+    if correctAnswer == null:
+        print("User did not click a correct answer")
+    else:
+        b = Question(question_text=question, description=photoDiscription, picture=myImage.name, a1=answer1, a2=answer2, a3=answer3, a4=answer4, answer=int(correctAnswer), lastSubAnswer=0, quiz=myQuiz )
+        #print(b.picture)
+        b.save()
+
+    return adminMenu(request, relationID)
+
+
+    return render(request, 'Remember/newPage.html')
+
+def resubmitQuestion(request):
+
+    print("This is the resubmitQuestion function")
+
+    print(request.POST.dict())
+
+    ## temp image to use till images are figured out.
+    myImage = open('./uploads/images/images2/Bison.png')
+
+    userRelationID = request.POST['relation']
+    questionID = request.POST['question']
+
+
+    userRelation = PatientClearanceAbstraction.objects.get(pk = userRelationID)
+    myQuestion = Question.objects.get(pk = questionID)
+    
+
 
 
     photoDiscription = request.POST['pDescription']
-    #print(photoDiscription)
-
-    question = request.POST['question']
-    #print(question)
-
-    question = request.POST['question']
-    #print(question)
-
+  
+    question = request.POST['theQuestion']
+ 
     answer1 = request.POST['answer1']
-    #print(answer1)
-
+  
     answer2 = request.POST['answer2']
-    #print(answer2)
-
+    
     answer3 = request.POST['answer3']
-    #print(answer3)
 
     answer4 = request.POST['answer4']
-    #print(answer4)
 
     correctAnswer = request.POST.get('toggle', null)
     #print(correctAnswer)
 
     if correctAnswer == null:
         print("User did not click a correct answer")
+        #todo, code in a page refresh error for such a senario
     else:
-        b = Question(question_text=question, description=photoDiscription, picture=myImage.name, a1=answer1, a2=answer2, a3=answer3, a4=answer4, answer=int(correctAnswer), lastSubAnswer=0, quiz=myQuiz[0] )
-        print(b.picture)
-        b.save()
+        myQuestion.question_text = question
+        myQuestion.description = photoDiscription
+        myQuestion.a1 = answer1
+        myQuestion.a2 = answer2
+        myQuestion.a3 = answer3
+        myQuestion.a4 = answer4
+        myQuestion.answer = correctAnswer
+        #this is where I would code in photo change if any.
+        myQuestion.save()
 
-    return render(request, 'Remember/newPage.html')
+    return adminMenu(request, userRelation.id)
+
+
+def removeQuestion(request):
+
+    # pulling the realtionship
+    relationID = request.POST['relation']
+    #pulling the question to be edited.
+    questionID = request.POST['question']
+
+    currentUser = PatientClearanceAbstraction.objects.get(pk = questionID)
+    question = Question.objects.get(pk = relationID)
+
+    question.delete()
+
+
+
+    return adminMenu(request, currentUser.id)
 
 
 
@@ -214,11 +284,7 @@ def editQuestionnaire(request):
     myQuiz = Quiz.objects.filter(patient = currentUser.patient)
 
 
-    myQuestions = Question.objects.filter(quiz = myQuiz[0]) 
-
-
-
-    
+    myQuestions = Question.objects.filter(quiz = myQuiz[0])    
 
     
 
@@ -232,9 +298,24 @@ def editQuestion(request):
 
     print("This is edit question")
 
-    print(request.POST.dict())
+    #print(request.POST.dict())
 
-    return render(request, 'Remember/makeQuestion.html')
+    # pulling the realtionship
+    relationID = request.POST['relation']
+    #pulling the question to be edited.
+    questionID = request.POST['question']
+
+    currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
+    question = Question.objects.get(pk = questionID)
+
+
+    
+
+    #quizes =  Quiz.objects.filter(patient = currentUser.patient)
+
+
+
+    return render(request, 'Remember/editQuestion.html', {'userRelation' : currentUser, 'question' : question})
 
 
 
