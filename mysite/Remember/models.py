@@ -9,7 +9,8 @@ from django.utils import timezone
 
 
 class Patient(models.Model):
-    name = models.CharField(max_length=200)
+    firstName = models.CharField(max_length=200)
+    lastName = models.CharField(max_length=200)
     username = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
     mugshot = models.FileField(upload_to='uploads/images/patient_pics/', max_length=200, default="")
@@ -28,7 +29,8 @@ class Reminder(models.Model):
 
 class User(models.Model):
     patients = models.ManyToManyField(Patient, through='PatientClearanceAbstraction') #ManyToManyField helps manage queries
-    name = models.CharField(max_length=200)
+    firstName = models.CharField(max_length=200)
+    lastName = models.CharField(max_length=200)
     email = models.CharField(max_length=200)#it's functionally a username
     password = models.CharField(max_length=200)
 
