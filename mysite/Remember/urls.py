@@ -24,6 +24,10 @@ urlpatterns = [
 
     path('pickedPatient/', views.pickedPatient, name='pickedPatient'),
 
+    path('helpPage/', views.helpPage, name='helpPage'),
+
+   
+
     ## Family and admin
     path('makeQuestion/', views.makeQuestion, name='makeQuestion'),
 
@@ -65,6 +69,8 @@ urlpatterns = [
     path('familyMenu/', views.familyMenu, name='familyMenu'), #changed familyMainMenu to familyMenu to match previous notation
 
 
+
+    
 
 
 

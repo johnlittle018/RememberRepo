@@ -87,6 +87,23 @@ def pickPatient(request):
 
 
 
+def helpPage(request):
+
+    print('This is the pick a patient view')
+
+    currentUser = User.objects.get(pk = request.session['loggedInID'])
+
+    usersRelations = PatientClearanceAbstraction.objects.filter(user = currentUser)
+
+    print(usersRelations)
+
+    #pCA is short for Patient clearance Abstraction
+    return render(request, 'Remember/newPage.html')
+
+
+
+
+
 # Function for when a patient is picked
 def pickedPatient(request):
 
