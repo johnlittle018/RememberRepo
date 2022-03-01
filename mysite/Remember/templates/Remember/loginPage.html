@@ -56,25 +56,35 @@
            
             .container{
                 padding-top: 4%;
-                padding-bottom: 3%;
             }
 
             .login-form{
                 background: #f7f7f7;
-                min-height: 500px;
-                min-width: 30%;
+                min-width: 25%; 
+                border-radius: 5px;
             }
 
-            .form-control, .btn {
-                height: 10%;
+            .login-form h2{
+                font-size: 2.4em;
+                padding-bottom: 2%;
             }
 
-            label{
-                margin-top: 8%; 
+            .login-form a{
+                color: #212529;
+            } 
+
+            .form-control, .form-label {
+                font-size: 1.1em;
+            }
+
+             .form-control{
+                padding-top: 6.7%;
+                padding-bottom: 6.7%;
             }
 
             .btn{
-                margin-top: 20%; 
+                margin-top: 8%;
+                text-align: center;
             }
 
 
@@ -94,6 +104,7 @@
         <!--  This element needs to be styled, and the screen needs to not fade in the second time-->
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
         <!-- All your html stuff here      required="required"  required="required"               -->
+
         <div class="mx-auto">
             <div class="d-flex justify-content-center">
                 <div class="login-form p-4">
@@ -101,23 +112,23 @@
                         
                         {% csrf_token %}
 
-                        <h2 class="text-center">Log in</h2>       
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="text" name="Email" class="form-control" placeholder="Your Email" >
+                        <h2 class="text-center">Log in</h2> 
+                        <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Your Email">
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Your Password" >
+                        <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Your Password">
                         </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block" value="login" >Log in</button>
+                        <div class="forgot float-right mb-2">
+                            <a href="#" id="forgot-link">Forgot Password?</a>
                         </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </form>
                 </div>
             </div>
-        </div>
-
+        </div> -->
 
 
 
