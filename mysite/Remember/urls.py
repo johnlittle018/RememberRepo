@@ -28,6 +28,9 @@ urlpatterns = [
 
    
 
+
+        
+
     ## Family and admin
     path('makeQuestion/', views.makeQuestion, name='makeQuestion'),
 
