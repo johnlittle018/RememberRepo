@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Patient, Reminder, User, PatientClearanceAbstraction, Result, Quiz, Question
+from .models import Patient, Reminder, User, PatientClearanceAbstraction, Quiz, Question, QuizResult, QuestionResult
 
 # Register your models here.
 
@@ -8,9 +8,10 @@ admin.site.register(Patient)
 admin.site.register(Reminder)
 admin.site.register(User)
 admin.site.register(PatientClearanceAbstraction)
-admin.site.register(Result)
 admin.site.register(Quiz)
 admin.site.register(Question)
+admin.site.register(QuizResult)
+admin.site.register(QuestionResult)
 
 
 '''

@@ -17,7 +17,7 @@ from sqlalchemy import null
 
 
 # importing models from our database. 
-from .models import Patient, Reminder, User, PatientClearanceAbstraction, Result, Quiz, Question
+from .models import Patient, Reminder, User, PatientClearanceAbstraction, Quiz, Question, QuizResult, QuestionResult
 # from .models import Choice, Question
 
 
