@@ -34,15 +34,15 @@ def loginPage(request):
 
 def login(request):
 
-    print(request.POST.dict())
+    #print(request.POST.dict())
 
     print("This is the login function")
 
     userName = request.POST['Email']
-    print(userName)
+    #print(userName)
 
     userPassword = request.POST['password']
-    print(userPassword)
+    #print(userPassword)
 
     # Checking our users
     if User.objects.filter(username = userName).exists():
@@ -50,7 +50,8 @@ def login(request):
         print("User is in the system.")
         if ourUser[0].password == userPassword:
             print("Password is good") 
-            return pickPatient(request, ourUser[0].id)
+            request.session['loggedInID'] = ourUser[0].id
+            return pickPatient(request)
             #return HttpResponseRedirect(reverse('Remember:pickPatient', args=(ourUser[0].id,)))
     
     # Checking our Patients
@@ -70,12 +71,11 @@ def login(request):
    
 
 
-def pickPatient(request, user_id):
+def pickPatient(request):
 
     print('This is the pick a patient view')
 
-
-    currentUser = User.objects.get(pk = user_id)
+    currentUser = User.objects.get(pk = request.session['loggedInID'])
 
     usersRelations = PatientClearanceAbstraction.objects.filter(user = currentUser)
 
@@ -98,19 +98,27 @@ def pickedPatient(request):
     relationID = request.POST['relation']
     #print(relationID)
 
-    currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
+    currentUser = User.objects.get(pk = request.session['loggedInID'])
 
+    userRelation = PatientClearanceAbstraction.objects.get(pk = relationID)
 
+    ## Cheking to see if the user realtion id we scraped from the html is
+    ## a relatioinship of the user logged in through the session.
+    if userRelation.user.id != currentUser.id:
+        print("security is trying to be broken, send back to login page")
+        return loginPage(request)
+
+    request.session['relationshipID'] = userRelation.id
 
     ## this is where we check if we are relation 1 or 2 
     ## Relation 1 sends you to the family menu
     ## Relation 2 sends you to the admin menu
-    if currentUser.clearanceLevel == 1:
+    if userRelation.clearanceLevel == 1:
         print("This is a family member")
-        return familyMenu(request, currentUser.id)
-    elif currentUser.clearanceLevel == 2:
+        return familyMenu(request, userRelation.id)
+    elif userRelation.clearanceLevel == 2:
         print("This is an admin")
-        return adminMenu(request, currentUser.id)
+        return adminMenu(request)
 
     else:
         print("ERRRRROOORRR!!!!!!!!")
@@ -155,11 +163,11 @@ def makeQuestion(request):
 
 def submitQuestion(request):
 
-    relationID = request.POST['relation']
-    quizID = request.POST['quize']
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
+    
+    
 
-
-    myQuiz = Quiz.objects.get(pk = quizID)
+    myQuiz = Quiz.objects.filter(patient = relation.patient)
 
     print("This is the submitQuestion function")
 
@@ -186,16 +194,19 @@ def submitQuestion(request):
     
 
     if correctAnswer == null:
+        ## to do
+        ## code in error that pops up, at the moment it just breaks to newPage
         print("User did not click a correct answer")
+        return render(request, 'Remember/newPage.html')
     else:
-        b = Question(question_text=question, description=photoDiscription, picture=myImage.name, a1=answer1, a2=answer2, a3=answer3, a4=answer4, answer=int(correctAnswer), lastSubAnswer=0, quiz=myQuiz )
+        b = Question(question_text=question, description=photoDiscription, picture=myImage.name, a1=answer1, a2=answer2, a3=answer3, a4=answer4, answer=int(correctAnswer), lastSubAnswer=0, quiz=myQuiz[0] )
         #print(b.picture)
         b.save()
 
-    return adminMenu(request, relationID)
+    return editQuestionnaire(request)
 
 
-    return render(request, 'Remember/newPage.html')
+    
 
 def resubmitQuestion(request):
 
@@ -206,13 +217,15 @@ def resubmitQuestion(request):
     ## temp image to use till images are figured out.
     myImage = open('./uploads/images/images2/Bison.png')
 
-    userRelationID = request.POST['relation']
     questionID = request.POST['question']
 
-
-    userRelation = PatientClearanceAbstraction.objects.get(pk = userRelationID)
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
     myQuestion = Question.objects.get(pk = questionID)
     
+    canEdit = checkIfValidQuestionToEdit(relation, myQuestion)
+
+    if canEdit == False: 
+        return loginPage(request)
 
 
 
@@ -245,24 +258,45 @@ def resubmitQuestion(request):
         #this is where I would code in photo change if any.
         myQuestion.save()
 
-    return adminMenu(request, userRelation.id)
+    return editQuestionnaire(request)
+
+
+def checkIfValidQuestionToEdit( relation, qestion):
+
+
+    
+    myQuiz = Quiz.objects.filter(patient = relation.patient)
+
+    questions = Question.objects.filter(quiz = myQuiz[0])
+    isValidQuestionToEdit = False
+    for q in questions:
+        if q.id == qestion.id:
+            isValidQuestionToEdit = True
+            break
+    
+    return isValidQuestionToEdit
+
 
 
 def removeQuestion(request):
 
-    # pulling the realtionship
-    relationID = request.POST['relation']
-    #pulling the question to be edited.
+
     questionID = request.POST['question']
 
-    currentUser = PatientClearanceAbstraction.objects.get(pk = questionID)
-    question = Question.objects.get(pk = relationID)
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
+    question = Question.objects.get(pk = questionID)
 
-    question.delete()
+    isValidQuestionToEdit = checkIfValidQuestionToEdit(relation, question)
+
+
+    if isValidQuestionToEdit == True:
+        question.delete()
+        return editQuestionnaire(request)
+    else:
+        return loginPage(request)
 
 
 
-    return adminMenu(request, currentUser.id)
 
 
 
@@ -274,21 +308,19 @@ def editQuestionnaire(request):
 
     print(request.POST.dict())
 
-    relationID = request.POST['relation']
-
     
-    currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
 
-    print(currentUser.patient.name)
+    print(relation.patient.name)
 
-    myQuiz = Quiz.objects.filter(patient = currentUser.patient)
+    myQuiz = Quiz.objects.filter(patient = relation.patient)
 
 
     myQuestions = Question.objects.filter(quiz = myQuiz[0])    
 
     
 
-    return render(request, 'Remember/editQuestionnaire.html', {'userRelation' : currentUser, 'questions' : myQuestions})
+    return render(request, 'Remember/editQuestionnaire.html', {'userRelation' : relation, 'questions' : myQuestions})
 
 
 
@@ -298,24 +330,26 @@ def editQuestion(request):
 
     print("This is edit question")
 
-    #print(request.POST.dict())
+    print(request.POST.dict())
 
-    # pulling the realtionship
-    relationID = request.POST['relation']
+    
     #pulling the question to be edited.
     questionID = request.POST['question']
 
-    currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
     question = Question.objects.get(pk = questionID)
+    
+
+    isValidQuestionToEdit = checkIfValidQuestionToEdit(relation, question)
+            
+    if isValidQuestionToEdit == True:
+        return render(request, 'Remember/editQuestion.html', {'userRelation' : relation, 'question' : question})
+    else:
+        return loginPage(request)
+
 
 
     
-
-    #quizes =  Quiz.objects.filter(patient = currentUser.patient)
-
-
-
-    return render(request, 'Remember/editQuestion.html', {'userRelation' : currentUser, 'question' : question})
 
 
 
@@ -347,11 +381,13 @@ def patientMenu(request):
 
 ## Exclusive to Admin
 
-def adminMenu(request, relationID):
+def adminMenu(request):
 
-    currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
 
-    return render(request, 'Remember/adminEx/adminMenu.html', {'userRelation' : currentUser})
+    
+
+    return render(request, 'Remember/adminEx/adminMenu.html', {'userRelation' : relation})
 
 def graphsData(request):
 
@@ -378,9 +414,9 @@ def adminPickPatient(request):
 
 def familyMenu(request, relationID): #changed familyMainMenu to familyMenu to be consistent with previous naming convention
 
-    currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
 
-    return render(request, 'Remember/familyEx/familyMenu.html', {'userRelation' : currentUser})
+    return render(request, 'Remember/familyEx/familyMenu.html', {'userRelation' : relation})
 
 
 
