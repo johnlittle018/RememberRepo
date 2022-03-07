@@ -48,7 +48,7 @@ class PatientClearanceAbstraction(models.Model):
 
 class Quiz(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, unique=True)
-    order = models.IntegerField(default=0, unique=True) # Jack requested this id to make routing easier
+    order = models.IntegerField(default=0) # Jack requested this id to make routing easier
 
     def __str__(self):
         return '{}\'s quiz'.format(self.patient)
