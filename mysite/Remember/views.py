@@ -98,7 +98,7 @@ def helpPage(request):
     print(usersRelations)
 
     #pCA is short for Patient clearance Abstraction
-    return render(request, 'Remember/newPage.html')
+    return render(request, 'Remember/helpPage.html')
 
 
 
