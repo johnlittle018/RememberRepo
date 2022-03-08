@@ -17,6 +17,7 @@
             
             .navbar{
                 border-bottom: 3px solid black;
+                background: rgba(255, 255, 255, 0.9);
             }
             .autohide{
                 position: fixed;
@@ -52,19 +53,8 @@
                 border: none;
             }
 
-            .settings.btn.btn-secondary.dropdown-toggle{
-                background-color: lightgrey;
-                width: 50%;
-            }
-
-            .settings.btn.btn-secondary{
-                background-color: white;
-                width: 50%;
-            }
-
-            .btn.btn-primary.btn-lg{
-                background-color: darkslateblue;
-                border: 3px solid black;
+            .btn.btn-secondary.dropdown-toggle {
+                background-color: rgb(211,211,211);  
             }
 
             h1{
@@ -103,7 +93,7 @@
                 background-size:cover;
             }
 
-            .btn-secondary{
+            .removeBorder{
                 border: none;
                 box-shadow: none;
             }
@@ -174,7 +164,7 @@
         <!-- All your html stuff here -->
 
         
-        <nav class="autohide navbar navbar-light bg-light" style="padding-left: 1vw;padding-right: 1vw;">
+        <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
             <a class="navbar-brand" href="#">
                 <button class="backButton" onclick="history.back()"></button>
             </a>
@@ -184,7 +174,7 @@
             </a>
             <div class="dropdown" style="padding-right:1vw;">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/../../static/remember/images/settingsIcon.png" style="width:42px;height:42px;">
+                    <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
                   <li><a class="dropdown-item" href="#">Logout</a></li>
@@ -313,7 +303,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <!--Jack's old code-->
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary removeBorder" data-bs-dismiss="modal">Close</button>
                                             <form action="{% url 'Remember:removeQuestion' %}" method="post">
                                                 <div>
                                                     <button type="submit" value="removeQuestion" class="btn btn-danger">
