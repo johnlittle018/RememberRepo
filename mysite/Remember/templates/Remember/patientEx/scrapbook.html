@@ -14,6 +14,27 @@
          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <style>
             
+            .navbar{
+                border-bottom: 3px solid black;
+                background: rgba(255, 255, 255, 0.9);
+            }
+
+            .autohide{
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1030;
+            }
+            .scrolled-down{
+                transform:translateY(-100%); transition: all 0.3s ease-in-out;
+            }
+
+            .scrolled-up{
+                transform:translateY(0); transition: all 0.3s ease-in-out;
+            }
+
             .backButton{
                 width:51px;height:51px;
                 background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
@@ -22,7 +43,7 @@
                 background-size: cover;
                 border: none;
             }
-            
+
             .logo{
                 width:83.1px; height: 72px; 
                 /* Original size width: 374; height: 324 */
@@ -30,12 +51,12 @@
                 mix-blend-mode: multiply;
                 background-size: cover;
                 border: none;
+                
             }
 
             .btn.btn-secondary.dropdown-toggle {
-                background-color: lightgrey;  
+                background-color: rgb(211,211,211);  
             }
-
             h1{
                 color: white;
                 font-family: 'Sans serif', Helvetica, sans-serif;
@@ -82,8 +103,8 @@
 
         <!-- All your html stuff here -->
 
-        <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">
+        <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
+            <a class="navbar-brand" href="#" >
                 <button class="backButton" onclick="history.back()"></button>
             </a>
             <a href="">
@@ -91,7 +112,7 @@
             </a>
             <div class="dropdown" style="padding-right:1vw;">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/../../static/remember/images/settingsIcon.png" style="width:42px;height:42px;">
+                    <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
                   <li><a class="dropdown-item" href="#">Logout</a></li>
@@ -155,6 +176,34 @@
               </button>
         </div>         
               
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
+
+                el_autohide = document.querySelector('.autohide');
+                // add padding-top to bady (if necessary)
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+                document.body.style.paddingTop = navbar_height + 'px';
+
+                if(el_autohide){
+                var last_scroll_top = 0;
+                window.addEventListener('scroll', function() {
+                        let scroll_top = window.scrollY;
+                    if(scroll_top < last_scroll_top) {
+                            el_autohide.classList.remove('scrolled-down');
+                            el_autohide.classList.add('scrolled-up');
+                        }
+                    else {
+                        el_autohide.classList.remove('scrolled-up');
+                        el_autohide.classList.add('scrolled-down');
+                    }
+                        last_scroll_top = scroll_top;
+                }); 
+                // window.addEventListener
+                }
+                // if
+
+            }); 
+        </script>
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
