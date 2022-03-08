@@ -15,7 +15,25 @@
          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <style>
             
- 
+            .navbar{
+                border-bottom: 3px solid black;
+            }
+            .autohide{
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1030;
+            }
+            .scrolled-down{
+                transform:translateY(-100%); transition: all 0.3s ease-in-out;
+            }
+
+            .scrolled-up{
+                transform:translateY(0); transition: all 0.3s ease-in-out;
+            }
+
             .backButton{
                 width:51px;height:51px;
                 background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
@@ -47,13 +65,6 @@
             .btn.btn-primary.btn-lg{
                 background-color: darkslateblue;
                 border: 3px solid black;
-            }
-
-            hr {
-                margin-top: 0rem;
-                margin-bottom: 1rem;
-                border: 0;
-                border-top: 5px solid rgba(0, 0, 0, .3);
             }
 
             h1{
@@ -163,7 +174,7 @@
         <!-- All your html stuff here -->
 
         
-        <nav class="navbar navbar-light bg-light" style="padding-left: 1vw;padding-right: 1vw;">
+        <nav class="autohide navbar navbar-light bg-light" style="padding-left: 1vw;padding-right: 1vw;">
             <a class="navbar-brand" href="#">
                 <button class="backButton" onclick="history.back()"></button>
             </a>
@@ -368,6 +379,32 @@
         <!-- Optional JavaScript -->
 
         <script>
+            document.addEventListener("DOMContentLoaded", function(){
+
+                el_autohide = document.querySelector('.autohide');
+                // add padding-top to bady (if necessary)
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+                document.body.style.paddingTop = navbar_height + 'px';
+
+                if(el_autohide){
+                var last_scroll_top = 0;
+                window.addEventListener('scroll', function() {
+                        let scroll_top = window.scrollY;
+                    if(scroll_top < last_scroll_top) {
+                            el_autohide.classList.remove('scrolled-down');
+                            el_autohide.classList.add('scrolled-up');
+                        }
+                    else {
+                        el_autohide.classList.remove('scrolled-up');
+                        el_autohide.classList.add('scrolled-down');
+                    }
+                        last_scroll_top = scroll_top;
+                }); 
+                // window.addEventListener
+                }
+                // if
+
+            }); 
         </script>
 
         
