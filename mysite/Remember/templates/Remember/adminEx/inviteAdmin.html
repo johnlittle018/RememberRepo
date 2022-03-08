@@ -31,6 +31,7 @@
                 mix-blend-mode: multiply;
                 background-size: cover;
                 border: none;
+                
             }
 
             .settings.btn.btn-secondary.dropdown-toggle{
@@ -70,36 +71,6 @@
                 padding: 1%;
             }
 
-            #upload {
-                opacity: 0;
-            }
-
-            #upload-label {
-                position: absolute;
-                top: 50%;
-                left: 1rem;
-                transform: translateY(-50%);
-            }
-
-            .image-area {
-                border: 2px dashed rgba(0, 0, 0, 0.7);
-                padding: 1rem;
-                position: relative;
-            }
-
-            .image-area::before {
-                content: 'Uploaded image result';
-                color: black;
-                font-weight: bold;
-                text-transform: uppercase;
-                position: top;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 0.8rem;
-                z-index: 1;
-            }
-
             .image-area img {
                 z-index: 2;
                 position: relative;
@@ -125,8 +96,9 @@
                 padding:0;
             }
 
-            .addLeftPadding{
-                padding-left:1vw;
+            .addHorizontalPadding{
+                padding-left: 1vw;
+                padding-right: 1vw;
             }
 
         </style>
@@ -141,8 +113,8 @@
         <!-- All your html stuff here -->
 
         
-        <nav class="navbar navbar-light sticky-top bg-light">
-            <a class="navbar-brand" href="#">
+        <nav class="navbar navbar-light sticky-top bg-light" style="padding-left: 1vw;padding-right: 1vw;">
+            <a class="navbar-brand" href="#" >
                 <button class="backButton" onclick="history.back()"></button>
             </a>
             <a href="">
@@ -188,36 +160,36 @@
             </div>
 
 
-            <div class="input-group mb-3 addLeftPadding">
+            <div class="input-group mb-3 addHorizontalPadding">
                 <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Email Address</span>
+                <span class="input-group-text " id="basic-addon1" style="width: 125px;">Email Address</span>
                 </div>
                 <input type="text" class="form-control" placeholder="Email Address">
             </div>
 
-            <div class="input-group mb-3 addLeftPadding">
+            <div class="input-group mb-3 addHorizontalPadding" id="passwordDisplay">
                 <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Password</span>
+                <span class="input-group-text" id="basic-addon1" style="width: 125px;">Password</span>
                 </div>
                 <input type="text" class="form-control" placeholder="Password" id="inputPasswordId">
             </div>
             
-            <div class="input-group mb-3 addLeftPadding">
+            <div class="input-group mb-3 addHorizontalPadding" id="fNameDisplay">
                 <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">First Name</span>
+                <span class="input-group-text" id="basic-addon1" style="width: 125px;">First Name</span>
                 </div>
                 <input type="text" class="form-control" placeholder="First Name"  id="inputFirstNameId">
             </div>
 
-            <div class="input-group mb-3 addLeftPadding">
+            <div class="input-group mb-3 addHorizontalPadding" id="lNameDisplay">
                 <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Last Name</span>
+                <span class="input-group-text" id="basic-addon1" style="width: 125px;">Last Name</span>
                 </div>
                 <input type="text" class="form-control" placeholder="Last Name"   id="inputLastNameId">
             </div>
             
-            <div class="addLeftPadding">
-                <button type="submit" value="submitQuestion" class="btn btn-primary" style="margin: 1.5vw;">Submit</button>
+            <div class="addHorizontalPadding">
+                <button type="submit" value="submitQuestion" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
             </div>
         </div>
         <!-- Optional JavaScript -->
@@ -229,31 +201,33 @@
                 fName = document.getElementById("inputFirstNameId")
                 lName = document.getElementById("inputLastNameId")
                 title = document.getElementById("accountTitle");
+                passwordDisplay = document.getElementById("passwordDisplay")
+                fNameDisplay = document.getElementById("fNameDisplay")
+                lNameDisplay = document.getElementById("lNameDisplay")
 
-                pass.disabled = "";
-                fName.disabled = "";
-                lName.disabled = "";
+                passwordDisplay.style.display = "inline-flex";
+                fNameDisplay.style.display = "inline-flex";
+                lNameDisplay.style.display = "inline-flex";
 
                 title.textContent="Create Admin Account";
-                pass.placeholder="Password";
-                fName.placeholder="First Name";
-                lName.placeholder="Last Name";
             }
 
             function inviteAccount(){
+                vis = document.getElementById("visibility")
                 pass = document.getElementById("inputPasswordId")
                 fName = document.getElementById("inputFirstNameId")
                 lName = document.getElementById("inputLastNameId")
                 title = document.getElementById("accountTitle");
+                passwordDisplay = document.getElementById("passwordDisplay")
+                fNameDisplay = document.getElementById("fNameDisplay")
+                lNameDisplay = document.getElementById("lNameDisplay")
 
-                pass.disabled = "true";
-                fName.disabled = "true";
-                lName.disabled = "true";
+                passwordDisplay.style.display = "none";
+                fNameDisplay.style.display = "none";
+                lNameDisplay.style.display = "none";
+
 
                 title.textContent="Invite Admin";
-                pass.placeholder="";
-                fName.placeholder="";
-                lName.placeholder="";
             }
 
 

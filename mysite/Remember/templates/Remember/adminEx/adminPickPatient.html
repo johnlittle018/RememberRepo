@@ -48,6 +48,13 @@
                 color: white;
             }
 
+            .names{
+                color: black;
+                padding: 5px;
+                padding-bottom: 0;
+                text-align: center;
+            }
+
             .btn.btn-secondary.dropdown-toggle {
                 background-color: lightgrey;  
             }
@@ -91,7 +98,7 @@
         <!-- All your html stuff here -->
 
         
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light bg-light" style="padding-left: 1vw;padding-right: 1vw;">
             <a class="navbar-brand" href="#">
                 <button class="backButton" onclick="history.back()"></button>
             </a>
@@ -134,81 +141,16 @@
                         <div class="pictureStyle"></div> <br> 
                         <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                     </div>
-                    <label for="pictureButton" style="padding-left: 5px;">Garrett Bridgham</label>
+                    <h5 class="names">Garrett Bridgham</h5>
                 </button>
             </div>
 
-            <div class="p-2 bd-highlight">
-                <div class="d-flex bd-highlight">
-                    <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
-                            <div class="pictureStyle"></div> <br>
-                        </div>
-                        <label for="pictureButton" style="padding-left: 5px;">Jack Little</label>
-                    </button>
-                </div>
-            </div>
-
-            <div class="p-2 bd-highlight">
-                <div class="d-flex bd-highlight">
-                    <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
-                            <div class="pictureStyle"></div> <br>
-                        </div>
-                        <label for="pictureButton" style="padding-left: 5px;">Omokhefe Ilalokhoin</label>
-                    </button>
-                </div>
-            </div>
-
-            <div class="p-2 bd-highlight">
-                <div class="d-flex bd-highlight">
-                    <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
-                            <div class="pictureStyle"></div> <br>
-                        </div>
-                        <label for="pictureButton" style="padding-left: 5px;">Andrew Didycz</label>
-                    </button>
-                </div>
-            </div>
-
-            <div class="p-2 bd-highlight">
-                <div class="d-flex bd-highlight">
-                    <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
-                            <div class="pictureStyle"></div> <br>
-                        </div>
-                        <label for="pictureButton" style="padding-left: 5px;">Andy Bridgham</label>
-                    </button>
-                </div>
-            </div>
-
-            <div class="p-2 bd-highlight">
-                <div class="d-flex bd-highlight">
-                    <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
-                            <div class="pictureStyle"></div> <br>
-                        </div>
-                        <label for="pictureButton" style="padding-left: 5px;">Jazlyn Bridgham</label>
-                    </button>
-                </div>
-            </div>
-
-            <div class="p-2 bd-highlight">
-                <div class="d-flex bd-highlight">
-                    <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
-                            <div class="pictureStyle"></div> <br>
-                        </div>
-                        <label for="pictureButton" style="padding-left: 5px;">Kylo Bridgham</label>
-                    </button>
-                </div>
-            </div>
             <!--Should this always be at the end??-->
             <div class="p-2 bd-highlight">
                 <div class="d-flex bd-highlight">
                     <button type="button" class="pictureButton">
                         <img src="/../../static/remember/images/plusSign.png" class="pictureStyle"> <br>
-                        <label for="pictureButton" style="padding-left: 5px;">Add Patient</label>
+                        <h5 class="names">Add Patient</h5>
                     </button>
                 </div>
             </div>

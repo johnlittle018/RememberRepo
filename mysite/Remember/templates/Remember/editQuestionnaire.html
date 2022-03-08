@@ -113,6 +113,40 @@
                 height: 10vw;
             }
 
+            .editIcon{
+                width: 50px;
+                height: 50px;
+            }
+
+
+            .BtnEditIcon{
+                width:8vw;height:8vw;
+                background: transparent url(/../../static/remember/images/EditIcon.png) no-repeat;
+                background-position: center;
+                background-color: transparent;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
+                max-width: 50px;
+                max-height: 50px;
+                min-width: 40px;
+                min-height: 40px;
+            }
+
+            .BtnTrashcanIcon{
+                width:8vw;height:8vw;
+                background: transparent url(/../../static/remember/images/TrashcanIcon.png) no-repeat;
+                background-position: center;
+                background-color: transparent;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
+                max-width: 50px;
+                max-height: 50px;
+                min-width: 40px;
+                min-height: 40px;
+            }
+
 
             
 
@@ -129,7 +163,7 @@
         <!-- All your html stuff here -->
 
         
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light bg-light" style="padding-left: 1vw;padding-right: 1vw;">
             <a class="navbar-brand" href="#">
                 <button class="backButton" onclick="history.back()"></button>
             </a>
@@ -148,7 +182,7 @@
         </nav>
         
         <!--For the length, the order goes top, right, bottom, left-->
-        <div class="d-flex justify-content-around" style="padding: 0vw 5vw 0vw 5vw">
+        <div class="d-flex justify-content-between" style="padding: 0vw 5vw 0vw 0vw">
             <h1>
                 {{userRelation.patient.name}} Questionnaire
             </h1>
@@ -227,7 +261,6 @@
                                 {{question.a4}}
                             </p>
                         </div>
-
                         <div class="d-flex justify-content-start">
                             <p class="boxContent">
                                 <strong>Correct Answer:</strong>
@@ -235,32 +268,69 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-2">
                         <div class="d-flex justify-content-end">
                             
                             <form action="{% url 'Remember:editQuestion' %}" method="post">
                                 <div>
-                                <button type="submit" value="editQuestion" class="button">
-                                    Edit
-                                    {% csrf_token %}
-                                    <input type="hidden" name="relation" value="{{userRelation.id}}">
-                                    <input type="hidden" name="question" value="{{question.id}}">
-                                </button>
+                                    <button type="submit" value="editQuestion" class="btn BtnEditIcon">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="relation" value="{{userRelation.id}}">
+                                        <input type="hidden" name="question" value="{{question.id}}">
+                                    </button>
                                 </div>
   
                             </form>
 
-                            <form action="{% url 'Remember:removeQuestion' %}" method="post">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn BtnTrashcanIcon" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+  
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete?
+                                            <br>
+                                            This action cannot be undone! 
+                                            <br>
+                                            Question: {{question.question_text}}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <!--Jack's old code-->
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <form action="{% url 'Remember:removeQuestion' %}" method="post">
+                                                <div>
+                                                    <button type="submit" value="removeQuestion" class="btn btn-danger">
+                                                        Delete
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="relation" value="{{userRelation.id}}">
+                                                        <input type="hidden" name="question" value="{{question.id}}">
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <!-- Jack's Super old code
+                                <form action="{% url 'Remember:removeQuestion' %}" method="post">
                                 <div>
-                                <button type="submit" value="removeQuestion" class="button">
-                                    Delete
-                                    {% csrf_token %}
-                                    <input type="hidden" name="relation" value="{{userRelation.id}}">
-                                    <input type="hidden" name="question" value="{{question.id}}">
-                                </button>
+                                    <button type="submit" value="removeQuestion" class="btn BtnTrashcanIcon">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="relation" value="{{userRelation.id}}">
+                                        <input type="hidden" name="question" value="{{question.id}}">
+                                    </button>
                                 </div>
   
                             </form>
+                            -->
 
                             
 
@@ -277,15 +347,23 @@
 
         </br>
 
-        
-
-
-
-        <div class="d-flex justify-content-center align-self-center" style="padding: 5vw 5vw 5vw 5vw">
-                <button type="button" class="btn btn-primary btn-lg">
-                    Make Question
-                </button>
+        <div class="d-flex justify-content-around" style="padding: 0vw 5vw 0vw 5vw">
+            <div class="justify-content-end align-self-center">
+                <form action="{% url 'Remember:makeQuestion' %}" method="post">   
+                    
+                    <div> 
+                        {% csrf_token %}
+                        <button type="submit" value="makeQuestion" class="btn btn-primary btn-lg">
+                            Make Question
+                            <input type="hidden" name="relation" value="{{userRelation.id}}">
+                            
+                                            
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
+    
 
         <!-- Optional JavaScript -->
 

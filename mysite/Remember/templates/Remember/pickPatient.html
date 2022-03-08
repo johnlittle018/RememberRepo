@@ -16,7 +16,9 @@
             
  
             .backButton{
-                width:51px;height:51px;
+                height: max-content;
+                width: max-content;
+
                 background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
                 background-color: transparent;
                 mix-blend-mode: multiply;
@@ -46,6 +48,12 @@
 
             p{
                 color: white;
+            }
+            .names{
+                color: black;
+                padding: 5px;
+                padding-bottom: 0;
+                text-align: center;
             }
 
             .btn.btn-secondary.dropdown-toggle {
@@ -91,7 +99,7 @@
         <!-- All your html stuff here -->
 
         
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light bg-light" style="padding-left: 1vw;padding-right: 1vw;">
             <a class="navbar-brand" href="#">
                 <button class="backButton" onclick="history.back()"></button>
             </a>
@@ -142,7 +150,7 @@
                             <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
                         <input type="hidden" name="relation" value="{{relation.id}}">
-                        <label for="pictureButton"  style="padding-left: 5px;">{{relation.patient.name}}</label>
+                        <h5 class="names">{{relation.patient.name}}</h5>
                     </button>
                 </div>
 
