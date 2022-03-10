@@ -65,20 +65,68 @@
                 padding-left: 12%;
             }
 
-            img{
-                width: 100%;
-                height: 235px;
+            .pictureButton{
+                background-color: white;
+                border-width: 4px;
+                border-color: black;
+                color: black;
+                padding: 1vw 1vw;
+                text-align: left;
+                font-weight: bold;
+                display: inline-block;
+                font-size: 16px;
+                margin: .5vw .5vw;
+                cursor: pointer;
             }
 
-            .caption{
-                background-color: white;
-                height: 15%;
-                padding-left: 5px;
-                font-size: larger;
-                opacity: 0.7;
+            .pictureStyle{
+                min-height: 250px;
+                max-width: 250px;
+                width: 60vw;
+                height:auto;
             }
-            
+
+            .scaleEdit{
+                object-fit:contain;
+                background: transparent url(/../../static/remember/images/editIcon.png) no-repeat;
+                background-size: contain;
+                background-position: center;
+            }
         
+            .scaleResults{
+                object-fit:contain;
+                background: transparent url(/../../static/remember/images/results.png) no-repeat;
+                background-size: contain;
+                background-position: center;
+            }
+
+            .scaleAnalytics{
+                object-fit:contain;
+                background: transparent url(/../../static/remember/images/analytics.png) no-repeat;
+                background-size: contain;
+                background-position: center;
+            }
+
+            .scaleReminder{
+                object-fit:contain;
+                background: transparent url(/../../static/remember/images/reminder.png) no-repeat;
+                background-size: contain;
+                background-position: center;
+            }
+
+            .scaleAddMembers{
+                object-fit:contain;
+                background: transparent url(/../../static/remember/images/addMember.png) no-repeat;
+                background-size: contain;
+                background-position: center;
+            }
+
+            .names{
+                color: black;
+                padding: 5px;
+                padding-bottom: 0;
+                text-align: center;
+            }
         </style>
     </head>
 
@@ -109,86 +157,93 @@
 
         <div class="d-flex mr-auto m-3 bd-highlight">
             <h1> 
-                <span>Menu -</span>
+                <span>Admin Menu -</span>
                 <span>{{userRelation.patient.name}}</span>
             </h1>
         </div>
 
-        <div class="container d-flex justify-content-center">
-            
-        
-            
-            <div class="row">
+        <div class="d-flex justify-content-center align-content-center flex-wrap">
 
-
-                <form action="{% url 'Remember:editQuestionnaire' %}" method="post">                
-                    {% csrf_token %}
-                    <div class="col-md-4">
-                        <button type="submit" value="editQuestionnaire"  >
-                        <div class="thumbnail">
-                            <a href=""><img src="/../../static/remember/images/codeHere.jfif" alt="" ></a>
-                            <div class="caption">
-                                <p>Edit Questionnaire</p>
-                            </div>
-                            <input type="hidden" name="relation" value="{{userRelation.id}}">
+            <form action="{% url 'Remember:editQuestionnaire' %}" method="post">
+                {% csrf_token %}
+                <div class="p-2 bd-highlight">
+                    <button type="submit" value="pickedPatient" class="pictureButton btn-light" >
+                        <div class="d-flex justify-content-center scaleEdit">
+                            <div class="pictureStyle"></div> <br> 
+                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
-                        </button>
-                    </div>
-
-                </form>
-
-
-                <div class="col-md-4">
-                  <div class="thumbnail">
-                      <a href=""><img src="/../../static/remember/images/codeHere.jfif" alt="" ></a>
-                      <div class="caption">
-                        <p>View Results</p>
-                      </div>
-                  </div>
+                        <input type="hidden" name="relation">
+                        <h5 class="names">Edit Questionnaire</h5>
+                        <input type="hidden" name="relation" value="{{userRelation.id}}">
+                    </button>
                 </div>
+            </form>
 
-                <div class="col-md-4">
-                  <div class="thumbnail">
-                      <a href=""><img src="/../../static/remember/images/codeHere.jfif" alt="" ></a>
-                      <div class="caption">
-                        <p>View Analytics</p>
-                      </div>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href=""><img src="/../../static/remember/images/codeHere.jfif" alt="" ></a>
-                        <div class="caption">
-                          <p>Set Reminder</p>
+            <form action="">
+                <div class="p-2 bd-highlight">
+                    <button type="submit" value="pickedPatient" class="pictureButton btn-light" >
+                        <div class="d-flex justify-content-center scaleResults">
+                            <div class="pictureStyle"></div> <br> 
+                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
-                    </div>
+                        <input type="hidden" name="relation">
+                        <h5 class="names">Review Results</h5>
+                    </button>
                 </div>
+            </form>
 
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href=""><img src="/../../static/remember/images/plusSign.png" alt="" ></a>
-                        <div class="caption">
-                          <p>Invite Admin</p>
+            <form action="">
+                <div class="p-2 bd-highlight">
+                    <button type="submit" value="pickedPatient" class="pictureButton btn-light">
+                        <div class="d-flex justify-content-center scaleAnalytics">
+                            <div class="pictureStyle"></div> <br> 
+                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
-                    </div>
+                        <input type="hidden" name="relation">
+                        <h5 class="names">View Analytics</h5>
+                    </button>
                 </div>
+            </form>
 
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href=""><img src="/../../static/remember/images/plusSign.png" alt="" ></a>
-                        <div class="caption">
-                          <p>Invite Family Member</p>
+            <form action="">
+                <div class="p-2 bd-highlight">
+                    <button type="submit" value="pickedPatient" class="pictureButton btn-light">
+                        <div class="d-flex justify-content-center scaleReminder">
+                            <div class="pictureStyle"></div> <br> 
+                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
-                    </div>
+                        <input type="hidden" name="relation">
+                        <h5 class="names">Set Reminder</h5>
+                    </button>
                 </div>
-            
-            
-            
-            
-            </div>    
+            </form>
+
+            <form action="">
+                <div class="p-2 bd-highlight">
+                    <button type="submit" value="pickedPatient" class="pictureButton btn-light" >
+                        <div class="d-flex justify-content-center scaleAddMembers">
+                            <div class="pictureStyle"></div> <br> 
+                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                        </div>
+                        <input type="hidden" name="relation">
+                        <h5 class="names">Invite Family or Friends</h5>
+                    </button>
+                </div>
+            </form>
+
+            <form action="">
+                <div class="p-2 bd-highlight">
+                    <button type="submit" value="pickedPatient" class="pictureButton btn-light" >
+                        <div class="d-flex justify-content-center scaleAddMembers">
+                            <div class="pictureStyle"></div> <br> 
+                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                        </div>
+                        <input type="hidden" name="relation">
+                        <h5 class="names">Invite Admins</h5>
+                    </button>
+                </div>
+            </form>
         </div>
-
 
         <script>
             document.addEventListener("DOMContentLoaded", function(){

@@ -34,17 +34,6 @@
                 transform:translateY(0); transition: all 0.3s ease-in-out;
             }
 
-            .backButton{
-                height: max-content;
-                width: max-content;
-
-                background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
-                background-color: transparent;
-                mix-blend-mode: multiply;
-                background-size: cover;
-                border: none;
-            }
-
             .logo{
                 width:83.1px; height: 72px; 
                 /* Original size width: 374; height: 324 */
@@ -112,8 +101,8 @@
 
         
         <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
-            <a class="navbar-brand" href="#">
-                <button class="backButton" onclick="history.back()"></button>
+            <a class="navbar-brand" href="#" style="padding-left: 50px;">
+                <!--Left here to keep the logo centered (No back arrow because they would logout)-->
             </a>
             <a href="">
                 <div class="logo"></div>
@@ -147,9 +136,7 @@
     
         
         <div class="d-flex justify-content-center align-content-center flex-wrap">
-            
-            
-            
+
             {% for relation in pCA %}
             <form action="{% url 'Remember:pickedPatient' %}" method="post">
                 <div class="p-2 bd-highlight">
@@ -166,9 +153,6 @@
 
             </form>
             {% endfor %}
-
-
-            
 
         </div>
         <!-- Optional JavaScript -->
