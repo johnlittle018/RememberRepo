@@ -82,17 +82,22 @@
                 z-index: 1;
             }
 
-            .btn.btn-secondary.dropdown-toggle {
-                background-color: rgb(211,211,211);  
-            }
-
+             /*This makes the image appear over the text its replacing*/
             .image-area img {
                 z-index: 2;
                 position: relative;
             }
 
+            .btn.btn-secondary.dropdown-toggle {
+                background-color: rgb(211,211,211);  
+            }
+
             h1{
                 color: white;
+                font-family: 'Sans serif', Helvetica, sans-serif;
+                font-size: calc(3vw + 2vh);
+                padding:2%;
+                padding-left: 12%;
             }
             .addBottomPadding{
                 padding-bottom: 15px;
@@ -146,7 +151,7 @@
     
                     <!-- Optional Feature that previews the image uploaded-->
                     <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
-                    <!-- <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div> -->
+                    <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
                     <form action="{% url 'Remember:submitQuestion' %}" method="post">
                         {% csrf_token %}
 
@@ -158,7 +163,7 @@
                             </div>
                             <div class="p-2 bd-highlight">                    <!-- Upload image input-->
                                 <input id="upload" type="file" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
-                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4" style="border: 2px solid black;"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
                             </div>
                         </div>
 
@@ -264,17 +269,11 @@
 
             }); 
             
-            /*
-            $(document).on('click', '.btn-group button', function (e) {
-                $(this).addClass('on').parent().siblings().find('button').removeClass('on');
-            });
-            */
 
             /*  ==========================================
                 SHOW UPLOADED IMAGE
             * ========================================== */
 
-            /*
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
@@ -286,21 +285,21 @@
                     reader.readAsDataURL(input.files[0]);
                 }
             }
-            */
+            
 
-            /*
+            
             $(function () {
                 $('#upload').on('change', function () {
                     readURL(input);
                 });
             });
 
-            */
+            
 
             /*  ==========================================
                 SHOW UPLOADED IMAGE NAME
             * ========================================== */
-            /*
+            
             var input = document.getElementById( 'upload' );
             var infoArea = document.getElementById( 'upload-label' );
 
@@ -310,7 +309,7 @@
             var fileName = input.files[0].name;
             infoArea.textContent = 'File name: ' + fileName;
             }
-            */
+            
 
 
             /* 

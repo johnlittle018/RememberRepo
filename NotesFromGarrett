@@ -129,24 +129,9 @@ GUIs Worked On:                 In order by Jira
 7. Invite Admin                 inviteAdmin
 8. Edit Questionnaire           editQuestionnaire
 
-Huge Problem:
-When an Admin is creating users if the user already exists they should invite them instead.
-Cases we have not thought of yet:
+https://uxwing.com/ gives free website icons with no attirbution needed
 
-Create Family Member and Friend Account
-Invite Family Member and Friend Account
-
-Create Admin Account
-Invite Admin
-
-Jack will have an error case when you're trying to create an account and the email is already in use.
-
-I updated the bootstrap css sheets and updated the actual bootstrap libraries with a bundle that includes popper
-
-Things to think about 
-Adding sticky-top to navigation class (would need to add a border to the bottom(instead of horizontal rule <hr>))
-
-left-padding for back arrow (maybe give background and make it a circle)
-Fix select correct answer btn
-Decide color for nav bar and settings button
-Navbar could be scrollable, on mobile if it's not going to go away it could take up too much space
+HUGE PROBLEM, AGAIN:
+For the new navbar, if the navbar fades away and you change your screen size so that you can fit all the content and the
+scrollbar goes away then you can't access the navbar at all until you change your screen size so that the scrollbar
+comes back. You can refresh and it comes back so it's not that bad but still...

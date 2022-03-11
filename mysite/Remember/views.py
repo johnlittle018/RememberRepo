@@ -85,6 +85,9 @@ def pickPatient(request):
     return render(request, 'Remember/pickPatient.html', {'pCA' : usersRelations})
 
 
+def createPatient(request):
+
+    return render(request, 'Remember/adminEx/createPatient.html')
 
 
 def helpPage(request):

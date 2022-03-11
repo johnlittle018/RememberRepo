@@ -65,6 +65,7 @@
                 padding:2%;
                 padding-left: 12%;
             }
+
             h2{
                 color: black;
                 padding: 2%;
@@ -76,11 +77,47 @@
                 padding: 1%;
             }
 
+            #upload {
+                opacity: 0;
+            }
+
+            #upload-label {
+                position: absolute;
+                top: 50%;
+                left: 1rem;
+                transform: translateY(-50%);
+            }
+
+            .image-area {
+                min-height: 100px;
+                border: 2px dashed black;
+                padding: 1rem;
+                position: relative;
+                background: transparent url(/../../static/remember/images/image-upload.png) no-repeat;
+                background-size: 65px;
+                background-position: 50% 70%;
+
+            }
+
+            .image-area::before {
+                content: 'Uploaded image result';
+                color: black;
+                font-weight: bold;
+                text-transform: uppercase;
+                position: absolute;
+                top: 15%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 0.8rem;
+                z-index: 1;
+            }
+
+            /*This makes the image appear over the text its replacing*/
             .image-area img {
                 z-index: 2;
                 position: relative;
             }
-            
+
             .col-sm{
                 padding: 0px;
                 margin: 0px;
@@ -105,6 +142,8 @@
                 padding-left: 1vw;
                 padding-right: 1vw;
             }
+
+            
 
         </style>
     </head>
@@ -136,29 +175,37 @@
         </nav>
         
         <h1>
-            Admins
+            Create Patient
         </h1>
         
         <div class="container removePadding">
             <!-- Content here -->
-            <div class="container d-flex justify-content-center" style="background-color:rgb(211,211,211);">
-                <div class="btn-group sliderToggle" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="createAccount()" checked>
-                    <label class="btn btn-outline-primary" for="btnradio1">CREATE
-                    </label>
-                    
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="inviteAccount()">
-                    <label class="btn btn-outline-primary" for="btnradio2">INVITE
-                    </label>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-center text-center">
+            <div class="d-flex justify-content-center text-center"  style="background-color:rgb(211,211,211);">
                 <h2 id="accountTitle">
                     Create Admin Account
                 </h2>
             </div>
 
+
+            <div class="container" style="background-color:rgb(211,211,211);">
+                <div class="row justify-content-center">
+                    <div class="col-12" style="text-align: center;">
+                        <p class="font-italic text-center" style="background-color:rgb(211,211,211);">The profile picture uploaded will be displayed inside the box below.</p>
+                        <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-6 align" style="text-align: center;">
+                        <div class="p-2 bd-highlight">                    <!-- Upload image input-->
+                            <input id="upload" type="file" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
+                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4" style="border: 2px solid black;"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <br>
 
             <div class="input-group mb-3 addHorizontalPadding">
                 <div class="input-group-prepend">
@@ -222,38 +269,49 @@
 
             }); 
 
-            function createAccount(){
-                pass = document.getElementById("inputPasswordId")
-                fName = document.getElementById("inputFirstNameId")
-                lName = document.getElementById("inputLastNameId")
-                title = document.getElementById("accountTitle");
-                passwordDisplay = document.getElementById("passwordDisplay")
-                fNameDisplay = document.getElementById("fNameDisplay")
-                lNameDisplay = document.getElementById("lNameDisplay")
+            
+            $(document).on('click', '.btn-group button', function (e) {
+                $(this).addClass('on').parent().siblings().find('button').removeClass('on');
+            });
 
-                passwordDisplay.style.display = "inline-flex";
-                fNameDisplay.style.display = "inline-flex";
-                lNameDisplay.style.display = "inline-flex";
+            /*  ==========================================
+                SHOW UPLOADED IMAGE
+            * ========================================== */
 
-                title.textContent="Create Admin Account";
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#imageResult')
+                            .attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
             }
+            
 
-            function inviteAccount(){
-                vis = document.getElementById("visibility")
-                pass = document.getElementById("inputPasswordId")
-                fName = document.getElementById("inputFirstNameId")
-                lName = document.getElementById("inputLastNameId")
-                title = document.getElementById("accountTitle");
-                passwordDisplay = document.getElementById("passwordDisplay")
-                fNameDisplay = document.getElementById("fNameDisplay")
-                lNameDisplay = document.getElementById("lNameDisplay")
+            
+            $(function () {
+                $('#upload').on('change', function () {
+                    readURL(input);
+                });
+            });
 
-                passwordDisplay.style.display = "none";
-                fNameDisplay.style.display = "none";
-                lNameDisplay.style.display = "none";
+            
 
+            /*  ==========================================
+                SHOW UPLOADED IMAGE NAME
+            * ========================================== */
+            
+            var input = document.getElementById( 'upload' );
+            var infoArea = document.getElementById( 'upload-label' );
 
-                title.textContent="Invite Admin";
+            input.addEventListener( 'change', showFileName );
+            function showFileName( event ) {
+            var input = event.srcElement;
+            var fileName = input.files[0].name;
+            infoArea.textContent = 'File name: ' + fileName;
             }
 
 

@@ -93,6 +93,10 @@
 
             h1{
                 color: white;
+                font-family: 'Sans serif', Helvetica, sans-serif;
+                font-size: calc(3vw + 2vh);
+                padding:2%;
+                padding-left: 12%;
             }
 
 
@@ -127,15 +131,9 @@
             </div>
         </nav>
 
-        <div class="d-flex justify-content-around">
-            <div class="d-flex justify-content-start">
-                <div class="mr-auto p-2 bd-highlight">
-                    <h1>
-                        Edit Question for {{userRelation.patient.name}}
-                    </h1>
-                </div>
-            </div>
-        </div>
+        <h1>
+            Edit Question for {{userRelation.patient.name}}
+        </h1>
 
             <!--
             <div class="container">            

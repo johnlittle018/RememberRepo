@@ -61,9 +61,11 @@
             h1{
                 color: white;
                 font-family: 'Sans serif', Helvetica, sans-serif;
-                font-size: calc(2.3vw + 2.3vh);
+                font-size: calc(3vw + 2vh);
+                padding-top:2%;
                 padding-left: 12%;
             }
+            /*The padding here is different because of the items below it */
 
             .pictureButton{
                 background-color: white;
@@ -75,7 +77,7 @@
                 font-weight: bold;
                 display: inline-block;
                 font-size: 16px;
-                margin: .5vw .5vw;
+                margin: 0vw .5vw 1vw .5vw;
                 cursor: pointer;
             }
 
@@ -155,12 +157,10 @@
         </nav>
 
 
-        <div class="d-flex mr-auto m-3 bd-highlight">
-            <h1> 
-                <span>Admin Menu -</span>
-                <span>{{userRelation.patient.name}}</span>
-            </h1>
-        </div>
+        <h1> 
+            <span>Admin Menu -</span>
+            <span>{{userRelation.patient.name}}</span>
+        </h1>
 
         <div class="d-flex justify-content-center align-content-center flex-wrap">
 
