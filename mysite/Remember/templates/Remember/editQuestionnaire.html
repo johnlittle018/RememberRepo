@@ -54,7 +54,7 @@
             }
 
             .btn.btn-secondary.dropdown-toggle {
-                background-color: rgb(211,211,211);  
+                background-color: rgb(225,225,225);  
             }
 
             h1{
@@ -307,10 +307,10 @@
                                         <div class="modal-footer">
                                             <!--Jack's old code-->
                                             <button type="button" class="btn btn-secondary removeBorder" data-bs-dismiss="modal">Close</button>
-                                            <form action="{% url 'Remember:removeQuestion' %}" method="post">
+                                            <form action="{% url 'Remember:patientMenu' %}" method="post">
                                                 <div>
-                                                    <button type="submit" value="removeQuestion" class="btn btn-danger">
-                                                        Delete
+                                                    <button type="submit" value="patientMenu" class="btn btn-danger">
+                                                        Quit
                                                         {% csrf_token %}
                                                         <input type="hidden" name="relation" value="{{userRelation.id}}">
                                                         <input type="hidden" name="question" value="{{question.id}}">

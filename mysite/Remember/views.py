@@ -431,7 +431,8 @@ def adminPickPatient(request):
 
 
 ## Exclusive to family
-
+## Family Members do not get a menu, they go from selectPatient to EditQuestionnaire ##############################################
+## Deleted familyMenu.html and familyEx directory
 def familyMenu(request, relationID): #changed familyMainMenu to familyMenu to be consistent with previous naming convention
 
     relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])

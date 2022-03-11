@@ -62,7 +62,7 @@
             }
 
             .btn.btn-secondary.dropdown-toggle {
-                background-color: rgb(211,211,211);  
+                background-color: rgb(225,225,225);  
             }
 
             .pictureButton{
@@ -86,10 +86,18 @@
                 height:auto;
             }
 
-            .scaleImage{
+            .scalePatientImage{
                 object-fit:contain;
                 background: transparent url(/../../static/remember/images/codeHere.png) no-repeat;
                 background-size: cover;
+                /*background color is 225*/
+            }
+
+            .scaleAddImage{
+                object-fit:contain;
+                background: rgb(225,225,225) url(/../../static/remember/images/plusSignNoBG.png) no-repeat;
+                background-size: cover;
+                background-position: 50% 50%;
             }
 
         </style>
@@ -140,7 +148,7 @@
                 <div class="p-2 bd-highlight">
                     <button type="submit" value="pickedPatient" class="pictureButton" >
                         {% csrf_token %}
-                        <div class="d-flex justify-content-center scaleImage">
+                        <div class="d-flex justify-content-center scalePatientImage">
                             <div class="pictureStyle"></div> <br> 
                             <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
@@ -152,12 +160,11 @@
             </form>
             {% endfor %}
 
-            <!-- This should lead to some createPatient page ()-->
             <form action="{% url 'Remember:createPatient' %}" method="post">
                 <div class="p-2 bd-highlight">
                     <button type="submit" value="pickedPatient" class="pictureButton" >
                         {% csrf_token %}
-                        <div class="d-flex justify-content-center scaleImage">
+                        <div class="d-flex justify-content-center scaleAddImage">
                             <div class="pictureStyle"></div> <br> 
                             <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
@@ -215,7 +222,7 @@
             <!-- <div class="p-2 bd-highlight">
                 <div class="d-flex bd-highlight">
                     <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
+                        <div class="d-flex justify-content-center scalePatientImage">
                             <div class="pictureStyle"></div> <br>
                         </div>
                         <label for="pictureButton" style="padding-left: 5px;">Jack Little</label>
@@ -226,7 +233,7 @@
             <div class="p-2 bd-highlight">
                 <div class="d-flex bd-highlight">
                     <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
+                        <div class="d-flex justify-content-center scalePatientImage">
                             <div class="pictureStyle"></div> <br>
                         </div>
                         <label for="pictureButton" style="padding-left: 5px;">Omokhefe Ilalokhoin</label>
@@ -237,7 +244,7 @@
             <div class="p-2 bd-highlight">
                 <div class="d-flex bd-highlight">
                     <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
+                        <div class="d-flex justify-content-center scalePatientImage">
                             <div class="pictureStyle"></div> <br>
                         </div>
                         <label for="pictureButton" style="padding-left: 5px;">Andrew Didycz</label>
@@ -248,7 +255,7 @@
             <div class="p-2 bd-highlight">
                 <div class="d-flex bd-highlight">
                     <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
+                        <div class="d-flex justify-content-center scalePatientImage">
                             <div class="pictureStyle"></div> <br>
                         </div>
                         <label for="pictureButton" style="padding-left: 5px;">Andy Bridgham</label>
@@ -259,7 +266,7 @@
             <div class="p-2 bd-highlight">
                 <div class="d-flex bd-highlight">
                     <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
+                        <div class="d-flex justify-content-center scalePatientImage">
                             <div class="pictureStyle"></div> <br>
                         </div>
                         <label for="pictureButton" style="padding-left: 5px;">Jazlyn Bridgham</label>
@@ -270,7 +277,7 @@
             <div class="p-2 bd-highlight">
                 <div class="d-flex bd-highlight">
                     <button type="button" class="pictureButton">
-                        <div class="d-flex justify-content-center scaleImage">
+                        <div class="d-flex justify-content-center scalePatientImage">
                             <div class="pictureStyle"></div> <br>
                         </div>
                         <label for="pictureButton" style="padding-left: 5px;">Kylo Bridgham</label>
