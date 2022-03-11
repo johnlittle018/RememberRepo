@@ -29,9 +29,7 @@ urlpatterns = [
    
 
 
-        
-
-    ## Family and admin
+    ## Family and Admin
     path('makeQuestion/', views.makeQuestion, name='makeQuestion'),
 
     path('submitQuestion/', views.submitQuestion, name='submitQuestion'),
@@ -46,6 +44,7 @@ urlpatterns = [
 
     ## Patient and Admin
     path('reviewResults/', views.reviewResults, name='reviewResults'),
+    path('questionnaireResults/', views.questionnaireResults, name='questionnaireResults'),
     
     
     ## Stuff for Patient

@@ -380,6 +380,10 @@ def reviewResults(request):
 
     return render(request, 'Remember/reviewResults.html')
 
+def questionnaireResults(request):
+
+    return render(request, 'Remember/questionnaireResults.html')
+
 
 
 ## Stuff exclusive to patient
