@@ -83,6 +83,24 @@
                 padding: 1%;
             }
 
+            .individualCorrectAnswer{
+                background-color: rgb(59, 153, 109);
+                border: 1px solid black;
+                width: 10%;
+                height: auto;
+            }
+
+            .individualWrongAnswer{
+                background-color: rgb(220, 53, 69);
+                border: 1px solid black;
+                width: 10%;
+                height: auto;
+            }
+
+            .outerBorder{
+                border: 2px solid black;
+            }
+
             .d-flex .justify-content-start{
                 padding:0px;
                 margin:0px;
@@ -121,7 +139,7 @@
         <div class="d-flex flex-column bd-highlight mb-3">
             <button type="button" class="container results">
                 <div class="row flex-nowrap">
-                    <div class="col-7">
+                    <div class="col-12">
                         <div class="d-flex justify-content-start">
                             <h4>
                                 Questionnaire 
@@ -140,6 +158,33 @@
                                 <span>23/45/3405</span>
                             </p>
                         </div>
+                        <div class="outerBorder">
+                            <div class="d-flex justify-content-start">
+                                <!--Each individual answer would have to increment through an id based on the questionnaire number-->
+                                <span class="individualCorrectAnswer" id={{NumbOfQuestionnaireWithAssociatedQuestionNumber}}>1</span> 
+                                <span class="individualWrongAnswer">2</span>
+                                <span class="individualCorrectAnswer">3</span>
+                                <span class="individualCorrectAnswer">4</span>
+                                <span class="individualCorrectAnswer">5</span>
+                                <span class="individualCorrectAnswer">6</span>
+                                <span class="individualCorrectAnswer">7</span>
+                                <span class="individualCorrectAnswer">8</span>
+                                <span class="individualCorrectAnswer">9</span>
+                                <span class="individualCorrectAnswer">10</span>
+                            </div>
+                            <div class="d-flex justify-content-start">
+                                <span class="individualCorrectAnswer">11</span>
+                                <span class="individualCorrectAnswer">12</span>
+                                <span class="individualCorrectAnswer">13</span>
+                                <span class="individualCorrectAnswer">14</span>
+                                <span class="individualCorrectAnswer">15</span>
+                                <span class="individualCorrectAnswer">16</span>
+                                <span class="individualCorrectAnswer">17</span>
+                                <span class="individualCorrectAnswer">18</span>
+                                <span class="individualCorrectAnswer">19</span>
+                                <span class="individualCorrectAnswer">20</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </button>
@@ -148,7 +193,7 @@
 
             <button type="button" class="container results">
                 <div class="row flex-nowrap">
-                    <div class="col-7">
+                    <div class="col-12">
                         <div class="d-flex justify-content-start">
                             <h4>
                                 Questionnaire 
@@ -167,6 +212,33 @@
                                 <span>23/45/3405</span>
                             </p>
                         </div>
+                        <div class="outerBorder">
+                            <div class="d-flex justify-content-start">
+                                <!--Each individual answer would have to increment through an id based on the questionnaire number-->
+                                <span class="individualCorrectAnswer" id={{NumbOfQuestionnaireWithAssociatedQuestionNumber}}>1</span> 
+                                <span class="individualCorrectAnswer">2</span>
+                                <span class="individualCorrectAnswer">3</span>
+                                <span class="individualWrongAnswer">4</span>
+                                <span class="individualCorrectAnswer">5</span>
+                                <span class="individualWrongAnswer">6</span>
+                                <span class="individualCorrectAnswer">7</span>
+                                <span class="individualWrongAnswer">8</span>
+                                <span class="individualCorrectAnswer">9</span>
+                                <span class="individualCorrectAnswer">10</span>
+                            </div>
+                            <div class="d-flex justify-content-start">
+                                <span class="individualCorrectAnswer">11</span>
+                                <span class="individualCorrectAnswer">12</span>
+                                <span class="individualWrongAnswer">13</span>
+                                <span class="individualCorrectAnswer">14</span>
+                                <span class="individualCorrectAnswer">15</span>
+                                <span class="individualWrongAnswer">16</span>
+                                <span class="individualCorrectAnswer">17</span>
+                                <span class="individualCorrectAnswer">18</span>
+                                <span class="individualWrongAnswer">19</span>
+                                <span class="individualCorrectAnswer">20</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </button>
@@ -175,11 +247,11 @@
 
             <button type="button" class="container results">
                 <div class="row flex-nowrap">
-                    <div class="col-7">
+                    <div class="col-12">
                         <div class="d-flex justify-content-start">
                             <h4>
                                 Questionnaire 
-                                <span>2</span>
+                                <span>3</span>
                             </h4>
                         </div>
                         <div class="d-flex justify-content-start">
@@ -193,6 +265,33 @@
                                 Date taken:
                                 <span>23/45/3405</span>
                             </p>
+                        </div>
+                        <div class="outerBorder">
+                            <div class="d-flex justify-content-start">
+                                <!--Each individual answer would have to increment through an id based on the questionnaire number-->
+                                <span class="individualWrongAnswer" id={{NumbOfQuestionnaireWithAssociatedQuestionNumber}}>1</span> 
+                                <span class="individualCorrectAnswer">2</span>
+                                <span class="individualWrongAnswer">3</span>
+                                <span class="individualWrongAnswer">4</span>
+                                <span class="individualWrongAnswer">5</span>
+                                <span class="individualWrongAnswer">6</span>
+                                <span class="individualWrongAnswer">7</span>
+                                <span class="individualCorrectAnswer">8</span>
+                                <span class="individualWrongAnswer">9</span>
+                                <span class="individualWrongAnswer">10</span>
+                            </div>
+                            <div class="d-flex justify-content-start">
+                                <span class="individualWrongAnswer">11</span>
+                                <span class="individualWrongAnswer">12</span>
+                                <span class="individualCorrectAnswer">13</span>
+                                <span class="individualCorrectAnswer">14</span>
+                                <span class="individualWrongAnswer">15</span>
+                                <span class="individualCorrectAnswer">16</span>
+                                <span class="individualWrongAnswer">17</span>
+                                <span class="individualCorrectAnswer">18</span>
+                                <span class="individualCorrectAnswer">19</span>
+                                <span class="individualWrongAnswer">20</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -202,6 +301,10 @@
         </div>     
 
         <script>
+            //Change question result from correct answer to wrong answer
+            //document.getElementById("MyElement").classList.add('individualWrongAnswer');
+            //document.getElementById("MyElement").classList.remove('individualCorrectAnswer');
+
             document.addEventListener("DOMContentLoaded", function(){
 
                 el_autohide = document.querySelector('.autohide');
@@ -228,6 +331,8 @@
                 // if
 
             }); 
+
+
         </script>
         
         <!-- Optional JavaScript -->
