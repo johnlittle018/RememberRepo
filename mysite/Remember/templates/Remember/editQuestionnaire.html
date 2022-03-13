@@ -311,7 +311,7 @@
                                             <form action="{% url 'Remember:patientMenu' %}" method="post">
                                                 <div>
                                                     <button type="submit" value="patientMenu" class="btn btn-danger">
-                                                        Quit
+                                                        Delete
                                                         {% csrf_token %}
                                                         <input type="hidden" name="relation" value="{{userRelation.id}}">
                                                         <input type="hidden" name="question" value="{{question.id}}">
