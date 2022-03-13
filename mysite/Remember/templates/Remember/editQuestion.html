@@ -119,7 +119,7 @@
             <div class="d-flex justify-content-start">
                 <div class="mr-auto p-2 bd-highlight">
                     <h1>
-                        Edit Question for {{userRelation.patient.name}}
+                        Edit Question for {{userRelation.patient.firstName}}
                     </h1>
                 </div>
             </div>
@@ -189,19 +189,19 @@
                         </div>
                         <div class="form-group">
                             <label for="answerA" class="text-white">A: </label>
-                            <textarea class="form-control" id="AanswerA" name="answer1" rows="1"  placeholder="Answer A">{{question.a1}}</textarea>
+                            <textarea class="form-control" id="AanswerA" name="answer1" rows="1"  placeholder="Answer A">{{question.A}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerB" class="text-white">B: </label>
-                            <textarea class="form-control" id="answerB" name="answer2" rows="1" placeholder="Answer B">{{question.a2}}</textarea>
+                            <textarea class="form-control" id="answerB" name="answer2" rows="1" placeholder="Answer B">{{question.B}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerC" class="text-white">C: </label>
-                            <textarea class="form-control" id="answerC" name="answer3" rows="1" placeholder="Answer C">{{question.a3}}</textarea>
+                            <textarea class="form-control" id="answerC" name="answer3" rows="1" placeholder="Answer C">{{question.C}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="answerD" class="text-white">D: </label>
-                            <textarea class="form-control" id="answerD" name="answer4" rows="1" placeholder="Answer D">{{question.a4}}</textarea>
+                            <textarea class="form-control" id="answerD" name="answer4" rows="1" placeholder="Answer D">{{question.D}}</textarea>
                         </div>
                         <label class="text-white">Pick Correct Answer </label>
                         <br>
@@ -276,7 +276,7 @@
                         </div>
                         
                         <input type="hidden" name="question" value="{{question.id}}">
-                        <input type="hidden" name="relation" value="{{userRelation.id}}">
+            
 
                        
                         <button type="submit" value="resubmitQuestion" class="btn btn-primary">Submit</button>

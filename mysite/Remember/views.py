@@ -4,6 +4,7 @@
 
 
 
+import datetime
 import email
 import time
 from django.http import Http404
@@ -17,6 +18,8 @@ from django.urls import reverse
 from sqlalchemy import null
 from sympy import re
 
+#from mysite.polls.views import ResultsView
+
 
 
 # importing models from our database. 
@@ -29,6 +32,8 @@ from .models import Patient, Reminder, User, PatientClearanceAbstraction, Result
 ### Stuff for everyone
 def loginPage(request):
 
+ 
+
     return render(request, 'Remember/loginPage.html')
 
 
@@ -38,15 +43,15 @@ def login(request):
 
     print("This is the login function")
 
-    userName = request.POST['Email']
+    Email = request.POST['Email']
     #print(userName)
 
     userPassword = request.POST['password']
     #print(userPassword)
 
     # Checking our users
-    if User.objects.filter(username = userName).exists():
-        ourUser = User.objects.filter(username = userName)
+    if User.objects.filter(email = Email).exists():
+        ourUser = User.objects.filter(email = Email)
         print("User is in the system.")
         if ourUser[0].password == userPassword:
             print("Password is good") 
@@ -55,12 +60,13 @@ def login(request):
             #return HttpResponseRedirect(reverse('Remember:pickPatient', args=(ourUser[0].id,)))
     
     # Checking our Patients
-    elif Patient.objects.filter(username = userName).exists():
-        ourPatient = Patient.objects.filter(username = userName)
+    elif Patient.objects.filter(username = Email).exists():
+        ourPatient = Patient.objects.filter(username = Email)
         print("User is in the system.")
         if ourPatient[0].password == userPassword:
             print("Password is good") 
-            return HttpResponseRedirect(reverse('Remember:patientMenu'))
+            request.session['loggedInID'] = ourPatient[0].id
+            return patientMenu(request)
             
     else:
         return render(request, 'Remember/loginPage.html', {
@@ -79,7 +85,7 @@ def pickPatient(request):
 
     usersRelations = PatientClearanceAbstraction.objects.filter(user = currentUser)
 
-    print(usersRelations)
+    #print(usersRelations)
 
     #pCA is short for Patient clearance Abstraction
     return render(request, 'Remember/pickPatient.html', {'pCA' : usersRelations})
@@ -161,7 +167,7 @@ def makeQuestion(request):
     
     print(request.POST.dict())
 
-    relationID = request.POST['relation']
+    relationID = request.session['relationshipID']
 
     
     currentUser = PatientClearanceAbstraction.objects.get(pk = relationID)
@@ -209,6 +215,8 @@ def submitQuestion(request):
   
     correctAnswer = request.POST.get('toggle', null)
     
+    fillerTimeEnded = datetime.date(2022, 2, 28)
+
 
     if correctAnswer == null:
         ## to do
@@ -216,7 +224,7 @@ def submitQuestion(request):
         print("User did not click a correct answer")
         return render(request, 'Remember/newPage.html')
     else:
-        b = Question(question_text=question, description=photoDiscription, picture=myImage.name, a1=answer1, a2=answer2, a3=answer3, a4=answer4, answer=int(correctAnswer), lastSubAnswer=0, quiz=myQuiz[0] )
+        b = Question(question_text=question, description=photoDiscription, picture=myImage.name, A=answer1, B=answer2, C=answer3, D=answer4, answer=int(correctAnswer), lastSubAnswer=0, quiz=myQuiz[0], timeEnded=fillerTimeEnded)
         #print(b.picture)
         b.save()
 
@@ -267,10 +275,10 @@ def resubmitQuestion(request):
     else:
         myQuestion.question_text = question
         myQuestion.description = photoDiscription
-        myQuestion.a1 = answer1
-        myQuestion.a2 = answer2
-        myQuestion.a3 = answer3
-        myQuestion.a4 = answer4
+        myQuestion.A = answer1
+        myQuestion.B = answer2
+        myQuestion.C = answer3
+        myQuestion.D = answer4
         myQuestion.answer = correctAnswer
         #this is where I would code in photo change if any.
         myQuestion.save()
@@ -328,7 +336,7 @@ def editQuestionnaire(request):
     
     relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
 
-    print(relation.patient.name)
+    print(relation.patient.firstName)
 
     myQuiz = Quiz.objects.filter(patient = relation.patient)
 
@@ -386,12 +394,45 @@ def scrapbook(request): #changed Book to book
 
 
 def takeQuestionnaire(request):
+    # this is the method that will be called the first time a questionair is started.
 
-    return render(request, 'Remember/patientEx/takeQuestionnaire.html')
+    myPatient = Patient.objects.get(pk = request.session['loggedInID'])
+
+    myQuiz = Quiz.objects.filter(patient = myPatient)
+
+    request.session['activeQuiz'] = myQuiz[0]
+
+    myQuestions = Question.objects.filter(quiz = myQuiz[0])
+
+    request.session['activeQuestions'] = myQuestions
+    request.session['activeQuestionIndex'] = 0
+
+    return takeQuestion(request)
+    
+
+def takeQuestion(request):
+
+    myQuestions = request.session['activeQuestions']
+    myQuestionIndex = request.session['activeQuestionIndex'] 
+    
+    if myQuestionIndex == len(myQuestions):
+        QuizCompleted(request)
+    else:
+        return render(request, 'Remember/patientEx/takeQuestionnaire.html')
+    
+
+
+
+def QuizCompleted(request):
+    
+    return reviewResults(request)
+
 
 def patientMenu(request):
 
-    return render(request, 'Remember/patientEx/patientMenu.html')
+    ourPatient = Patient.objects.get(pk = request.session['loggedInID'])
+
+    return render(request, 'Remember/patientEx/patientMenu.html', {'patient' : ourPatient})
 
 
 

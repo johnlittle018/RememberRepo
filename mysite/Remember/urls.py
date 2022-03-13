@@ -51,6 +51,8 @@ urlpatterns = [
     ## Stuff for Patient
     path('scrapbook/', views.scrapbook, name='scrapbook'), #changed Book to book
     path('takeQuestionnaire/', views.takeQuestionnaire, name='takeQuestionnaire'),
+    path('takeQuestion/', views.takeQuestion, name='takeQuestion'),
+
     path('patientMenu/', views.patientMenu, name='patientMenu'),
 
 

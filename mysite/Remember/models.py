@@ -7,7 +7,8 @@ from django.utils import timezone
 
 
 class Patient(models.Model):
-    name = models.CharField(max_length=200)
+    firstName = models.CharField(max_length=200)
+    lastName = models.CharField(max_length=200)
     username = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
     #find a patient's reminders by querying Reminder
@@ -25,8 +26,9 @@ class Reminder(models.Model):
 
 class User(models.Model):
     patients = models.ManyToManyField(Patient, through='PatientClearanceAbstraction') #ManyToManyField helps manage queries
-    name = models.CharField(max_length=200)
-    username = models.CharField(max_length=200)
+    firstName = models.CharField(max_length=200)
+    lastName = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)#it's functionally a username
     password = models.CharField(max_length=200)
 
     def __str__(self):
@@ -54,6 +56,7 @@ class Result(models.Model):
 
 class Quiz(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, unique=True)
+    order = models.IntegerField(default=0, unique=False)
 
     def __str__(self):
         return '{}\'s quiz'.format(self.patient) #first 25 characters of the question
@@ -61,16 +64,17 @@ class Quiz(models.Model):
 class Question(models.Model):
     question_text = models.CharField(max_length=200, default="")
     description = models.CharField(max_length=200, default="")
-    picture = models.FileField(upload_to='uploads/images/', max_length=200) #https://docs.djangoproject.com/en/1.10/ref/models/fields/#django.db.models.FileField
+    picture = models.FileField(upload_to='uploads/images/question_pics/', max_length=200, default="") #https://docs.djangoproject.com/en/1.10/ref/models/fields/#django.db.models.FileField
                                                                             #using FileField takes a little extra legwork comapred to CharField
                                                                             #upload_to can be set to any directory, and it can sort by upload date into subdirectories
                                                                             #also consider the ImageField datatype, which requires the Pillow library
-    a1 = models.CharField(max_length=200, default="")
-    a2 = models.CharField(max_length=200, default="")
-    a3 = models.CharField(max_length=200, default="")
-    a4 = models.CharField(max_length=200, default="")
+    A = models.CharField(max_length=200, default="")
+    B = models.CharField(max_length=200, default="")
+    C = models.CharField(max_length=200, default="")
+    D = models.CharField(max_length=200, default="")
     answer = models.IntegerField(default=0)
     lastSubAnswer = models.IntegerField(default=0)
+    timeEnded = models.DateTimeField()
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
 
     def __str__(self):

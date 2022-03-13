@@ -150,7 +150,7 @@
         <!--For the length, the order goes top, right, bottom, left-->
         <div class="d-flex justify-content-around" style="padding: 0vw 5vw 0vw 5vw">
             <h1>
-                {{userRelation.patient.name}} Questionnaire
+                {{userRelation.patient.firstName}} Questionnaire
             </h1>
 
 
@@ -161,7 +161,7 @@
                         {% csrf_token %}
                         <button type="submit" value="makeQuestion" class="btn btn-primary btn-lg">
                             Make Question
-                            <input type="hidden" name="relation" value="{{userRelation.id}}">
+                            
                             
                                             
                         </button>
@@ -200,7 +200,7 @@
                                 <strong>A:</strong> &nbsp;
                             </p>
                             <p class="boxContent">
-                                {{question.a1}}
+                                {{question.A}}
                             </p>
                         </div>
                         <div class="d-flex justify-content-start">
@@ -208,7 +208,7 @@
                                 <strong>B:</strong> &nbsp;
                             </p>
                             <p class="boxContent">
-                                {{question.a2}}
+                                {{question.B}}
                             </p>
                         </div>
                         <div class="d-flex justify-content-start">
@@ -216,7 +216,7 @@
                                 <strong>C:</strong> &nbsp;
                             </p>
                             <p class="boxContent">
-                                {{question.a3}}
+                                {{question.C}}
                             </p>
                         </div>
                         <div class="d-flex justify-content-start">
@@ -224,7 +224,7 @@
                                 <strong>D:</strong> &nbsp;
                             </p>
                             <p class="boxContent">
-                                {{question.a4}}
+                                {{question.D}}
                             </p>
                         </div>
 
@@ -243,7 +243,6 @@
                                 <button type="submit" value="editQuestion" class="button">
                                     Edit
                                     {% csrf_token %}
-                                    <input type="hidden" name="relation" value="{{userRelation.id}}">
                                     <input type="hidden" name="question" value="{{question.id}}">
                                 </button>
                                 </div>
@@ -255,7 +254,6 @@
                                 <button type="submit" value="removeQuestion" class="button">
                                     Delete
                                     {% csrf_token %}
-                                    <input type="hidden" name="relation" value="{{userRelation.id}}">
                                     <input type="hidden" name="question" value="{{question.id}}">
                                 </button>
                                 </div>
