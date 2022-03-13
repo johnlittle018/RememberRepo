@@ -55,7 +55,7 @@ class Result(models.Model):
         return '{} completed at {}'.format(self.patient, self.timeEnded)
 
 class Quiz(models.Model):
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, unique=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, unique=False)
     order = models.IntegerField(default=0, unique=False)
 
     def __str__(self):

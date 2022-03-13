@@ -1,0 +1,367 @@
+{% load static %} 
+<link rel="stylesheet" type="text/css" href="{% static 'remember/style.css' %}"> 
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <title></title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <style>
+            
+            .navbar{
+                border-bottom: 3px solid black;
+                background: rgba(255, 255, 255, 0.9);
+            }
+            .autohide{
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1030;
+            }
+            .scrolled-down{
+                transform:translateY(-100%); transition: all 0.3s ease-in-out;
+            }
+
+            .scrolled-up{
+                transform:translateY(0); transition: all 0.3s ease-in-out;
+            }
+
+            .backButton{
+                width:51px;height:51px;
+                background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
+                background-color: transparent;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
+            }
+            
+            .logo{
+                width:83.1px; height: 72px; 
+                /* Original size width: 374; height: 324 */
+                background: transparent url(/../../static/remember/images/RememberLogoSized.png) no-repeat;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
+            }
+
+            .btn.btn-secondary.dropdown-toggle {
+                background-color: rgb(225,225,225);  
+            }
+
+            h1{
+                color: white;
+                font-family: 'Sans serif', Helvetica, sans-serif;
+                font-size: calc(3vw + 2vh);
+                padding:2%;
+                padding-left: 12%;
+            }
+
+            .boxContent{
+                color:black;
+                padding:0px;
+                margin:0px;
+            }
+
+            .selectedAnswer{
+                width: 130px;
+                text-align: right;
+                color:black;
+                padding-right:10px;
+                margin:0px;
+            }
+
+            .fourOptionsDefault{
+                background-color: aliceblue;
+                border: none;
+            }
+
+            .fourOptionsWrong{
+                background-color: rgb(255,170,170);
+                border: solid 5px rgb(220, 53, 69);
+            }
+
+            .fourOptionsGivenCorrect{
+                background-color: rgb(170,255,170);
+                border: solid 5px rgb(25,135,84);
+                border-radius:  50px 50px 50px 50px;
+            }
+
+            .fourOptionsCorrect{
+                background-color: rgb(59, 153, 109);
+                border: solid 5px rgb(25,135,84);
+                border-radius:  50px 50px 50px 50px;
+            }
+
+            h5{
+                padding-left: 3%;
+                color: grey
+            }
+
+            p{
+                color: white;
+                padding:0%;
+                margin:0%;
+            }
+            .container{
+                border: 5px solid black;
+                background-color: aliceblue;
+                padding: 1%;
+            }
+            .photoImg{
+                border: 5px solid black;
+                width:100%;
+                height: auto;
+            }
+
+            .removeBorder{
+                border: none;
+                box-shadow: none;
+            }
+
+            .d-flex.justify-content-start{
+                padding:0px;
+                margin:0px;
+            }
+
+            .rounded-circle{
+                max-width:10vw;
+
+            }
+            .btn.btn-secondary.rounded-circle{
+                max-width: 70px;
+                max-height: 70px;
+                width:10vw;
+                height: 10vw;
+            }
+
+
+            
+
+
+
+
+        </style>
+    </head>
+    
+
+    <body>
+        
+
+        <!-- All your html stuff here -->
+
+        
+        <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
+            <a class="navbar-brand" href="#">
+                <button class="backButton" onclick="history.back()"></button>
+            </a>
+            
+            <a href="">
+                <div class="logo"></div>
+            </a>
+            <div class="dropdown" style="padding-right:1vw;">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">Help Page</a></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <!--For the length, the order goes top, right, bottom, left-->
+        <div class="d-flex justify-content-between" style="padding: 0vw 10vw 0vw 0vw">
+            <h1>
+                Questionnaire Results {{result.completionTime}}
+                <br>
+                Score: {{result.score}}%
+                <br>
+                Correct: {{result.correct}} 
+                <br>
+                Wrong: {{result.wrong}}
+            </h1>
+
+        </div>
+
+        <!-- % for question in questions % -->   
+        <!-- Had to remove {} from above because Django reads through comments lol -->             
+
+
+        {% for question in questions %}
+        <div class="container">
+            <div class="row flex-nowrap">
+                <div class="col-3 justify-content-center align-self-center">
+                    <!-- <img src={{question.picture}} class="photoImg">  -->
+                    
+                    <img src="/../../static/remember/images/codeHere.png" class="photoImg"> 
+                    <!--<img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> -->
+                    <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
+                    <br>
+                </div>
+                <div class="col-9">
+                    <div class="d-flex justify-content-start">
+                        <h3 class="boxContent">
+                            Question: {{question.question_text}}
+                            
+                        </h3>
+                    </div>
+                    <div class="d-flex justify-content-start fourOptionsDefault" id="question1answer1">
+                        <p class="selectedAnswer" id ="question1text1">
+                            
+                        </p>
+                        <p class="boxContent">
+                            <strong>A:</strong> &nbsp;
+                            {{question.A}}
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start fourOptionsDefault" id="question1answer2">
+                        <p class="selectedAnswer" id ="question1text2">
+                             
+                        </p>
+                        <p class="boxContent">
+                            <strong>B:</strong> &nbsp;
+                            {{question.B}}
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start fourOptionsDefault" id="question1answer3">
+                        <p class="selectedAnswer" id ="question1text3">
+                            
+                        </p>
+                        <p class="boxContent">
+                            <strong>C:</strong> &nbsp;
+                            {{question.C}}
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-start fourOptionsDefault"  id="question1answer4">
+                        <p class="selectedAnswer" id ="question1text4">
+                            
+                        </p>
+                        <p class="boxContent">
+                            <strong>D:</strong> &nbsp;
+                            {{question.D}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </br>
+
+        {% endfor %}
+        
+        <!-- % endfor % -->
+        <!-- Had to remove {} from above because Django reads through comments -->             
+
+    
+
+        <!-- Optional JavaScript -->
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
+
+                el_autohide = document.querySelector('.autohide');
+                // add padding-top to bady (if necessary)
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+                document.body.style.paddingTop = navbar_height + 'px';
+
+                if(el_autohide){
+                var last_scroll_top = 0;
+                window.addEventListener('scroll', function() {
+                        let scroll_top = window.scrollY;
+                    if(scroll_top < last_scroll_top) {
+                            el_autohide.classList.remove('scrolled-down');
+                            el_autohide.classList.add('scrolled-up');
+                        }
+                    else {
+                        el_autohide.classList.remove('scrolled-up');
+                        el_autohide.classList.add('scrolled-down');
+                    }
+                        last_scroll_top = scroll_top;
+                }); 
+                // window.addEventListener
+                }
+                // if
+
+            }); 
+
+            answer1 = document.getElementById("question1answer1");
+            answer2 = document.getElementById("question1answer2");
+            answer3 = document.getElementById("question1answer3");
+            answer4 = document.getElementById("question1answer4");
+
+            textForAnswer1 = document.getElementById("question1text1");
+            textForAnswer2 = document.getElementById("question1text2");
+            textForAnswer3 = document.getElementById("question1text3");
+            textForAnswer4 = document.getElementById("question1text4");
+
+            var correctAnswer = 3;
+            var selectedAnswer = 4;
+            //var selectedAnswer = 3; //when selectedAnswer = correctAnswer
+            //Would need to run the following code in a for loop for every question
+
+            if(selectedAnswer == correctAnswer){
+                console.log("Selected Answer: " + selectedAnswer)
+                console.log("Correct Answer: " + correctAnswer)
+                console.log("Started If")
+                let answerNum = "answer";
+                let textForAnswerNum = "textForAnswer";
+                answerNum = "answer" + selectedAnswer.toString();
+                textForAnswerNum = "textForAnswer" + selectedAnswer.toString();
+                console.log("Answer To String: " + answerNum)
+                console.log("Text To String: " + textForAnswerNum)
+
+                var correctAnswer = window[answerNum];
+                var correctText = window[textForAnswerNum];
+
+
+                correctAnswer.classList.add('fourOptionsCorrect');
+                correctText.innerText = "Correct: ";
+            }
+            else{
+                console.log("Started Else")
+
+                let answerNum = "answer";
+                let textForAnswerNum = "textForAnswer";
+                answerNum = "answer" + correctAnswer.toString();
+                textForAnswerNum = "textForAnswer" + correctAnswer.toString();
+                console.log("Answer To String: " + answerNum)
+                console.log("Text To String: " + textForAnswerNum)
+
+                var correctAnswer = window[answerNum];
+                var correctText = window[textForAnswerNum];
+
+                correctAnswer.classList.add('fourOptionsGivenCorrect');
+                correctText.innerText = "Correct Answer: ";
+
+                answerNum = "answer" + selectedAnswer.toString();
+                textForAnswerNum = "textForAnswer" + selectedAnswer.toString();
+                console.log("Answer To String: " + answerNum)
+                console.log("Text To String: " + textForAnswerNum)
+
+                var correctAnswer = window[answerNum];
+                var correctText = window[textForAnswerNum];
+
+                correctAnswer.classList.add('fourOptionsWrong');
+                correctText.innerText = "Selected Answer: ";
+
+
+
+            }
+            
+
+        </script>
+
+        
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>

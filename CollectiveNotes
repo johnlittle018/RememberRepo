@@ -22,3 +22,19 @@ Change your models (in models.py).
 Run python manage.py makemigrations to create migrations for those changes
 Run python manage.py migrate to apply those changes to the database.
 
+
+
+I am not longer using the order statment of quiz as originaly intended order of 0 
+means it it the currenrnt build of the quize,
+order 1 is a quize in use, and can be cleaned if a quize is quite and it is left unfinished
+order 2 means it is a result. 
+
+
+Jack Little 
+
+We forgot add a creator id to question, so we cannot identify as a family what questions can be edited
+
+Things I need to do, 
+
+Record in the sesion what kind of user is logged in for pages 
+of multiple user types.... may be able to imiminate some templets 

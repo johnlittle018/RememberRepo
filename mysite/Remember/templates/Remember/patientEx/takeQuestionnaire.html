@@ -98,24 +98,31 @@
         <div class="d-flex justify-content-start">
             <h1 style="padding-left: 10%;">
                 <!--Code of the corrsponding question-->
-                Who is this?
+                {{question.question_text}}
             </h1>
         </div>
-        <div class="d-flex flex-column bd-highlight mb-3">
-            <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-primary btn-lg" onclick="answerSelected()">Block level button</button>
-            </div>
-            <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-primary btn-lg" onclick="answerSelected()" >Block level button</button>
-            </div>
-            <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-primary btn-lg" onclick="answerSelected()">Block level button</button>
-            </div>
-            <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-primary btn-lg" onclick="answerSelected()">Block level button</button>
-            </div>
-        </div>
-  
+
+        <form action="{% url 'Remember:answerQusetion' %}" method="post">
+            {% csrf_token %}
+            <label class="text-white">Pick Correct Answer </label>
+                
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons" required="required" name="CorrectAnswer123">
+                        <label class="btn btn-secondary" id="label1">
+                            <input type="radio" id="option1" name="toggle" value="1" autocomplete="off"> {{question.A}}
+                        </label>
+                        <label class="btn btn-secondary" id="label2">
+                            <input type="radio" id="option2" name="toggle" value="2" autocomplete="off"> {{question.B}}
+                        </label>
+                        <label class="btn btn-secondary" id="label3">
+                            <input type="radio" id="option3" name="toggle" value="3" autocomplete="off"> {{question.C}}
+                        </label>
+                        <label class="btn btn-secondary" id="label4">
+                            <input type="radio" id="option3" name="toggle" value="4" autocomplete="off"> {{question.D}}
+                        </label>
+                    </div>
+
+                    <button type="submit" value="answerQuestion" class="btn btn-primary">Submit</button>
+        </form>
         <!-- Optional JavaScript -->
 
         <script>
