@@ -479,9 +479,9 @@ def calculateScore(questionsIn):
     tally.append(wrong)
     return tally
 
-def questionnaireResults(request):
+# def questionnaireResults(request):
 
-    return render(request, 'Remember/questionnaireResults.html')
+#     return render(request, 'Remember/questionnaireResults.html')
 
 
 
