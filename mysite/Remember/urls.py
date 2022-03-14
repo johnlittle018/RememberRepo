@@ -29,9 +29,7 @@ urlpatterns = [
    
 
 
-        
-
-    ## Family and admin
+    ## Family and Admin
     path('makeQuestion/', views.makeQuestion, name='makeQuestion'),
 
     path('submitQuestion/', views.submitQuestion, name='submitQuestion'),
@@ -62,7 +60,7 @@ urlpatterns = [
     ## Stuff for Admin 
     path('adminMenu/', views.adminMenu, name='adminMenu'),
 
-
+    path('createPatient/', views.createPatient, name='createPatient'), # NEW
 
 
 
@@ -70,7 +68,7 @@ urlpatterns = [
     path('inviteFamily/', views.inviteFamily, name='inviteFamily'),
     path('inviteAdmin/', views.inviteAdmin, name='inviteAdmin'),
     path('setReminder/', views.setReminder, name='setReminder'),
-    path('adminPickPatient/', views.adminPickPatient, name='adminPickPatient'), # NEW
+    #path('adminPickPatient/', views.adminPickPatient, name='adminPickPatient'), # NEW # Html file destroyed, bye bye
 
 
     ## Stuff for Family 

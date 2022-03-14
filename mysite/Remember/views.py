@@ -106,6 +106,9 @@ def pickPatient(request):
     return render(request, 'Remember/pickPatient.html', {'pCA' : usersRelations})
 
 
+def createPatient(request):
+
+    return render(request, 'Remember/adminEx/createPatient.html')
 
 
 def helpPage(request):
@@ -476,6 +479,10 @@ def calculateScore(questionsIn):
     tally.append(wrong)
     return tally
 
+def questionnaireResults(request):
+
+    return render(request, 'Remember/questionnaireResults.html')
+
 
 
 
@@ -645,7 +652,8 @@ def adminPickPatient(request):
 
 
 ## Exclusive to family
-
+## Family Members do not get a menu, they go from selectPatient to EditQuestionnaire ##############################################
+## Deleted familyMenu.html and familyEx directory
 def familyMenu(request, relationID): #changed familyMainMenu to familyMenu to be consistent with previous naming convention
 
     relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
