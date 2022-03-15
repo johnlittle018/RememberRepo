@@ -4,7 +4,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Admin Main Menu</title>
+        <title>Patient Main Menu</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -87,14 +87,14 @@
                 width: 60vw;
                 height:auto;
             }
-
-            .scaleEdit{
+        
+            .scaleQuiz{
                 object-fit:contain;
-                background: transparent url(/../../static/remember/images/editIcon.png) no-repeat;
+                background: transparent url(/../../static/remember/images/quiz.png) no-repeat;
                 background-size: contain;
                 background-position: center;
             }
-        
+
             .scaleResults{
                 object-fit:contain;
                 background: transparent url(/../../static/remember/images/results.png) no-repeat;
@@ -102,9 +102,9 @@
                 background-position: center;
             }
 
-            .scaleAnalytics{
+            .scaleScrapbook{
                 object-fit:contain;
-                background: transparent url(/../../static/remember/images/analytics.png) no-repeat;
+                background: transparent url(/../../static/remember/images/scrapbook.png) no-repeat;
                 background-size: contain;
                 background-position: center;
             }
@@ -112,13 +112,6 @@
             .scaleReminder{
                 object-fit:contain;
                 background: transparent url(/../../static/remember/images/reminder.png) no-repeat;
-                background-size: contain;
-                background-position: center;
-            }
-
-            .scaleAddMembers{
-                object-fit:contain;
-                background: transparent url(/../../static/remember/images/addMember.png) no-repeat;
                 background-size: contain;
                 background-position: center;
             }
@@ -151,58 +144,56 @@
                     <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
-                    <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
+                    <li><a class="dropdown-item" href="#">Help Page</a></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
                 </ul>
             </div>
         </nav>
 
 
-        
         <h1> 
-            <span>Admin Menu -</span>
-            <span>{{userRelation.patient.name}}</span>
+            <span>{{userRelation.patient.name}}'s Menu</span>
         </h1>
-        
 
         <div class="d-flex justify-content-center align-content-center flex-wrap">
 
-            <form action="{% url 'Remember:editQuestionnaire' %}" method="post">
+            <form action="{% url 'Remember:editQuestionnaie' %}" method="post">
                 {% csrf_token %}
                 <div class="p-2 bd-highlight">
                     <button type="submit" value="pickedPatient" class="pictureButton btn-light" >
-                        <div class="d-flex justify-content-center scaleEdit">
+                        <div class="d-flex justify-content-center scaleQuiz">
                             <div class="pictureStyle"></div> <br> 
                             <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
                         <input type="hidden" name="relation">
-                        <h5 class="names">Edit Questionnaire</h5>
+                        <h5 class="names">Take Quiz</h5>
                         <input type="hidden" name="relation" value="{{userRelation.id}}">
                     </button>
                 </div>
             </form>
 
-            <a href="/remember/reviewResults">
-                <div class="p-2 bd-highlight" >
-                    <button  class="pictureButton btn-light" >
+            <form action="">
+                <div class="p-2 bd-highlight">
+                    <button type="submit" value="pickedPatient" class="pictureButton btn-light" >
                         <div class="d-flex justify-content-center scaleResults">
                             <div class="pictureStyle"></div> <br> 
                             <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
+                        <input type="hidden" name="relation">
                         <h5 class="names">Review Results</h5>
                     </button>
                 </div>
-            </a>
+            </form>
 
             <form action="">
                 <div class="p-2 bd-highlight">
                     <button type="submit" value="pickedPatient" class="pictureButton btn-light">
-                        <div class="d-flex justify-content-center scaleAnalytics">
+                        <div class="d-flex justify-content-center scaleScrapbook">
                             <div class="pictureStyle"></div> <br> 
                             <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
                         <input type="hidden" name="relation">
-                        <h5 class="names">View Analytics</h5>
+                        <h5 class="names">Scrapbook</h5>
                     </button>
                 </div>
             </form>
@@ -215,33 +206,7 @@
                             <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
                         <input type="hidden" name="relation">
-                        <h5 class="names">Set Reminder</h5>
-                    </button>
-                </div>
-            </form>
-
-            <form action="">
-                <div class="p-2 bd-highlight">
-                    <button type="submit" value="pickedPatient" class="pictureButton btn-light" >
-                        <div class="d-flex justify-content-center scaleAddMembers">
-                            <div class="pictureStyle"></div> <br> 
-                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                        </div>
-                        <input type="hidden" name="relation">
-                        <h5 class="names">Invite Family/Friends</h5>
-                    </button>
-                </div>
-            </form>
-
-            <form action="">
-                <div class="p-2 bd-highlight">
-                    <button type="submit" value="pickedPatient" class="pictureButton btn-light" >
-                        <div class="d-flex justify-content-center scaleAddMembers">
-                            <div class="pictureStyle"></div> <br> 
-                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                        </div>
-                        <input type="hidden" name="relation">
-                        <h5 class="names">Invite Admins</h5>
+                        <h5 class="names">Review Reminders</h5>
                     </button>
                 </div>
             </form>
