@@ -152,12 +152,12 @@
 
 
         <h1> 
-            <span>{{userRelation.patient.name}}'s Menu</span>
+            <span>Patient 2's Menu</span>
         </h1>
 
         <div class="d-flex justify-content-center align-content-center flex-wrap">
 
-            <form action="{% url 'Remember:editQuestionnaie' %}" method="post">
+            <form action="{% url 'Remember:takeQuestionnaire' %}" method="post">
                 {% csrf_token %}
                 <div class="p-2 bd-highlight">
                     <button type="submit" value="pickedPatient" class="pictureButton btn-light" >
@@ -172,7 +172,7 @@
                 </div>
             </form>
 
-            <form action="">
+            <form action="{% url 'Remember:reviewResults' %}">
                 <div class="p-2 bd-highlight">
                     <button type="submit" value="pickedPatient" class="pictureButton btn-light" >
                         <div class="d-flex justify-content-center scaleResults">
@@ -185,7 +185,7 @@
                 </div>
             </form>
 
-            <form action="">
+            <form action="{% url 'Remember:scrapbook' %}">
                 <div class="p-2 bd-highlight">
                     <button type="submit" value="pickedPatient" class="pictureButton btn-light">
                         <div class="d-flex justify-content-center scaleScrapbook">
