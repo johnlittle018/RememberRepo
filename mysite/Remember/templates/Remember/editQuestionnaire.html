@@ -151,7 +151,6 @@
                 min-height: 40px;
             }
 
-
             
 
 
@@ -210,6 +209,8 @@
         </div>
 
         {% for question in questions %}        
+
+ 
 
             <div class="container">
                 <div class="row flex-nowrap">
@@ -288,6 +289,44 @@
   
                             </form>
 
+
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn BtnTrashcanIcon" data-bs-toggle="modal" data-bs-target="#{{question}}"></button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{question}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete?
+                                            <br>
+                                            This action cannot be undone! 
+                                            <br>
+                                            Question: {{question}}
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                            <!--Jack's old code-->
+                                            <button type="button" class="btn btn-secondary removeBorder" data-bs-dismiss="modal">Close</button>
+                                            <form action="{% url 'Remember:removeQuestion' %}" method="post">
+                                                <div>
+                                                    <button type="submit" value="removeQuestion" class="btn btn-danger">
+                                                        Delete
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="question" value="{{question.id}}">
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--
                             <form action="{% url 'Remember:removeQuestion' %}" method="post">
                                 <div>
                                 <button type="submit" value="removeQuestion" class="button">
@@ -298,7 +337,7 @@
                                 </div>
   
                             </form>
-
+                            -->
                             
 
                         </div>
@@ -361,6 +400,16 @@
                 // if
 
             }); 
+
+            function setQuestion(string){
+                document.getElementById("questionName").innerHTML = string
+                console.log("Set String = " + string);
+            }
+            
+            function getQuestion(){
+                console.log("Get String = " + string);
+                return string;
+            }
 
         </script>
 
