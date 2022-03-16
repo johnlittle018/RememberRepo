@@ -403,18 +403,24 @@ def reviewResults(request):
         print("This is a patient")
         myQuizs = Quiz.objects.filter(order = 2, patient = user)
         results = []
+        # quizQuestions = []
         for quiz in myQuizs:
             results.append(ResultContainer(quiz))
-        return render(request, 'Remember/reviewResults.html', {'QuizeResults': results})
+        # for r in results:
+        #     quizQuestions.append(r.myQuestions)
+        return render(request, 'Remember/reviewResults.html', {'QuizeResults': results, 'patient': user})
         
     elif request.session['userType'] == "admin":
         # do not think this is needed#  user = User.objects.get(pk = request.session['loggedInID'])
         relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
         myQuizs = Quiz.objects.filter(order = 2, patient = relation.patient)
         results = []
+        # quizQuestions = []
         for quiz in myQuizs:
             results.append(ResultContainer(quiz))
-        return render(request, 'Remember/reviewResults.html', {'QuizeResults': results})
+        # for r in results:
+        #     quizQuestions.append(r.myQuestions)
+        return render(request, 'Remember/reviewResults.html', {'QuizeResults': results, 'patient': relation.patient})
 
     else:
         #family member is trying to accses somthing they shouldent
@@ -422,7 +428,7 @@ def reviewResults(request):
 
 
 def questionnaireResults(request):
-    quizeID = request.POST['quizeID']
+    quizeID = request.POST['quizID']
     myQuiz = Quiz.objects.get(pk = quizeID)
     myResult = ResultContainer(myQuiz)
     questions = Question.objects.filter(quiz = myQuiz)

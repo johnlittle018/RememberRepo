@@ -172,8 +172,8 @@
                     <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Help Page</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                    <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -189,6 +189,7 @@
                 <br>
                 Wrong: {{result.wrong}}
             </h1>
+
 
         </div>
 
@@ -207,6 +208,8 @@
                     <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
                     <br>
                 </div>
+                <input type="hidden" name="{{question.id}}correctAnswer" value="{{question.answer}}">
+                <input type="hidden" name="{{question.id}}lastSubAnswer" value="{{question.lastSubAnswer}}">
                 <div class="col-9">
                     <div class="d-flex justify-content-start">
                         <h3 class="boxContent">
