@@ -52,6 +52,7 @@ urlpatterns = [
     path('scrapbook/', views.scrapbook, name='scrapbook'), #changed Book to book
     path('takeQuestionnaire/', views.takeQuestionnaire, name='takeQuestionnaire'),
     path('patientMenu/', views.patientMenu, name='patientMenu'),
+    path('viewReminder/', views.viewReminder, name='viewReminder'),
 
 
     ## Stuff for Admin 

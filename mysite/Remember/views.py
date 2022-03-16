@@ -392,7 +392,11 @@ def takeQuestionnaire(request):
 def patientMenu(request):
 
     return render(request, 'Remember/patientEx/patientMenu.html')
+    
 
+def viewReminder(request):
+
+    return render(request, 'Remember/patientEx/viewReminder.html')
 
 
 
