@@ -55,6 +55,7 @@ urlpatterns = [
     
 
     path('patientMenu/', views.patientMenu, name='patientMenu'),
+    path('viewReminder/', views.viewReminder, name='viewReminder'),
 
 
     ## Stuff for Admin 
