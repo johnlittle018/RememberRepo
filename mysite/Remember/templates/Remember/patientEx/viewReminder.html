@@ -344,27 +344,85 @@
 
 
             //calendar functionality
-            (function($) {
 
-                "use strict";
+        (function ($) {
+            
+            $(document).ready(function () {
+
+                var today;
+                var year, month, nextMonth, nextYear;
+    
+                var i = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+                var daysArray = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+                var cal1 = $("#calendar_first");
+                var calHeader1 = cal1.find(".calendar_header");
+                var weekline1 = cal1.find(".calendar_weekdays");
+                var datesBody1 = cal1.find(".calendar_content");
+
+                var cal2 = $("#calendar_second");
+                var calHeader2 = cal2.find(".calendar_header");
+                var weekline2 = cal2.find(".calendar_weekdays");
+                var datesBody2 = cal2.find(".calendar_content");
+
+                var bothCals = $(".calendar");
+
+                var switchButton = bothCals.find(".calendar_header").find('.switch-month');
+
+                var calendars = {
+                    "cal1": {
+                        "name": "first",
+                            "calHeader": calHeader1,
+                            "weekline": weekline1,
+                            "datesBody": datesBody1
+                    },
+                        "cal2": {
+                        "name": "second",
+                            "calHeader": calHeader2,
+                            "weekline": weekline2,
+                            "datesBody": datesBody2
+                    }
+                }
 
 
-                $(document).ready(function () {
-                function c(passed_month, passed_year, calNum) {
+                var clickedElement;
+                var firstClicked, secondClicked;
+                var firstClick = false;
+                var selected = {};
+
+
+                setDates();
+                currentCalendar(month, year, 0);
+                currentCalendar(nextMonth, nextYear, 1);
+
+                switchButton.on("click", function () {
+                    var clicked = $(this);
+                    var generateCalendars = function (e) {
+                        var nextDatesFirst = getAdjacentMonth(month, year, e);
+                        var nextDatesSecond = getAdjacentMonth(nextMonth, nextYear, e);
+                        month = nextDatesFirst[0];
+                        year = nextDatesFirst[1];
+                        nextMonth = nextDatesSecond[0];
+                        nextYear = nextDatesSecond[1];
+
+                        currentCalendar(month, year, 0);
+                        currentCalendar(nextMonth, nextYear, 1);
+                    };
+                    if (clicked.attr("class").indexOf("left") != -1) {
+                        generateCalendars("previous");
+                    } else {
+                        generateCalendars("next");
+                    }
+                    clickedElement = bothCals.find(".calendar_content").find("div");
+                });
+
+                function currentCalendar(passed_month, passed_year, calNum) {
                     var calendar = calNum == 0 ? calendars.cal1 : calendars.cal2;
                     makeWeek(calendar.weekline);
                     calendar.datesBody.empty();
                     var calMonthArray = makeMonthArray(passed_month, passed_year);
-                    var r = 0;
-                    var u = false;
-                    while (!u) {
-                        if (daysArray[r] == calMonthArray[0].weekday) {
-                            u = true
-                        } else {
-                            calendar.datesBody.append('<div class="blank"></div>');
-                            r++;
-                        }
-                    }
+                    var r = addDaysToMonthArray(daysArray, calMonthArray, calendar);
                     for (var cell = 0; cell < 42 - r; cell++) { // 42 date-cells in calendar
                         if (cell >= calMonthArray.length) {
                             calendar.datesBody.append('<div class="blank"></div>');
@@ -382,54 +440,91 @@
                         }
                     }
 
-                    var color = "#444444";
                     calendar.calHeader.find("h2").text(i[passed_month] + " " + passed_year);
-                    calendar.weekline.find("div").css("color", color);
-                    calendar.datesBody.find(".today").css("color", "#00bdaa");
 
                     // find elements (dates) to be clicked on each time
                     // the calendar is generated
                     var clicked = false;
-                    selectDate(selected);
+                    selectDates(selected);
 
                     clickedElement = calendar.datesBody.find('div');
                     clickedElement.on("click", function () {
                         clicked = $(this);
-                        var whichCalendar = calendar.name;
 
-                        if (Click) {
-                        click = true;
-                        Clicked = getClickedInfo(clicked, calendar);
-                        selected[Clicked.year] = {};
-                        selected[Clicked.year][Clicked.month] = [Clicked.date];
-                        var timer = document.getElementsByClassName("time");
-                        var today = new Date();
-                        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                        timer.appendChild(time);
+                        if (!firstClick) {
+                            firstClick = true;
+                            firstClicked = getClickedInfo(clicked, calendar);
+                            selected[firstClicked.year] = {};
+                            selected[firstClicked.year][firstClicked.month] = [firstClicked.date];
+                            $(".results").find(".time").each(function () { //not relevant at alllll
+                                $(this).append(i[firstClicked.month] + " " + firstClicked.date + ", " + firstClicked.year); //not relevant at alllll
+                            }); //not relevant at alllll
+                        }
 
-                        } else { // reset clicks
-                                selected = {};
-                                Clicked = [];
-                                Click = false;
-                                bothCals.find(".calendar_content").find("div").each(function () {
-                                    $(this).removeClass("selected");
-                                });
-                            }
-                        selectDate(selected);
-
+                        while(firstClick){
+                            resetClicks();
+                            removeClicksFromClass();
+                            $(".results").find(".time").empty(); //not relevant at alllll
+                            secondClicked = getClickedInfo(clicked, calendar);
+                            selected[secondClicked.year] = {};
+                            selected[secondClicked.year][secondClicked.month] = [secondClicked.date];
+                            $(".results").find(".time").each(function () { //not relevant at alllll
+                                $(this).append(i[secondClicked.month] + " " + secondClicked.date + ", " + secondClicked.year); //not relevant at alllll
+                            });//not relevant at alllll
+                        }
+                        selectDates(selected);
                     });
 
                 }
 
-                function selectDate(selected) {
+                function addDaysToMonthArray(daysArray, calMonthArray, calendar) {
+                    var r = 0;
+                    var u = false;
+                    while (!u) {
+                        if (daysArray[r] == calMonthArray[0].weekday) {
+                            u = true;
+                        } else {
+                            calendar.datesBody.append('<div class="blank"></div>');
+                            r++;
+                        }
+                    }
+                    return r;
+                }
+
+                function resetClicks() {
+                    selected = {};
+                    firstClicked = [];
+                    secondClicked = [];
+                    firstClick = false;
+                    secondClick = false;
+                }
+
+                function removeClicksFromClass() {
+                    bothCals.find(".calendar_content").find("div").each(function () {
+                        $(this).removeClass("selected");
+                    });
+                }
+
+
+                function setDates() {
+                    today = new Date;
+                    year = today.getFullYear();
+                    month = today.getMonth();
+                    var nextDates = getAdjacentMonth(month, year, "next");
+                    nextMonth = nextDates[0];
+                    nextYear = nextDates[1];
+                }
+
+                function selectDates(selected) {
                     if (!$.isEmptyObject(selected)) {
                         var dateElements1 = datesBody1.find('div');
+                        var dateElements2 = datesBody2.find('div');
 
-                        function highlightDate(passed_year, passed_month, dateElements) {
+                        function highlightDates(passed_year, passed_month, dateElements) {
                             if (passed_year in selected && passed_month in selected[passed_year]) {
                                 var daysToCompare = selected[passed_year][passed_month];
                                 for (var d in daysToCompare) {
-                                    dateElements.each(function (index) {
+                                    dateElements.each(function () {
                                         if (parseInt($(this).text()) == daysToCompare[d]) {
                                             $(this).addClass('selected');
                                         }
@@ -439,11 +534,10 @@
                             }
                         }
 
-                        highlightDate(year, month, dateElements1);
+                        highlightDates(year, month, dateElements1);
+                        highlightDates(nextYear, nextMonth, dateElements2);
                     }
                 }
-
-                
 
                 function makeMonthArray(passed_month, passed_year) { // creates Array specifying dates and weekdays
                     var e = [];
@@ -456,7 +550,6 @@
                     }
                     return e;
                 }
-
 
                 function makeWeek(week) {
                     week.empty();
@@ -493,112 +586,15 @@
                     return [theNextMonth, theNextYear];
                 }
 
-                function b() {
-                    today = new Date;
-                    year = today.getFullYear();
-                    month = today.getMonth();
-                    var nextDates = getAdjacentMonth(month, year, "next");
-                    nextMonth = nextDates[0];
-                    nextYear = nextDates[1];
-                }
 
-                var e = 480;
-
-                var today;
-                var year,
-                month,
-                nextMonth,
-                nextYear;
-
-                var r = [];
-                var i = [
-                    "January",
-                    "Feburary",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
-                    "August",
-                    "September",
-                    "October",
-                    "November",
-                    "December"];
-                var daysArray = [
-                    "Sunday",
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday"];
-
-                var cal1 = $("#calendar_first");
-                var calHeader1 = cal1.find(".calendar_header");
-                var weekline1 = cal1.find(".calendar_weekdays");
-                var datesBody1 = cal1.find(".calendar_content");
-
-                var cal2 = $("#calendar_second");
-                var calHeader2 = cal2.find(".calendar_header");
-                var weekline2 = cal2.find(".calendar_weekdays");
-                var datesBody2 = cal2.find(".calendar_content");
-
-                var bothCals = $(".calendar");
-
-                var switchButton = bothCals.find(".calendar_header").find('.switch-month');
-
-                var calendars = {
-                    "cal1": {
-                        "name": "first",
-                            "calHeader": calHeader1,
-                            "weekline": weekline1,
-                            "datesBody": datesBody1
-                    },
-                        "cal2": {
-                        "name": "second",
-                            "calHeader": calHeader2,
-                            "weekline": weekline2,
-                            "datesBody": datesBody2
-                    }
-                }
-
-                var clickedElement;
-                var Clicked;
-                var click = false;
-                var selected = {};
-
-                b();
-                c(month, year, 0);
-                c(nextMonth, nextYear, 1);
-                switchButton.on("click", function () {
-                    var clicked = $(this);
-                    var generateCalendars = function (e) {
-                        var nextDatesFirst = getAdjacentMonth(month, year, e);
-                        var nextDatesSecond = getAdjacentMonth(nextMonth, nextYear, e);
-                        month = nextDatesFirst[0];
-                        year = nextDatesFirst[1];
-                        nextMonth = nextDatesSecond[0];
-                        nextYear = nextDatesSecond[1];
-
-                        c(month, year, 0);
-                        c(nextMonth, nextYear, 1);
-                    };
-                    if (clicked.attr("class").indexOf("left") != -1) {
-                        generateCalendars("previous");
-                    } else {
-                        generateCalendars("next");
-                    }
-                    clickedElement = bothCals.find(".calendar_content").find("div");
-                });
-
-                 //  Click picking stuff
-                 function getClickedInfo(element, calendar) {
+                //  Click picking stuff
+                function getClickedInfo(element, calendar) {
                     var clickedInfo = {};
                     var clickedCalendar,
                     clickedMonth,
                     clickedYear;
                     clickedCalendar = calendar.name;
-                    clickedMonth = clickedCalendar == "first" ? month : nextMonth;
+                    clickedMonth = clickedCalendar == "first" ? month: nextMonth;
                     clickedYear = clickedCalendar == "first" ? year : nextYear;
                     clickedInfo = {
                         "calNum": clickedCalendar,
@@ -608,12 +604,9 @@
                     }
                     return clickedInfo;
                 }
+            });
 
-
-                });
-
-
-            })(jQuery);
+        })(jQuery);
 
         </script>
 

@@ -506,6 +506,11 @@ def scrapbook(request): #changed Book to book
     return render(request, 'Remember/patientEx/scrapbook.html')
 
 
+def viewReminder(request): 
+
+    return render(request, 'Remember/patientEx/viewReminder.html')
+
+
 def takeQuestionnaire(request):
     # this is the method that will be called the first time a questionair is started.
 
