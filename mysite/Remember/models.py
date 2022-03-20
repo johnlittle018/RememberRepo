@@ -14,7 +14,7 @@ class Patient(models.Model):
     #find a patient's reminders by querying Reminder
 
     def __str__(self):
-        return 'patient {}'.format(self.name)
+        return 'patient {} {}'.format(self.firstName, self.lastName)
 
 class Reminder(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
@@ -32,7 +32,7 @@ class User(models.Model):
     password = models.CharField(max_length=200)
 
     def __str__(self):
-        return 'user {}'.format(self.name)
+        return 'user {} {}'.format(self.firstName, self.lastName)
 
 
 class PatientClearanceAbstraction(models.Model):
