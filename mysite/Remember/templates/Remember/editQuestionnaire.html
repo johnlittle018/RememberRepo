@@ -290,10 +290,7 @@
                             </form>
 
 
-
-                            <!-- Button trigger modal -->
                             <button type="button" class="btn BtnTrashcanIcon" data-bs-toggle="modal" data-bs-target="#{{question}}"></button>
-                            <!-- Modal -->
                             <div class="modal fade" id="{{question}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -310,7 +307,6 @@
                                             
                                         </div>
                                         <div class="modal-footer">
-                                            <!--Jack's old code-->
                                             <button type="button" class="btn btn-secondary removeBorder" data-bs-dismiss="modal">Close</button>
                                             <form action="{% url 'Remember:removeQuestion' %}" method="post">
                                                 <div>
@@ -325,7 +321,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <!--
                             <form action="{% url 'Remember:removeQuestion' %}" method="post">
                                 <div>
