@@ -329,7 +329,7 @@ def removeQuestion(request):
 
     if isValidQuestionToEdit == True:
         question.delete()
-        return editQuestionnaire(request)
+        return HttpResponseRedirect(reverse('Remember:editQuestionnaire'))
     else:
         return loginPage(request)
 
