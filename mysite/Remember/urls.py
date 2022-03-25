@@ -16,7 +16,7 @@ urlpatterns = [
 
     
     ## Stuff for everyone
-    path('loginPage/', views.loginPage, name='loginPage'),
+    path('', views.loginPage, name='loginPage'),
     
     path('login/', views.login, name='login'),
 
