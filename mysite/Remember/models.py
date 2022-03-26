@@ -11,6 +11,7 @@ class Patient(models.Model):
     lastName = models.CharField(max_length=200)
     username = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
+    mugshot = models.FileField(upload_to='uploads/images/patient_pics/', max_length=200, default="")
     #find a patient's reminders by querying Reminder
 
     def __str__(self):
@@ -76,6 +77,7 @@ class Question(models.Model):
     lastSubAnswer = models.IntegerField(default=0)
     timeEnded = models.DateTimeField()
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return "%.25s" % '{}'.format(self.question_text) #first 25 characters of the question
