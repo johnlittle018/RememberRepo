@@ -180,7 +180,7 @@
                     
     
                     <!-- Optional Feature that previews the image uploaded-->
-                    <form action="{% url 'Remember:resubmitQuestion' %}" method="post">
+                    <form action="{% url 'Remember:resubmitQuestion' %}" method="post" enctype="multipart/form-data" >
                         {% csrf_token %}
 
 

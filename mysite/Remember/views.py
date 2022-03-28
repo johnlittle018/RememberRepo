@@ -6,6 +6,7 @@
 
 import datetime
 import email
+import os
 import time
 from urllib import request
 from django.http import Http404
@@ -18,6 +19,7 @@ from django.views import generic
 from django.urls import reverse
 from sqlalchemy import null
 from sympy import re
+from django.core.files.storage import FileSystemStorage
 
 #from mysite.polls.views import ResultsView
 
@@ -248,12 +250,40 @@ def submitQuestion(request):
 
 def resubmitQuestion(request):
 
+    ## know issue with this is that you cannot upload more then one image with the same name, or the original will allways be used.
+
     print("This is the resubmitQuestion function")
 
-    print(request.POST.dict())
+    # print(request.POST.dict())
+
+    print("The foolowing is all listed options for files")
+    print(request.FILES.dict())
 
     ## temp image to use till images are figured out.
     myImage = open('./uploads/images/images2/Bison.png')
+
+    myThingy = request.FILES['uploadedPic']
+
+    myFileSystem = FileSystemStorage()
+
+    myFileSystem.save(myThingy.name, myThingy)
+
+    # print(os.listdir("./media"))
+    # print(os.listdir("./Remember/static"))
+
+    source = "./media/" + myThingy.name 
+    destination = "./Remember/static/remember/images/questionImages/" + myThingy.name
+    
+    os.rename(source, destination)
+
+    nameForDatabase = "/../../static/remember/images/questionImages/" + myThingy.name
+
+
+    
+
+    
+
+    # save(name, content, max_length=None)
 
     questionID = request.POST['question']
 
@@ -293,6 +323,7 @@ def resubmitQuestion(request):
         myQuestion.C = answer3
         myQuestion.D = answer4
         myQuestion.answer = correctAnswer
+        myQuestion.picture = nameForDatabase
         #this is where I would code in photo change if any.
         myQuestion.save()
 
