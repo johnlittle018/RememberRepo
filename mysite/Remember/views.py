@@ -211,7 +211,23 @@ def submitQuestion(request):
 
     print(request.POST.dict())
 
-    myImage = open('./uploads/images/images2/Bison.png')
+    ## stuff for images
+    myThingy = request.FILES['uploadedPic']
+
+    myFileSystem = FileSystemStorage()
+
+    myFileSystem.save(myThingy.name, myThingy)
+
+    # print(os.listdir("./media"))
+    # print(os.listdir("./Remember/static"))
+
+    source = "./media/" + myThingy.name 
+    destination = "./Remember/static/remember/images/questionImages/" + myThingy.name
+    
+    os.rename(source, destination)
+
+    nameForDatabase = "/../../static/remember/images/questionImages/" + myThingy.name
+ 
 
     #myQuiz = Quiz.objects.filter(patient = 1)
 
@@ -239,7 +255,7 @@ def submitQuestion(request):
         print("User did not click a correct answer")
         return render(request, 'Remember/newPage.html')
     else:
-        b = Question(question_text=question, description=photoDiscription, picture=myImage.name, A=answer1, B=answer2, C=answer3, D=answer4, answer=int(correctAnswer), lastSubAnswer=0, quiz=myQuiz[0], timeEnded=fillerTimeEnded)
+        b = Question(question_text=question, description=photoDiscription, picture=nameForDatabase, A=answer1, B=answer2, C=answer3, D=answer4, answer=int(correctAnswer), lastSubAnswer=0, quiz=myQuiz[0], timeEnded=fillerTimeEnded)
         #print(b.picture)
         b.save()
 

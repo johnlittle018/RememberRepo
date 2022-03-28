@@ -10,10 +10,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <style>
-            
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+         <style>
+         
+         .navbar{
+                border-bottom: 3px solid black;
+                background: rgba(255, 255, 255, 0.9);
+            }
+            .autohide{
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1030;
+            }
+            .scrolled-down{
+                transform:translateY(-100%); transition: all 0.3s ease-in-out;
+            }
+
+            .scrolled-up{
+                transform:translateY(0); transition: all 0.3s ease-in-out;
+            }
+
             .backButton{
                 width:51px;height:51px;
                 background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
@@ -32,13 +52,6 @@
                 border: none;
             }
 
-            hr {
-                margin-top: 0rem;
-                margin-bottom: 1rem;
-                border: 0;
-                border-top: 5px solid rgba(0, 0, 0, .3);
-            }
-
             #upload {
                 opacity: 0;
             }
@@ -51,26 +64,37 @@
             }
 
             .image-area {
-                border: 2px dashed rgba(255, 255, 255, 0.7);
+                min-height: 100px;
+                border: 2px dashed white;
                 padding: 1rem;
                 position: relative;
+                background: transparent url(/../../static/remember/images/image-uploadWhite.png) no-repeat;
+                background-size: 65px;
+                background-position: 50% 70%;
+
             }
 
             .image-area::before {
                 content: 'Uploaded image result';
-                color: #fff;
+                color: white;
                 font-weight: bold;
                 text-transform: uppercase;
                 position: absolute;
-                top: 50%;
+                top: 15%;
                 left: 50%;
                 transform: translate(-50%, -50%);
                 font-size: 0.8rem;
                 z-index: 1;
             }
 
+            /*This makes the image appear over the text its replacing*/
+            .image-area img {
+                z-index: 2;
+                position: relative;
+            }
+
             .btn.btn-secondary.dropdown-toggle {
-                background-color: lightgrey;  
+                background-color: rgb(225,225,225);  
             }
 
             .image-area img {
@@ -80,10 +104,14 @@
 
             h1{
                 color: white;
+                font-family: 'Sans serif', Helvetica, sans-serif;
+                font-size: calc(3vw + 2vh);
+                padding:2%;
+                padding-left: 12%;
             }
 
 
-
+ 
         </style>
     </head>
 
@@ -96,7 +124,7 @@
         <!-- All your html stuff here -->
 
         
-        <nav class="navbar navbar-light bg-light">
+        <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
             <a class="navbar-brand" href="#">
                 <button class="backButton" onclick="history.back()"></button>
             </a>
@@ -105,18 +133,16 @@
             </a>
             <div class="dropdown" style="padding-right:1vw;">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/../../static/remember/images/settingsIcon.png" style="width:42px;height:42px;">
+                    <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
                 </a>
-                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">Help Page</a></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
                 </ul>
             </div>
         </nav>
 
-        <hr/>
-        <div class="d-flex justify-content-around">
-            <div class="d-flex justify-content-start">
-                <div class="mr-auto p-2 bd-highlight">
+
                     <h1>
                         New Question for {{userRelation.patient.firstName}}
                     </h1>
@@ -130,58 +156,80 @@
                     
     
                     <!-- Optional Feature that previews the image uploaded-->
-                    <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
-                    <!-- <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div> -->
-                    <br>
-                    <form action="{% url 'Remember:submitQuestion' %}" method="post">
+                    <form action="{% url 'Remember:submitQuestion' %}" method="post" enctype="multipart/form-data" >
                         {% csrf_token %}
+
+
+                        <div class="row justify-content-center">
+                            <div class="col-12" style="text-align: center;">
+                                <p class="font-italic text-white text-center">The profile picture uploaded will be displayed inside the box below.</p>
+                                <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-6 align" style="text-align: center;">
+                                <div class="p-2 bd-highlight">                    <!-- Upload image input-->
+                                    <input id="upload" type="file" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
+                                    <label for="upload" class="btn btn-light m-0 rounded-pill px-4" style="border: 2px solid black;"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                                </div>
+                            </div>
+                        </div>
 
                         
 
-                        <div class="d-flex flex-row bd-highlight mb-3">
-                            <div class="align-self-end">
-                                <div class="p-2 bd-highlight">
-                                    <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" width="60">
-                                </div>
-                            </div>
-                            <div class="p-2 bd-highlight">                    <!-- Upload image input-->
-                                <input id="upload" type="file" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
-                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <textarea name="makeShiftName" id="makeShift" style="display: none"></textarea>
-                        </div>
-
                         <div class="form-group">
                             <label for="photoDescription" class="text-white">Image Description</label>
-                            <textarea class="form-control" id="photoDescription" required="required" name="pDescription" rows="3" placeholder="Your Description"></textarea>
+                            <textarea class="form-control" id="photoDescription" name="pDescription" rows="3" >{{question.description}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="question" class="text-white">Question:</label>
-                            <textarea class="form-control" id="question" required="required" name="theQuestion" rows="2" placeholder="Your Question"></textarea>
+                            <textarea class="form-control" id="question" name="theQuestion" rows="2" placeholder="Your Question">{{question.question_text}}</textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="answerA" class="text-white">A: </label>
-                            <textarea class="form-control" id="AanswerA" required="required" name="answer1" rows="1" placeholder="Answer A"></textarea>
+                        <div class="input-group mb-3" style="padding-top: 15px">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1" style="width: 35px;">A</span>
+                            </div>
+                            <textarea class="form-control" id="AanswerA" required="required" name="answer1" rows="1" placeholder="Answer A">{{question.A}}</textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="answerB" class="text-white">B: </label>
-                            <textarea class="form-control" id="answerB" required="required" name="answer2" rows="1" placeholder="Answer B"></textarea>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1" style="width: 35px;">B</span>
+                            </div>
+                            <textarea class="form-control" id="answerB" required="required" name="answer2" rows="1" placeholder="Answer B">{{question.B}}</textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="answerC" class="text-white">C: </label>
-                            <textarea class="form-control" id="answerC" required="required" name="answer3" rows="1" placeholder="Answer C"></textarea>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1" style="width: 35px;">C</span>
+                            </div>
+                            <textarea class="form-control" id="answerC" required="required" name="answer3" rows="1" placeholder="Answer C">{{question.C}}</textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="answerD" class="text-white">D: </label>
-                            <textarea class="form-control" id="answerD" required="required" name="answer4" rows="1" placeholder="Answer D"></textarea>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1" style="width: 35px;">D</span>
+                            </div>
+                            <textarea class="form-control" id="answerD" required="required" name="answer4" rows="1" placeholder="Answer D">{{question.D}}</textarea>
                         </div>
+
                         <label class="text-white">Pick Correct Answer </label>
                         <br>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons" required="required" name="CorrectAnswer123">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons" name="CorrectAnswer123">
+                            
+                            <!-- {% for x in "1234" %}
+
+                                {% if x == question.answer %}
+                                <label class="btn btn-secondary" id="label1">
+                                    <input type="radio" id="option1" name="toggle" value="1" autocomplete="off"> A
+                                </label>
+                                {% endif %}
+                                
+                            {% endfor %}
+
+
+                            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %} -->
+                            
+                            
+
                             <label class="btn btn-secondary" id="label1">
                                 <input type="radio" id="option1" name="toggle" value="1" autocomplete="off"> A
                             </label>
@@ -194,15 +242,15 @@
                             <label class="btn btn-secondary" id="label4">
                                 <input type="radio" id="option3" name="toggle" value="4" autocomplete="off"> D
                             </label>
+                            
+
                         </div>
-
-                        <input type="hidden" name="relation" value="{{userRelation.id}}">
-                        <input type="hidden" name="quize" value="{{quize.id}}">
+                        
+                        <input type="hidden" name="question" value="{{question.id}}">
+            
                         <br>
                         <br>
-                        <button type="submit" value="submitQuestion" class="btn btn-primary">Submit</button>
-
-                        <h1 id="selectedAnswer">Here</h1>
+                        <button type="submit" value="submitQuestion" class="btn btn-primary">Edit Question</button>
                     </form>
                 </div>
             </div>
@@ -216,9 +264,33 @@
          -->
 
         <script>
-            
-            
-            /*
+            document.addEventListener("DOMContentLoaded", function(){
+
+                el_autohide = document.querySelector('.autohide');
+                // add padding-top to bady (if necessary)
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+                document.body.style.paddingTop = navbar_height + 'px';
+
+                if(el_autohide){
+                var last_scroll_top = 0;
+                window.addEventListener('scroll', function() {
+                        let scroll_top = window.scrollY;
+                    if(scroll_top < last_scroll_top) {
+                            el_autohide.classList.remove('scrolled-down');
+                            el_autohide.classList.add('scrolled-up');
+                        }
+                    else {
+                        el_autohide.classList.remove('scrolled-up');
+                        el_autohide.classList.add('scrolled-down');
+                    }
+                        last_scroll_top = scroll_top;
+                }); 
+                // window.addEventListener
+                }
+                // if
+
+            }); 
+             /*
             $(document).on('click', '.btn-group button', function (e) {
                 $(this).addClass('on').parent().siblings().find('button').removeClass('on');
             });
@@ -228,7 +300,6 @@
                 SHOW UPLOADED IMAGE
             * ========================================== */
 
-            /*
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
@@ -240,21 +311,17 @@
                     reader.readAsDataURL(input.files[0]);
                 }
             }
-            */
 
-            /*
             $(function () {
                 $('#upload').on('change', function () {
                     readURL(input);
                 });
             });
 
-            */
 
             /*  ==========================================
                 SHOW UPLOADED IMAGE NAME
             * ========================================== */
-            /*
             var input = document.getElementById( 'upload' );
             var infoArea = document.getElementById( 'upload-label' );
 
@@ -264,8 +331,6 @@
             var fileName = input.files[0].name;
             infoArea.textContent = 'File name: ' + fileName;
             }
-            */
-
 
             /* 
 
