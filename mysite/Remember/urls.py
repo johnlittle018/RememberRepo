@@ -58,6 +58,10 @@ urlpatterns = [
     path('takeQuestionnaire/', views.takeQuestionnaire, name='takeQuestionnaire'),
     path('takeQuestion/', views.takeQuestion, name='takeQuestion'),
     path('answerQusetion/', views.answerQusetion, name='answerQusetion'),
+
+    path('noQuestions/', views.noQuestions, name='noQuestions'),
+
+    path('noQuiz/', views.noQuiz, name='noQuiz'),
     
 
     path('patientMenu/', views.patientMenu, name='patientMenu'),

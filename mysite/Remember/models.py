@@ -11,7 +11,7 @@ class Patient(models.Model):
     lastName = models.CharField(max_length=200)
     username = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
-    mugshot = models.FileField(upload_to='uploads/images/patient_pics/', max_length=200, default="")
+    mugshot = models.FileField(upload_to='./Remember/static/remember/images/patientMugShots/', max_length=200, default="")
     #find a patient's reminders by querying Reminder
 
     def __str__(self):

@@ -398,10 +398,19 @@ def editQuestionnaire(request):
 
     print(relation.patient.firstName)
 
-    myQuiz = Quiz.objects.filter(patient = relation.patient)
+    try:
 
+        myQuiz = Quiz.objects.filter(patient = relation.patient)
+    except:
+        myQuiz = 0
 
-    myQuestions = Question.objects.filter(quiz = myQuiz[0])    
+    try:
+        myQuestions = Question.objects.filter(quiz = myQuiz[0])  
+    except:
+        myQuestions = 0
+        
+
+      
 
     
 
@@ -444,11 +453,17 @@ def editQuestion(request):
 def reviewResults(request):
 
     
-    ##to do, replace of all this, will not work if you are a admin checking out the page
+ 
     if request.session['userType'] == "patient":
         user = Patient.objects.get(pk = request.session['loggedInID'])
         print("This is a patient")
-        myQuizs = Quiz.objects.filter(order = 2, patient = user)
+
+        try:
+            myQuizs = Quiz.objects.filter(order = 2, patient = user)
+        except:
+            return HttpResponseRedirect(reverse('Remember:noQuiz'))
+        
+
         results = []
         # quizQuestions = []
         for quiz in myQuizs:
@@ -460,6 +475,9 @@ def reviewResults(request):
     elif request.session['userType'] == "admin":
         # do not think this is needed#  user = User.objects.get(pk = request.session['loggedInID'])
         relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
+        
+       
+            
         myQuizs = Quiz.objects.filter(order = 2, patient = relation.patient)
         results = []
         # quizQuestions = []
@@ -563,7 +581,22 @@ def scrapbook(request): #changed Book to book
 
     myQuestions = Question.objects.filter(quiz = myQuiz)
 
+    if len(myQuestions) == 0: 
+        return HttpResponseRedirect(reverse('Remember:noQuestions'))
+
     return render(request, 'Remember/patientEx/scrapbook.html', {'questions': myQuestions })
+
+
+def noQuestions(request):
+
+    return render(request, 'Remember/noQuestions.html')
+
+def noQuiz(request):
+
+    return render(request, 'Remember/noQuiz.html')
+
+
+
 
 
 def takeQuestionnaire(request):
@@ -574,13 +607,30 @@ def takeQuestionnaire(request):
     myPatient = Patient.objects.get(pk = request.session['loggedInID'])
     print("my patients name is " + myPatient.firstName)
 
+    
+    myQuizs = Quiz.objects.filter(patient = myPatient)
+    
+
     myQuizs = Quiz.objects.filter(patient = myPatient)
     myQuiz = myQuizs[0]
     print("myQuize is " + str(myQuiz.id))
 
     #request.session['activeQuiz'] = myQuiz[0]
 
-    myQuestions = Question.objects.filter(quiz = myQuiz)
+    ## this should fail but it does not... strange... if statment catches what try should
+    try:
+        myQuestions = Question.objects.filter(quiz = myQuiz)
+    except:
+        print("we should be redirected")
+        return HttpResponseRedirect(reverse('Remember:noQuestions'))
+    
+    if len(myQuestions) == 0:
+        print("we should be redirected")
+        return HttpResponseRedirect(reverse('Remember:noQuestions'))
+
+    
+    
+    
     print("The questions are " + str(myQuestions))
 
     newQuiz = Quiz(patient=myQuiz.patient, order = 1)
