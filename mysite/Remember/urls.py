@@ -48,6 +48,9 @@ urlpatterns = [
     ## Patient and Admin
     path('reviewResults/', views.reviewResults, name='reviewResults'),
     path('questionnaireResults/', views.questionnaireResults, name='questionnaireResults'),
+    path('viewReminder/', views.viewReminder, name='viewReminder'),
+
+   
     
     
     ## Stuff for Patient

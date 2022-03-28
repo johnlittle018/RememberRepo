@@ -663,6 +663,11 @@ def answerQusetion(request):
     return takeQuestion(request)
 
 
+def viewReminder(request):
+    
+    
+    return render(request, 'Remember/patientEx/viewReminder.html')
+
 
 def QuizCompleted(request):
     
