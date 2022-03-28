@@ -183,10 +183,13 @@
                     <form action="{% url 'Remember:resubmitQuestion' %}" method="post" enctype="multipart/form-data" >
                         {% csrf_token %}
 
+                        <div class="image-area mt-4"><img id="imageResult" src="{{question.picture}}" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                        </div>
 
                         <div class="row justify-content-center">
+                            
                             <div class="col-12" style="text-align: center;">
-                                <p class="font-italic text-white text-center">The profile picture uploaded will be displayed inside the box below.</p>
+                                <p class="font-italic text-white text-center">The picture uploaded will be displayed inside the box below.</p>
                                 <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
                                 </div>
                             </div>

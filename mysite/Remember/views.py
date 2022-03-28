@@ -556,7 +556,14 @@ class ResultContainer:
 ## Stuff exclusive to patient
 def scrapbook(request): #changed Book to book
 
-    return render(request, 'Remember/patientEx/scrapbook.html')
+    myPatient = Patient.objects.get(pk = request.session['loggedInID'])
+
+    myQuizs = Quiz.objects.filter(patient = myPatient)
+    myQuiz = myQuizs[0]
+
+    myQuestions = Question.objects.filter(quiz = myQuiz)
+
+    return render(request, 'Remember/patientEx/scrapbook.html', {'questions': myQuestions })
 
 
 def takeQuestionnaire(request):

@@ -4,21 +4,22 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title></title>
+        <title>Scrapbook</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
         <style>
             
             .navbar{
                 border-bottom: 3px solid black;
                 background: rgba(255, 255, 255, 0.9);
-
             }
+
             .autohide{
                 position: fixed;
                 top: 0;
@@ -35,9 +36,9 @@
                 transform:translateY(0); transition: all 0.3s ease-in-out;
             }
 
-            .exitButton{
+            .backButton{
                 width:51px;height:51px;
-                background: transparent url(/../../static/remember/images/exitButton.png) no-repeat;
+                background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
                 background-color: transparent;
                 mix-blend-mode: multiply;
                 background-size: cover;
@@ -51,87 +52,56 @@
                 mix-blend-mode: multiply;
                 background-size: cover;
                 border: none;
+                
             }
 
             .btn.btn-secondary.dropdown-toggle {
-                background-color: rgb(225,225,225);  
+                background-color: rgb(211,211,211);  
             }
 
             h1{
                 color: white;
                 font-family: 'Sans serif', Helvetica, sans-serif;
-                font-size: calc(3vw + 2vh);
-                padding:2%;
-                padding-left: 12%;
+                font-size: calc(2.5vw + 2.5vh);
             }
 
             h2{
-                color: white;
-                font-family: 'Sans serif', Helvetica, sans-serif;
-                font-size: calc(2.25vw + 1.5vh);
-                padding:1%;
-                margin: 1%;
-                background-color: rgb(50,50,50);
-                border-radius: 20%;
-                text-align: center;
-
-            }
-            h3{
-                color: white;
-                font-family: 'Sans serif', Helvetica, sans-serif;
-                font-size: calc(2.25vw + 1.5vh);
-                text-align: center;
-                margin: 0px;
-                padding:0px;
+                font-size: calc(1.7vw + 1.0vh);
             }
 
-            .photoImg{
-                border: 5px solid black;
-                height: 30vw;
-                width:auto
-            }
-
-            .customBtn{
-                width:100%;
-                margin: .7%;
-                padding: 1%;
-            }
-
-            .topLevelProgressBar{
-               margin: 0% 5% 5% 5%;
-               display: none;
-               opacity: 0%;
-               transition: visibility 0s, opacity 0.5s linear;
-               scroll-behavior: smooth;
-            }
-
-
-            .customProgressBtn{
+            img{
                 width: 100%;
-                padding: 10px 10px;
-            }
-
-            .customProgress{
-                height: 6vw;
-                background-color: rgb(59, 153, 109);
+                height: 100%;
+                max-width: 100%;
+                max-height: 700px;
+                object-fit: fill;
 
             }
 
-            .customProgressMeter{
-                /*width:50%;*/
-                text-align: center;
+            .scrapbook{
+                padding: 1%;
+                background-color: white;
             }
 
-            .strokeme {
-            color: white;
-            font-family: 'Sans serif', Helvetica, sans-serif;
-            font-size: calc(2.25vw + 1.5vh);
-            position: absolute;
-            width: 90%;
-            text-align: center;
-            margin: 0px;
-            padding:0px;
+            .fades{
+                animation: fade 1.5s;
             }
+
+            @keyframes fade {
+                from {opacity: .4} 
+                to {opacity: 1}
+            }
+
+            .carousel-caption-description p{
+                font-size: calc(1.0vw + 1.5vh);
+                color: black;
+            }
+
+
+            .btn{
+                font-size: calc(1.0vw + 1.5vh);
+            }
+
 
         </style>
     </head>
@@ -145,95 +115,103 @@
         <!-- All your html stuff here -->
 
         <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
-            <a class="navbar-brand" href="#">
-                <button class="exitButton" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+            <a class="navbar-brand" href="#" >
+                <button class="backButton" onclick="history.back()"></button>
             </a>
             <a href="">
                 <div class="logo"></div>
             </a>
-            <p style="width: 80px">
-                
-            </p>
+            <div class="dropdown" style="padding-right:1vw;">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+            </div>
         </nav>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Quit Confirmation</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to quit?
-                        <br>
-                        Your progress will be lost!
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <!--Jack's old code-->
-                        <button type="button" class="btn btn-secondary removeBorder" data-bs-dismiss="modal">Close</button>
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <div>
-                                <button type="submit" value="pickedPatient" class="btn btn-danger">
-                                    Quit
-                                    <!--Return to Patient Main Menu-->
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="d-flex justify-content-center">
-            <!--Code of the photo-->
-            <!--<img src="/../../static/remember/images/codeHere.png" class="photoImg"> -->
-            <img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> 
-            <br>
-            <!--Note: Our system works a lot better with wider photos-->
+        <div class="container">
+            <div class="mr-auto mt-2 p-2 bd-highlight">
+                <h1>
+                    Scrapbook
+                </h1> 
+            </div>             
         </div>
         
-            <h1>
-                Who is this?
-            </h1>
+            
+        <div class="container d-flex flex-column mb-5 col-md-8">  
 
-        <div class="d-flex flex-column bd-highlight mb-3">
-
-            <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
-                <button type="button" class="btn btn-primary btn-lg customBtn" id="QuestionA"><h3>John Smite</h3></button>
+            <div class="mb-2 align-self-end">
+                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">Previous</button>
+                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">Next</button>
             </div>
 
-            <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
-                <button type="button" class="btn btn-primary btn-lg customBtn" id="QuestionB"><h3>John Smite</h3></button>
-            </div>
+            <div id="carouselExampleDark" class="carousel carousel-dark slide scrapbook align-self-center col-md-12" data-bs-interval="false">
+                <div class="thumbnail carousel-inner">
+                    <div class="carousel-item active fades">
+                    <img src="/../../static/remember/images/codeHere.png" alt="...">
+                    <div class="carousel-caption-description">
+                        <h2>Description</h2>
+                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                        
+                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
+                        
+                    </div>                   
+                    </div>
 
-            <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
-                <button type="button" class="btn btn-primary btn-lg customBtn" id = "QuestionC"><h3>John Smite</h3></button>
-            </div>
-
-            <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
-                <button type="button" class="btn btn-primary btn-lg customBtn" id = "QuestionD"><h3>John Smite</h3></button>
-            </div>
-        </div>
-
-        <div class="d-flex justify-content-start topLevelProgressBar" id="displayProgressBar">
-            <button type="button" class="btn btn-success btn-lg customProgressBtn" id = "progressBtn" disabled>
-                <div class="progress customProgress">
-                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated customProgressMeter" id="progressMeter" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                        <p class="strokeme">Next Question</p>
+                    <div class="carousel-item fades">
+                    <img src="/../../static/remember/images/codeHere.png" alt="...">
+                    <div class="carousel-caption-description">
+                        <h2>Description</h2>
+                        <p>Description 2</p>
+                    </div>
+                    </div>
+                    
+                    <div class="carousel-item fades">
+                    <img src="/../../static/remember/images/codeHere.png" alt="...">
+                    <div class="carousel-caption-description">
+                        <h2>Description</h2>
+                        <p>Description 3</p>
+                    </div>
                     </div>
                 </div>
-            </button>
-        </div>
-  
-        <!-- Optional JavaScript -->
+            </div> 
 
+            <div class="mt-4 align-self-center">
+                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">Previous</button>
+                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">Next</button>
+            </div>
+             
+
+        </div> 
+              
         <script>
 
-           document.addEventListener("DOMContentLoaded", function(){
+            var slideIndex = 1;
+            showSlides(slideIndex);
+
+            function plusSlides(n) {
+            showSlides(slideIndex += n);
+            }
+            function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("carousel-item");
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+
+            slides[slideIndex-1].style.display = "block";  
+            }
+
+
+            document.addEventListener("DOMContentLoaded", function(){
 
                 el_autohide = document.querySelector('.autohide');
                 // add padding-top to bady (if necessary)
@@ -259,130 +237,10 @@
                 // if
 
             }); 
-            document.getElementById("progressBtn").addEventListener("click", nextQuestion);
-
-            /*Needs actual correct answer obvi*/
-            var correctAnswer = 3;
-
-            document.getElementById("QuestionA").addEventListener("click", selectedA);
-            function selectedA(){
-                /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
-                if(1 == correctAnswer){
-                    disabledQuestion = document.getElementById("QuestionA");
-                    disabledQuestion.disabled = true;
-                    disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
-                    disabledQuestion.style.borderColor = 'rgb(25,135,84)';
-                    disabledQuestion.style.opacity= 1;
-                    selectedB();
-                    selectedC();
-                    selectedD();
-                    runProgressBar();
-                }
-                else{
-                    disabledQuestion = document.getElementById("QuestionA");
-                    disabledQuestion.disabled = true;
-                }
-            }
-
-            document.getElementById("QuestionB").addEventListener("click", selectedB);
-            function selectedB(){
-                /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
-                if(2 == correctAnswer){
-                    disabledQuestion = document.getElementById("QuestionB");
-                    disabledQuestion.disabled = true;
-                    disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
-                    disabledQuestion.style.borderColor = 'rgb(25,135,84)';
-                    disabledQuestion.style.opacity= 1;
-                    selectedA();
-                    selectedC();
-                    selectedD();
-                    runProgressBar();
-                }
-                else{
-                    disabledQuestion = document.getElementById("QuestionB");
-                    disabledQuestion.disabled = true;
-                }
-            }
-
-            document.getElementById("QuestionC").addEventListener("click", selectedC);
-            function selectedC(){
-                /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
-                if(3 == correctAnswer){
-                    disabledQuestion = document.getElementById("QuestionC");
-                    disabledQuestion.disabled = true;
-                    disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
-                    disabledQuestion.style.borderColor = 'rgb(25,135,84)';
-                    disabledQuestion.style.opacity= 1;
-                    selectedA();
-                    selectedB();
-                    selectedD();
-                    runProgressBar();
-                }
-                else{
-                    disabledQuestion = document.getElementById("QuestionC");
-                    disabledQuestion.disabled = true;
-                }
-            }
-
-            document.getElementById("QuestionD").addEventListener("click", selectedD);
-            function selectedD(){
-                /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
-                if(4 == correctAnswer){
-                    disabledQuestion = document.getElementById("QuestionD");
-                    disabledQuestion.disabled = true;
-                    disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
-                    disabledQuestion.style.borderColor = 'rgb(25,135,84)';
-                    disabledQuestion.style.opacity= 1;
-                    selectedA();
-                    selectedB();
-                    selectedD();
-                    runProgressBar();
-                }
-                else{
-                    disabledQuestion = document.getElementById("QuestionD");
-                    disabledQuestion.disabled = true;
-                }
-            }
-
-            function runProgressBar(){
-                bar = document.getElementById("displayProgressBar");
-                barBtn = document.getElementById("progressBtn");
-                bar.style.display = "inline-flex";
-                bar.style.opacity = 1;
-                barBtn.disabled = false;
-                bar.scrollIntoView()
-                var startingNumber = 0;
-                progressLoop(startingNumber);
-            }
-
-            var width = 0;
-            progressWidth = document.getElementById("progressMeter").style.width
-            console.log(progressWidth)
-
-            function progressLoop(){
-                if(width != 100){
-                    width = width + 1;
-                    let progressWidthString = width.toString() + '%';
-                    progressWidth = progressWidthString;
-                    $('#progressMeter').css({'width': progressWidth, 'height': 'auto'});
-                    setTimeout(progressLoop, 100);
-                }
-                else{
-                    nextQuestion();
-                    console.log("Else Statement")
-                }
-            }
-
-            function nextQuestion(){
-                console.log("NEXT QUESETION")
-                /*Actual code to next question*/
-            }
-
-
 
         </script>
-
         
+        <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
