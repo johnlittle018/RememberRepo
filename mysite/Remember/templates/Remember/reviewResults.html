@@ -170,13 +170,28 @@
                                         <p class="boxContent">
                                             Wrong:
                                             <span>{{result.wrong}}</span>
+                                            <span>{{result.quiz.id}}</span>
+
+
                                         </p>
                                     </div>
 
-                                    <!-- <div class="outerBorder">
+                                    <div class="outerBorder">
                                         <div class="d-flex justify-content-start">
 
-                                            
+                                        {% for q in result.quiz.question %}
+                                            <span class="individualCorrectAnswer" id={{fds}}>1</span> 
+
+                                        
+                                        {% endfor %}
+                                
+                                        </div>
+                                        
+                                    </div> 
+
+                                    <!--
+                                        <div class="outerBorder">
+                                        <div class="d-flex justify-content-start">
 
                                         {% for q in result.myQuestions %}
 
@@ -185,10 +200,10 @@
                                         
                                         {% endfor %}
                                         
-                                
                                         </div>
                                         
-                                    </div> -->
+                                    </div> 
+                                    -->
                                 </div>
                             </div>
                         </button>
