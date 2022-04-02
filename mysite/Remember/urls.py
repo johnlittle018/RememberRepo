@@ -82,6 +82,10 @@ urlpatterns = [
     path('noUser/', views.noUser, name='noUser'),
     path('newAdmin/', views.newAdmin, name='newAdmin'),
 
+    path('submitPatient/', views.submitPatient, name='submitPatient'),
+
+    path('newAdmin/', views.newAdmin, name='newAdmin'),
+
 
 
     path('setReminder/', views.setReminder, name='setReminder'),

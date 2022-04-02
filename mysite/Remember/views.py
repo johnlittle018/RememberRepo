@@ -33,10 +33,11 @@ from .models import Patient, Reminder, User, PatientClearanceAbstraction, Result
 
 
 ### Stuff for everyone
+
+#loads the login page
 def loginPage(request):
 
     ## Clearing session data 
-    
     request.session['loggedInID'] = 0
     request.session['userType'] = ""
     request.session['relationshipID'] = 0
@@ -46,124 +47,107 @@ def loginPage(request):
 
     return render(request, 'Remember/loginPage.html')
 
-
+# checks info from the login page
 def login(request):
-
-    #print(request.POST.dict())
-
-
-    
-    
-    
 
     print("This is the login function")
 
+    #pulling email and password from the calling login form
     Email = request.POST['Email']
-    #print(userName)
-
     userPassword = request.POST['password']
-    #print(userPassword)
 
     # Checking our users
     if User.objects.filter(email = Email).exists():
         ourUser = User.objects.filter(email = Email)
-        print("email is in the system.")
+        # print("email is in the system.")
         if ourUser[0].password == userPassword:
-            print("Password is good") 
+            # print("Password is good") 
             request.session['loggedInID'] = ourUser[0].id
-            
-            return pickPatient(request)
-            #return HttpResponseRedirect(reverse('Remember:pickPatient', args=(ourUser[0].id,)))
+            return HttpResponseRedirect(reverse('Remember:pickPatient'))
+        
     
     # Checking our Patients
     if Patient.objects.filter(username = Email).exists():
         ourPatient = Patient.objects.filter(username = Email)
-        print("email is in the system.")
+        # print("email is in the system.")
         if ourPatient[0].password == userPassword:
-            print("Password is good") 
+            # print("Password is good") 
             request.session['loggedInID'] = ourPatient[0].id
             request.session['userType'] = "patient"
-            return patientMenu(request)
+            return HttpResponseRedirect(reverse('Remember:patientMenu'))
             
-    
-    return render(request, 'Remember/loginPage.html', {
+        # This is how we update the page with an error message
+        return render(request, 'Remember/loginPage.html', {
             'error_message': "You have entered the wrong username or password, please try again",
         })
 
 
    
 
-
+## if a user logs in, they must first pick a patient. 
 def pickPatient(request):
 
-    print('This is the pick a patient view')
-
+    #pulling user from session data
     currentUser = User.objects.get(pk = request.session['loggedInID'])
-
+    #pulling that users patient realations
+    # .filter will always return a list, even if that list is empty, so be aware
     usersRelations = PatientClearanceAbstraction.objects.filter(user = currentUser)
-
-    #print(usersRelations)
 
     #pCA is short for Patient clearance Abstraction
     return render(request, 'Remember/pickPatient.html', {'pCA' : usersRelations})
 
 
+## loads the createPatientPage
 def createPatient(request):
 
     return render(request, 'Remember/adminEx/createPatient.html')
 
-
+## loads the help page
 def helpPage(request):
 
     
     return render(request, 'Remember/helpPage.html')
 
 
-
-
-
-# Function for when a patient is picked
+## Function for when a patient is picked
 def pickedPatient(request):
+    # prints all data passed from the form
+    # print(request.POST.dict())
 
-    print('This is the Picked Patient Function')
-
-    print(request.POST.dict())
-
-
+    ## pulling selected relation id from form
     relationID = request.POST['relation']
 
-    #print(relationID)
-
+    ## pulling user from session data
     currentUser = User.objects.get(pk = request.session['loggedInID'])
-
+    ## pulling relation from database using relation id
     userRelation = PatientClearanceAbstraction.objects.get(pk = relationID)
 
-    ## Cheking to see if the user realtion id we scraped from the html is
-    ## a relatioinship of the user logged in through the session.
+    ## the following checks that this is a valid user realtion for this user
     if userRelation.user.id != currentUser.id:
+        ## If this runs the user is trying to accses another users relation, boots to login screen 
+        ## where the current user is loged out
         print("security is trying to be broken, send back to login page")
         return loginPage(request)
 
+    ## recording the relation in the session data
     request.session['relationshipID'] = userRelation.id
 
     ## this is where we check if we are relation 1 or 2 
     ## Relation 1 sends you to the family menu
     ## Relation 2 sends you to the admin menu
+    ## in current build the family member relation is not supported
     if userRelation.clearanceLevel == 1:
-        print("This is a family member")
+        # print("This is a family member")
         request.session['userType'] = "familyMemeber"
         return familyMenu(request, userRelation.id)
     elif userRelation.clearanceLevel == 2:
-        print("This is an admin")
+        # print("This is an admin")
         request.session['userType'] = "admin"
-        return adminMenu(request)
+        return HttpResponseRedirect(reverse('Remember:adminMenu'))
 
+    ## below code should never run
     else:
         print("ERRRRROOORRR!!!!!!!!")
-
-   
-
-
 
     return render(request, 'Remember/newPage.html')
 
@@ -175,6 +159,8 @@ def pickedPatient(request):
 
 
 ## family and admin
+
+
 
 def makeQuestion(request):
 
@@ -255,7 +241,18 @@ def submitQuestion(request):
         print("User did not click a correct answer")
         return render(request, 'Remember/newPage.html')
     else:
-        b = Question(question_text=question, description=photoDiscription, picture=nameForDatabase, A=answer1, B=answer2, C=answer3, D=answer4, answer=int(correctAnswer), lastSubAnswer=0, quiz=myQuiz[0], timeEnded=fillerTimeEnded)
+        b = Question(question_text=question, 
+            description=photoDiscription, 
+            picture=nameForDatabase, 
+            A=answer1, 
+            B=answer2, 
+            C=answer3, 
+            D=answer4, 
+            answer=int(correctAnswer), 
+            lastSubAnswer=0, 
+            quiz=myQuiz[0], 
+            timeEnded=fillerTimeEnded, 
+            author=relation.user)
         #print(b.picture)
         b.save()
 
@@ -651,7 +648,8 @@ def takeQuestionnaire(request):
          answer=question.answer,
          lastSubAnswer=question.lastSubAnswer,
          timeEnded=question.timeEnded,
-         quiz = newQuiz)
+         quiz = newQuiz,
+         author=question.author)
         
         newQuestion.save()
         print("new Question.id " + str(newQuestion.id))
@@ -816,6 +814,61 @@ def noUser(request):
 def newAdmin(request):
 
     return render(request, 'Remember/newAdmin.html')
+
+
+
+def submitPatient(request):
+
+    myUser = User.objects.get(pk = request.session['loggedInID'])
+
+    # print(request.POST.dict())
+
+    ## taking and processing images, latter, I need to change the naming to take the date so no two pictures have the same name
+    ## we will check in the backend if a picutre has been provided
+    myThingy = request.FILES['uploadedPic']
+
+    myFileSystem = FileSystemStorage()
+
+    myFileSystem.save(myThingy.name, myThingy)
+
+    source = "./media/" + myThingy.name 
+    destination = "./Remember/static/remember/images/questionImages/" + myThingy.name
+    
+    os.rename(source, destination)
+
+    nameForDatabase = "/../../static/remember/images/questionImages/" + myThingy.name
+
+    # the frond end is responsable for making sure these feilds are entered and entered validly "email is an email"
+    email = request.POST['email']
+    password = request.POST['password']
+    firstName = request.POST['firstName']
+    lastName = request.POST['lastName']
+
+    ## checking if email is already used, this is the only factor that will stop an acound from being made.
+    try:
+        check = Patient.objects.get(email = email)
+    except:
+        newPatient = Patient(firstName=firstName, password=password, lastName=lastName, username=email, mugshot=nameForDatabase)
+        newPatient.save()
+        myNewRelation = PatientClearanceAbstraction(user=myUser, patient=newPatient, clearanceLevel = 2)
+        myNewRelation.save()
+        newQuiz = Quiz(patient=newPatient, order=0)
+        newQuiz.save()
+        return HttpResponseRedirect(reverse('Remember:pickPatient'))
+        
+
+
+
+    return render(request, 'Remember/noUser.html')    
+
+
+
+    
+
+
+
+
+
 
 
 
