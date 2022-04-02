@@ -39,7 +39,7 @@ class User(models.Model):
 class PatientClearanceAbstraction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    clearanceLevel = models.IntegerField(default=0) #can use BooleanField, but this allows room for functional expansion
+    clearanceLevel = models.IntegerField(default=0) # 1 means you are a family member, 2 means you are an admin
 
     def __str__(self):
         return 'user {} has clearance {} with patient {}'.format(self.user, self.clearanceLevel, self.patient)

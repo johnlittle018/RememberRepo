@@ -757,6 +757,76 @@ def inviteAdmin(request):
 
     return render(request, 'Remember/adminEx/inviteAdmin.html')
 
+## called when submitting a new admin acount
+def processNewAdmin(request):
+
+    print("This is the processNewAdminView")
+
+    print(request.POST.dict())
+
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
+
+    email = request.POST['emailAddress']
+
+    password = request.POST['password']
+
+    firstName = request.POST['firstName']
+
+    lastName = request.POST['lastName']
+
+
+    if password == "" and firstName == "" and lastName == "":
+        ## we are adding an acount that already exsit. 
+
+        try:
+            myNewAdmin = User.objects.get(email = email)
+        except:
+            ## user does not exsit
+            return HttpResponseRedirect(reverse('Remember:noUser'))
+
+        ## make Sure this relation does not already exsist
+        try: 
+            cheking = PatientClearanceAbstraction.objects.get(patient = relation.patient, user = myNewAdmin)
+        except:
+            myNewRelation = PatientClearanceAbstraction(user=myNewAdmin, patient=relation.patient, clearanceLevel = 2)
+            myNewRelation.save()
+
+            print(myNewAdmin)
+            
+            # user does not exsist
+            return HttpResponseRedirect(reverse('Remember:newAdmin'))
+        
+        # user exsist
+        return HttpResponseRedirect(reverse('Remember:noUser'))
+    
+    ## We are creating a user
+    ## we are under the assumption that the all the feilds have been filed and cheked on the html side of things
+
+    myNewAdmin = User(firstName=firstName, lastName=lastName, email=email, password=password)
+    myNewAdmin.save()
+    myNewRelation = PatientClearanceAbstraction(user=myNewAdmin, patient=relation.patient, clearanceLevel = 2)
+    myNewRelation.save()
+
+    return HttpResponseRedirect(reverse('Remember:newAdmin'))
+
+def noUser(request):
+
+    return render(request, 'Remember/noUser.html')
+
+def newAdmin(request):
+
+    return render(request, 'Remember/newAdmin.html')
+
+
+
+
+# called when linking an already exsistent acount as a new admin.
+def processAdmin(request):
+
+    return render(request, 'Remember/newPage.html')
+
+
+
 def setReminder(request):
 
     return render(request, 'Remember/adminEx/setReminder.html')

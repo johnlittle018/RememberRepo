@@ -24,6 +24,12 @@ Fix wrong password popup
 Fix bad back links
 Make noQuestions and noQuiz "no compleations" html pages. 
 
+Fix edit question image upload
+
+Make a change pasword page
+
+we need to make it so all text feilds are manditory before submition.
+Moving from create to invite on invite admin needs to reset the text feilds for backend logic... can be done in javascript
 
 
 

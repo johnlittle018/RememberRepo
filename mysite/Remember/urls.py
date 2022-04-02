@@ -77,6 +77,13 @@ urlpatterns = [
     path('graphsData/', views.graphsData, name='graphsData'),
     path('inviteFamily/', views.inviteFamily, name='inviteFamily'),
     path('inviteAdmin/', views.inviteAdmin, name='inviteAdmin'),
+    path('processNewAdmin/', views.processNewAdmin, name='processNewAdmin'),
+
+    path('noUser/', views.noUser, name='noUser'),
+    path('newAdmin/', views.newAdmin, name='newAdmin'),
+
+
+
     path('setReminder/', views.setReminder, name='setReminder'),
     #path('adminPickPatient/', views.adminPickPatient, name='adminPickPatient'), # NEW # Html file destroyed, bye bye
 
