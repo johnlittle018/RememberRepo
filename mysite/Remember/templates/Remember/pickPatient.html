@@ -10,18 +10,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <style>
             
- 
-            .backButton{
-                width:51px;height:51px;
-                background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
-                background-color: transparent;
-                mix-blend-mode: multiply;
-                background-size: cover;
-                border: none;
+            .navbar{
+                border-bottom: 3px solid black;
+                background: rgba(255, 255, 255, 0.9);
+            }
+            .autohide{
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1030;
+            }
+            .scrolled-down{
+                transform:translateY(-100%); transition: all 0.3s ease-in-out;
+            }
+
+            .scrolled-up{
+                transform:translateY(0); transition: all 0.3s ease-in-out;
             }
 
             .logo{
@@ -33,23 +43,26 @@
                 border: none;
             }
 
-            hr {
-                margin-top: 0rem;
-                margin-bottom: 1rem;
-                border: 0;
-                border-top: 5px solid rgba(0, 0, 0, .3);
-            }
-
             h1{
                 color: white;
+                font-family: 'Sans serif', Helvetica, sans-serif;
+                font-size: calc(3vw + 2vh);
+                padding:2%;
+                padding-left: 12%;
             }
 
             p{
                 color: white;
             }
+            .names{
+                color: black;
+                padding: 5px;
+                padding-bottom: 0;
+                text-align: center;
+            }
 
             .btn.btn-secondary.dropdown-toggle {
-                background-color: lightgrey;  
+                background-color: rgb(225,225,225);  
             }
 
             .pictureButton{
@@ -73,10 +86,18 @@
                 height:auto;
             }
 
-            .scaleImage{
+            .scalePatientImage{
                 object-fit:contain;
                 background: transparent url(/../../static/remember/images/codeHere.png) no-repeat;
                 background-size: cover;
+                /*background color is 225*/
+            }
+
+            .scaleAddImage{
+                object-fit:contain;
+                background: rgb(225,225,225) url(/../../static/remember/images/plusSignNoBG.png) no-repeat;
+                background-size: cover;
+                background-position: 50% 50%;
             }
 
         </style>
@@ -91,33 +112,28 @@
         <!-- All your html stuff here -->
 
         
-        <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">
-                <button class="backButton" onclick="history.back()"></button>
+        <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
+            <a class="navbar-brand" href="#" style="padding-left: 50px;">
+                <!--Left here to keep the logo centered (No back arrow because they would logout)-->
             </a>
             <a href="">
                 <div class="logo"></div>
             </a>
             <div class="dropdown" style="padding-right:1vw;">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/../../static/remember/images/settingsIcon.png" style="width:42px;height:42px;">
+                    <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
                 </a>
-                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                    <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
         </nav>
 
-        <hr/>
-
-        <div class="d-flex justify-content-around">
-            <div class="d-flex justify-content-start">
-                <div class="mr-auto p-2 bd-highlight">
                     <h1>
                         Select a Patient
                     </h1>
-                </div>
-            </div>
+
             <!-- GUI for Profile Picture
             <div class="d-flex justify-content-end">
                 <form class="form-inline">
@@ -125,7 +141,7 @@
                 </form>
             </div>
             -->
-        </div>
+
     
         
         <div class="d-flex justify-content-center align-content-center flex-wrap">
@@ -137,18 +153,32 @@
                 <div class="p-2 bd-highlight">
                     <button type="submit" value="pickedPatient" class="pictureButton" >
                         {% csrf_token %}
-                        <div class="d-flex justify-content-center scaleImage">
+                        <div class="d-flex justify-content-center scalePatientImage">
                             <div class="pictureStyle"></div> <br> 
                             <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>
                         <input type="hidden" name="relation" value="{{relation.id}}">
-                        <label for="pictureButton"  style="padding-left: 5px;">{{relation.patient.firstName}}</label>
+                        <h5 class="names">{{relation.patient.firstName}}</h5>
                     </button>
                 </div>
 
             </form>
             {% endfor %}
 
+            <form action="{% url 'Remember:createPatient' %}" method="post">
+                <div class="p-2 bd-highlight">
+                    <button type="submit" value="pickedPatient" class="pictureButton" >
+                        {% csrf_token %}
+                        <div class="d-flex justify-content-center scaleAddImage">
+                            <div class="pictureStyle"></div> <br> 
+                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                        </div>
+                        <input type="hidden" name="relation" value="{{relation.id}}">
+                        <h5 class="names">New Patient</h5>
+                    </button>
+                </div>
+
+            </form>
 
             
 
@@ -156,6 +186,32 @@
         <!-- Optional JavaScript -->
 
         <script>
+            document.addEventListener("DOMContentLoaded", function(){
+
+                el_autohide = document.querySelector('.autohide');
+                // add padding-top to bady (if necessary)
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+                document.body.style.paddingTop = navbar_height + 'px';
+
+                if(el_autohide){
+                var last_scroll_top = 0;
+                window.addEventListener('scroll', function() {
+                        let scroll_top = window.scrollY;
+                    if(scroll_top < last_scroll_top) {
+                            el_autohide.classList.remove('scrolled-down');
+                            el_autohide.classList.add('scrolled-up');
+                        }
+                    else {
+                        el_autohide.classList.remove('scrolled-up');
+                        el_autohide.classList.add('scrolled-down');
+                    }
+                        last_scroll_top = scroll_top;
+                }); 
+                // window.addEventListener
+                }
+                // if
+
+            }); 
         </script>
 
         

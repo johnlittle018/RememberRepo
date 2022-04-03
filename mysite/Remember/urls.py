@@ -1,3 +1,6 @@
+from django.conf import settings
+from django.conf.urls.static import static
+
 from django.urls import path
 
 from . import views
@@ -45,6 +48,9 @@ urlpatterns = [
     ## Patient and Admin
     path('reviewResults/', views.reviewResults, name='reviewResults'),
     path('questionnaireResults/', views.questionnaireResults, name='questionnaireResults'),
+    path('viewReminder/', views.viewReminder, name='viewReminder'),
+
+   
     
     
     ## Stuff for Patient
@@ -52,6 +58,10 @@ urlpatterns = [
     path('takeQuestionnaire/', views.takeQuestionnaire, name='takeQuestionnaire'),
     path('takeQuestion/', views.takeQuestion, name='takeQuestion'),
     path('answerQusetion/', views.answerQusetion, name='answerQusetion'),
+
+    path('noQuestions/', views.noQuestions, name='noQuestions'),
+
+    path('noQuiz/', views.noQuiz, name='noQuiz'),
     
 
     path('patientMenu/', views.patientMenu, name='patientMenu'),
@@ -67,6 +77,17 @@ urlpatterns = [
     path('graphsData/', views.graphsData, name='graphsData'),
     path('inviteFamily/', views.inviteFamily, name='inviteFamily'),
     path('inviteAdmin/', views.inviteAdmin, name='inviteAdmin'),
+    path('processNewAdmin/', views.processNewAdmin, name='processNewAdmin'),
+
+    path('noUser/', views.noUser, name='noUser'),
+    path('newAdmin/', views.newAdmin, name='newAdmin'),
+
+    path('submitPatient/', views.submitPatient, name='submitPatient'),
+
+    path('newAdmin/', views.newAdmin, name='newAdmin'),
+
+
+
     path('setReminder/', views.setReminder, name='setReminder'),
     #path('adminPickPatient/', views.adminPickPatient, name='adminPickPatient'), # NEW # Html file destroyed, bye bye
 
@@ -84,6 +105,9 @@ urlpatterns = [
 
 
 
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 

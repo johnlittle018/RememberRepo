@@ -172,8 +172,8 @@
                     <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Help Page</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                    <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -190,6 +190,7 @@
                 Wrong: {{result.wrong}}
             </h1>
 
+
         </div>
 
         <!-- % for question in questions % -->   
@@ -202,20 +203,21 @@
                 <div class="col-3 justify-content-center align-self-center">
                     <!-- <img src={{question.picture}} class="photoImg">  -->
                     
-                    <img src="/../../static/remember/images/codeHere.png" class="photoImg"> 
+                    <img src="{{question.picture}}" class="photoImg"> 
                     <!--<img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> -->
                     <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
                     <br>
                 </div>
+                <input type="hidden" id="{{question.id}}" name="{{question.id}}correctAnswer" value="{{question.answer}}" class="correctAnswer">
+                <input type="hidden" name="{{question.id}}lastSubAnswer" value="{{question.lastSubAnswer}}" class="lastSubAnswer">
                 <div class="col-9">
                     <div class="d-flex justify-content-start">
                         <h3 class="boxContent">
-                            Question: {{question.question_text}}
-                            
+                            Question: {{question.question_text}}   
                         </h3>
                     </div>
-                    <div class="d-flex justify-content-start fourOptionsDefault" id="question1answer1">
-                        <p class="selectedAnswer" id ="question1text1">
+                    <div class="d-flex justify-content-start fourOptionsDefault" id="{{question.id}}answer1">
+                        <p class="selectedAnswer" id="{{question.id}}text1">
                             
                         </p>
                         <p class="boxContent">
@@ -223,8 +225,8 @@
                             {{question.A}}
                         </p>
                     </div>
-                    <div class="d-flex justify-content-start fourOptionsDefault" id="question1answer2">
-                        <p class="selectedAnswer" id ="question1text2">
+                    <div class="d-flex justify-content-start fourOptionsDefault" id="{{question.id}}answer2">
+                        <p class="selectedAnswer" id="{{question.id}}text2">
                              
                         </p>
                         <p class="boxContent">
@@ -232,8 +234,8 @@
                             {{question.B}}
                         </p>
                     </div>
-                    <div class="d-flex justify-content-start fourOptionsDefault" id="question1answer3">
-                        <p class="selectedAnswer" id ="question1text3">
+                    <div class="d-flex justify-content-start fourOptionsDefault" id="{{question.id}}answer3">
+                        <p class="selectedAnswer" id="{{question.id}}text3">
                             
                         </p>
                         <p class="boxContent">
@@ -241,8 +243,8 @@
                             {{question.C}}
                         </p>
                     </div>
-                    <div class="d-flex justify-content-start fourOptionsDefault"  id="question1answer4">
-                        <p class="selectedAnswer" id ="question1text4">
+                    <div class="d-flex justify-content-start fourOptionsDefault" id="{{question.id}}answer4">
+                        <p class="selectedAnswer" id="{{question.id}}text4">
                             
                         </p>
                         <p class="boxContent">
@@ -255,6 +257,7 @@
         </div>
         </br>
 
+        <div class="readAnswer" style="display:none">{{question.answer}}</div>
         {% endfor %}
         
         <!-- % endfor % -->
@@ -292,69 +295,107 @@
 
             }); 
 
-            answer1 = document.getElementById("question1answer1");
-            answer2 = document.getElementById("question1answer2");
-            answer3 = document.getElementById("question1answer3");
-            answer4 = document.getElementById("question1answer4");
 
-            textForAnswer1 = document.getElementById("question1text1");
-            textForAnswer2 = document.getElementById("question1text2");
-            textForAnswer3 = document.getElementById("question1text3");
-            textForAnswer4 = document.getElementById("question1text4");
 
-            var correctAnswer = 3;
-            var selectedAnswer = 4;
+            newCorrectAnswer = document.getElementsByClassName("readAnswer")
+            console.log("How many Questions? = " + newCorrectAnswer.length)
+
+            for(var i = 0; i < newCorrectAnswer.length; i++){
+                
+                classCorrectAnswer = document.getElementsByClassName("correctAnswer")
+                classLastAnswered = document.getElementsByClassName("lastSubAnswer")
+
+                console.log("Class Correct Answer: " + classCorrectAnswer[i])
+                console.log("Class Last Answered: " + classLastAnswered[i])
+
+                correctAnswer = classCorrectAnswer[i].value;
+                console.log("Correct Answer: " + correctAnswer)
+                selectedAnswer = classLastAnswered[i].value;
+                console.log("Selected Answer: " + selectedAnswer)
+
+                var questionId = classCorrectAnswer[i].id;
+                console.log("Question ID: " + questionId)
+                var questionIdString = questionId.toString();
+
+                answer1String = questionIdString + "answer1";
+                answer2String = questionIdString + "answer2";
+                answer3String = questionIdString + "answer3";
+                answer4String = questionIdString + "answer4";
+
+
+                answer1 = document.getElementById(answer1String);
+                answer2 = document.getElementById(answer2String);
+                answer3 = document.getElementById(answer3String);
+                answer4 = document.getElementById(answer4String);
+
+                text1String = questionId + "text1"
+                text2String = questionId + "text2"
+                text3String = questionId + "text3"
+                text4String = questionId + "text4"
+
+                text1 = document.getElementById(text1String);
+                text2 = document.getElementById(text2String);
+                text3 = document.getElementById(text3String);
+                text4 = document.getElementById(text4String);
+
+
+                if(selectedAnswer == correctAnswer){
+                    console.log("Started If")
+                    let answerNum = questionId + "answer";
+                    let textNum = questionId + "text";
+                    answerNum = answerNum + selectedAnswer.toString();
+                    textNum = textNum + selectedAnswer.toString();
+                    console.log("Answer To String: " + answerNum)
+                    console.log("Text To String: " + textNum)
+
+                    var correctAnswer = window[answerNum];
+                    var correctText = window[textNum];
+
+                    console.log("Window Element Correct Answer: " + correctAnswer)
+                    console.log("Window Element Correct Answer Text: " + correctText)
+
+
+                    correctAnswer.classList.add('fourOptionsCorrect');
+                    correctText.innerText = "Correct: ";
+                }
+                else{
+                    console.log("Started Else")
+
+                    let answerNum = questionId + "answer";
+                    let textNum = questionId + "text";
+                    answerNum = answerNum + correctAnswer.toString();
+                    textNum = textNum + correctAnswer.toString();
+                    console.log("Answer To String: " + answerNum)
+                    console.log("Text To String: " + textNum)
+
+                    var correctAnswer = window[answerNum];
+                    var correctText = window[textNum];
+
+                    correctAnswer.classList.add('fourOptionsGivenCorrect');
+                    correctText.innerText = "Correct Answer: ";
+
+                    answerNum = questionId + "answer";
+                    textNum = questionId + "text";
+
+                    answerNum = answerNum + selectedAnswer.toString();
+                    textNum = textNum + selectedAnswer.toString();
+                    console.log("Answer To String: " + answerNum)
+                    console.log("Text To String: " + textNum)
+
+                    var correctAnswer = window[answerNum];
+                    var correctText = window[textNum];
+
+                    correctAnswer.classList.add('fourOptionsWrong');
+                    correctText.innerText = "Selected Answer: ";
+
+                }
+
+            }
+
             //var selectedAnswer = 3; //when selectedAnswer = correctAnswer
             //Would need to run the following code in a for loop for every question
 
-            if(selectedAnswer == correctAnswer){
-                console.log("Selected Answer: " + selectedAnswer)
-                console.log("Correct Answer: " + correctAnswer)
-                console.log("Started If")
-                let answerNum = "answer";
-                let textForAnswerNum = "textForAnswer";
-                answerNum = "answer" + selectedAnswer.toString();
-                textForAnswerNum = "textForAnswer" + selectedAnswer.toString();
-                console.log("Answer To String: " + answerNum)
-                console.log("Text To String: " + textForAnswerNum)
-
-                var correctAnswer = window[answerNum];
-                var correctText = window[textForAnswerNum];
-
-
-                correctAnswer.classList.add('fourOptionsCorrect');
-                correctText.innerText = "Correct: ";
-            }
-            else{
-                console.log("Started Else")
-
-                let answerNum = "answer";
-                let textForAnswerNum = "textForAnswer";
-                answerNum = "answer" + correctAnswer.toString();
-                textForAnswerNum = "textForAnswer" + correctAnswer.toString();
-                console.log("Answer To String: " + answerNum)
-                console.log("Text To String: " + textForAnswerNum)
-
-                var correctAnswer = window[answerNum];
-                var correctText = window[textForAnswerNum];
-
-                correctAnswer.classList.add('fourOptionsGivenCorrect');
-                correctText.innerText = "Correct Answer: ";
-
-                answerNum = "answer" + selectedAnswer.toString();
-                textForAnswerNum = "textForAnswer" + selectedAnswer.toString();
-                console.log("Answer To String: " + answerNum)
-                console.log("Text To String: " + textForAnswerNum)
-
-                var correctAnswer = window[answerNum];
-                var correctText = window[textForAnswerNum];
-
-                correctAnswer.classList.add('fourOptionsWrong');
-                correctText.innerText = "Selected Answer: ";
-
-
-
-            }
+            
             
 
         </script>

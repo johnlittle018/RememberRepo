@@ -11,10 +11,11 @@ class Patient(models.Model):
     lastName = models.CharField(max_length=200)
     username = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
+    mugshot = models.FileField(upload_to='./Remember/static/remember/images/patientMugShots/', max_length=200, default="")
     #find a patient's reminders by querying Reminder
 
     def __str__(self):
-        return 'patient {}'.format(self.name)
+        return 'patient {} {}'.format(self.firstName, self.lastName)
 
 class Reminder(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
@@ -32,13 +33,13 @@ class User(models.Model):
     password = models.CharField(max_length=200)
 
     def __str__(self):
-        return 'user {}'.format(self.name)
+        return 'user {} {}'.format(self.firstName, self.lastName)
 
 
 class PatientClearanceAbstraction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    clearanceLevel = models.IntegerField(default=0) #can use BooleanField, but this allows room for functional expansion
+    clearanceLevel = models.IntegerField(default=0) # 1 means you are a family member, 2 means you are an admin
 
     def __str__(self):
         return 'user {} has clearance {} with patient {}'.format(self.user, self.clearanceLevel, self.patient)
@@ -76,6 +77,7 @@ class Question(models.Model):
     lastSubAnswer = models.IntegerField(default=0)
     timeEnded = models.DateTimeField()
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return "%.25s" % '{}'.format(self.question_text) #first 25 characters of the question

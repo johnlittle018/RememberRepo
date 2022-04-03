@@ -9,125 +9,290 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <style>
-            
- 
-            .exitButton{
-                width:51px;height:51px;
-                background: transparent url(/../../static/remember/images/exitButton.png) no-repeat;
-                background-color: transparent;
-                mix-blend-mode: multiply;
-                background-size: cover;
-                border: none;
-            }
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+    
+    .navbar{
+        border-bottom: 3px solid black;
+        background: rgba(255, 255, 255, 0.9);
 
-            .logo{
-                width:83.1px; height: 72px; 
-                /* Original size width: 374; height: 324 */
-                background: transparent url(/../../static/remember/images/RememberLogoSized.png) no-repeat;
-                mix-blend-mode: multiply;
-                background-size: cover;
-                border: none;
-            }
+    }
+    .autohide{
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1030;
+    }
+    .scrolled-down{
+        transform:translateY(-100%); transition: all 0.3s ease-in-out;
+    }
 
-            hr {
-                margin-top: 0rem;
-                margin-bottom: 1rem;
-                border: 0;
-                border-top: 5px solid rgba(0, 0, 0, .3);
-            }
+    .scrolled-up{
+        transform:translateY(0); transition: all 0.3s ease-in-out;
+    }
 
-            h1{
-                color: white;
-                padding: 3%;
-            }
+    .exitButton{
+        width:51px;height:51px;
+        background: transparent url(/../../static/remember/images/exitButton.png) no-repeat;
+        background-color: transparent;
+        mix-blend-mode: multiply;
+        background-size: cover;
+        border: none;
+    }
 
-            .photoImg{
-                border: 5px solid black;
-                height: 30vw;
-                width:auto
-            }
+    .logo{
+        width:83.1px; height: 72px; 
+        /* Original size width: 374; height: 324 */
+        background: transparent url(/../../static/remember/images/RememberLogoSized.png) no-repeat;
+        mix-blend-mode: multiply;
+        background-size: cover;
+        border: none;
+    }
 
-            .btn.btn-primary.btn-lg{
-                width:80%;
-                margin: .7%;
-                padding: 1%;
-                opacity: 1;
-                transition: .5s;
-            }
+    .btn.btn-secondary.dropdown-toggle {
+        background-color: rgb(225,225,225);  
+    }
+
+    h1{
+        color: white;
+        font-family: 'Sans serif', Helvetica, sans-serif;
+        font-size: calc(3vw + 2vh);
+        padding:2%;
+        padding-left: 12%;
+    }
+
+    h2{
+        color: white;
+        font-family: 'Sans serif', Helvetica, sans-serif;
+        font-size: calc(2.25vw + 1.5vh);
+        padding:1%;
+        margin: 1%;
+        background-color: rgb(50,50,50);
+        border-radius: 20%;
+        text-align: center;
+
+    }
+    h3{
+        color: white;
+        font-family: 'Sans serif', Helvetica, sans-serif;
+        font-size: calc(2.25vw + 1.5vh);
+        text-align: center;
+        margin: 0px;
+        padding:0px;
+    }
+
+    .photoImg{
+        border: 5px solid black;
+        height: 30vw;
+        width:auto
+    }
+
+    .customBtn{
+        width:100%;
+        margin: .7%;
+        padding: 1%;
+    }
+
+    .topLevelProgressBar{
+       margin: 0% 5% 5% 5%;
+       display: none;
+       opacity: 0%;
+       transition: visibility 0s, opacity 0.5s linear;
+       scroll-behavior: smooth;
+    }
 
 
+    .customProgressBtn{
+        width: 100%;
+        padding: 10px 10px;
+    }
 
-        </style>
-    </head>
+    .customProgress{
+        height: 6vw;
+        background-color: rgb(59, 153, 109);
 
-    <body>
-        <header>
+    }
 
-            
-        </header>
+    .customProgressMeter{
+        /*width:50%;*/
+        text-align: center;
+    }
 
-        <!-- All your html stuff here -->
+    .strokeme {
+    color: white;
+    font-family: 'Sans serif', Helvetica, sans-serif;
+    font-size: calc(2.25vw + 1.5vh);
+    position: absolute;
+    width: 90%;
+    text-align: center;
+    margin: 0px;
+    padding:0px;
+    }
 
+</style>
+</head>
+
+<body>
+<header>
+
+    
+</header>
+
+<!-- All your html stuff here -->
+
+<nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
+    <a class="navbar-brand" href="#">
+        <button class="exitButton" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+    </a>
+    <a href="">
+        <div class="logo"></div>
+    </a>
+    <p style="width: 80px">
         
-        <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">
-                <button class="exitButton" onclick="history.back()"></button>
-            </a>
-            <a href="">
-                <div class="logo"></div>
-            </a>
-            <p style="width: 80px">
+    </p>
+</nav>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Quit Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to quit?
+                <br>
+                Your progress will be lost!
                 
-            </p>
-        </nav>
+            </div>
+            <div class="modal-footer">
+                <!--Jack's old code-->
+                <button type="button" class="btn btn-secondary removeBorder" data-bs-dismiss="modal">Close</button>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div>
+                        <button type="submit" value="pickedPatient" class="btn btn-danger">
+                            Quit
+                            <!--Return to Patient Main Menu-->
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-        <hr/>
-
+<br>
         <div class="d-flex justify-content-center">
             <!--Code of the photo-->
             <!--<img src="/../../static/remember/images/codeHere.png" class="photoImg"> -->
-            <img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> 
+            <img src="{{question.picture}}" class="photoImg"> 
+            <!-- <img src="/../../static/remember/images/questionImages/iphoneImg.jpg" class="photoImg">  -->
             <br>
             <!--Note: Our system works a lot better with wider photos-->
         </div>
         
-        <div class="d-flex justify-content-start">
-            <h1 style="padding-left: 10%;">
-                <!--Code of the corrsponding question-->
-                {{question.question_text}}
-            </h1>
+        <h1>
+            {{question.question_text}}
+        </h1>
+        
+
+
+        <div class="d-flex flex-column bd-highlight mb-3">
+            <form action="{% url 'Remember:answerQusetion' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="toggle" value="1">
+            <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
+                <button type="submit" value="answerQusetion" class="btn btn-primary btn-lg customBtn" id="QuestionA"><h3>{{question.A}}</h3></button>
+            </div>
+            
+            </form>
         </div>
 
-        <form action="{% url 'Remember:answerQusetion' %}" method="post">
+        <div class="d-flex flex-column bd-highlight mb-3">
+            <form action="{% url 'Remember:answerQusetion' %}" method="post">
             {% csrf_token %}
-            <label class="text-white">Pick Correct Answer </label>
-                
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons" required="required" name="CorrectAnswer123">
-                        <label class="btn btn-secondary" id="label1">
-                            <input type="radio" id="option1" name="toggle" value="1" autocomplete="off"> {{question.A}}
-                        </label>
-                        <label class="btn btn-secondary" id="label2">
-                            <input type="radio" id="option2" name="toggle" value="2" autocomplete="off"> {{question.B}}
-                        </label>
-                        <label class="btn btn-secondary" id="label3">
-                            <input type="radio" id="option3" name="toggle" value="3" autocomplete="off"> {{question.C}}
-                        </label>
-                        <label class="btn btn-secondary" id="label4">
-                            <input type="radio" id="option3" name="toggle" value="4" autocomplete="off"> {{question.D}}
-                        </label>
-                    </div>
+            <input type="hidden" name="toggle" value="2">
+            <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
+                <button type="submit" value="answerQusetion" class="btn btn-primary btn-lg customBtn" id="QuestionA"><h3>{{question.B}}</h3></button>
+            </div>
+            
+            </form>
+        </div>
 
-                    <button type="submit" value="answerQuestion" class="btn btn-primary">Submit</button>
-        </form>
+        <div class="d-flex flex-column bd-highlight mb-3">
+            <form action="{% url 'Remember:answerQusetion' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="toggle" value="3">
+            <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
+                <button type="submit" value="answerQusetion" class="btn btn-primary btn-lg customBtn" id="QuestionA"><h3>{{question.C}}</h3></button>
+            </div>
+            
+            </form>
+        </div>
+
+        <div class="d-flex flex-column bd-highlight mb-3">
+            <form action="{% url 'Remember:answerQusetion' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="toggle" value="4">
+            <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
+                <button type="submit" value="answerQusetion" class="btn btn-primary btn-lg customBtn" id="QuestionA"><h3>{{question.D}}</h3></button>
+            </div>
+            
+            </form>
+        </div>
+
+
+
+
+        <div class="d-flex justify-content-start topLevelProgressBar" id="displayProgressBar">
+            <button type="button" class="btn btn-success btn-lg customProgressBtn" id = "progressBtn" disabled>
+                <div class="progress customProgress">
+                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated customProgressMeter" id="progressMeter" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        <p class="strokeme">Next Question</p>
+                    </div>
+                </div>
+            </button>
+        </div>
+
+        
         <!-- Optional JavaScript -->
 
         <script>
 
-        </script>
+            document.addEventListener("DOMContentLoaded", function(){
+ 
+                 el_autohide = document.querySelector('.autohide');
+                 // add padding-top to bady (if necessary)
+                 navbar_height = document.querySelector('.navbar').offsetHeight;
+                 document.body.style.paddingTop = navbar_height + 'px';
+ 
+                 if(el_autohide){
+                 var last_scroll_top = 0;
+                 window.addEventListener('scroll', function() {
+                         let scroll_top = window.scrollY;
+                     if(scroll_top < last_scroll_top) {
+                             el_autohide.classList.remove('scrolled-down');
+                             el_autohide.classList.add('scrolled-up');
+                         }
+                     else {
+                         el_autohide.classList.remove('scrolled-up');
+                         el_autohide.classList.add('scrolled-down');
+                     }
+                         last_scroll_top = scroll_top;
+                 }); 
+                 // window.addEventListener
+                 }
+                 // if
+ 
+             }); 
+            
+ 
+         </script>
 
         
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

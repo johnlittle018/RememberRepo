@@ -60,25 +60,36 @@
             h1{
                 color: white;
                 font-family: 'Sans serif', Helvetica, sans-serif;
-                font-size: calc(3vw + 2vh);
-                padding:2%;
-                padding-left: 12%;
+                font-size: calc(2.5vw + 2.5vh);
+            }
+
+            h2{
+                font-size: calc(1.7vw + 1.0vh);
             }
 
             img{
                 width: 100%;
-                height: 500px;
+                height: 100%;
+                max-width: 100%;
+                max-height: 700px;
                 object-fit: fill;
-                
+
             }
 
             .scrapbook{
                 padding: 1%;
                 background-color: white;
             }
+            .fades{
+                animation: fade 1.5s;
+            }
 
+            @keyframes fade {
+                from {opacity: .4} 
+                to {opacity: 1}
+            }
             .carousel-caption-description p{
-                font-size: larger;
+                font-size: calc(1.0vw + 1.5vh);
                 color: black;
             }
 
@@ -91,6 +102,10 @@
 
             .carousel-control-color{
                 color: black;
+            }
+
+            .btn{
+                font-size: calc(1.0vw + 1.5vh);
             }
 
 
@@ -126,56 +141,62 @@
         <h1>
             Scrapbook
         </h1> 
-            
-        <div class="container d-flex justify-content-center mb-5">  
-            
-            <div id="carouselExampleDark" class="carousel carousel-dark slide col-md-8 scrapbook" data-bs-interval="false">
+         
+        <div class="container d-flex flex-column mb-5 col-md-8">  
+
+            <div class="mb-2 align-self-end">
+                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">Previous</button>
+                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">Next</button>
+            </div>
+
+            <div id="carouselExampleDark" class="carousel carousel-dark slide scrapbook align-self-center col-md-12" data-bs-interval="false">
                 <div class="thumbnail carousel-inner">
-                    <div class="carousel-item active">
-                    <img src="/../../static/remember/images/codeHere.png" alt="...">
-                    <div class="carousel-caption-description">
-                        <h3>Description</h3>
-                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
-                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
-                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
-                        
-                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
-                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
-                        <p>This is Emmet Jackson. He is your first son. He lives in Erie Pennsylvania. He has a wife and 2 children</p>
-                        
-                    </div>                   
-                    </div>
-
-                    <div class="carousel-item">
-                    <img src="/../../static/remember/images/codeHere.png" alt="...">
-                    <div class="carousel-caption-description">
-                        <h3>Description</h3>
-                        <p>Description 2</p>
-                    </div>
-                    </div>
                     
-                    <div class="carousel-item">
-                    <img src="/../../static/remember/images/codeHere.png" alt="...">
-                    <div class="carousel-caption-description">
-                        <h3>Description</h3>
-                        <p>Description 3</p>
-                    </div>
-                    </div>
-                </div>
 
+                    {% for question in questions %}
+
+                    <div class="carousel-item fades">
+                    <img src="{{question.picture}}" alt="...">
+                    <div class="carousel-caption-description">
+                        <h2>Description</h2>
+                        <p>{{question.description}}</p>
+                    </div>
+                    </div>
+
+                    {% endfor %}
+                    
+                   
+                </div>
             </div> 
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-        </div>         
+            <div class="mt-4 align-self-center">
+                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">Previous</button>
+                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">Next</button>
+            </div>
+             
+
+        </div> 
               
         <script>
+
+            var slideIndex = 1;
+            showSlides(slideIndex);
+
+            function plusSlides(n) {
+            showSlides(slideIndex += n);
+            }
+            function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("carousel-item");
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+
+            slides[slideIndex-1].style.display = "block";  
+            }
+
             document.addEventListener("DOMContentLoaded", function(){
 
                 el_autohide = document.querySelector('.autohide');
