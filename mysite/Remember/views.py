@@ -9,6 +9,7 @@ import email
 import os
 import time
 from urllib import request
+import uuid
 from django.http import Http404
 from django.http import HttpResponse
 from django.utils import timezone
@@ -187,12 +188,14 @@ def submitQuestion(request):
     myFileSystem = FileSystemStorage()
     myFileSystem.save(myThingy.name, myThingy)
     source = "./media/" + myThingy.name 
-    destination = "./Remember/static/remember/images/questionImages/" + myThingy.name 
+    name = str(uuid.uuid4()) + myThingy.name
+    destination = "./Remember/static/remember/images/questionImages/" + name 
     os.rename(source, destination)
+    
     
     ## this is what is passed to the question for a refrence to the image.
     ## formated so it can be used directly in html
-    nameForDatabase = "/../../static/remember/images/questionImages/" + myThingy.name
+    nameForDatabase = "/../../static/remember/images/questionImages/" + name
  
     ## pulling data from the calling form
     photoDiscription = request.POST['pDescription']
@@ -258,12 +261,14 @@ def resubmitQuestion(request):
     myFileSystem = FileSystemStorage()
     myFileSystem.save(myThingy.name, myThingy)
     source = "./media/" + myThingy.name 
-    destination = "./Remember/static/remember/images/questionImages/" + myThingy.name 
+    name = str(uuid.uuid4()) + myThingy.name
+    destination = "./Remember/static/remember/images/questionImages/" + name 
     os.rename(source, destination)
+    
     
     ## this is what is passed to the question for a refrence to the image.
     ## formated so it can be used directly in html
-    nameForDatabase = "/../../static/remember/images/questionImages/" + myThingy.name
+    nameForDatabase = "/../../static/remember/images/questionImages/" + name
  
     # pulling data from calling form
     photoDiscription = request.POST['pDescription']
@@ -740,23 +745,28 @@ def submitPatient(request):
     ## loading the user from session
     myUser = User.objects.get(pk = request.session['loggedInID'])
 
-
-    ## taking and processing images, latter, I need to change the naming to take the date so no two pictures have the same name
-    ## we will check in the backend if a picutre has been provided
+    ## stuff for images
     myThingy = request.FILES['uploadedPic']
     myFileSystem = FileSystemStorage()
     myFileSystem.save(myThingy.name, myThingy)
     source = "./media/" + myThingy.name 
-    destination = "./Remember/static/remember/images/questionImages/" + myThingy.name
+    name = str(uuid.uuid4()) + myThingy.name
+    destination = "./Remember/static/remember/images/questionImages/" + name 
     os.rename(source, destination)
-    ## name for refrencing image in the database, formated for HTML
-    nameForDatabase = "/../../static/remember/images/questionImages/" + myThingy.name
+    
+    
+    ## this is what is passed to the question for a refrence to the image.
+    ## formated so it can be used directly in html
+    nameForDatabase = "/../../static/remember/images/questionImages/" + name
 
-    # the frond end is responsable for making sure these feilds are entered and entered validly "email is an email"
+    ## pulling data from requesting form
+    
     email = request.POST['email']
     password = request.POST['password']
     firstName = request.POST['firstName']
     lastName = request.POST['lastName']
+
+
 
     ## checking if email is already used, this is the only factor that will stop an acound from being made.
     try:
