@@ -31,6 +31,10 @@ Make a change pasword page
 we need to make it so all text feilds are manditory before submition.
 Moving from create to invite on invite admin needs to reset the text feilds for backend logic... can be done in javascript
 I need the picture of patient profile to be refrenced in the html, not the css
+images names are generated from the data and time so no two names are the same.
+Make question still has the old toggle, 
+code form error popups across all forms
+make a now question page
 
 
 
