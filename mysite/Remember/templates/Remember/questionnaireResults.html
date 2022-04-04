@@ -203,7 +203,7 @@
                 <div class="col-3 justify-content-center align-self-center">
                     <!-- <img src={{question.picture}} class="photoImg">  -->
                     
-                    <img src="{{question.picture}}" class="photoImg"> 
+                    <img src="/../../static/remember/images/codeHere.png" class="photoImg"> 
                     <!--<img src="/../../static/remember/images/wideImg.jfif" class="photoImg"> -->
                     <!--<img src="/../../static/remember/images/iphoneImg.jpg" class="photoImg"> -->
                     <br>
@@ -256,8 +256,6 @@
             </div>
         </div>
         </br>
-
-        <div class="readAnswer" style="display:none">{{question.answer}}</div>
         {% endfor %}
         
         <!-- % endfor % -->
@@ -297,13 +295,10 @@
 
 
 
-            newCorrectAnswer = document.getElementsByClassName("readAnswer")
-            console.log("How many Questions? = " + newCorrectAnswer.length)
+            classCorrectAnswer = document.getElementsByClassName("correctAnswer")
+            classLastAnswered = document.getElementsByClassName("lastSubAnswer")
 
-            for(var i = 0; i < newCorrectAnswer.length; i++){
-                
-                classCorrectAnswer = document.getElementsByClassName("correctAnswer")
-                classLastAnswered = document.getElementsByClassName("lastSubAnswer")
+            for(var i = 0; i < classCorrectAnswer.length; i++){
 
                 console.log("Class Correct Answer: " + classCorrectAnswer[i])
                 console.log("Class Last Answered: " + classLastAnswered[i])
@@ -315,13 +310,11 @@
 
                 var questionId = classCorrectAnswer[i].id;
                 console.log("Question ID: " + questionId)
-                var questionIdString = questionId.toString();
 
-                answer1String = questionIdString + "answer1";
-                answer2String = questionIdString + "answer2";
-                answer3String = questionIdString + "answer3";
-                answer4String = questionIdString + "answer4";
-
+                answer1String = questionId + "answer1";
+                answer2String = questionId + "answer2";
+                answer3String = questionId + "answer3";
+                answer4String = questionId + "answer4";
 
                 answer1 = document.getElementById(answer1String);
                 answer2 = document.getElementById(answer2String);
@@ -341,15 +334,15 @@
 
                 if(selectedAnswer == correctAnswer){
                     console.log("Started If")
-                    let answerNum = questionId + "answer";
-                    let textNum = questionId + "text";
-                    answerNum = answerNum + selectedAnswer.toString();
-                    textNum = textNum + selectedAnswer.toString();
-                    console.log("Answer To String: " + answerNum)
-                    console.log("Text To String: " + textNum)
+                    let classNameAnswer = questionId + "answer";
+                    let classNameText = questionId + "text";
+                    classNameAnswer = classNameAnswer + selectedAnswer.toString();
+                    classNameText = classNameText + selectedAnswer.toString();
+                    console.log("Answer To String: " + classNameAnswer)
+                    console.log("Text To String: " + classNameText)
 
-                    var correctAnswer = window[answerNum];
-                    var correctText = window[textNum];
+                    var correctAnswer = window[classNameAnswer];
+                    var correctText = window[classNameText];
 
                     console.log("Window Element Correct Answer: " + correctAnswer)
                     console.log("Window Element Correct Answer Text: " + correctText)
@@ -361,29 +354,29 @@
                 else{
                     console.log("Started Else")
 
-                    let answerNum = questionId + "answer";
-                    let textNum = questionId + "text";
-                    answerNum = answerNum + correctAnswer.toString();
-                    textNum = textNum + correctAnswer.toString();
-                    console.log("Answer To String: " + answerNum)
-                    console.log("Text To String: " + textNum)
+                    let classNameAnswer = questionId + "answer";
+                    let classNameText = questionId + "text";
+                    classNameAnswer = classNameAnswer + correctAnswer.toString();
+                    classNameText = classNameText + correctAnswer.toString();
+                    console.log("Answer To String: " + classNameAnswer)
+                    console.log("Text To String: " + classNameText)
 
-                    var correctAnswer = window[answerNum];
-                    var correctText = window[textNum];
+                    var correctAnswer = window[classNameAnswer];
+                    var correctText = window[classNameText];
 
                     correctAnswer.classList.add('fourOptionsGivenCorrect');
                     correctText.innerText = "Correct Answer: ";
 
-                    answerNum = questionId + "answer";
-                    textNum = questionId + "text";
+                    classNameAnswer = questionId + "answer";
+                    classNameText = questionId + "text";
 
-                    answerNum = answerNum + selectedAnswer.toString();
-                    textNum = textNum + selectedAnswer.toString();
-                    console.log("Answer To String: " + answerNum)
-                    console.log("Text To String: " + textNum)
+                    classNameAnswer = classNameAnswer + selectedAnswer.toString();
+                    classNameText = classNameText + selectedAnswer.toString();
+                    console.log("Answer To String: " + classNameAnswer)
+                    console.log("Text To String: " + classNameText)
 
-                    var correctAnswer = window[answerNum];
-                    var correctText = window[textNum];
+                    var correctAnswer = window[classNameAnswer];
+                    var correctText = window[classNameText];
 
                     correctAnswer.classList.add('fourOptionsWrong');
                     correctText.innerText = "Selected Answer: ";
