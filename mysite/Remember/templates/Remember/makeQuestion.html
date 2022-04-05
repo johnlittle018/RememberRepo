@@ -144,7 +144,7 @@
 
 
                     <h1>
-                        New Question for {{userRelation.patient.firstName}}
+                        Create Question - {{userRelation.patient.firstName}}
                     </h1>
                 </div>
             </div>
@@ -180,7 +180,7 @@
 
                         <div class="form-group">
                             <label for="photoDescription" class="text-white">Image Description</label>
-                            <textarea class="form-control" id="photoDescription" name="pDescription" rows="3" >{{question.description}}</textarea>
+                            <textarea class="form-control" id="photoDescription" name="pDescription" rows="3" placeholder="Image Description">{{question.description}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="question" class="text-white">Question:</label>
@@ -230,18 +230,17 @@
                             
                             
 
-                            <label class="btn btn-secondary" id="label1">
-                                <input type="radio" id="option1" name="toggle" value="1" autocomplete="off"> A
-                            </label>
-                            <label class="btn btn-secondary" id="label2">
-                                <input type="radio" id="option2" name="toggle" value="2" autocomplete="off"> B
-                            </label>
-                            <label class="btn btn-secondary" id="label3">
-                                <input type="radio" id="option3" name="toggle" value="3" autocomplete="off"> C
-                            </label>
-                            <label class="btn btn-secondary" id="label4">
-                                <input type="radio" id="option3" name="toggle" value="4" autocomplete="off"> D
-                            </label>
+                            <input type="radio" class="btn-check" id="option1" name="toggle" value="1" autocomplete="off">
+                            <label class="btn btn-secondary" for="option1">A</label>
+
+                           <input type="radio" class="btn-check" id="option2" name="toggle" value="2" autocomplete="off">
+                            <label class="btn btn-secondary" for="option2">B</label>
+
+                            <input type="radio" class="btn-check" id="option3" name="toggle" value="3" autocomplete="off">
+                            <label class="btn btn-secondary" for="option3">C</label>
+
+                            <input type="radio" class="btn-check" id="option4" name="toggle" value="4" autocomplete="off">
+                            <label class="btn btn-secondary" for="option4">D</label>
                             
 
                         </div>
@@ -250,7 +249,7 @@
             
                         <br>
                         <br>
-                        <button type="submit" value="submitQuestion" class="btn btn-primary">Make Question</button>
+                        <button type="submit" value="submitQuestion" class="btn btn-primary">Create Question</button>
                     </form>
                 </div>
             </div>

@@ -188,7 +188,7 @@
         <!--For the length, the order goes top, right, bottom, left-->
         <div class="d-flex justify-content-between" style="padding: 0vw 10vw 0vw 0vw">
             <h1>
-                {{userRelation.patient.firstName}} Questionnaire
+                Questionnaire - {{userRelation.patient.firstName}} 
             </h1>
 
 
@@ -198,7 +198,7 @@
                     <div> 
                         {% csrf_token %}
                         <button type="submit" value="makeQuestion" class="btn btn-primary btn-lg">
-                            Make Question
+                            Create Question
                             
                             
                                             
@@ -360,7 +360,7 @@
                     <div> 
                         {% csrf_token %}
                         <button type="submit" value="makeQuestion" class="btn btn-primary btn-lg">
-                            Make Question
+                            Create Question
                             <input type="hidden" name="relation" value="{{userRelation.id}}">
                             
                                             
