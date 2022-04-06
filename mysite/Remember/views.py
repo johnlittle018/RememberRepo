@@ -700,20 +700,20 @@ def processNewAdmin(request):
     lastName = request.POST['lastName']
     corI = request.POST['CorI']
 
-    ## if conditional is true, we are adding an acount that already exsist.
+    ## if conditional is true, we are adding an account that already exist.
     if corI == "i":
         
-        ## see if that acound exist, if not, thow to error page
+        ## see if that account exist, if not, throw to error page
             
         try:
             myNewAdmin = User.objects.get(email = email)
         except:
-            ## user does not exsit
+            ## user does not exist
             return render(request, 'Remember/adminEx/inviteAdmin.html', 
                 { 'error_message': "The email you have entered is not registered.",}
             )       
 
-        ## make Sure this relation does not already exsist
+        ## make sure this relation does not already exist
         
         check = PatientClearanceAbstraction.objects.filter(patient = relation.patient, user = myNewAdmin)
 
@@ -726,7 +726,9 @@ def processNewAdmin(request):
         myNewRelation = PatientClearanceAbstraction(user=myNewAdmin, patient=relation.patient, clearanceLevel = 2)
         myNewRelation.save()
             
-        return HttpResponseRedirect(reverse('Remember:newAdmin'))
+        return render(request, 'Remember/adminEx/inviteAdmin.html', 
+            { 'coi_message': "You have successfully invited an Admin",}
+        )
 
        
 
@@ -753,7 +755,9 @@ def processNewAdmin(request):
     myNewRelation = PatientClearanceAbstraction(user=myNewAdmin, patient=relation.patient, clearanceLevel = 2)
     myNewRelation.save()
 
-    return HttpResponseRedirect(reverse('Remember:newAdmin'))
+    return render(request, 'Remember/adminEx/inviteAdmin.html', 
+            { 'coi_message': "You have successfully invited an Admin",}
+        )
 
 
 # loads noUser Page

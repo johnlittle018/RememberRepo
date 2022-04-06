@@ -202,9 +202,28 @@
                 </div>
             </form>
 
-
+            <p></p>
         </div>
+        
+        <div id="myModal" class="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:rgb(59, 153, 109)">
+                        <h5 class="modal-title" id="exampleModalLabel"> Admin Created Successfully</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modalTextClass">{{coi_message}}</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary removeBorder" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Optional JavaScript -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 
         <script>
             document.addEventListener("DOMContentLoaded", function(){
@@ -282,14 +301,34 @@
                 title.textContent="Invite Admin";
             }
 
+            var myNewModal = document.getElementById("myModal")
+
+            var galleryModal = new bootstrap.Modal(document.getElementById('myModal'), {
+            keyboard: false
+            });
+
+            
+            boolDisplay = document.getElementById("modalTextClass")
+            var boolDisplayVal = boolDisplay.textContent
+            if(boolDisplayVal != null){
+                console.log("In 1 IF: " + boolDisplayVal)
+                if(boolDisplayVal == ""){
+                    console.log("In 2 IF")
+                }
+                else{
+                    console.log("In ELSE!")
+                    galleryModal.show();
+                }
+            }
+
+
+            
 
         </script>
 
-        
+        <!--            if(boolDisplayVal != null){      -->
         
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+        
     </body>
 </html>
