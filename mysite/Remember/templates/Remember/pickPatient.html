@@ -88,14 +88,14 @@
 
             .scalePatientImage{
                 object-fit:contain;
-                background: transparent url(/../../static/remember/images/codeHere.png) no-repeat;
+                /* background: transparent url(/../../static/remember/images/codeHere.png) no-repeat; */
                 background-size: cover;
                 /*background color is 225*/
             }
 
             .scaleAddImage{
                 object-fit:contain;
-                background: rgb(225,225,225) url(/../../static/remember/images/plusSignNoBG.png) no-repeat;
+                background: rgb(225,225,225) url(/../../static/remember/images/plusSignNoBG.png) no-repeat; 
                 background-size: cover;
                 background-position: 50% 50%;
             }
@@ -153,7 +153,7 @@
                 <div class="p-2 bd-highlight">
                     <button type="submit" value="pickedPatient" class="pictureButton" >
                         {% csrf_token %}
-                        <div class="d-flex justify-content-center scalePatientImage">
+                        <div class="d-flex justify-content-center scalePatientImage" style="background: rgb(225,225,225) url({{relation.patient.mugshot}}) no-repeat;">
                             <div class="pictureStyle"></div> <br> 
                             <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
                         </div>

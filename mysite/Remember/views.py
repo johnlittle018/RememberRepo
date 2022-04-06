@@ -77,10 +77,11 @@ def login(request):
             request.session['userType'] = "patient"
             return HttpResponseRedirect(reverse('Remember:patientMenu'))
             
-        # This is how we update the page with an error message
-        return render(request, 'Remember/loginPage.html', {
-            'error_message': "You have entered the wrong username or password, please try again",
-        })
+    
+    # This is how we update the page with an error message
+    return render(request, 'Remember/loginPage.html', 
+    { 'error_message': "THis is dumy data",}
+        )        
 
 
    
@@ -692,30 +693,52 @@ def processNewAdmin(request):
     password = request.POST['password']
     firstName = request.POST['firstName']
     lastName = request.POST['lastName']
+    corI = request.POST['CorI']
 
     ## if conditional is true, we are adding an acount that already exsist.
-    if password == "" and firstName == "" and lastName == "":
+    if corI == "i":
         
         ## see if that acound exist, if not, thow to error page
+            
         try:
             myNewAdmin = User.objects.get(email = email)
         except:
             ## user does not exsit
-            return HttpResponseRedirect(reverse('Remember:noUser'))
+            return render(request, 'Remember/adminEx/inviteAdmin.html', 
+                { 'error_message': "The email you have entered is not registered.",}
+            )       
 
         ## make Sure this relation does not already exsist
-        try: 
-            cheking = PatientClearanceAbstraction.objects.get(patient = relation.patient, user = myNewAdmin)
-        except:
-            myNewRelation = PatientClearanceAbstraction(user=myNewAdmin, patient=relation.patient, clearanceLevel = 2)
-            myNewRelation.save()
-            
-            return HttpResponseRedirect(reverse('Remember:newAdmin'))
         
-        # user exsist
-        return HttpResponseRedirect(reverse('Remember:noUser'))
-    
+        check = PatientClearanceAbstraction.objects.filter(patient = relation.patient, user = myNewAdmin)
 
+        if len(check) != 0:
+            return render(request, 'Remember/adminEx/inviteAdmin.html', 
+                { 'error_message': "The email you have entered already an admin of this patient.",}
+            )
+        
+
+        myNewRelation = PatientClearanceAbstraction(user=myNewAdmin, patient=relation.patient, clearanceLevel = 2)
+        myNewRelation.save()
+            
+        return HttpResponseRedirect(reverse('Remember:newAdmin'))
+
+       
+
+
+        
+    if password == '' or firstName == '' or lastName == '':    
+        return render(request, 'Remember/adminEx/inviteAdmin.html', 
+            { 'error_message': "Please enter data in all feilds.",}
+        )
+
+
+    check = User.objects.filter(email = email)
+
+    if len(check) != 0:
+        return render(request, 'Remember/adminEx/inviteAdmin.html', 
+        { 'error_message': "The email you have entered is already registered.",}
+        )         
 
     ## We are creating a user
     ## we are under the assumption that the all the feilds have been filed and cheked on the html side of things
@@ -767,11 +790,9 @@ def submitPatient(request):
     lastName = request.POST['lastName']
 
 
+    check = Patient.objects.filter(username = email)
 
-    ## checking if email is already used, this is the only factor that will stop an acound from being made.
-    try:
-        check = Patient.objects.get(email = email)
-    except:
+    if len(check) == 0:
         ## email is not in use
         # making and saving the new patient
         newPatient = Patient(firstName=firstName, password=password, lastName=lastName, username=email, mugshot=nameForDatabase)
@@ -784,11 +805,12 @@ def submitPatient(request):
         newQuiz.save()
 
         return HttpResponseRedirect(reverse('Remember:pickPatient'))
-        
-
+    
 
     ## email is in use, throw error
-    return render(request, 'Remember/noUser.html')    
+    return render(request, 'Remember/adminEx/createPatient.html', 
+    { 'error_message': "THis is dumy data",}
+    ) 
 
 
 
