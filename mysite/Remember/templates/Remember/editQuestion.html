@@ -111,6 +111,20 @@
                 padding-left: 12%;
             }
 
+            .btn-success {
+                color: black;
+                background-color: white;
+                border-color: black;
+            }
+            
+            .btn-success:focus,
+            .btn-success.focus,
+            .btn-success:hover {
+                color: #fff;
+                background-color: rgb(59, 153, 109);
+                border-color: rgb(25,135,84);
+            }
+
 
  
         </style>
@@ -259,44 +273,44 @@
 
                             {% if 1 == question.answer %}
                                 <input type="radio" class="btn-check" id="option1" name="toggle" required="required" value="1" autocomplete="off" checked>
-                                <label class="btn btn-secondary" for="option1">A</label>
+                                <label class="btn btn-success" for="option1">A</label>
 
                             {% endif %}
 
                             {% if 1 != question.answer %}
                                 <input type="radio" class="btn-check" id="option1" name="toggle" required="required" value="1" autocomplete="off" checked>
-                                <label class="btn btn-secondary" for="option1">A</label>
+                                <label class="btn btn-success" for="option1">A</label>
                             {% endif %}
 
 
                             {% if 2 == question.answer %}
                                 <input type="radio" class="btn-check" id="option2" name="toggle" required="required" value="2" autocomplete="off" checked>
-                                <label class="btn btn-secondary" for="option2">B</label>
+                                <label class="btn btn-success" for="option2">B</label>
                             {% endif %}
 
                             {% if 2 != question.answer %}
                                 <input type="radio" class="btn-check" id="option2" name="toggle" required="required" value="2" autocomplete="off">
-                                <label class="btn btn-secondary" for="option2">B</label>
+                                <label class="btn btn-success" for="option2">B</label>
                             {% endif %}
 
                             {% if 3 == question.answer %}
                                 <input type="radio" class="btn-check" id="option3" name="toggle" required="required" value="3" autocomplete="off" checked>
-                                <label class="btn btn-secondary" for="option3">C</label>
+                                <label class="btn btn-success" for="option3">C</label>
                             {% endif %}
 
                             {% if 3 != question.answer %}
                                 <input type="radio" class="btn-check" id="option3" name="toggle" required="required" value="3" autocomplete="off">
-                                <label class="btn btn-secondary" for="option3">C</label>
+                                <label class="btn btn-success" for="option3">C</label>
                             {% endif %}
 
                             {% if 4 == question.answer %}
                                 <input type="radio" class="btn-check" id="option4" name="toggle" required="required" value="4" autocomplete="off" checked>
-                                <label class="btn btn-secondary" for="option4">D</label>
+                                <label class="btn btn-success" for="option4">D</label>
                             {% endif %}
 
                             {% if 4 != question.answer %}
                                 <input type="radio" class="btn-check" id="option4" name="toggle" required="required" value="4" autocomplete="off">
-                                <label class="btn btn-secondary" for="option4">D</label>
+                                <label class="btn btn-success" for="option4">D</label>
                             {% endif %}
 
                             
