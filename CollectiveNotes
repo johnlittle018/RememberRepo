@@ -29,6 +29,11 @@ Stuff to do: Garrett
 **Make a change password page
 **Use edit questionaire toggle method for changing correct answer number to letter on edit questionere 
 **Fix pick patient Image
+Sign Up Page (Create Admin Account)
+Admin needs a review reminders
+Manange {{relation.user.firstName}} Account (has changing password (could have changing emails and profile pic))
+
+Print out script for Wednesday
 
 *Couldn't fix reviewResults because it either goes to the adminMenu or patientMenu but all others are fixed (along with logout btn)
 
