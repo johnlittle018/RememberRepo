@@ -179,8 +179,8 @@
                     <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Help Page</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                    <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -273,7 +273,22 @@
                         <div class="d-flex justify-content-start">
                             <p class="boxContent">
                                 <strong>Correct Answer:</strong>
-                                {{question.answer}}
+
+                                {% if question.answer == 1 %}
+                                A
+                                {% endif %}
+
+                                {% if question.answer == 2 %}
+                                B
+                                {% endif %}
+
+                                {% if question.answer == 3 %}
+                                C
+                                {% endif %}
+
+                                {% if question.answer == 4 %}
+                                D
+                                {% endif %}
                             </p>
                         </div>
 

@@ -110,6 +110,11 @@ def helpPage(request):
     
     return render(request, 'Remember/helpPage.html')
 
+def changePassword(request):
+
+    
+    return render(request, 'Remember/changePassword.html')
+
 
 ## Function for when a patient is picked
 def pickedPatient(request):
@@ -530,7 +535,7 @@ def scrapbook(request):
 # loads the no questions page
 def noQuestions(request):
 
-    return render(request, 'Remember/noQuestions.html')
+    return render(request, 'Remember/patientEx/noQuestions.html')
 
 ## loads the no quiz page
 def noQuiz(request):

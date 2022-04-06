@@ -170,17 +170,10 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                 
             </div>
             <div class="modal-footer">
-                <!--Jack's old code-->
                 <button type="button" class="btn btn-secondary removeBorder" data-bs-dismiss="modal">Close</button>
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <div>
-                        <button type="submit" value="pickedPatient" class="btn btn-danger">
-                            Quit
-                            <!--Return to Patient Main Menu-->
-                        </button>
-                    </div>
-                </form>
+                <a class="navbar-brand" href="/remember/patientMenu">
+                    <button class="btn btn-danger">Quit</button>
+                </a>
             </div>
         </div>
     </div>

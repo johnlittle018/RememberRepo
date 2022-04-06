@@ -63,18 +63,19 @@
                 transform: translateY(-50%);
             }
 
+            /* url({{question.picture}}) */
+
             .image-area {
                 min-height: 100px;
                 border: 2px dashed white;
                 padding: 1rem;
                 position: relative;
-                background: transparent url({{question.picture}}) no-repeat;
+                background: transparent url() no-repeat;
                 background-position: 50% 50%;
-
             }
 
             .image-area::before {
-                content: 'Uploaded image result';
+                content: '';
                 color: white;
                 font-weight: bold;
                 text-transform: uppercase;
@@ -90,6 +91,7 @@
             .image-area img {
                 z-index: 2;
                 position: relative;
+
             }
 
             .btn.btn-secondary.dropdown-toggle {
@@ -135,8 +137,8 @@
                     <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Help Page</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                    <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -188,7 +190,7 @@
                             
                             <div class="col-12" style="text-align: center;">
                                 <p class="font-italic text-white text-center">The picture uploaded will be displayed inside the box below.</p>
-                                <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                                <div class="image-area mt-4"><img id="imageResult" src=" {{question.picture}}" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
                                 </div>
                             </div>
                         </div>

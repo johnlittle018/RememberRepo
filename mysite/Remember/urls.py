@@ -29,6 +29,9 @@ urlpatterns = [
 
     path('helpPage/', views.helpPage, name='helpPage'),
 
+    path('changePassword/', views.changePassword, name='changePassword'),
+
+
    
 
 
