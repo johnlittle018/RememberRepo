@@ -603,20 +603,42 @@ def takeQuestionnaire(request):
 ## this is called to load a question during the quize
 def takeQuestion(request):
 
+    print("Running Take Question")
     ## pulling values from the session
     myQuestionsIDs = request.session['activeQuestions']
     myQuestionIndex = request.session['activeQuestionIndex'] 
+
+    print(myQuestionIndex)
+
+    if 0 == myQuestionIndex:
+        currentQuestion = Question.objects.get(pk = myQuestionsIDs[myQuestionIndex])
+        return render(request, 'Remember/patientEx/takeQuestionnaire.html', {'question' : currentQuestion})
 
     ## if we have answered all questions, mark the quiz as order 2 for compleation, redirect to review results
     if myQuestionIndex == len(myQuestionsIDs):
         myQuiz = Quiz.objects.get(pk = request.session['activeQuiz'])
         myQuiz.order = 2
         myQuiz.save()
-        return HttpResponseRedirect(reverse('Remember:reviewResults'))
+        # return HttpResponseRedirect(reverse('Remember:reviewResults'))
+        return render(request, 'Remember/patientEx/takeQuestionnaire.html', {'finished' : "true"})
     else:
         # load the next question
-        currentQuestion = Question.objects.get(pk = myQuestionsIDs[myQuestionIndex])
-        return render(request, 'Remember/patientEx/takeQuestionnaire.html', {'question' : currentQuestion})
+        # return render(request, 'Remember/patientEx/takeQuestionnaire.html', {'question' : currentQuestion})
+        return render(request, 'Remember/patientEx/takeQuestionnaire.html', {'finished' : "false"})
+
+# This gives the patient some time to view the last question, they can then hit finish questionnaire to be done
+
+def nextQuestion(request):
+    print("Next Question Working")
+    myQuestionsIDs = request.session['activeQuestions']
+    myQuestionIndex = request.session['activeQuestionIndex']
+
+    currentQuestion = Question.objects.get(pk = myQuestionsIDs[myQuestionIndex])
+    return render(request, 'Remember/patientEx/takeQuestionnaire.html', {'question' : currentQuestion})
+
+def finishQuestionnaire(request):
+     return HttpResponseRedirect(reverse('Remember:reviewResults'))
+
 
 ## called to answer a quesiton  
 def answerQusetion(request):
@@ -633,12 +655,13 @@ def answerQusetion(request):
     if givenAnswer == null or givenAnswer < 1 or givenAnswer > 4 :
         return takeQuestion(request)
     
-    ## save the anser given and the time it was completed in the database
+    ## save the answer given and the time it was completed in the database
     currentQuestion.lastSubAnswer = givenAnswer
     currentQuestion.timeEnded = datetime.datetime.now()
     currentQuestion.save()
     
     # increasing the question index
+    print("INCREMENTING!")
     myQuestionIndex = myQuestionIndex + 1; 
     request.session['activeQuestionIndex'] = myQuestionIndex
 

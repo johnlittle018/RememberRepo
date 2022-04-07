@@ -1,143 +1,31 @@
-All Bootrap is, is a set of libraries or frameworks that make our site look good. Once the environment for it is set up, you can pretty much ignore that it's there.
-
-Here is a bunch of examples of html features being styled by bootstrap
-(I shrink this example file in this document by using the arrows on the left to make these notes file readable)
-
-<!doctype html>
-<html lang="en">
-    <head>
-        <title>editQuestion Page</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <style>
-            .bs-example{
-                margin: 20px;        
-            }
-        </style>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <a href="#">Simpson College</a>
-                <ul>
-                    <li>
-                        Home
-                    </li>
-                    <li>
-                        <a href="index.html">Index.html</a>
-                    </li>
-                    <li>
-                        <a href="location.html">Location</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <h1>Lorem Ipsum</h1>
-        <p>
-            <em>
-               "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-            </em>
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur blandit odio quis magna pharetra finibus.
-            Etiam iaculis pellentesque lectus, sed suscipit enim scelerisque in. Cras volutpat ut mi id suscipit.
-            Nunc quis turpis lectus. Ut rutrum tempus enim quis dictum.
-            Duis consequat ex orci, non maximus dui vestibulum non.
-            In sed rutrum nulla. Curabitur auctor ultrices massa, vel maximus enim imperdiet sed.
-            Sed libero augue, vehicula eu finibus vitae, interdum nec ante.
-            Mauris vel porttitor felis.
-            Suspendisse blandit erat vel neque volutpat, sed convallis est volutpat.
-        </p>
-        <p>
-            Quisque felis mi, ornare molestie mauris ut, ullamcorper varius ex.
-            Etiam facilisis lorem vitae quam tristique sagittis.
-            Morbi finibus mauris eget elit pellentesque, non porta tortor placerat.
-            Cras vel sodales tortor, fermentum fringilla elit.
-            Proin ante ligula, posuere vitae sem sit amet, tincidunt dapibus quam.
-            Pellentesque placerat augue ut aliquet vehicula. Cras et mauris id mauris pretium varius ac nec augue.
-            Etiam rutrum eros quis hendrerit ultricies. Pellentesque a tellus id neque auctor eleifend vehicula non odio.
-            Sed varius, justo sit amet rutrum blandit, justo erat tincidunt justo, eget mollis justo felis vitae enim.
-        </p>
-        <h2>Tables</h2>
-        <table>
-            <tr>
-                <thead>
-                    <tr>
-                        <th>First</th>
-                        <th>Last</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Sam</td>
-                        <td>Simpson</td>
-                        <td>sam.simpson@simpson.edu</td>
-                    </tr>
-                    <tr>
-                        <td>Fred</td>
-                        <td>Flinstone</td>
-                        <td>fred.flinstone@simpson.edu</td>
-                    </tr>
-                </tbody>
-            </tr>
-        </table>
-
-        <div class="bs-example">
-            <form>
-                <!-- Multiple Choice -->
-                <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" name="customRadio" id="customRadio1">
-                    <label class="custom-control-label" for="customRadio1">Custom radio</label>
-                </div>
-                <div class="custom-control custom-radio mt-2">
-                    <input type="radio" class="custom-control-input" name="customRadio" id="customRadio2" checked>
-                    <label class="custom-control-label" for="customRadio2">Another custom radio</label>
-                </div>
-
-                <!-- Browse Files Button -->
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
-                </div>
+    DJANGO GOES THROUGH COMMENTS
+    
+    <!--
+        <div class="d-flex justify-content-start topLevelProgressBar" id="displayProgressBar">
+            <form action="{% url 'Remember:nextQuestion' %}" method="post">
+            {% csrf_token %}
+                <button type="button" value = "nextQuestion" class="btn btn-success btn-lg customProgressBtn" id = "progressBtn" disabled>
+                    <div class="progress customProgress">
+                        <div class="progress-bar progress-bar-striped bg-success progress-bar-animated customProgressMeter" id="progressMeter" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <p class="strokeme">Next Question</p>
+                        </div>
+                    </div>
+                </button>
             </form>
         </div>
+    -->
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </body>
-</html>
-
-Used this to remove background off images
-https://www.remove.bg/upload
-
-GUIs Worked On:                 In order by Jira
-1. Questionnaire Page           takeQuestionnaire
-2. Admin Pick Patient           adminPickPatient
-3. Pick Patient                 pickPatient
-4. Make a Question Page         makeQuestion
-5. Edit Question Page           editQuestion
-6. Invite Family and Friends    inviteFamily
-7. Invite Admin                 inviteAdmin
-8. Edit Questionnaire           editQuestionnaire
-
-https://uxwing.com/ gives free website icons with no attirbution needed
-
-Universal blue rgb(13,110,253) (primary btn)
-Universal grey is (225, 225, 225)
-Universal green/correct answer rgb(59, 153, 109);
-Universal dark green rgb(25,135,84)
-Universtal red/wrong answer rgb(220, 53, 69);
-
-HUGE PROBLEM, AGAIN:
-For the new navbar, if the navbar fades away and you change your screen size so that you can fit all the content and the
-scrollbar goes away then you can't access the navbar at all until you change your screen size so that the scrollbar
-comes back. You can refresh and it comes back so it's not that bad but still...
+        <!--
+        <div class="d-flex justify-content-start topLevelProgressBar" id="displayProgressBar">
+            <form action="{% url 'Remember:finishQuestionnaire' %}" method="post">
+            {% csrf_token %}
+                <button type="button" value = "finishQuestionnaire" class="btn btn-success btn-lg customProgressBtn" id = "progressBtn" disabled>
+                    <div class="progress customProgress">
+                        <div class="progress-bar progress-bar-striped bg-success progress-bar-animated customProgressMeter" id="progressMeter" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <p class="strokeme">Finish Questionnaire</p>
+                        </div>
+                    </div>
+                </button>
+            </form>
+        </div>
+        -->

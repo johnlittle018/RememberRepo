@@ -211,7 +211,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
             {% csrf_token %}
             <input type="hidden" name="toggle" value="2">
             <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
-                <button type="submit" value="answerQusetion" class="btn btn-primary btn-lg customBtn" id="QuestionA"><h3>{{question.B}}</h3></button>
+                <button type="submit" value="answerQusetion" class="btn btn-primary btn-lg customBtn" id="QuestionB"><h3>{{question.B}}</h3></button>
             </div>
             
             </form>
@@ -222,7 +222,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
             {% csrf_token %}
             <input type="hidden" name="toggle" value="3">
             <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
-                <button type="submit" value="answerQusetion" class="btn btn-primary btn-lg customBtn" id="QuestionA"><h3>{{question.C}}</h3></button>
+                <button type="submit" value="answerQusetion" class="btn btn-primary btn-lg customBtn" id="QuestionC"><h3>{{question.C}}</h3></button>
             </div>
             
             </form>
@@ -233,7 +233,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
             {% csrf_token %}
             <input type="hidden" name="toggle" value="4">
             <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
-                <button type="submit" value="answerQusetion" class="btn btn-primary btn-lg customBtn" id="QuestionA"><h3>{{question.D}}</h3></button>
+                <button type="submit" value="answerQusetion" class="btn btn-primary btn-lg customBtn" id="QuestionD"><h3>{{question.D}}</h3></button>
             </div>
             
             </form>
@@ -241,18 +241,24 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 
 
 
-
         <div class="d-flex justify-content-start topLevelProgressBar" id="displayProgressBar">
-            <button type="button" class="btn btn-success btn-lg customProgressBtn" id = "progressBtn" disabled>
-                <div class="progress customProgress">
-                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated customProgressMeter" id="progressMeter" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                        <p class="strokeme">Next Question</p>
+            <form action="{% url 'Remember:nextQuestion' %}" method="post">
+            {% csrf_token %}
+                <button type="submit" value = "nextQuestion" class="btn btn-success btn-lg customProgressBtn" id = "progressBtn" disabled>
+                    <div class="progress customProgress">
+                        <div class="progress-bar progress-bar-striped bg-success progress-bar-animated customProgressMeter" id="progressMeter" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <p class="strokeme">Next Question</p>
+                        </div>
                     </div>
-                </div>
-            </button>
+                </button>
+            </form>
         </div>
 
-        
+
+
+
+        <input type="hidden" name="name" id="correctAnswerId" value="{{question.answer}}"></div>
+        <input type="hidden" name="name" id="finishedQuestionnaire" value="{{finished}}"></div>
         <!-- Optional JavaScript -->
 
         <script>
@@ -283,7 +289,129 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                  // if
  
              }); 
-            
+             document.getElementById("progressBtn").addEventListener("click", nextQuestion);
+ 
+             /*Needs actual correct answer obvi*/
+             var correctAnswer = document.getElementById("correctAnswerId").value;
+             var finished = document.getElementById("finishedQuestionnaire").value;
+             console.log("Finished?: " + finished)
+             console.log("Correct Answer: " + correctAnswer)
+
+             document.getElementById("QuestionA").addEventListener("click", selectedA);
+             function selectedA(){
+                 /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
+                 if(1 == correctAnswer){
+                     disabledQuestion = document.getElementById("QuestionA");
+                     disabledQuestion.disabled = true;
+                     disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
+                     disabledQuestion.style.borderColor = 'rgb(25,135,84)';
+                     disabledQuestion.style.opacity= 1;
+                     selectedB();
+                     selectedC();
+                     selectedD();
+                     runProgressBar();
+                 }
+                 else{
+                     disabledQuestion = document.getElementById("QuestionA");
+                     disabledQuestion.disabled = true;
+                 }
+             }
+ 
+             document.getElementById("QuestionB").addEventListener("click", selectedB);
+             function selectedB(){
+                 /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
+                 if(2 == correctAnswer){
+                     disabledQuestion = document.getElementById("QuestionB");
+                     disabledQuestion.disabled = true;
+                     disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
+                     disabledQuestion.style.borderColor = 'rgb(25,135,84)';
+                     disabledQuestion.style.opacity= 1;
+                     selectedA();
+                     selectedC();
+                     selectedD();
+                     runProgressBar();
+                 }
+                 else{
+                     disabledQuestion = document.getElementById("QuestionB");
+                     disabledQuestion.disabled = true;
+                 }
+             }
+ 
+             document.getElementById("QuestionC").addEventListener("click", selectedC);
+             function selectedC(){
+                 /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
+                 if(3 == correctAnswer){
+                     disabledQuestion = document.getElementById("QuestionC");
+                     disabledQuestion.disabled = true;
+                     disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
+                     disabledQuestion.style.borderColor = 'rgb(25,135,84)';
+                     disabledQuestion.style.opacity= 1;
+                     selectedA();
+                     selectedB();
+                     selectedD();
+                     runProgressBar();
+                 }
+                 else{
+                     disabledQuestion = document.getElementById("QuestionC");
+                     disabledQuestion.disabled = true;
+                 }
+             }
+ 
+             document.getElementById("QuestionD").addEventListener("click", selectedD);
+             function selectedD(){
+                 /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
+                 if(4 == correctAnswer){
+                     disabledQuestion = document.getElementById("QuestionD");
+                     disabledQuestion.disabled = true;
+                     disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
+                     disabledQuestion.style.borderColor = 'rgb(25,135,84)';
+                     disabledQuestion.style.opacity= 1;
+                     selectedA();
+                     selectedB();
+                     selectedD();
+                     runProgressBar();
+                 }
+                 else{
+                     disabledQuestion = document.getElementById("QuestionD");
+                     disabledQuestion.disabled = true;
+                 }
+             }
+ 
+             function runProgressBar(){
+                 bar = document.getElementById("displayProgressBar");
+                 barBtn = document.getElementById("progressBtn");
+                 bar.style.display = "inline-flex";
+                 bar.style.opacity = 1;
+                 barBtn.disabled = false;
+                 bar.scrollIntoView()
+                 var startingNumber = 0;
+                 progressLoop(startingNumber);
+             }
+ 
+             var width = 0;
+             progressWidth = document.getElementById("progressMeter").style.width
+             console.log(progressWidth)
+ 
+             function progressLoop(){
+                 if(width != 100){
+                     width = width + 1;
+                     let progressWidthString = width.toString() + '%';
+                     progressWidth = progressWidthString;
+                     $('#progressMeter').css({'width': progressWidth, 'height': 'auto'});
+                     setTimeout(progressLoop, 100);
+                 }
+                 else{
+                     nextQuestion();
+                     console.log("Else Statement")
+                 }
+             }
+ 
+             function nextQuestion(){
+                 
+                 /*Actual code to next question*/
+             }
+ 
+ 
  
          </script>
 

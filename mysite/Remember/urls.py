@@ -63,6 +63,10 @@ urlpatterns = [
     path('takeQuestion/', views.takeQuestion, name='takeQuestion'),
     path('answerQusetion/', views.answerQusetion, name='answerQusetion'),
 
+    path('nextQuestion/', views.nextQuestion, name='nextQuestion'),
+    path('finishQuestionnaire/', views.finishQuestionnaire, name='finishQuestionnaire'),
+
+
     path('noQuestions/', views.noQuestions, name='noQuestions'),
 
     path('noQuiz/', views.noQuiz, name='noQuiz'),
