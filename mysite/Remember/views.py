@@ -104,6 +104,11 @@ def createPatient(request):
 
     return render(request, 'Remember/adminEx/createPatient.html')
 
+def createAdmin(request):
+
+    
+    return render(request, 'Remember/createAdmin.html')
+
 ## loads the help page
 def helpPage(request):
 
@@ -687,7 +692,7 @@ def inviteAdmin(request):
 
 
 
-## called when submitting a new admin acount
+## called when submitting a new admin account
 def processNewAdmin(request):
 
     # pulling relation from session
@@ -758,6 +763,37 @@ def processNewAdmin(request):
     return render(request, 'Remember/adminEx/inviteAdmin.html', 
             { 'coi_message': "You have successfully invited an Admin",}
         )
+
+
+def managePatientAccount(request):
+
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
+
+    return render(request, 'Remember/adminEx/managePatientAccount.html', {'userRelation' : relation})
+
+def managePatientPic(request):
+
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
+
+    return render(request, 'Remember/adminEx/managePatientPic.html', {'userRelation' : relation})
+
+def managePatientEmail(request):
+
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
+
+    return render(request, 'Remember/adminEx/managePatientEmail.html', {'userRelation' : relation})
+
+def managePatientPassword(request):
+
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
+
+    return render(request, 'Remember/adminEx/managePatientPassword.html', {'userRelation' : relation})
+
+def managePatientName(request):
+
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
+
+    return render(request, 'Remember/adminEx/managePatientName.html', {'userRelation' : relation})
 
 
 # loads noUser Page

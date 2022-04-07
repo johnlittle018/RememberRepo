@@ -154,7 +154,7 @@
                         
                         {% csrf_token %}
 
-                        <h2 class="text-center">Log in</h2>       
+                        <h2 class="text-center">Create Admin <br> Account</h2>       
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <input type="text" name="Email" class="form-control" placeholder="Your Email" >
@@ -162,14 +162,16 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" name="password" class="form-control" placeholder="Your Password" >
-                            
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPasswordConfirm1">Password</label>
+                            <input type="password" name="passwordConfirm" class="form-control" placeholder="Confirm Your Password" >
                         </div>
                         
                         
                         
-                        
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block" value="login" >Log in</button>
+                            <button type="submit" class="btn btn-primary btn-block" value="login" >Create</button>
                         </div>
                     </form>
 
@@ -180,9 +182,7 @@
                     </div>
                     {% endif %}   
                     
-                    <a href="/remember/changePassword" style="color:blue">Forgot Password?</a>
                     <br>
-                    <a href="/remember/createAdmin" style="color:blue">Create Admin Account?</a>
                 </div>
             </div>
         </div>
