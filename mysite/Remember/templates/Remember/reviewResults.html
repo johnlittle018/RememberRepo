@@ -86,19 +86,22 @@
       .individualCorrectAnswer{
           background-color: rgb(59, 153, 109);
           border: 1px solid black;
-          width: 10%;
-          height: auto;
       }
 
       .individualWrongAnswer{
           background-color: rgb(220, 53, 69);
           border: 1px solid black;
-          width: 10%;
-          height: auto;
+      }
+
+      .answerBlock{
+        height: auto;
       }
 
       .outerBorder{
+          font-size: larger;
+          font-weight: bold;
           border: 2px solid black;
+          background-color: rgb(225,225,225);
       }
 
       .d-flex .justify-content-start{
@@ -177,16 +180,17 @@
                                         </p>
                                     </div>
 
-                                    <div class="outerBorder">
+                                    <div class="outerBorder" value = "" id="quizID{{result.quiz.id}}">
                                         <div class="d-flex justify-content-start">
 
-                                        {% for q in result.quiz.question %}
-                                            <span class="individualCorrectAnswer" id={{fds}}>1</span> 
+                                        {% for q in result.myQuestions %}
+                                            <span class="answerBlock individualCorrectAnswer" value={{result.length}} id={{q.id}} style="width:100%"></span> 
+                                            <div class="wrongOrRight" style="display:none" value={{q.answer}}>{{q.lastSubAnswer}}</div>
 
                                         
                                         {% endfor %}
-                                
                                         </div>
+                                        
                                         
                                     </div> 
 
@@ -252,6 +256,65 @@
 
             }); 
 
+            var myOuterBorder = document.getElementsByClassName("outerBorder")
+            var myAnswerBlock = document.getElementsByClassName("answerBlock")
+            var myWrongOrRight = document.getElementsByClassName("wrongOrRight")
+
+            console.log("Boxes Count: " + myOuterBorder.length)
+            console.log("Answer Count: " + myAnswerBlock.length)
+
+
+            //  for(j = 0; j <= myAnswerBlock.length-1; j++){
+            //     var questionsInQuiz = myAnswerBlock[j].getAttribute('value')
+
+            //      for(i = 0; i <= questionsInQuiz; i++){
+            //          myAnswerBlock[j].innerHTML = i + 1
+            //          lastSubAnswer = myAnswerBlock[j].innerHTML
+            //          correctAnswer = myAnswerBlock[j].getAttribute('value')
+            //          console.log("lastSub " + lastSubAnswer)
+            //          console.log("crr " + correctAnswer)
+            //          console.log("BREAK")
+
+
+            //         if(lastSubAnswer != correctAnswer){
+            //             myAnswerBlock[j].classList.remove('individualCorrectAnswer');
+            //             myAnswerBlock[j].classList.add('individualWrongAnswer');
+
+            //         }
+
+            //      }
+            //     myAnswerBlock[j].setAttribute('value',1);
+            //  }
+
+                var counter = 0
+             for(j = 0; j <= myAnswerBlock.length-1; j++){
+                var questionsInQuiz = myAnswerBlock[j].getAttribute('value')
+
+                lastSubAnswer = myWrongOrRight[j].innerHTML
+                correctAnswer = myWrongOrRight[j].getAttribute('value')
+
+                counter = counter + 1
+                myAnswerBlock[j].innerHTML = counter
+
+                if(counter == questionsInQuiz){
+                    counter = 0
+                }
+
+                // if(questionsInQuiz < 10){
+                //     percentageScreen = (1/questionsInQuiz)*100
+                //     myAnswerBlock[j].style.width = percentageScreen
+
+                // }
+                
+
+                if(lastSubAnswer != correctAnswer){
+                    myAnswerBlock[j].classList.remove('individualCorrectAnswer');
+                    myAnswerBlock[j].classList.add('individualWrongAnswer');
+                    
+
+                }
+
+             }
 
         </script>
 

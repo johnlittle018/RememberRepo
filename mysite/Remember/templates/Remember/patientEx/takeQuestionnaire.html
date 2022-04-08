@@ -386,7 +386,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                       disabledQuestion.style.opacity= 1;
                       selectedA();
                       selectedB();
-                      selectedD();
+                      selectedC();
                       runProgressBar();
                   }
                   else{
@@ -423,23 +423,11 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                  else{
                     console.log("Next Question")
                     barBtn = document.getElementById("progressBtn");
-                    setTimeout(() => {  barBtn.click(); }, 2000);
+                    setTimeout(() => {  barBtn.click(); }, 1000);
                     
                  }
              }
 
-              
-            function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-
-            async function demo() {
-                for (let i = 0; i < 5; i++) {
-                    console.log(`Waiting ${i} seconds...`);
-                    await sleep(i * 1000);
-                }
-                console.log('Done');
-            }
 
 
             
