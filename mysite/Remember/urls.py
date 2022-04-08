@@ -61,10 +61,8 @@ urlpatterns = [
     path('scrapbook/', views.scrapbook, name='scrapbook'), #changed Book to book
     path('takeQuestionnaire/', views.takeQuestionnaire, name='takeQuestionnaire'),
     path('takeQuestion/', views.takeQuestion, name='takeQuestion'),
-    path('answerQusetion/', views.answerQusetion, name='answerQusetion'),
+    path('answerQuestion/', views.answerQuestion, name='answerQuestion'),
 
-    path('nextQuestion/', views.nextQuestion, name='nextQuestion'),
-    path('finishQuestionnaire/', views.finishQuestionnaire, name='finishQuestionnaire'),
 
 
     path('noQuestions/', views.noQuestions, name='noQuestions'),
