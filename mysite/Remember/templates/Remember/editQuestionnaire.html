@@ -43,6 +43,14 @@
                 background-size: cover;
                 border: none;
             }
+
+            .upButton{
+                width:51px;height:51px;
+                background: rgb(13,110,253) url(/../../static/remember/images/upButtonCustom.png) no-repeat;
+                background-size: cover;
+                opacity: 1;
+                border-radius: 50%;
+            }
             
             .logo{
                 width:83.1px; height: 72px; 
@@ -151,6 +159,13 @@
                 min-height: 40px;
             }
 
+            #btn-back-to-top {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                display: none;
+            }
+
             
 
 
@@ -167,8 +182,8 @@
 
         
         <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
-            <a class="navbar-brand" href="#">
-                <button class="backButton" onclick="history.back()"></button>
+            <a class="navbar-brand" href="/remember/adminMenu">
+                <button class="backButton"></button>
             </a>
             
             <a href="">
@@ -179,8 +194,8 @@
                     <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Help Page</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                    <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -188,7 +203,7 @@
         <!--For the length, the order goes top, right, bottom, left-->
         <div class="d-flex justify-content-between" style="padding: 0vw 10vw 0vw 0vw">
             <h1>
-                {{userRelation.patient.firstName}} Questionnaire
+                Questionnaire - {{userRelation.patient.firstName}} 
             </h1>
 
 
@@ -198,7 +213,7 @@
                     <div> 
                         {% csrf_token %}
                         <button type="submit" value="makeQuestion" class="btn btn-primary btn-lg">
-                            Make Question
+                            Create Question
                             
                             
                                             
@@ -273,7 +288,29 @@
                         <div class="d-flex justify-content-start">
                             <p class="boxContent">
                                 <strong>Correct Answer:</strong>
-                                {{question.answer}}
+
+                                {% if question.answer == 1 %}
+                                A
+                                {% endif %}
+
+                                {% if question.answer == 2 %}
+                                B
+                                {% endif %}
+
+                                {% if question.answer == 3 %}
+                                C
+                                {% endif %}
+
+                                {% if question.answer == 4 %}
+                                D
+                                {% endif %}
+                            </p>
+                        </div>
+
+                        <div class="d-flex justify-content-start">
+                            <p class="boxContent">
+                                <strong>Author:</strong>
+                                {{question.author.firstName}} {{question.author.lastName}}
                             </p>
                         </div>
                     </div>
@@ -352,28 +389,13 @@
         {% endif %}
 
         </br>
-
-        <div class="d-flex justify-content-around" style="padding: 0vw 5vw 0vw 5vw">
-            <div class="justify-content-end align-self-center">
-                <form action="{% url 'Remember:makeQuestion' %}" method="post">   
-                    
-                    <div> 
-                        {% csrf_token %}
-                        <button type="submit" value="makeQuestion" class="btn btn-primary btn-lg">
-                            Make Question
-                            <input type="hidden" name="relation" value="{{userRelation.id}}">
-                            
-                                            
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
         
+        <button type="button" class="btn btn-primary btn-lg upButton" id="btn-back-to-top"></button>
+
 
          <!-- Optional JavaScript -->
 
-         <script>
+        <script>
             document.addEventListener("DOMContentLoaded", function(){
 
                 el_autohide = document.querySelector('.autohide');
@@ -409,6 +431,32 @@
             function getQuestion(){
                 console.log("Get String = " + string);
                 return string;
+            }
+
+            //Get the button
+            let mybutton = document.getElementById("btn-back-to-top");
+
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (
+                    document.body.scrollBottom > 20 ||
+                    document.documentElement.scrollBottom > 20
+                ) {
+                    mybutton.style.display = "block";
+                } else {
+                    mybutton.style.display = "none";
+                }
+            }
+            // When the user clicks on the button, scroll to the top of the document
+            mybutton.addEventListener("click", backToTop);
+
+            function backToTop() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
             }
 
         </script>

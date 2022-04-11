@@ -145,7 +145,7 @@
             
         </header>
         <!--  This element needs to be styled, and the screen needs to not fade in the second time-->
-        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+       
         <!-- All your html stuff here      required="required"  required="required"               -->
         <div class="mx-auto">
             <div class="d-flex justify-content-center">
@@ -162,18 +162,32 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" name="password" class="form-control" placeholder="Your Password" >
+                            
                         </div>
+                        
+                        
+                        
+                        
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block" value="login" >Log in</button>
                         </div>
                     </form>
-                    <a href="" style="color:blue">Forgot Password?</a>
+
+
+                    {% if error_message %}
+                    <div style="width:50%">
+                    <p style="color:red"><strong>You have entered the wrong username or password, please try again</strong></p>
+                    </div>
+                    {% endif %}   
+                    
+                    <a href="/remember/changePassword" style="color:blue">Forgot Password?</a>
                     <br>
-                    <a href="" style="color:blue">Create Admin Account?</a>
+                    <a href="/remember/createAdmin" style="color:blue">Create Admin Account?</a>
                 </div>
             </div>
         </div>
 
+             
 
 
         

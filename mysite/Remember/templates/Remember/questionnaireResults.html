@@ -65,14 +65,18 @@
                 padding-left: 12%;
             }
 
+
             .boxContent{
+                font-size: 20px;
                 color:black;
                 padding:0px;
                 margin:0px;
             }
 
             .selectedAnswer{
+                font-size: 20px;
                 width: 130px;
+                font-weight: bold;
                 text-align: right;
                 color:black;
                 padding-right:10px;
@@ -81,7 +85,7 @@
 
             .fourOptionsDefault{
                 background-color: aliceblue;
-                border: none;
+                border: solid 5px aliceblue; 
             }
 
             .fourOptionsWrong{
@@ -143,6 +147,14 @@
                 height: 10vw;
             }
 
+            .line{
+                border: 0;
+                border-bottom: 5px dashed black;
+                opacity: .3;
+                padding:0;
+                margin:0;
+            }
+
 
             
 
@@ -160,13 +172,12 @@
 
         
         <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
-            <a class="navbar-brand" href="#">
-                <button class="backButton" onclick="history.back()"></button>
+            <a class="navbar-brand" href="/remember/reviewResults">
+                <button class="backButton"></button>
             </a>
             
-            <a href="">
-                <div class="logo"></div>
-            </a>
+            <div class="logo"></div>
+            
             <div class="dropdown" style="padding-right:1vw;">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
@@ -181,17 +192,64 @@
         <!--For the length, the order goes top, right, bottom, left-->
         <div class="d-flex justify-content-between" style="padding: 0vw 10vw 0vw 0vw">
             <h1>
-                Questionnaire Results {{result.completionTime}}
+                Questionnaire Results - {{patient.firstName}}
                 <br>
-                Score: {{result.score}}%
-                <br>
-                Correct: {{result.correct}} 
-                <br>
-                Wrong: {{result.wrong}}
+                
             </h1>
 
 
         </div>
+
+        <div class="container">
+            <div class="row flex-nowrap">
+                <div class="col text-center">
+                    <h2 style="padding:0; margin:0;">
+                        Summary
+                    </h2>
+                </div>
+            </div>
+            <hr style="height:5px; border:none; color:black; opacity: 1;">
+            <div class="row flex-nowrap">
+                <div class="col-7 justify-content-left align-self-center">
+                    <h2>
+                        Score
+                    </h2>
+                </div>
+                <div class="col-5 justify-content-center text-center">
+                    <h2>
+                        {{result.score}}%
+                    </h2>
+                </div>
+            </div>
+            <hr class="line">
+            <div class="row flex-nowrap">
+                <div class="col-7 justify-content-left align-self-center">
+                    <h2>
+                        Date Completed 
+                    </h2>
+                </div>
+                <div class="col-5 justify-content-left text-center">
+                    <h2>
+                        {{result.completionTime}}
+                    </h2>
+                </div>
+            </div>
+            <hr class="line">
+            <div class="row flex-nowrap">
+                <div class="col-7 justify-content-left align-self-center">
+                    <h2>
+                        Correct / Wrong
+                    </h2>
+                </div>
+                <div class="col-5 justify-content-left text-center">
+                    <h2>
+                        {{result.correct}}/{{result.wrong}}
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <br>
 
         <!-- % for question in questions % -->   
         <!-- Had to remove {} from above because Django reads through comments lol -->             
@@ -217,8 +275,8 @@
                         </h3>
                     </div>
                     <div class="d-flex justify-content-start fourOptionsDefault" id="{{question.id}}answer1">
-                        <p class="selectedAnswer" id="{{question.id}}text1">
-                            
+                        <p class="selectedAnswer align-self-center" id="{{question.id}}text1">
+
                         </p>
                         <p class="boxContent">
                             <strong>A:</strong> &nbsp;
@@ -226,7 +284,7 @@
                         </p>
                     </div>
                     <div class="d-flex justify-content-start fourOptionsDefault" id="{{question.id}}answer2">
-                        <p class="selectedAnswer" id="{{question.id}}text2">
+                        <p class="selectedAnswer align-self-center" id="{{question.id}}text2">
                              
                         </p>
                         <p class="boxContent">
@@ -235,7 +293,7 @@
                         </p>
                     </div>
                     <div class="d-flex justify-content-start fourOptionsDefault" id="{{question.id}}answer3">
-                        <p class="selectedAnswer" id="{{question.id}}text3">
+                        <p class="selectedAnswer align-self-center" id="{{question.id}}text3">
                             
                         </p>
                         <p class="boxContent">
@@ -244,7 +302,7 @@
                         </p>
                     </div>
                     <div class="d-flex justify-content-start fourOptionsDefault" id="{{question.id}}answer4">
-                        <p class="selectedAnswer" id="{{question.id}}text4">
+                        <p class="selectedAnswer align-self-center" id="{{question.id}}text4">
                             
                         </p>
                         <p class="boxContent">
@@ -356,7 +414,7 @@
 
 
                     correctAnswer.classList.add('fourOptionsCorrect');
-                    correctText.innerText = "Correct: ";
+                    correctText.innerText = "Correct";
                 }
                 else{
                     console.log("Started Else")
@@ -372,7 +430,7 @@
                     var correctText = window[textNum];
 
                     correctAnswer.classList.add('fourOptionsGivenCorrect');
-                    correctText.innerText = "Correct Answer: ";
+                    correctText.innerText = "Correct";
 
                     answerNum = questionId + "answer";
                     textNum = questionId + "text";
@@ -386,7 +444,7 @@
                     var correctText = window[textNum];
 
                     correctAnswer.classList.add('fourOptionsWrong');
-                    correctText.innerText = "Selected Answer: ";
+                    correctText.innerText = "Selected";
 
                 }
 

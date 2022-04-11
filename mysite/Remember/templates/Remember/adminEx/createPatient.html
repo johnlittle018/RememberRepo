@@ -153,8 +153,8 @@
 
         
         <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
-            <a class="navbar-brand" href="#" >
-                <button class="backButton" onclick="history.back()"></button>
+            <a class="navbar-brand" href="/remember/pickPatient" >
+                <button class="backButton"></button>
             </a>
             <a href="">
                 <div class="logo"></div>
@@ -164,7 +164,8 @@
                     <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                  <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -190,14 +191,14 @@
                     <div class="row justify-content-center">
                         <div class="col-12" style="text-align: center;">
                             <p class="font-italic text-center">The profile picture uploaded will be displayed inside the box below.</p>
-                            <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                            <div class="mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block image-area">
                             </div>
                         </div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-6 align" style="text-align: center;">
                             <div class="p-2 bd-highlight">                    <!-- Upload image input-->
-                                <input id="upload" type="file" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
+                                <input id="upload" type="file" name="uploadedPic" required="required" onchange="readURL(this);" class="form-control border-0">
                                 <label for="upload" class="btn btn-light m-0 rounded-pill px-4" style="border: 2px solid black;"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
                             </div>
                         </div>
@@ -210,32 +211,38 @@
                     <div class="input-group-prepend">
                     <span class="input-group-text " id="basic-addon1" style="width: 125px;">Email Address</span>
                     </div>
-                    <input type="text" name="email" class="form-control" placeholder="Email Address">
+                    <input type="email" name="email" required="required" class="form-control" placeholder="Email Address">
                 </div>
 
                 <div class="input-group mb-3 addHorizontalPadding" id="passwordDisplay">
                     <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1" style="width: 125px;">Password</span>
                     </div>
-                    <input type="text" name="password" class="form-control" placeholder="Password" id="inputPasswordId">
+                    <input type="text" name="password" required="required" class="form-control" placeholder="Password" id="inputPasswordId">
                 </div>
                 
                 <div class="input-group mb-3 addHorizontalPadding" id="fNameDisplay">
                     <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1" style="width: 125px;">First Name</span>
                     </div>
-                    <input type="text" name="firstName" class="form-control" placeholder="First Name"  id="inputFirstNameId">
+                    <input type="text" name="firstName" required="required" class="form-control" placeholder="First Name"  id="inputFirstNameId">
                 </div>
 
                 <div class="input-group mb-3 addHorizontalPadding" id="lNameDisplay">
                     <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1" style="width: 125px;">Last Name</span>
                     </div>
-                    <input type="text" name="lastName" class="form-control" placeholder="Last Name"   id="inputLastNameId">
+                    <input type="text" name="lastName" required="required" class="form-control" placeholder="Last Name"   id="inputLastNameId">
                 </div>
+
+                {% if error_message %}
+                    <div style="width:50%">
+                    <p style="color:red"><strong>The email you have entered is already registered.</strong></p>
+                    </div>
+                {% endif %}   
                 
                 <div class="addHorizontalPadding">
-                    <button type="submit" value="submitPatient" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
+                    <button type="submit" value="submitPatient" required="required" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
                 </div>
 
 

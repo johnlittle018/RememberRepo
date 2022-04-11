@@ -116,6 +116,13 @@
                 background-position: center;
             }
 
+            .scaleEditAccount{
+                object-fit:contain;
+                background: transparent url(/../../static/remember/images/editMember.png) no-repeat;
+                background-size: contain;
+                background-position: center;
+            }
+
             .scaleAddMembers{
                 object-fit:contain;
                 background: transparent url(/../../static/remember/images/addMember.png) no-repeat;
@@ -140,8 +147,8 @@
         <!-- All your html stuff here -->
 
         <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
-            <a class="navbar-brand" href="#" >
-                <button class="backButton" onclick="history.back()"></button>
+            <a class="navbar-brand" href="/remember/pickPatient">
+                <button class="backButton"></button>
             </a>
             <a href="">
                 <div class="logo"></div>
@@ -161,7 +168,7 @@
         
         <h1> 
             <span>Admin Menu -</span>
-            <span>{{userRelation.patient.name}}</span>
+            <span>{{userRelation.patient.firstName}}</span>
         </h1>
         
 
@@ -216,6 +223,19 @@
                         </div>
                         
                         <h5 class="names">Set Reminder</h5>
+                    </button>
+                </div>
+            </a>
+
+            <a href="/remember/managePatientAccount">
+                <div class="p-2 bd-highlight">
+                    <button class="pictureButton btn-light">
+                        <div class="d-flex justify-content-center scaleEditAccount">
+                            <div class="pictureStyle"></div> <br> 
+                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                        </div>
+                        
+                        <h5 class="names">{{userRelation.patient.firstName}}'s Account</h5>
                     </button>
                 </div>
             </a>

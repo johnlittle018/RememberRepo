@@ -1,5 +1,291 @@
-Sorry, the user you are looking for does not exsist
+{% load static %} 
+<link rel="stylesheet" type="text/css" href="{% static 'remember/style.css' %}"> 
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <title></title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <style>
+            
+            .navbar{
+                border-bottom: 3px solid black;
+                background: rgba(255, 255, 255, 0.9);
+            }
+            
+            .autohide{
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1030;
+            }
+            .scrolled-down{
+                transform:translateY(-100%); transition: all 0.3s ease-in-out;
+            }
+
+            .scrolled-up{
+                transform:translateY(0); transition: all 0.3s ease-in-out;
+            }
+
+            .backButton{
+                width:51px;height:51px;
+                background: transparent url(/../../static/remember/images/backButton.png) no-repeat;
+                background-color: transparent;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
+            }
+            
+            .logo{
+                width:83.1px; height: 72px; 
+                /* Original size width: 374; height: 324 */
+                background: transparent url(/../../static/remember/images/RememberLogoSized.png) no-repeat;
+                mix-blend-mode: multiply;
+                background-size: cover;
+                border: none;
+                
+            }
+
+            .btn.btn-secondary.dropdown-toggle {
+                background-color: rgb(225,225,225);  
+            }
+
+            h1{
+                color: white;
+                font-family: 'Sans serif', Helvetica, sans-serif;
+                font-size: calc(3vw + 2vh);
+                padding:2%;
+                padding-left: 12%;
+            }
+
+            h2{
+                color: black;
+                padding: 2%;
+                font-weight: bold;
+            }
+
+            p{
+                font-size: larger;
+                color: black;
+                padding: 2%;
+                font-weight: bold;
+            }
+
+            .container{
+                background-color: aliceblue;
+                padding: 1%;
+            }
+
+            #upload {
+                opacity: 0;
+            }
+
+            #upload-label {
+                position: absolute;
+                top: 50%;
+                left: 1rem;
+                transform: translateY(-50%);
+            }
+
+            .image-area {
+                min-height: 100px;
+                border: 2px dashed black;
+                padding: 1rem;
+                position: relative;
+                background: transparent url(/../../static/remember/images/image-upload.png) no-repeat;
+                background-size: 65px;
+                background-position: 50% 70%;
+
+            }
+
+            .image-area::before {
+                content: 'Uploaded image result';
+                color: black;
+                font-weight: bold;
+                text-transform: uppercase;
+                position: absolute;
+                top: 15%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 0.8rem;
+                z-index: 1;
+            }
+
+            /*This makes the image appear over the text its replacing*/
+            .image-area img {
+                z-index: 2;
+                position: relative;
+            }
+
+            .changeHeight{
+                height:0px;
+                margin: 0px;
+                padding:0px;
+            }
+            
+            .sliderToggle{
+                width:80%;
+
+            }
+
+            .removePadding{
+                padding:0;
+            }
+
+            .addHorizontalPadding{
+                padding-left: 1vw;
+                padding-right: 1vw;
+            }
+
+            
+
+        </style>
+    </head>
+
+    <body>
+        <header>
+
+            
+        </header>
+
+        <!-- All your html stuff here -->
+
+        
+        <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
+            <a class="navbar-brand" href="#" >
+                <button class="backButton" onclick="history.back()"></button>
+            </a>
+            <a href="">
+                <div class="logo"></div>
+            </a>
+            <div class="dropdown" style="padding-right:1vw;">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/../../static/remember/images/settingsIcon1.png" style="width:42px;height:42px;">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                    <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <br>
+
+        <div class="container removePadding">
+            <!-- Content here -->
+            <div class="d-flex justify-content-center text-center"  style="background-color:rgb(225,225,225);">
+                <h2 id="accountTitle">
+                    User Does Not Exist
+                </h2>
+            </div>
+            <div class="d-flex justify-content-center text-center"  style="background-color:rgb(225,225,225);">
+                <p>
+                    The user you are looking for does not exist
+                </p>
+                
+            </div>
+            <div class="d-flex justify-content-center text-center"  style="background-color:rgb(225,225,225);">
+                <p>
+                    You can return to the previous screen by hitting the back arrow at the top left or refer to our 
+                    help page <a href="/remember/helpPage">here.</a>
+                </P>
+                
+            </div>
+        </div>
 
 
+        
+        <!-- Optional JavaScript -->
 
-"This is also now just a general error page"
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
+
+                el_autohide = document.querySelector('.autohide');
+                // add padding-top to bady (if necessary)
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+                document.body.style.paddingTop = navbar_height + 'px';
+
+                if(el_autohide){
+                var last_scroll_top = 0;
+                window.addEventListener('scroll', function() {
+                        let scroll_top = window.scrollY;
+                    if(scroll_top < last_scroll_top) {
+                            el_autohide.classList.remove('scrolled-down');
+                            el_autohide.classList.add('scrolled-up');
+                        }
+                    else {
+                        el_autohide.classList.remove('scrolled-up');
+                        el_autohide.classList.add('scrolled-down');
+                    }
+                        last_scroll_top = scroll_top;
+                }); 
+                // window.addEventListener
+                }
+                // if
+
+            }); 
+
+            
+            $(document).on('click', '.btn-group button', function (e) {
+                $(this).addClass('on').parent().siblings().find('button').removeClass('on');
+            });
+
+            /*  ==========================================
+                SHOW UPLOADED IMAGE
+            * ========================================== */
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#imageResult')
+                            .attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            
+
+            
+            $(function () {
+                $('#upload').on('change', function () {
+                    readURL(input);
+                });
+            });
+
+            
+
+            /*  ==========================================
+                SHOW UPLOADED IMAGE NAME
+            * ========================================== */
+            
+            var input = document.getElementById( 'upload' );
+            var infoArea = document.getElementById( 'upload-label' );
+
+            input.addEventListener( 'change', showFileName );
+            function showFileName( event ) {
+            var input = event.srcElement;
+            var fileName = input.files[0].name;
+            infoArea.textContent = 'File name: ' + fileName;
+            }
+
+
+        </script>
+
+        
+        
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    </body>
+</html>
