@@ -54,7 +54,11 @@ urlpatterns = [
     path('questionnaireResults/', views.questionnaireResults, name='questionnaireResults'),
     path('viewReminder/', views.viewReminder, name='viewReminder'),
 
-   
+    path('manageMyAdminAccount/', views.manageMyAdminAccount, name='manageMyAdminAccount'),
+    path('manageMyAdminEmail/', views.manageMyAdminEmail, name='manageMyAdminEmail'),
+    path('manageMyAdminPassword/', views.manageMyAdminPassword, name='manageMyAdminPassword'),
+    path('manageMyAdminName/', views.manageMyAdminName, name='manageMyAdminName'),
+
     
     
     ## Stuff for Patient

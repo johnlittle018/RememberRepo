@@ -689,7 +689,21 @@ def inviteAdmin(request):
 
     return render(request, 'Remember/adminEx/inviteAdmin.html')
 
+def manageMyAdminAccount(request):
 
+    return render(request, 'Remember/adminEx/manageMyAdminAccount.html')
+
+def manageMyAdminEmail(request):
+
+    return render(request, 'Remember/adminEx/manageMyAdminEmail.html')
+
+def manageMyAdminPassword(request):
+
+    return render(request, 'Remember/adminEx/manageMyAdminPassword.html')
+
+def manageMyAdminName(request):
+
+    return render(request, 'Remember/adminEx/manageMyAdminName.html')
 
 
 ## called when submitting a new admin account
