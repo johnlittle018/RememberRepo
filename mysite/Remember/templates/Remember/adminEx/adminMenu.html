@@ -69,8 +69,8 @@
 
             .pictureButton{
                 background-color: white;
-                border-width: 4px;
-                border-color: black;
+                border-width: 10px;
+                border-color: rgb(13,110,253);
                 color: black;
                 padding: 1vw 1vw;
                 text-align: left;
@@ -79,6 +79,10 @@
                 font-size: 16px;
                 margin: 0vw .5vw 1vw .5vw;
                 cursor: pointer;
+            }
+
+            .pictureButton:hover{
+                border-color:rgb(8,73,169)
             }
 
             .pictureStyle{
@@ -190,56 +194,48 @@
                 </div>
             </form>
 
-            <a href="/remember/reviewResults">
-                <div class="p-2 bd-highlight" >
-                    <button  class="pictureButton btn-light" >
-                        <div class="d-flex justify-content-center scaleResults">
-                            <div class="pictureStyle"></div> <br> 
-                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                        </div>
-                        <h5 class="names">Review Results</h5>
-                    </button>
-                </div>
-            </a>
+            <div class="p-2 bd-highlight">
+                <button  class="pictureButton btn-light" onclick="window.location.href='/remember/reviewResults';">
+                    <div class="d-flex justify-content-center scaleResults">
+                        <div class="pictureStyle"></div> <br> 
+                        <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                    </div>
+                    <h5 class="names">Review Results</h5>
+                </button>
+            </div>
 
-            <a href="/remember/graphsData">
-                <div class="p-2 bd-highlight">
-                    <button class="pictureButton btn-light">
-                        <div class="d-flex justify-content-center scaleAnalytics">
-                            <div class="pictureStyle"></div> <br> 
-                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                        </div>
-                       
-                        <h5 class="names">View Analytics</h5>
-                    </button>
-                </div>
-            </a>
+            <div class="p-2 bd-highlight">
+                <button class="pictureButton btn-light"  onclick="window.location.href='/remember/graphsData';">
+                    <div class="d-flex justify-content-center scaleAnalytics">
+                        <div class="pictureStyle"></div> <br> 
+                        <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                    </div>
+                    
+                    <h5 class="names">View Analytics</h5>
+                </button>
+            </div>
 
-            <a href="/remember/setReminder">
-                <div class="p-2 bd-highlight">
-                    <button class="pictureButton btn-light">
-                        <div class="d-flex justify-content-center scaleReminder">
-                            <div class="pictureStyle"></div> <br> 
-                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                        </div>
-                        
-                        <h5 class="names">Set Reminder</h5>
-                    </button>
-                </div>
-            </a>
+            <div class="p-2 bd-highlight">
+                <button class="pictureButton btn-light" onclick="window.location.href='/remember/setReminder';">
+                    <div class="d-flex justify-content-center scaleReminder">
+                        <div class="pictureStyle"></div> <br> 
+                        <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                    </div>
+                    
+                    <h5 class="names">Set Reminder</h5>
+                </button>
+            </div>
 
-            <a href="/remember/managePatientAccount">
-                <div class="p-2 bd-highlight">
-                    <button class="pictureButton btn-light">
-                        <div class="d-flex justify-content-center scaleEditAccount">
-                            <div class="pictureStyle"></div> <br> 
-                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                        </div>
-                        
-                        <h5 class="names">{{userRelation.patient.firstName}}'s Account</h5>
-                    </button>
-                </div>
-            </a>
+            <div class="p-2 bd-highlight">
+                <button class="pictureButton btn-light"  onclick="window.location.href='/remember/managePatientAccount';">
+                    <div class="d-flex justify-content-center scaleEditAccount">
+                        <div class="pictureStyle"></div> <br> 
+                        <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                    </div>
+                    
+                    <h5 class="names">{{userRelation.patient.firstName}}'s Account</h5>
+                </button>
+            </div>
 
             <!-- <a href="/remember/inviteFamily">
                 <div class="p-2 bd-highlight">
@@ -253,18 +249,16 @@
                 </div>
             </a> -->
 
-            <a href="/remember/inviteAdmin">
-                <div class="p-2 bd-highlight">
-                    <button class="pictureButton btn-light" >
-                        <div class="d-flex justify-content-center scaleAddMembers">
-                            <div class="pictureStyle"></div> <br> 
-                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                        </div>
-                      
-                        <h5 class="names">Invite Admins</h5>
-                    </button>
-                </div>
-            </a>
+            <div class="p-2 bd-highlight">
+                <button class="pictureButton btn-light" onclick="window.location.href='/remember/inviteAdmin';">
+                    <div class="d-flex justify-content-center scaleAddMembers">
+                        <div class="pictureStyle"></div> <br> 
+                        <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                    </div>
+                    
+                    <h5 class="names">Invite Admins</h5>
+                </button>
+            </div>
         </div>
 
         <script>

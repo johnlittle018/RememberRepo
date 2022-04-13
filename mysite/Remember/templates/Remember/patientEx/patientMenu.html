@@ -69,8 +69,8 @@
 
          .pictureButton{
              background-color: white;
-             border-width: 4px;
-             border-color: black;
+             border-width: 10px;
+             border-color: rgb(13,110,253);
              color: black;
              padding: 1vw 1vw;
              text-align: left;
@@ -80,6 +80,10 @@
              margin: 0vw .5vw 1vw .5vw;
              cursor: pointer;
          }
+
+         .pictureButton:hover{
+                border-color:rgb(8,73,169)
+            }
 
          .pictureStyle{
              min-height: 200px;
@@ -145,7 +149,6 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
-                    <li><a class="dropdown-item" href="/remember/manageMyAdminAccount">Manage My Account</a></li>
                     <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
@@ -157,57 +160,48 @@
                     </h1> 
    
                     <div class="d-flex justify-content-center align-content-center flex-wrap">
-
-                        <a href="/remember/takeQuestionnaire">
                             
-                            <div class="p-2 bd-highlight">
-                                <button class="pictureButton btn-light" >
-                                    <div class="d-flex justify-content-center scaleQuiz">
-                                        <div class="pictureStyle"></div> <br> 
-                                        <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                                    </div>
-                                    <h5 class="names">Take Quiz</h5>
-                                    
-                                </button>
-                            </div>
-                        </a>
-            
-                        <a href="/remember/reviewResults">
-                            <div class="p-2 bd-highlight">
-                                <button  class="pictureButton btn-light" >
-                                    <div class="d-flex justify-content-center scaleResults">
-                                        <div class="pictureStyle"></div> <br> 
-                                        <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                                    </div>
-                                    <h5 class="names">Review Results</h5>
-                                </button>
-                            </div>
-                        </a>
+                        <div class="p-2 bd-highlight">
+                            <button class="pictureButton btn-light"  onclick="window.location.href='/remember/takeQuestionnaire';">
+                                <div class="d-flex justify-content-center scaleQuiz">
+                                    <div class="pictureStyle"></div> <br> 
+                                    <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                                </div>
+                                <h5 class="names">Take Quiz</h5>
+                                
+                            </button>
+                        </div>
+        
+                        <div class="p-2 bd-highlight">
+                            <button  class="pictureButton btn-light"  onclick="window.location.href='/remember/reviewResults';">
+                                <div class="d-flex justify-content-center scaleResults">
+                                    <div class="pictureStyle"></div> <br> 
+                                    <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                                </div>
+                                <h5 class="names">Review Results</h5>
+                            </button>
+                        </div>
 
-                        <a href="/remember/scrapbook">
-                            <div class="p-2 bd-highlight">
-                                <button class="pictureButton btn-light">
-                                    <div class="d-flex justify-content-center scaleScrapbook">
-                                        <div class="pictureStyle"></div> <br> 
-                                        <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                                    </div>
-                                    <h5 class="names">Scrapbook</h5>
-                                </button>
-                            </div>
-                        </a>
-            
-                        <a href="/remember/viewReminder">
-                            <div class="p-2 bd-highlight">
-                                <button class="pictureButton btn-light">
-                                    <div class="d-flex justify-content-center scaleReminder">
-                                        <div class="pictureStyle"></div> <br> 
-                                        <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                                    </div>
-                                 
-                                    <h5 class="names">Review Reminders</h5>
-                                </button>
-                            </div>
-                        </a>
+                        <div class="p-2 bd-highlight">
+                            <button class="pictureButton btn-light"  onclick="window.location.href='/remember/scrapbook';">
+                                <div class="d-flex justify-content-center scaleScrapbook">
+                                    <div class="pictureStyle"></div> <br> 
+                                    <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                                </div>
+                                <h5 class="names">Scrapbook</h5>
+                            </button>
+                        </div>
+        
+                        <div class="p-2 bd-highlight">
+                            <button class="pictureButton btn-light"  onclick="window.location.href='/remember/viewReminder';">
+                                <div class="d-flex justify-content-center scaleReminder">
+                                    <div class="pictureStyle"></div> <br> 
+                                    <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                                </div>
+                                
+                                <h5 class="names">Review Reminders</h5>
+                            </button>
+                        </div>
                     </div>   
 
                     <script>

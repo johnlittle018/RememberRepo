@@ -138,6 +138,15 @@
                 position: relative;
             }
 
+            .chooseFileBtn{
+                border: 5px solid rgb(13,110,253);
+                font-weight: bold;
+            }
+
+            .chooseFileBtn:hover{
+                border-color:rgb(8,73,169);
+            }
+
 
             
 
@@ -202,7 +211,7 @@
                     <div class="col-6 align" style="text-align: center;">
                         <div class="p-2 bd-highlight">                    <!-- Upload image input-->
                             <input id="upload" type="file" required="required" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
-                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4" style="border: 2px solid black;"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4 chooseFileBtn">CHOOSE FILE</label>
                         </div>
                     </div>
                 </div>
