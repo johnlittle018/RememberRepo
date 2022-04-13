@@ -8,6 +8,7 @@ import datetime
 import email
 import os
 import time
+from turtle import update
 from urllib import request
 import uuid
 from django.http import Http404
@@ -436,11 +437,18 @@ def reviewResults(request):
         for quiz in myQuizs:
             results.append(ResultContainer(quiz))
 
+        results.reverse()
+
         return render(request, 'Remember/reviewResults.html', {'QuizeResults': results, 'patient': relation.patient})
 
     else:
         ## code should never run, but satifiys logic
         return HttpResponseRedirect(reverse('Remember:loginPage'))
+
+
+
+
+
 
 
 
@@ -689,21 +697,6 @@ def inviteAdmin(request):
 
     return render(request, 'Remember/adminEx/inviteAdmin.html')
 
-def manageMyAdminAccount(request):
-
-    return render(request, 'Remember/adminEx/manageMyAdminAccount.html')
-
-def manageMyAdminEmail(request):
-
-    return render(request, 'Remember/adminEx/manageMyAdminEmail.html')
-
-def manageMyAdminPassword(request):
-
-    return render(request, 'Remember/adminEx/manageMyAdminPassword.html')
-
-def manageMyAdminName(request):
-
-    return render(request, 'Remember/adminEx/manageMyAdminName.html')
 
 
 ## called when submitting a new admin account
@@ -779,6 +772,158 @@ def processNewAdmin(request):
         )
 
 
+
+def userMenu(request):
+
+    if request.session['userType'] == "patient":
+        return HttpResponseRedirect(reverse('Remember:patientMenu'))
+
+    if request.session['userType'] == "admin":
+        return HttpResponseRedirect(reverse('Remember:adminMenu'))
+
+    return HttpResponseRedirect(reverse('Remember:loginPage'))
+
+
+
+def updateUser(request):
+    
+    
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])    
+    myPatient = relation.patient
+
+    updateType = request.POST['updateType']
+
+
+    if updateType == "email":
+        email = request.POST['email']
+        myPatient.username = email
+        myPatient.save()
+        return HttpResponseRedirect(reverse('Remember:userMenu'))
+      
+
+    if updateType == "password":
+        passwordConfirm = request.POST['passwordConfirm']
+        password = request.POST['password']
+        if passwordConfirm == password:
+            myPatient.password = password
+            myPatient.save()
+        else:
+            return render(request, 'Remember/adminEx/managePatientPassword.html', 
+            { 'error_message': "The passwords you entered did not match.", 'userRelation' : relation }
+            )
+
+
+        return HttpResponseRedirect(reverse('Remember:userMenu'))
+
+    if updateType == "name":
+        firstName = request.POST['firstName']
+        lastName = request.POST['lastName']
+        myPatient.firstName = firstName
+        myPatient.lastName = lastName
+        myPatient.save()
+        return HttpResponseRedirect(reverse('Remember:userMenu'))
+        
+
+    if updateType == "pic":
+        ## stuff for images
+        myThingy = request.FILES['uploadedPic']
+        myFileSystem = FileSystemStorage()
+        myFileSystem.save(myThingy.name, myThingy)
+        source = "./media/" + myThingy.name 
+        name = str(uuid.uuid4()) + myThingy.name
+        destination = "./Remember/static/remember/images/questionImages/" + name 
+        os.rename(source, destination)
+        
+        
+        ## this is what is passed to the question for a refrence to the image.
+        ## formated so it can be used directly in html
+        nameForDatabase = "/../../static/remember/images/questionImages/" + name
+
+        myPatient.mugshot = nameForDatabase
+        myPatient.save()
+
+        return HttpResponseRedirect(reverse('Remember:userMenu'))
+
+
+
+
+    return HttpResponseRedirect(reverse('Remember:loginPage'))
+
+
+    
+    
+    
+    
+
+    return HttpResponseRedirect(reverse('Remember:userMenu'))
+
+
+def updatePatient(request):
+    
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])    
+    myPatient = relation.patient
+
+    updateType = request.POST['updateType']
+
+
+    if updateType == "email":
+        email = request.POST['email']
+        myPatient.username = email
+        myPatient.save()
+        return HttpResponseRedirect(reverse('Remember:userMenu'))
+      
+
+    if updateType == "password":
+        passwordConfirm = request.POST['passwordConfirm']
+        password = request.POST['password']
+        if passwordConfirm == password:
+            myPatient.password = password
+            myPatient.save()
+        else:
+            return render(request, 'Remember/adminEx/managePatientPassword.html', 
+            { 'error_message': "The passwords you entered did not match.", 'userRelation' : relation }
+            )
+
+
+        return HttpResponseRedirect(reverse('Remember:userMenu'))
+
+    if updateType == "name":
+        firstName = request.POST['firstName']
+        lastName = request.POST['lastName']
+        myPatient.firstName = firstName
+        myPatient.lastName = lastName
+        myPatient.save()
+        return HttpResponseRedirect(reverse('Remember:userMenu'))
+        
+
+    if updateType == "pic":
+        ## stuff for images
+        myThingy = request.FILES['uploadedPic']
+        myFileSystem = FileSystemStorage()
+        myFileSystem.save(myThingy.name, myThingy)
+        source = "./media/" + myThingy.name 
+        name = str(uuid.uuid4()) + myThingy.name
+        destination = "./Remember/static/remember/images/questionImages/" + name 
+        os.rename(source, destination)
+        
+        
+        ## this is what is passed to the question for a refrence to the image.
+        ## formated so it can be used directly in html
+        nameForDatabase = "/../../static/remember/images/questionImages/" + name
+
+        myPatient.mugshot = nameForDatabase
+        myPatient.save()
+
+        return HttpResponseRedirect(reverse('Remember:userMenu'))
+
+
+
+
+    return HttpResponseRedirect(reverse('Remember:loginPage'))
+
+
+
+
 def managePatientAccount(request):
 
     relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
@@ -808,6 +953,29 @@ def managePatientName(request):
     relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
 
     return render(request, 'Remember/adminEx/managePatientName.html', {'userRelation' : relation})
+
+
+
+
+
+
+
+def manageMyAdminAccount(request):
+
+    return render(request, 'Remember/adminEx/manageMyAdminAccount.html', {'userRelation' : relation})
+
+def manageMyAdminEmail(request):
+
+    return render(request, 'Remember/adminEx/manageMyAdminEmail.html', {'userRelation' : relation})
+
+def manageMyAdminPassword(request):
+
+    return render(request, 'Remember/adminEx/manageMyAdminPassword.html', {'userRelation' : relation})
+
+def manageMyAdminName(request):
+
+    return render(request, 'Remember/adminEx/manageMyAdminName.html', {'userRelation' : relation})
+
 
 
 # loads noUser Page

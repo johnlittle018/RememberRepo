@@ -33,6 +33,12 @@ urlpatterns = [
 
     path('createAdmin/', views.createAdmin, name='createAdmin'),
 
+    path('userMenu/', views.userMenu, name='userMenu'),
+
+    path('updateUser/', views.updateUser, name='updateUser'),
+    
+    path('updatePatient/', views.updatePatient, name='updatePatient'),
+
    
 
 
