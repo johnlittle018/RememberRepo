@@ -787,17 +787,18 @@ def userMenu(request):
 
 def updateUser(request):
     
+
+    print("This is the update user method")
     
-    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])    
-    myPatient = relation.patient
+    myUser = User.objects.get(pk = request.session['loggedInID'])
 
     updateType = request.POST['updateType']
 
 
     if updateType == "email":
         email = request.POST['email']
-        myPatient.username = email
-        myPatient.save()
+        myUser.email = email
+        myUser.save()
         return HttpResponseRedirect(reverse('Remember:userMenu'))
       
 
@@ -805,11 +806,12 @@ def updateUser(request):
         passwordConfirm = request.POST['passwordConfirm']
         password = request.POST['password']
         if passwordConfirm == password:
-            myPatient.password = password
-            myPatient.save()
+            myUser.password = password
+            myUser.save()
         else:
-            return render(request, 'Remember/adminEx/managePatientPassword.html', 
-            { 'error_message': "The passwords you entered did not match.", 'userRelation' : relation }
+            print("Error Error 9000")
+            return render(request, 'Remember/adminEx/manageMyAdminPassword.html', 
+            { 'error_message': "The passwords you entered did not match.", 'user' : myUser }
             )
 
 
@@ -818,44 +820,19 @@ def updateUser(request):
     if updateType == "name":
         firstName = request.POST['firstName']
         lastName = request.POST['lastName']
-        myPatient.firstName = firstName
-        myPatient.lastName = lastName
-        myPatient.save()
+        myUser.firstName = firstName
+        myUser.lastName = lastName
+        myUser.save()
         return HttpResponseRedirect(reverse('Remember:userMenu'))
         
 
-    if updateType == "pic":
-        ## stuff for images
-        myThingy = request.FILES['uploadedPic']
-        myFileSystem = FileSystemStorage()
-        myFileSystem.save(myThingy.name, myThingy)
-        source = "./media/" + myThingy.name 
-        name = str(uuid.uuid4()) + myThingy.name
-        destination = "./Remember/static/remember/images/questionImages/" + name 
-        os.rename(source, destination)
-        
-        
-        ## this is what is passed to the question for a refrence to the image.
-        ## formated so it can be used directly in html
-        nameForDatabase = "/../../static/remember/images/questionImages/" + name
 
-        myPatient.mugshot = nameForDatabase
-        myPatient.save()
-
-        return HttpResponseRedirect(reverse('Remember:userMenu'))
 
 
 
 
     return HttpResponseRedirect(reverse('Remember:loginPage'))
 
-
-    
-    
-    
-    
-
-    return HttpResponseRedirect(reverse('Remember:userMenu'))
 
 
 def updatePatient(request):
@@ -962,19 +939,27 @@ def managePatientName(request):
 
 def manageMyAdminAccount(request):
 
-    return render(request, 'Remember/adminEx/manageMyAdminAccount.html', {'userRelation' : relation})
+    myUser = User.objects.get(pk = request.session['loggedInID'])
+
+    return render(request, 'Remember/adminEx/manageMyAdminAccount.html', {'user' : myUser})
 
 def manageMyAdminEmail(request):
 
-    return render(request, 'Remember/adminEx/manageMyAdminEmail.html', {'userRelation' : relation})
+    myUser = User.objects.get(pk = request.session['loggedInID'])
+
+    return render(request, 'Remember/adminEx/manageMyAdminEmail.html', {'user' : myUser})
 
 def manageMyAdminPassword(request):
 
-    return render(request, 'Remember/adminEx/manageMyAdminPassword.html', {'userRelation' : relation})
+    myUser = User.objects.get(pk = request.session['loggedInID'])
+
+    return render(request, 'Remember/adminEx/manageMyAdminPassword.html', {'user' : myUser})
 
 def manageMyAdminName(request):
 
-    return render(request, 'Remember/adminEx/manageMyAdminName.html', {'userRelation' : relation})
+    myUser = User.objects.get(pk = request.session['loggedInID'])
+
+    return render(request, 'Remember/adminEx/manageMyAdminName.html', {'user' : myUser})
 
 
 
