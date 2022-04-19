@@ -6,6 +6,7 @@
 
 import datetime
 import email
+from json import dumps
 import os
 import time
 from turtle import update
@@ -221,6 +222,8 @@ def submitQuestion(request):
     # dummy date neded for the creation of a question
     fillerTimeEnded = datetime.date(2022, 2, 28)
 
+    
+
     ## checking that the toggle has been selected
     if correctAnswer == null:
         ## to do
@@ -269,18 +272,25 @@ def resubmitQuestion(request):
 
     ## stuff for images
     # pulling the picture from the form
-    myThingy = request.FILES['uploadedPic']
-    myFileSystem = FileSystemStorage()
-    myFileSystem.save(myThingy.name, myThingy)
-    source = "./media/" + myThingy.name 
-    name = str(uuid.uuid4()) + myThingy.name
-    destination = "./Remember/static/remember/images/questionImages/" + name 
-    os.rename(source, destination)
+    newPic = True
+    try:
+        myThingy = request.FILES['uploadedPic']
+    except:
+        newPic = False
+
+    if newPic == True: 
     
-    
-    ## this is what is passed to the question for a refrence to the image.
-    ## formated so it can be used directly in html
-    nameForDatabase = "/../../static/remember/images/questionImages/" + name
+        myFileSystem = FileSystemStorage()
+        myFileSystem.save(myThingy.name, myThingy)
+        source = "./media/" + myThingy.name 
+        name = str(uuid.uuid4()) + myThingy.name
+        destination = "./Remember/static/remember/images/questionImages/" + name 
+        os.rename(source, destination)
+        
+        ## this is what is passed to the question for a refrence to the image.
+        ## formated so it can be used directly in html
+        nameForDatabase = "/../../static/remember/images/questionImages/" + name
+        myQuestion.picture = nameForDatabase
  
     # pulling data from calling form
     photoDiscription = request.POST['pDescription']
@@ -293,6 +303,7 @@ def resubmitQuestion(request):
 
     ## should never be a problem, as editing a question will already have a selected anser.
     if correctAnswer == null:
+        ## should never ocure now that a correct Answer is required by front end.
         print("User did not click a correct answer")
         #todo, code in a page refresh error for such a senario
     else:
@@ -304,7 +315,7 @@ def resubmitQuestion(request):
         myQuestion.C = answer3
         myQuestion.D = answer4
         myQuestion.answer = correctAnswer
-        myQuestion.picture = nameForDatabase
+        
 
         #saving the question changes
         myQuestion.save()
@@ -687,7 +698,48 @@ def adminMenu(request):
 ## Loads the graph data page
 def graphsData(request):
 
-    return render(request, 'Remember/adminEx/graphsData.html')
+    # pulling relation from sesion
+    relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
+        # pulling all completed quizes   
+    myQuizs = Quiz.objects.filter(order = 2, patient = relation.patient)
+        
+        # array for storing calculated results
+    results = []
+
+        # for each copleted quiz, put it in a results containter
+    for quiz in myQuizs:
+        results.append(ResultContainer(quiz))
+
+    ## scores over time
+
+    scores = []
+    for result in results:
+        score = [str(result.completionTime),  str(result.score)]
+        scores.append(score)
+
+    # print(scores)
+
+
+    ## times over time
+
+    times = []
+    for result in results:
+        elapsedTime = result.completionTime - result.myQuestions[0].timeEnded 
+        # formatedElapsedTime = str(elapsedTime.minute) + ":" + str(elapsedTime.second)
+        # formatedElapsedTime = str(int(elapsedTime.seconds / 60)) + str(elapsedTime.seconds % 60)
+        formatedElapsedTime = elapsedTime.seconds
+        time = [str(result.completionTime), formatedElapsedTime]
+        times.append(time)
+
+    print(times)
+
+    
+
+
+    passingScores = dumps(scores)
+    passingTimes = dumps(times)
+
+    return render(request, 'Remember/adminEx/graphsData.html', {'userRelation' : relation, 'results' : results, 'scores' : passingScores, 'times': passingTimes})
 
 ## loads the invite family page
 def inviteFamily(request):
