@@ -65,6 +65,12 @@ urlpatterns = [
     path('manageMyAdminPassword/', views.manageMyAdminPassword, name='manageMyAdminPassword'),
     path('manageMyAdminName/', views.manageMyAdminName, name='manageMyAdminName'),
 
+
+    
+    path('createANewAdmin/', views.createANewAdmin, name='createANewAdmin'),
+
+    
+
     
     
     ## Stuff for Patient

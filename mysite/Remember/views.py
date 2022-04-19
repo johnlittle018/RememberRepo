@@ -420,6 +420,8 @@ def reviewResults(request):
         for quiz in myQuizs:
             results.append(ResultContainer(quiz))
 
+        results.reverse()
+
         return render(request, 'Remember/reviewResults.html', {'QuizeResults': results, 'patient': user})
 
     # for amdin    
@@ -535,7 +537,7 @@ def scrapbook(request):
     # pull current quiz from database
     myQuiz = Quiz.objects.filter(order = 0, patient = myPatient)
     # pulling questions from quiz
-    myQuestions = Question.objects.filter(quiz = myQuiz)
+    myQuestions = Question.objects.filter(quiz = myQuiz[0])
 
     # if there are no current questions
     if len(myQuestions) == 0: 
@@ -960,6 +962,50 @@ def manageMyAdminName(request):
     myUser = User.objects.get(pk = request.session['loggedInID'])
 
     return render(request, 'Remember/adminEx/manageMyAdminName.html', {'user' : myUser})
+
+
+
+def createANewAdmin(request):
+
+
+
+    email = request.POST['Email']
+    password = request.POST['password']
+    passwordConfirm = request.POST['passwordConfirm']
+    firstName = request.POST['FName']
+    lastName = request.POST['LName']
+
+
+    ## check that the passwords given are the same. 
+
+    if password != passwordConfirm:
+        return render(request, 'Remember/createAdmin.html', 
+            { 'error_message': "The passwords you entered did not match.",}
+        )        
+
+    ## check that the email is not already part of the system.
+    
+    check1 = User.objects.filter(email = email)
+    check2 = Patient.objects.filter(username = email)
+
+    if len(check1) != 0 or len(check2) != 0:
+        return render(request, 'Remember/createAdmin.html', 
+            { 'error_message': "The email you have entered is already in the system",}
+        )      
+
+
+
+    ourUser = User(firstName=firstName, lastName=lastName, password=password, email=email)
+    ourUser.save()
+
+
+
+
+    request.session['loggedInID'] = ourUser.id
+    
+    return HttpResponseRedirect(reverse('Remember:pickPatient'))
+
+
 
 
 
