@@ -23,6 +23,7 @@ from django.urls import reverse
 from sqlalchemy import null
 from sympy import re
 from django.core.files.storage import FileSystemStorage
+import bcrypt
 
 #from mysite.polls.views import ResultsView
 
@@ -63,7 +64,12 @@ def login(request):
     if User.objects.filter(email = Email).exists():
         ourUser = User.objects.filter(email = Email)
         # print("email is in the system.")
-        if ourUser[0].password == userPassword:
+        print(userPassword)
+        print(ourUser[0].password)
+        print(userPassword.encode('utf8'))
+        print(type(userPassword.encode('utf8')))
+        print(type(ourUser[0].password))
+        if bcrypt.checkpw(userPassword.encode('utf8'), ourUser[0].password):
             # print("Password is good") 
             request.session['loggedInID'] = ourUser[0].id
             return HttpResponseRedirect(reverse('Remember:pickPatient'))
@@ -73,7 +79,7 @@ def login(request):
     if Patient.objects.filter(username = Email).exists():
         ourPatient = Patient.objects.filter(username = Email)
         # print("email is in the system.")
-        if ourPatient[0].password == userPassword:
+        if bcrypt.checkpw(userPassword.encode('utf8'), ourPatient[0].password):
             # print("Password is good") 
             request.session['loggedInID'] = ourPatient[0].id
             request.session['userType'] = "patient"
@@ -765,6 +771,7 @@ def processNewAdmin(request):
     firstName = request.POST['firstName']
     lastName = request.POST['lastName']
     corI = request.POST['CorI']
+    salt = bcrypt.gensalt()  # used to hash the admin's password
 
     ## if conditional is true, we are adding an account that already exist.
     if corI == "i":
@@ -785,7 +792,7 @@ def processNewAdmin(request):
 
         if len(check) != 0:
             return render(request, 'Remember/adminEx/inviteAdmin.html', 
-                { 'error_message': "The email you have entered already an admin of this patient.",}
+                { 'error_message': "The email you have entered is already an admin of this patient.",}
             )
         
 
@@ -814,9 +821,12 @@ def processNewAdmin(request):
         )         
 
     ## We are creating a user
-    ## we are under the assumption that the all the feilds have been filed and cheked on the html side of things
-
-    myNewAdmin = User(firstName=firstName, lastName=lastName, email=email, password=password)
+    ## we are under the assumption that the all the fields have been filled and checked on the html side of things
+    print(password.encode('utf8'))
+    print(bcrypt.hashpw(password.encode('utf8'), salt))
+    print(type(password.encode('utf8')))
+    print(type(bcrypt.hashpw(password.encode('utf8'), salt)))
+    myNewAdmin = User(firstName=firstName, lastName=lastName, email=email, password=bcrypt.hashpw(password.encode('utf8'), salt))
     myNewAdmin.save()
     myNewRelation = PatientClearanceAbstraction(user=myNewAdmin, patient=relation.patient, clearanceLevel = 2)
     myNewRelation.save()
@@ -1026,7 +1036,7 @@ def createANewAdmin(request):
     passwordConfirm = request.POST['passwordConfirm']
     firstName = request.POST['FName']
     lastName = request.POST['LName']
-
+    salt = bcrypt.gensalt()
 
     ## check that the passwords given are the same. 
 
@@ -1043,11 +1053,13 @@ def createANewAdmin(request):
     if len(check1) != 0 or len(check2) != 0:
         return render(request, 'Remember/createAdmin.html', 
             { 'error_message': "The email you have entered is already in the system",}
-        )      
+        )
 
-
-
-    ourUser = User(firstName=firstName, lastName=lastName, password=password, email=email)
+    print(password.encode('utf8'))
+    print(bcrypt.hashpw(password.encode('utf8'), salt))
+    print(type(password.encode('utf8')))
+    print(type(bcrypt.hashpw(password.encode('utf8'), salt)))
+    ourUser = User(firstName=firstName, lastName=lastName, password=bcrypt.hashpw(password.encode('utf8'), salt), email=email)
     ourUser.save()
 
 
@@ -1075,6 +1087,7 @@ def newAdmin(request):
 ## called when making a new patient acount
 def submitPatient(request):
 
+    salt = bcrypt.gensalt()
     ## loading the user from session
     myUser = User.objects.get(pk = request.session['loggedInID'])
 
@@ -1105,7 +1118,7 @@ def submitPatient(request):
     if len(check) == 0:
         ## email is not in use
         # making and saving the new patient
-        newPatient = Patient(firstName=firstName, password=password, lastName=lastName, username=email, mugshot=nameForDatabase)
+        newPatient = Patient(firstName=firstName, password=bcrypt.hashpw(password.encode('utf8'), salt), lastName=lastName, username=email, mugshot=nameForDatabase)
         newPatient.save()
         ## making a relation between patient and creater
         myNewRelation = PatientClearanceAbstraction(user=myUser, patient=newPatient, clearanceLevel = 2)

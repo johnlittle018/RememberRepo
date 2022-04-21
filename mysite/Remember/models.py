@@ -10,7 +10,7 @@ class Patient(models.Model):
     firstName = models.CharField(max_length=200)
     lastName = models.CharField(max_length=200)
     username = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
+    password = models.BinaryField(max_length=200)
     mugshot = models.FileField(upload_to='./Remember/static/remember/images/patientMugShots/', max_length=200, default="")
     #find a patient's reminders by querying Reminder
 
@@ -30,7 +30,7 @@ class User(models.Model):
     firstName = models.CharField(max_length=200)
     lastName = models.CharField(max_length=200)
     email = models.CharField(max_length=200)#it's functionally a username
-    password = models.CharField(max_length=200)
+    password = models.BinaryField(max_length=200)
 
     def __str__(self):
         return 'user {} {}'.format(self.firstName, self.lastName)
