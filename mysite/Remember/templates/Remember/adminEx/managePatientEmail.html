@@ -152,9 +152,12 @@
             </div>
 
 
-            <form action="{% url 'Remember:submitPatient' %}" method="post" enctype="multipart/form-data" >
+            <form action="{% url 'Remember:updatePatient' %}" method="post" enctype="multipart/form-data" >
                 {% csrf_token %}
                 
+
+
+                <input type="hidden" name="updateType" value="email">
 
                 <div class="row justify-content-center align-content-center \">
                     <div class="col-12" style="text-align: center;">
@@ -168,12 +171,12 @@
 
                 <br>
 
-                <div class="input-group mb-3 addHorizontalPadding">
+                <!-- <div class="input-group mb-3 addHorizontalPadding">
                     <div class="input-group-prepend">
                     <span class="input-group-text " id="basic-addon1" style="width: 185px;">Current Email Address</span>
                     </div>
                     <input type="email" name="email" class="form-control" placeholder="{{userRelation.patient.username}}" disabled>
-                </div>
+                </div> -->
 
                 <div class="input-group mb-3 addHorizontalPadding">
                     <div class="input-group-prepend">
@@ -219,7 +222,7 @@
                 {% endif %}   
                 
                 <div class="addHorizontalPadding">
-                    <button type="submit" value="submitPatient" required="required" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
+                    <button type="submit" value="updatePatient" required="required" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
                 </div>
 
 

@@ -132,43 +132,50 @@
         <div class="mx-auto">
             <div class="d-flex justify-content-center">
                 <div class="login-form p-4">
-                    <form action="{% url 'Remember:login' %}" method="post">
+                    <form action="{% url 'Remember:createANewAdmin' %}" method="post">
                         
                         {% csrf_token %}
                         <h2 class="text-center">Create Admin <br> Account</h2>       
 
                         <div class="form-group">
                             <label for="exampleInputFName">First Name</label>
-                            <input type="text" name="FName" class="form-control" placeholder="First Name" >
+                            <input type="text" name="FName" class="form-control" required="required" placeholder="First Name" >
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFName">Last Name</label>
-                            <input type="text" name="FName" class="form-control" placeholder="Last Name" >
+                            <input type="text" name="LName" class="form-control" required="required" placeholder="Last Name" >
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
-                            <input type="text" name="Email" class="form-control" placeholder="Your Email" >
+                            <input type="email" name="Email" class="form-control" required="required" placeholder="Your Email" >
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Your Password" >
+                            <input type="password" name="password" class="form-control" required="required" placeholder="Your Password" >
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPasswordConfirm1">Password</label>
-                            <input type="password" name="passwordConfirm" class="form-control" placeholder="Confirm Your Password" >
+                            <input type="password" name="passwordConfirm" class="form-control" required="required" placeholder="Confirm Your Password" >
                         </div>
+
+
+                        {% if error_message %}
+                        <div style="width:50%">
+                        <p style="color:red"><strong>{{error_message}}</strong></p>
+                        </div>
+                        {% endif %}    
+
+
                         
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block" value="login" >Create</button>
+                            <button type="submit" class="btn btn-primary btn-block" value="createANewAdmin" >Create</button>
                         </div>
+
+
                     </form>
 
 
-                    {% if error_message %}
-                    <div style="width:50%">
-                    <p style="color:red"><strong>You have entered the wrong username or password, please try again</strong></p>
-                    </div>
-                    {% endif %}   
+                    
                     
                     <br>
                 </div>

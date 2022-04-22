@@ -194,9 +194,14 @@
             </div>
 
 
-            <form action="{% url 'Remember:submitPatient' %}" method="post" enctype="multipart/form-data" >
+            <form action="{% url 'Remember:updatePatient' %}" method="post" enctype="multipart/form-data" >
                 {% csrf_token %}
                 
+
+
+                <input type="hidden" name="updateType" value="pic">
+
+
                 <br>
 
                 <div class="row justify-content-center">
@@ -263,7 +268,7 @@
                 {% endif %}   
                 
                 <div class="addHorizontalPadding">
-                    <button type="submit" value="submitPatient" required="required" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
+                    <button type="submit" value="updatePatient" required="required" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
                 </div>
 
 

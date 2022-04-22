@@ -33,6 +33,12 @@ urlpatterns = [
 
     path('createAdmin/', views.createAdmin, name='createAdmin'),
 
+    path('userMenu/', views.userMenu, name='userMenu'),
+
+    path('updateUser/', views.updateUser, name='updateUser'),
+    
+    path('updatePatient/', views.updatePatient, name='updatePatient'),
+
    
 
 
@@ -58,6 +64,12 @@ urlpatterns = [
     path('manageMyAdminEmail/', views.manageMyAdminEmail, name='manageMyAdminEmail'),
     path('manageMyAdminPassword/', views.manageMyAdminPassword, name='manageMyAdminPassword'),
     path('manageMyAdminName/', views.manageMyAdminName, name='manageMyAdminName'),
+
+
+    
+    path('createANewAdmin/', views.createANewAdmin, name='createANewAdmin'),
+
+    
 
     
     
