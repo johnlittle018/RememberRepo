@@ -540,6 +540,7 @@ class ResultContainer:
         self.score = myTally[0]
         self.correct = myTally[1]
         self.wrong = myTally[2]
+        self.score = round(self.score, 2)
          
 
 
@@ -720,7 +721,8 @@ def graphsData(request):
 
     scores = []
     for result in results:
-        score = [str(result.completionTime),  str(result.score)]
+        x = str(result.completionTime.day) + "/" + str(result.completionTime.month) + "/" + str(result.completionTime.year) 
+        score = [x,  str(result.score)]
         scores.append(score)
 
     # print(scores)
@@ -730,11 +732,12 @@ def graphsData(request):
 
     times = []
     for result in results:
+        x = str(result.completionTime.day) + "/" + str(result.completionTime.month) + "/" + str(result.completionTime.year) 
         elapsedTime = result.completionTime - result.myQuestions[0].timeEnded 
         # formatedElapsedTime = str(elapsedTime.minute) + ":" + str(elapsedTime.second)
         # formatedElapsedTime = str(int(elapsedTime.seconds / 60)) + str(elapsedTime.seconds % 60)
         formatedElapsedTime = elapsedTime.seconds
-        time = [str(result.completionTime), formatedElapsedTime]
+        time = [x, formatedElapsedTime]
         times.append(time)
 
     print(times)
