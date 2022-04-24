@@ -1,0 +1,89 @@
+This is where we will store notes like usefull comands 
+
+
+user info:
+
+User 
+little018@gannon.edu
+Jupiter987
+
+Patient
+didycz001@gannon.edu
+Jupiter987
+
+
+
+Admin info is as follows
+
+username: admin 
+Password: Jupiter987
+
+
+
+
+Stuff to do: Garrett
+**Completed
+
+*Fix bad back links
+**Fix edit question image upload
+**Make a change password page
+**Use edit questionaire toggle method for changing correct answer number to letter on edit questionere 
+**Fix pick patient Image
+
+**Sign Up Page (Create Admin Account)
+*`Admin needs a review reminders
+** (super finished) Manage {{relation.user.firstName}} Account (has changing password (could have changing emails and profile pic))
+
+Print out script for Wednesday
+
+*Couldn't fix reviewResults because it either goes to the adminMenu or patientMenu but all others are fixed (along with logout btn)
+
+*` Why does an Admin need a review reminders, they should be able to see all the reminders in setReminders
+
+My Own List
+Review Results
+
+
+Stuff to do: Jack
+Fix broken scrapbook
+Implement date
+
+
+
+
+
+python manage.py makemigrations polls
+by running makemigrations, you’re telling Django that you’ve made some changes to your models
+
+
+python manage.py migrate
+
+
+
+Change your models (in models.py).
+Run python manage.py makemigrations to create migrations for those changes
+Run python manage.py migrate to apply those changes to the database.
+
+
+
+I am not longer using the order statment of quiz as originaly intended order of 0 
+means it it the currenrnt build of the quize,
+order 1 is a quize in use, and can be cleaned if a quize is quite and it is left unfinished
+order 2 means it is a result. 
+
+
+Jack Little 
+
+We forgot add a creator id to question, so we cannot identify as a family what questions can be edited
+
+Things I need to do, 
+
+Record in the sesion what kind of user is logged in for pages 
+of multiple user types.... may be able to imiminate some templets 
+
+
+To do list
+ 
+ Fix clickable icons in admin menu
+ fix icons in patient Menu
+
