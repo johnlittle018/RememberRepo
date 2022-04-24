@@ -12,32 +12,442 @@ Universtal red/wrong answer rgb(220, 53, 69);
   
   DJANGO GOES THROUGH COMMENTS
     
-    <!--
-        <div class="d-flex justify-content-start topLevelProgressBar" id="displayProgressBar">
-            <form action="{% url 'Remember:nextQuestion' %}" method="post">
-            {% csrf_token %}
-                <button type="button" value = "nextQuestion" class="btn btn-success btn-lg customProgressBtn" id = "progressBtn" disabled>
-                    <div class="progress customProgress">
-                        <div class="progress-bar progress-bar-striped bg-success progress-bar-animated customProgressMeter" id="progressMeter" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                            <p class="strokeme">Next Question</p>
-                        </div>
-                    </div>
-                </button>
-            </form>
-        </div>
-    -->
+    TAKE QUESTIONNAIRE
 
-        <!--
-        <div class="d-flex justify-content-start topLevelProgressBar" id="displayProgressBar">
-            <form action="{% url 'Remember:finishQuestionnaire' %}" method="post">
-            {% csrf_token %}
-                <button type="button" value = "finishQuestionnaire" class="btn btn-success btn-lg customProgressBtn" id = "progressBtn" disabled>
-                    <div class="progress customProgress">
-                        <div class="progress-bar progress-bar-striped bg-success progress-bar-animated customProgressMeter" id="progressMeter" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                            <p class="strokeme">Finish Questionnaire</p>
-                        </div>
-                    </div>
-                </button>
-            </form>
-        </div>
-        -->
+  {% load static %} 
+  <link rel="stylesheet" type="text/css" href="{% static 'remember/style.css' %}"> 
+  
+  <!doctype html>
+  <html lang="en">
+      <head>
+          <title></title>
+          <!-- Required meta tags -->
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <style>
+      
+      .navbar{
+          border-bottom: 3px solid black;
+          background: rgba(255, 255, 255, 0.9);
+  
+      }
+      .autohide{
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          width: 100%;
+          z-index: 1030;
+      }
+      .scrolled-down{
+          transform:translateY(-100%); transition: all 0.3s ease-in-out;
+      }
+  
+      .scrolled-up{
+          transform:translateY(0); transition: all 0.3s ease-in-out;
+      }
+  
+      .exitButton{
+          width:51px;height:51px;
+          background: transparent url(/../../static/remember/images/exitButton.png) no-repeat;
+          background-color: transparent;
+          mix-blend-mode: multiply;
+          background-size: cover;
+          border: none;
+      }
+  
+      .logo{
+          width:83.1px; height: 72px; 
+          /* Original size width: 374; height: 324 */
+          background: transparent url(/../../static/remember/images/RememberLogoSized.png) no-repeat;
+          mix-blend-mode: multiply;
+          background-size: cover;
+          border: none;
+      }
+  
+      .btn.btn-secondary.dropdown-toggle {
+          background-color: rgb(225,225,225);  
+      }
+  
+      h1{
+          color: white;
+          font-family: 'Sans serif', Helvetica, sans-serif;
+          font-size: calc(3vw + 2vh);
+          padding:2%;
+          padding-left: 12%;
+      }
+  
+      h2{
+          color: white;
+          font-family: 'Sans serif', Helvetica, sans-serif;
+          font-size: calc(2.25vw + 1.5vh);
+          padding:1%;
+          margin: 1%;
+          background-color: rgb(50,50,50);
+          border-radius: 20%;
+          text-align: center;
+  
+      }
+      h3{
+          color: white;
+          font-family: 'Sans serif', Helvetica, sans-serif;
+          font-size: calc(2.25vw + 1.5vh);
+          text-align: center;
+          margin: 0px;
+          padding:0px;
+      }
+  
+      .photoImg{
+          border: 5px solid black;
+          height: 50vw;
+          width:auto;
+          max-height:50vh;
+      }
+  
+      .customBtn{
+          width:100%;
+          margin: 1%;
+          padding: 1%;
+      }
+  
+      .topLevelProgressBar{
+         margin: 0% 5% 5% 5%;
+         display: none;
+         opacity: 0%;
+         transition: visibility 0s, opacity 0.5s linear;
+         scroll-behavior: smooth;
+      }
+  
+  
+      .customProgressBtn{
+          width: 100%;
+          padding: 10px 10px;
+      }
+  
+      .customProgress{
+          height: 6vw;
+          background-color: rgb(59, 153, 109);
+  
+      }
+  
+      .customProgressMeter{
+          /*width:50%;*/
+          text-align: center;
+      }
+  
+      .strokeme {
+      color: white;
+      font-family: 'Sans serif', Helvetica, sans-serif;
+      font-size: calc(2.25vw + 1.5vh);
+      position: absolute;
+      width: 90%;
+      text-align: center;
+      margin: 0px;
+      padding:0px;
+      }
+  
+  </style>
+  </head>
+  
+  <body>
+  <header>
+  
+      
+  </header>
+  
+  <!-- All your html stuff here -->
+  
+  <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
+      <a class="navbar-brand" href="#">
+          <button class="exitButton" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+      </a>
+      <a href="">
+          <div class="logo"></div>
+      </a>
+      <p style="width: 80px">
+          
+      </p>
+  </nav>
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Quit Confirmation</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  Are you sure you want to quit?
+                  <br>
+                  Your progress will be lost!
+                  
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary removeBorder" data-bs-dismiss="modal">Close</button>
+                  <a class="navbar-brand" href="/remember/patientMenu">
+                      <button class="btn btn-danger">Quit</button>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <br>
+          <div class="d-flex justify-content-center">
+              <!--Code of the photo-->
+              <img src="{{question.picture}}" class="photoImg"> 
+              <!-- <img src="/../../static/remember/images/questionImages/iphoneImg.jpg" class="photoImg">  -->
+              <br>
+              <!--Note: Our system works a lot better with wider photos-->
+          </div>
+          
+          <h1>
+              {{question.question_text}}
+          </h1>
+          
+  
+  
+          <div class="d-flex flex-column bd-highlight">
+              <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
+                  <button type="submit" value="1" class="btn btn-primary btn-lg customBtn" id="QuestionA"><h3>{{question.A}}</h3></button>
+              </div>
+          </div>
+          <div class="d-flex flex-column bd-highlight">
+              <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
+                  <button type="submit" value="2" class="btn btn-primary btn-lg customBtn" id="QuestionB"><h3>{{question.B}}</h3></button>
+              </div>
+          </div>
+          <div class="d-flex flex-column bd-highlight">
+              <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
+                  <button type="submit" value="3" class="btn btn-primary btn-lg customBtn" id="QuestionC"><h3>{{question.C}}</h3></button>
+              </div>
+          </div>
+          
+          <div class="d-flex flex-column bd-highlight">
+              <div class="d-flex justify-content-start" style="margin: 0% 5% 0% 5%;">
+                  <button type="submit" value="4" class="btn btn-primary btn-lg customBtn" id="QuestionD"><h3>{{question.D}}</h3></button>
+              </div>
+          </div>
+  
+          <form action="{% url 'Remember:answerQuestion' %}" method="post">
+              {% csrf_token %}
+              <div class="d-flex justify-content-start topLevelProgressBar" id="displayProgressBar">
+                  <input type="hidden" name="toggle" value="" id="lastSubAnswer">
+                  <button type="submit" value = "answerQuestion" class="btn btn-success btn-lg customProgressBtn" id = "progressBtn" disabled>
+                      <div class="progress customProgress">
+                          <div class="progress-bar progress-bar-striped bg-success customProgressMeter" id="progressMeter" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                              <p class="strokeme">Next Question</p>
+                          </div>
+                      </div>
+                  </button>
+              </div>
+          </form>
+  
+          <!--
+          <div class="d-flex justify-content-start topLevelProgressBar" id="displayProgressBar">
+              <form action="{% url 'Remember:answerQuestion' %}" method="post">
+              {% csrf_token %}
+                  <button type="submit" value = "answerQuestion" class="btn btn-success btn-lg customProgressBtn" id = "progressBtn" disabled>
+                      <div class="progress customProgress">
+                          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated customProgressMeter" id="progressMeter" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                              <p class="strokeme">Finish</p>
+                          </div>
+                      </div>
+                  </button>
+              </form>
+          </div>
+      -->
+  
+  
+  
+          <input type="hidden" name="name" id="correctAnswerId" value="{{question.answer}}"></div>
+          <input type="hidden" name="name" id="finishedQuestionnaire" value="{{finished}}"></div>
+          <!-- Optional JavaScript -->
+          
+  
+                  
+          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      
+          <script>
+  
+              
+  
+              document.addEventListener("DOMContentLoaded", function(){
+   
+                   el_autohide = document.querySelector('.autohide');
+                   // add padding-top to bady (if necessary)
+                   navbar_height = document.querySelector('.navbar').offsetHeight;
+                   document.body.style.paddingTop = navbar_height + 'px';
+   
+                   if(el_autohide){
+                   var last_scroll_top = 0;
+                   window.addEventListener('scroll', function() {
+                           let scroll_top = window.scrollY;
+                       if(scroll_top < last_scroll_top) {
+                               el_autohide.classList.remove('scrolled-down');
+                               el_autohide.classList.add('scrolled-up');
+                           }
+                       else {
+                           el_autohide.classList.remove('scrolled-up');
+                           el_autohide.classList.add('scrolled-down');
+                       }
+                           last_scroll_top = scroll_top;
+                   }); 
+                   // window.addEventListener
+                   }
+                   // if
+   
+               }); 
+               //document.getElementById("progressBtn").addEventListener("click", nextQuestion);
+   
+               /*Needs actual correct answer obvi*/
+               var correctAnswer = document.getElementById("correctAnswerId").value;
+               var finished = document.getElementById("finishedQuestionnaire").value;
+               var lastSubAnswer = document.getElementById("lastSubAnswer")
+               console.log("Finished?: " + finished)
+               console.log("Correct Answer: " + correctAnswer)
+               var firstSelectedAnswer
+  
+               document.getElementById("QuestionA").addEventListener("click", selectedA);
+               function selectedA(){
+                  if(lastSubAnswer.value == ""){
+                      lastSubAnswer.setAttribute('value','1');
+                      console.log("First Selected Answer: "+ lastSubAnswer.value)
+                  }
+                   /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
+                   if(1 == correctAnswer){
+                       disabledQuestion = document.getElementById("QuestionA");
+                       disabledQuestion.disabled = true;
+                       disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
+                       disabledQuestion.style.borderColor = 'rgb(25,135,84)';
+                       disabledQuestion.style.opacity= 1;
+                       selectedB();
+                       selectedC();
+                       selectedD();
+                       runProgressBar();
+                   }
+                   else{
+                       disabledQuestion = document.getElementById("QuestionA");
+                       disabledQuestion.disabled = true;
+                   }
+               }
+   
+               document.getElementById("QuestionB").addEventListener("click", selectedB);
+               function selectedB(){
+                  if(lastSubAnswer.value == ""){
+                      lastSubAnswer.setAttribute('value','2');
+  
+                      console.log("First Selected Answer: "+ lastSubAnswer.value)
+                  }
+                   /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
+                   if(2 == correctAnswer){
+                       disabledQuestion = document.getElementById("QuestionB");
+                       disabledQuestion.disabled = true;
+                       disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
+                       disabledQuestion.style.borderColor = 'rgb(25,135,84)';
+                       disabledQuestion.style.opacity= 1;
+                       selectedA();
+                       selectedC();
+                       selectedD();
+                       runProgressBar();
+                   }
+                   else{
+                       disabledQuestion = document.getElementById("QuestionB");
+                       disabledQuestion.disabled = true;
+                  }
+              }
+   
+               document.getElementById("QuestionC").addEventListener("click", selectedC);
+               function selectedC(){
+                  if(lastSubAnswer.value == ""){
+                      lastSubAnswer.setAttribute('value','3');
+                      console.log("First Selected Answer: "+ lastSubAnswer.value)
+                  }
+                   /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
+                   if(3 == correctAnswer){
+                       disabledQuestion = document.getElementById("QuestionC");
+                       disabledQuestion.disabled = true;
+                       disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
+                       disabledQuestion.style.borderColor = 'rgb(25,135,84)';
+                       disabledQuestion.style.opacity= 1;
+                       selectedA();
+                       selectedB();
+                       selectedD();
+                       runProgressBar();
+                   }
+                   else{
+                       disabledQuestion = document.getElementById("QuestionC");
+                       disabledQuestion.disabled = true
+                   }
+              }
+   
+                document.getElementById("QuestionD").addEventListener("click", selectedD);
+                function selectedD(){
+                  if(lastSubAnswer.value == ""){
+                      lastSubAnswer.setAttribute('value','4');
+                      console.log("First Selected Answer: "+ lastSubAnswer.value)
+                  }
+                    /*var correctAnswer = JSON.parse("{{JacksCorrectAnswerValue}}"); */
+                    if(4 == correctAnswer){
+                        disabledQuestion = document.getElementById("QuestionD");
+                        disabledQuestion.disabled = true;
+                        disabledQuestion.style.backgroundColor = 'rgb(59,153,109)';
+                        disabledQuestion.style.borderColor = 'rgb(25,135,84)';
+                        disabledQuestion.style.opacity= 1;
+                        selectedA();
+                        selectedB();
+                        selectedC();
+                        runProgressBar();
+                    }
+                    else{
+                        disabledQuestion = document.getElementById("QuestionD");
+                        disabledQuestion.disabled = true;
+                   }
+                  }
+  
+              
+   
+               function runProgressBar(){
+                   bar = document.getElementById("displayProgressBar");
+                   barBtn = document.getElementById("progressBtn");
+                   bar.style.display = "inline-flex";
+                   bar.style.opacity = 1;
+                   barBtn.disabled = false;
+                   bar.scrollIntoView()
+                   var startingNumber = 0;
+                   progressLoop(startingNumber);
+               }
+   
+               var width = 0;
+               progressWidth = document.getElementById("progressMeter").style.width
+               console.log(progressWidth)
+   
+               function progressLoop(){
+                   if(width != 100){
+                       width = width + 1;
+                       let progressWidthString = width.toString() + '%';
+                       progressWidth = progressWidthString;
+                       $('#progressMeter').css({'width': progressWidth, 'height': 'auto'});
+                       setTimeout(progressLoop, 100);
+                   }
+                   else{
+                      console.log("Next Question")
+                      barBtn = document.getElementById("progressBtn");
+                      setTimeout(() => {  barBtn.click(); }, 1000);
+                      
+                   }
+               }
+  
+  
+  
+              
+          
+          </script>
+      </body>
+  </html>

@@ -155,6 +155,12 @@
                 margin:0;
             }
 
+            .removePadding{
+                margin:0;
+                padding:0;
+                display:inline-flex
+            }
+
 
             
 
@@ -238,12 +244,15 @@
             <div class="row flex-nowrap">
                 <div class="col-7 justify-content-left align-self-center">
                     <h2>
-                        Correct / Wrong
+                        Correct / Total
                     </h2>
                 </div>
                 <div class="col-5 justify-content-left text-center">
                     <h2>
-                        {{result.correct}}/{{result.wrong}}
+                        <param class="removePadding" id="numOfCorrect" value="{{result.correct}}" >
+                        </param>
+                        <param class="removePadding" id="totalNum" value="{{result.wrong}}">
+                        </param>
                     </h2>
                 </div>
             </div>
@@ -328,6 +337,18 @@
         <script>
             document.addEventListener("DOMContentLoaded", function(){
 
+                var numOfCorrect = document.getElementById("numOfCorrect")
+                var totalNum = document.getElementById("totalNum")
+
+                console.log("NUMOFCORRECT: " + numOfCorrect.value)
+
+                console.log("TOTAL: " + totalNum.value)
+
+                var sumOfWrongAndRight = Number(numOfCorrect.value) + Number(totalNum.value)
+                numOfCorrect.innerText = numOfCorrect.value + " /"
+                totalNum.innerText = sumOfWrongAndRight
+                console.log("SUM: " + sumOfWrongAndRight)
+
                 el_autohide = document.querySelector('.autohide');
                 // add padding-top to bady (if necessary)
                 navbar_height = document.querySelector('.navbar').offsetHeight;
@@ -355,6 +376,7 @@
 
 
 
+
             newCorrectAnswer = document.getElementsByClassName("readAnswer")
             console.log("How many Questions? = " + newCorrectAnswer.length)
 
@@ -363,23 +385,22 @@
                 classCorrectAnswer = document.getElementsByClassName("correctAnswer")
                 classLastAnswered = document.getElementsByClassName("lastSubAnswer")
 
-                console.log("Class Correct Answer: " + classCorrectAnswer[i])
-                console.log("Class Last Answered: " + classLastAnswered[i])
+                //console.log("Class Correct Answer: " + classCorrectAnswer[i])
+                //console.log("Class Last Answered: " + classLastAnswered[i])
 
                 correctAnswer = classCorrectAnswer[i].value;
-                console.log("Correct Answer: " + correctAnswer)
+                //.log("Correct Answer: " + correctAnswer)
                 selectedAnswer = classLastAnswered[i].value;
-                console.log("Selected Answer: " + selectedAnswer)
+                //console.log("Selected Answer: " + selectedAnswer)
 
                 var questionId = classCorrectAnswer[i].id;
-                console.log("Question ID: " + questionId)
+                //console.log("Question ID: " + questionId)
                 var questionIdString = questionId.toString();
 
                 answer1String = questionIdString + "answer1";
                 answer2String = questionIdString + "answer2";
                 answer3String = questionIdString + "answer3";
                 answer4String = questionIdString + "answer4";
-
 
                 answer1 = document.getElementById(answer1String);
                 answer2 = document.getElementById(answer2String);
@@ -398,33 +419,33 @@
 
 
                 if(selectedAnswer == correctAnswer){
-                    console.log("Started If")
+                    //console.log("Started If")
                     let answerNum = questionId + "answer";
                     let textNum = questionId + "text";
                     answerNum = answerNum + selectedAnswer.toString();
                     textNum = textNum + selectedAnswer.toString();
-                    console.log("Answer To String: " + answerNum)
-                    console.log("Text To String: " + textNum)
+                    //console.log("Answer To String: " + answerNum)
+                    //console.log("Text To String: " + textNum)
 
                     var correctAnswer = window[answerNum];
                     var correctText = window[textNum];
 
-                    console.log("Window Element Correct Answer: " + correctAnswer)
-                    console.log("Window Element Correct Answer Text: " + correctText)
+                    //console.log("Window Element Correct Answer: " + correctAnswer)
+                    //console.log("Window Element Correct Answer Text: " + correctText)
 
 
                     correctAnswer.classList.add('fourOptionsCorrect');
                     correctText.innerText = "Correct";
                 }
                 else{
-                    console.log("Started Else")
+                    //console.log("Started Else")
 
                     let answerNum = questionId + "answer";
                     let textNum = questionId + "text";
                     answerNum = answerNum + correctAnswer.toString();
                     textNum = textNum + correctAnswer.toString();
-                    console.log("Answer To String: " + answerNum)
-                    console.log("Text To String: " + textNum)
+                    //console.log("Answer To String: " + answerNum)
+                    //console.log("Text To String: " + textNum)
 
                     var correctAnswer = window[answerNum];
                     var correctText = window[textNum];
@@ -437,8 +458,8 @@
 
                     answerNum = answerNum + selectedAnswer.toString();
                     textNum = textNum + selectedAnswer.toString();
-                    console.log("Answer To String: " + answerNum)
-                    console.log("Text To String: " + textNum)
+                    //console.log("Answer To String: " + answerNum)
+                    //console.log("Text To String: " + textNum)
 
                     var correctAnswer = window[answerNum];
                     var correctText = window[textNum];

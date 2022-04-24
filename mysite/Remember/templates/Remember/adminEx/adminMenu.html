@@ -179,20 +179,16 @@
 
         <div class="d-flex justify-content-center align-content-center flex-wrap">
 
-            <form action="{% url 'Remember:editQuestionnaire' %}" method="post">
-                {% csrf_token %}
-                <div class="p-2 bd-highlight">
-                    <button type="submit" value="pickedPatient" class="pictureButton btn-light" >
-                        <div class="d-flex justify-content-center scaleEdit">
-                            <div class="pictureStyle"></div> <br> 
-                            <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
-                        </div>
-                        <input type="hidden" name="relation">
-                        <h5 class="names">Edit Questionnaire</h5>
-                        <input type="hidden" name="relation" value="{{userRelation.id}}">
-                    </button>
-                </div>
-            </form>
+
+            <div class="p-2 bd-highlight">
+                <button  class="pictureButton btn-light" onclick="window.location.href='/remember/editQuestionnaire';">
+                    <div class="d-flex justify-content-center scaleEdit">
+                        <div class="pictureStyle"></div> <br> 
+                        <!--The minimum width of the image depends on the length of the name, (there are problems if the name is too long)-->
+                    </div>
+                    <h5 class="names">Edit Questionnaire</h5>
+                </button>
+            </div>
 
             <div class="p-2 bd-highlight">
                 <button  class="pictureButton btn-light" onclick="window.location.href='/remember/reviewResults';">
