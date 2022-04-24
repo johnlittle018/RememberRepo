@@ -163,7 +163,11 @@
 
                 -->
                 <br>
+
+            <form action="{% url 'Remember:updateUser' %}" method="post" enctype="multipart/form-data" >
+                {% csrf_token %}
                 
+                <input type="hidden" name="updateType" value="name">
 
                 <div class="input-group mb-3 addHorizontalPadding">
                     <div class="input-group-prepend">
@@ -189,14 +193,14 @@
                     <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1" style="width: 150px;">First Name</span>
                     </div>
-                    <input type="text" name="firstName" required="required" class="form-control" placeholder=""  id="inputFirstNameId">
+                    <input type="text" name="firstName" required="required" class="form-control" value="{{user.firstName}}"  id="inputFirstNameId">
                 </div>
 
                 <div class="input-group mb-3 addHorizontalPadding" id="lNameDisplay">
                     <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1" style="width: 150px;">Last Name</span>
                     </div>
-                    <input type="text" name="lastName" required="required" class="form-control" placeholder=""   id="inputLastNameId">
+                    <input type="text" name="lastName" required="required" class="form-control" value="{{user.lastName}}"   id="inputLastNameId">
                 </div>
 
                 {% if error_message %}
@@ -205,11 +209,11 @@
                     </div>
                 {% endif %}   
                 
-                <!--
+                
                 <div class="addHorizontalPadding">
-                    <button type="submit" value="submitMyAdmin" required="required" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
+                    <button type="submit" value="updateUser" required="required" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
                 </div>
-                -->
+               
 
             </form>
         <!-- Optional JavaScript -->

@@ -164,20 +164,17 @@
                 -->
 
                 <br>
-                
 
-                <div class="input-group mb-3 addHorizontalPadding">
-                    <div class="input-group-prepend">
-                    <span class="input-group-text " id="basic-addon1" style="width: 185px;">Current Email Address</span>
-                    </div>
-                    <input type="email" name="email" class="form-control" placeholder="" disabled>
-                </div>
+            <form action="{% url 'Remember:updateUser' %}" method="post" enctype="multipart/form-data" >
+                {% csrf_token %}
+
+                <input type="hidden" name="updateType" value="email">
 
                 <div class="input-group mb-3 addHorizontalPadding">
                     <div class="input-group-prepend">
                     <span class="input-group-text " id="basic-addon1" style="width: 185px;">New Email Address</span>
                     </div>
-                    <input type="email" name="email" required="required" class="form-control" placeholder="New Email Address">
+                    <input type="email" name="email" required="required" class="form-control" value="{{user.email}}">
                 </div>
 
                 <div class="input-group mb-3 addHorizontalPadding" id="passwordDisplay">
@@ -216,14 +213,14 @@
                     </div>
                 {% endif %}   
                 
-                <!--
+                
                 <div class="addHorizontalPadding">
-                    <button type="submit" value="submitMyAdmin" required="required" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
+                    <button type="submit" value="updateUser" required="required" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
                 </div>
-                -->
-
-
             </form>
+
+
+          
         <!-- Optional JavaScript -->
 
         <script>

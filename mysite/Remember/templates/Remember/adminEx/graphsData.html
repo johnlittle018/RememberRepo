@@ -119,13 +119,19 @@
         <br>
         
         <h1> 
-            <span>Analytics -</span>
-            <span>{{userRelation.patient.name}}</span>
+            <span>Analytics - {{userRelation.patient.firstName}}</span>
+            <span></span>
         </h1>
 
         <div class="card chart-container">
             <canvas id="chart"></canvas>
-          </div>
+        </div>
+
+        <br>
+
+        <div class="card chart-container">
+            <canvas id="chart2"></canvas>
+        </div>
 
         <!-- Optional JavaScript -->
 
@@ -159,18 +165,86 @@
             </script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" crossorigin="anonymous"></script>
             <script>
+
+            
+            
+            var data = JSON.parse("{{scores|escapejs}}");
+            console.log(data);
+            // Making x data
+            xData = []
+            for (let i = 0; i < data.length; i++) {
+                xData.push(data[i][0])
+            }
+            // console.log(xData);
+
+            // making y data 
+            yData = []
+            for (let i = 0; i < data.length; i++) {
+                yData.push(data[i][1])
+            }
+            // console.log(yData);
+
+
+            //Chart 1
             const ctx = document.getElementById("chart").getContext('2d');
             const myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                labels: ["3/6/2022", "3/7/2022", "3/8/2022",
-                "3/9/2022", "3/10/2022", "3/11/2022", "3/12/2022"],
-                datasets: [{
-                    label: 'Last week',
-                    backgroundColor: 'rgba(161, 198, 247, 1)',
-                    borderColor: 'rgb(47, 128, 237)',
-                    data: [87, 100, 70, 89, 69, 27, 10],
-                }]
+                    // equivelent to x
+                    labels: xData,
+                    datasets: [{
+                        label: 'Last week',
+                        backgroundColor: 'rgba(161, 198, 247, 1)',
+                        borderColor: 'rgb(47, 128, 237)',
+                    // equivelent to y per uper x
+                        data: yData,
+                    }]
+                },
+                options: {
+                scales: {
+                    yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                    }]
+                }
+                },
+            });
+
+
+            var data2 = JSON.parse("{{times|escapejs}}");
+            console.log(data);
+            // Making x data
+            xData2 = []
+            for (let i = 0; i < data.length; i++) {
+                xData2.push(data2[i][0])
+            }
+            
+            console.log(xData2);
+
+            // making y data 
+            yData2 = []
+            for (let i = 0; i < data.length; i++) {
+                yData2.push(data2[i][1])
+            }
+            
+            console.log(yData2);
+
+
+            //Chart 2
+            const ctx2 = document.getElementById("chart2").getContext('2d');
+            const myChart2 = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    // equivelent to x
+                    labels: xData2,
+                    datasets: [{
+                        label: 'Last week',
+                        backgroundColor: 'rgba(161, 198, 247, 1)',
+                        borderColor: 'rgb(47, 128, 237)',
+                    // equivelent to y per uper x
+                        data: yData2,
+                    }]
                 },
                 options: {
                 scales: {

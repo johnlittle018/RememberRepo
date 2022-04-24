@@ -134,6 +134,27 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
     padding:0px;
     }
 
+    .strikeout{
+        text-decoration: line-through 4px;
+        text-decoration-color: rgb(220, 53, 69);        
+    }
+
+    .newHidden{
+        animation: fadeOutAnimation ease 2s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+
+    
+    @keyframes fadeOutAnimation{
+                0% {
+                    opacity: .6;
+                }
+                100% {
+                    opacity: 0;
+                }
+            } 
+
 </style>
 </head>
 
@@ -318,7 +339,9 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                  }
                  else{
                      disabledQuestion = document.getElementById("QuestionA");
+                     disabledQuestion.classList.add("strikeout");
                      disabledQuestion.disabled = true;
+                     hideAnswer(disabledQuestion)
                  }
              }
  
@@ -343,7 +366,10 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                  }
                  else{
                      disabledQuestion = document.getElementById("QuestionB");
+                     disabledQuestion.classList.add("strikeout");
                      disabledQuestion.disabled = true;
+                     hideAnswer(disabledQuestion)
+
                 }
             }
  
@@ -367,7 +393,10 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                  }
                  else{
                      disabledQuestion = document.getElementById("QuestionC");
+                     disabledQuestion.classList.add("strikeout");
                      disabledQuestion.disabled = true
+                     hideAnswer(disabledQuestion)
+
                  }
             }
  
@@ -391,7 +420,10 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                   }
                   else{
                       disabledQuestion = document.getElementById("QuestionD");
+                      disabledQuestion.classList.add("strikeout");
                       disabledQuestion.disabled = true;
+                      hideAnswer(disabledQuestion)
+
                  }
                 }
 
@@ -426,7 +458,15 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                     setTimeout(() => {  barBtn.click(); }, 1000);
                     
                  }
-             }
+             }             
+
+            function hideAnswer(disabledQuestion){
+                setTimeout(function(){disabledQuestion.classList.add("newHidden");}, 500);
+
+                
+
+
+            }
 
 
 
