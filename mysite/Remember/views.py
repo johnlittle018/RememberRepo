@@ -208,13 +208,14 @@ def submitQuestion(request):
     myFileSystem.save(myThingy.name, myThingy)
     source = "./media/" + myThingy.name 
     name = str(uuid.uuid4()) + myThingy.name
-    destination = "./Remember/static/remember/images/questionImages/" + name 
+    destination = "./media/Remember/Images/" + name
+    # destination = "./Remember/media/Remember/images/questionImages/" + name 
     os.rename(source, destination)
     
     
     ## this is what is passed to the question for a refrence to the image.
     ## formated so it can be used directly in html
-    nameForDatabase = "/../../static/remember/images/questionImages/" + name
+    nameForDatabase = "/../../media/Remember/Images/" + name
  
     ## pulling data from the calling form
     photoDiscription = request.POST['pDescription']
@@ -276,7 +277,7 @@ def resubmitQuestion(request):
         return HttpResponseRedirect(reverse('Remember:loginPage'))
 
 
-    ## stuff for images
+    
     # pulling the picture from the form
     newPic = True
     try:
@@ -286,16 +287,19 @@ def resubmitQuestion(request):
 
     if newPic == True: 
     
+        myThingy = request.FILES['uploadedPic']
         myFileSystem = FileSystemStorage()
         myFileSystem.save(myThingy.name, myThingy)
         source = "./media/" + myThingy.name 
         name = str(uuid.uuid4()) + myThingy.name
-        destination = "./Remember/static/remember/images/questionImages/" + name 
+        destination = "./media/Remember/Images/" + name
+        # destination = "./Remember/media/Remember/images/questionImages/" + name 
         os.rename(source, destination)
-        
+    
+    
         ## this is what is passed to the question for a refrence to the image.
         ## formated so it can be used directly in html
-        nameForDatabase = "/../../static/remember/images/questionImages/" + name
+        nameForDatabase = "/../../media/Remember/Images/" + name
         myQuestion.picture = nameForDatabase
  
     # pulling data from calling form
@@ -947,13 +951,14 @@ def updatePatient(request):
         myFileSystem.save(myThingy.name, myThingy)
         source = "./media/" + myThingy.name 
         name = str(uuid.uuid4()) + myThingy.name
-        destination = "./Remember/static/remember/images/questionImages/" + name 
+        destination = "./media/Remember/Images/" + name
+        # destination = "./Remember/media/Remember/images/questionImages/" + name 
         os.rename(source, destination)
-        
-        
+    
+    
         ## this is what is passed to the question for a refrence to the image.
         ## formated so it can be used directly in html
-        nameForDatabase = "/../../static/remember/images/questionImages/" + name
+        nameForDatabase = "/../../media/Remember/Images/" + name
 
         myPatient.mugshot = nameForDatabase
         myPatient.save()
@@ -1100,13 +1105,14 @@ def submitPatient(request):
     myFileSystem.save(myThingy.name, myThingy)
     source = "./media/" + myThingy.name 
     name = str(uuid.uuid4()) + myThingy.name
-    destination = "./Remember/static/remember/images/questionImages/" + name 
+    destination = "./media/Remember/Images/" + name
+    # destination = "./Remember/media/Remember/images/questionImages/" + name 
     os.rename(source, destination)
     
     
     ## this is what is passed to the question for a refrence to the image.
     ## formated so it can be used directly in html
-    nameForDatabase = "/../../static/remember/images/questionImages/" + name
+    nameForDatabase = "/../../media/Remember/Images/" + name
 
     ## pulling data from requesting form
     
