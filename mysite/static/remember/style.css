@@ -1,0 +1,10 @@
+
+li a {
+    color: green;
+}
+
+body {
+    background: black url("images/backgroundImg.png") repeat;
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+}
