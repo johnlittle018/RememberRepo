@@ -134,9 +134,10 @@
         </div>
 
         <!-- Optional JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-       <script>
+      <script>
            document.addEventListener("DOMContentLoaded", function(){
 
                 el_autohide = document.querySelector('.autohide');
@@ -204,20 +205,20 @@
                     },
                     legend: {display: false},
                     scales: {
-                        xAxes: [{
+                        x: {
                             display: true,
                             scaleLabel: {
                             display: true,
                             labelString: 'Date Completed'
                             }
-                        }],
-                        yAxes: [{
+                        },
+                        y: {
                             display: true,
                             scaleLabel: {
                             display: true,
                             labelString: 'Score'
                             }
-                        }]
+                        }
                     }
                 },
             });
@@ -253,7 +254,8 @@
                         backgroundColor: 'rgba(161, 198, 247, 1)',
                         borderColor: 'rgb(47, 128, 237)',
                     // equivelent to y per uper x
-                        data: yData2,
+                    data: yData2,
+
                     }]
                 },
                 options: {
@@ -263,23 +265,34 @@
                     },
                     legend: {display: false},
                     scales: {
-                        xAxes: [{
+                        x: {
                             display: true,
                             scaleLabel: {
                             display: true,
                             labelString: 'Date Completed'
                             }
-                        }],
-                        yAxes: [{
+                        },
+                        y: {
                             display: true,
                             scaleLabel: {
-                            display: true,
-                            labelString: 'Time'
-                            }
-                        }]
+                                display: true,
+                                labelString: 'Time'
+                            },
+                            ticks: {
+                                beginAtZero:true,
+                                callback: function(value, index, values) {
+                                    for(let i = 0; i < data.length; i++)
+                                        return fmtMSS(value);
+                                }
+                            },
+                        }
                     }
                 },
             });
+
+            function fmtMSS(s){
+                return((s-(s%=60))/60+(9<s?':m':':0')+s + "s")
+            }
 
         </script>
 
