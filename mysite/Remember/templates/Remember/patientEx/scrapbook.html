@@ -108,6 +108,23 @@
                 font-size: calc(1.0vw + 1.5vh);
             }
 
+            .previousArrow{
+                width:50px; height: 30px; 
+                background: url(/../../static/remember/images/leftArrow.png) no-repeat;
+                background-size: contain;
+                border: none;
+                background-position: center;
+            }
+
+            .nextArrow{
+                width:50px; height: 30px; 
+                background: url(/../../static/remember/images/rightArrow.png) no-repeat;
+                background-size: contain;
+                border: none;
+                background-position: center;
+            }
+
+
 
         </style>
     </head>
@@ -144,9 +161,14 @@
          
         <div class="container d-flex flex-column mb-5 col-md-8">  
 
-            <div class="mb-2 align-self-end">
-                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">Previous</button>
-                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">Next</button>
+            <div class="mb-2 align-self-center">
+                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">
+                    <div class="previousArrow"></div>
+                </button>
+
+                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">
+                    <div class="nextArrow"></div>
+                </button>
             </div>
 
             <div id="carouselExampleDark" class="carousel carousel-dark slide scrapbook align-self-center col-md-12" data-bs-interval="false">
@@ -170,8 +192,15 @@
             </div> 
 
             <div class="mt-4 align-self-center">
-                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">Previous</button>
-                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">Next</button>
+                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">
+                    <div class="previousArrow"></div>
+                </button>
+                <div class="" style="background-color: white;">
+                    HERE
+                </div>
+                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">
+                    <div class="nextArrow"></div>
+                </button>
             </div>
              
 
