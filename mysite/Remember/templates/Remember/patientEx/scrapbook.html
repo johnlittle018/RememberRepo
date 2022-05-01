@@ -57,11 +57,14 @@
             .btn.btn-secondary.dropdown-toggle {
                 background-color: rgb(225,225,225);  
             }
+            
             h1{
-                color: white;
-                font-family: 'Sans serif', Helvetica, sans-serif;
-                font-size: calc(2.5vw + 2.5vh);
-            }
+             color: white;
+             font-family: 'Sans serif', Helvetica, sans-serif;
+             font-size: calc(3vw + 2vh);
+             padding-top:2%;
+             padding-left: 12%;
+         }
 
             h2{
                 font-size: calc(1.7vw + 1.0vh);
@@ -124,7 +127,18 @@
                 background-position: center;
             }
 
-
+            .index{
+                background-color: aliceblue;
+                padding-left: 0%;
+                padding-right: 0%;
+                margin-left: 5px;
+                margin-right: 5px;
+                font-weight: bold;
+                font-size: 30px;
+                padding: 3px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
 
         </style>
     </head>
@@ -161,11 +175,11 @@
          
         <div class="container d-flex flex-column mb-5 col-md-8">  
 
-            <div class="mb-2 align-self-center">
-                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">
+            <div class="mt-4 d-flex justify-content-center align-self-center " style="margin-bottom: 10px;">
+                <button type="button" class="btn btn-primary prev" onclick="plusSlides(-1)">
                     <div class="previousArrow"></div>
                 </button>
-
+                <div class="index align-self-center" id="indexCounter"></div>
                 <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">
                     <div class="nextArrow"></div>
                 </button>
@@ -191,13 +205,10 @@
                 </div>
             </div> 
 
-            <div class="mt-4 align-self-center">
-                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">
+            <div class="mt-4 d-flex justify-content-center align-self-center ">
+                <button type="button" class="btn btn-primary prev" onclick="plusSlides(-1)" style="margin-right: 5px">
                     <div class="previousArrow"></div>
                 </button>
-                <div class="" style="background-color: white;">
-                    HERE
-                </div>
                 <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">
                     <div class="nextArrow"></div>
                 </button>
@@ -208,18 +219,29 @@
               
         <script>
 
+            myIndex = document.getElementById("indexCounter");
+
             var slideIndex = 1;
             showSlides(slideIndex);
 
             function plusSlides(n) {
-            showSlides(slideIndex += n);
+            newIndex = slideIndex += n;
+            showSlides(newIndex);
             }
+
             function showSlides(n) {
             var i;
             var slides = document.getElementsByClassName("carousel-item");
-            if (n > slides.length) {slideIndex = 1}    
-            if (n < 1) {slideIndex = slides.length}
+            if (n > slides.length) {
+                slideIndex = 1
+                myIndex.textContent = slideIndex;
+            }    
+            if (n < 1) {
+                myIndex.textContent = slideIndex;
+                slideIndex = slides.length
+            }
             for (i = 0; i < slides.length; i++) {
+                myIndex.textContent = slideIndex;
                 slides[i].style.display = "none";  
             }
 
