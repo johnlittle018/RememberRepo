@@ -128,7 +128,6 @@
             }
 
             .index{
-                background-color: aliceblue;
                 padding-left: 0%;
                 padding-right: 0%;
                 margin-left: 5px;
@@ -138,6 +137,25 @@
                 padding: 3px;
                 padding-left: 5px;
                 padding-right: 5px;
+            }
+
+            .littleIndex{
+                padding-left: 0%;
+                padding-right: 0%;
+                margin-left: 1px;
+                margin-right: 1px;
+                font-weight: bold;
+                font-size: 15px;
+                color: rgb(125, 125, 125);
+                padding: 1px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            .flex-container {
+                display: flex;
+                align-items: center;
+                width: 100%;
             }
 
         </style>
@@ -179,9 +197,15 @@
                 <button type="button" class="btn btn-primary prev" onclick="plusSlides(-1)">
                     <div class="previousArrow"></div>
                 </button>
-                <div class="index align-self-center" id="indexCounter"></div>
+                <div class="flex-container" style="background-color:aliceblue">
+                    <div class="littleIndex align-self-center" id="indexCounter-2"></div>
+                    <div class="littleIndex align-self-center" id="indexCounter-1"></div>
+                    <div class="index align-self-center" id="indexCounter"></div>
+                    <div class="littleIndex align-self-center" id="indexCounter+1"></div>
+                    <div class="littleIndex align-self-center" id="indexCounter+2"></div>
+                </div>
                 <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">
-                    <div class="nextArrow"></div>
+                <div class="nextArrow"></div>
                 </button>
             </div>
 
@@ -218,34 +242,82 @@
         </div> 
               
         <script>
-
+            myIndexM2 = document.getElementById("indexCounter-2");
+            myIndexM1 = document.getElementById("indexCounter-1");
             myIndex = document.getElementById("indexCounter");
+            myIndexP1 = document.getElementById("indexCounter+1");
+            myIndexP2 = document.getElementById("indexCounter+2");
 
             var slideIndex = 1;
             showSlides(slideIndex);
 
             function plusSlides(n) {
-            newIndex = slideIndex += n;
-            showSlides(newIndex);
-            }
+                newIndex = slideIndex += n;
+                showSlides(newIndex);
+                }
 
-            function showSlides(n) {
-            var i;
-            var slides = document.getElementsByClassName("carousel-item");
-            if (n > slides.length) {
-                slideIndex = 1
-                myIndex.textContent = slideIndex;
-            }    
-            if (n < 1) {
-                myIndex.textContent = slideIndex;
-                slideIndex = slides.length
-            }
-            for (i = 0; i < slides.length; i++) {
-                myIndex.textContent = slideIndex;
-                slides[i].style.display = "none";  
-            }
+                function showSlides(n) {
+                var i;
+                var slides = document.getElementsByClassName("carousel-item");
+                //going fowards too far
+                if (n > slides.length) {
+                    slideIndex = 1
+                    myIndexM2.textContent = slideIndex-2;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndex.textContent = slideIndex;
+                    myIndexP1.textContent = slideIndex+1;
+                    myIndexP2.textContent = slideIndex+2;
+                }    
+                //going backwards too far
+                if (n < 1) {
+                    myIndexM2.textContent = slideIndex-2;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndex.textContent = slideIndex;
+                    myIndexP1.textContent = slideIndex+1;
+                    myIndexP2.textContent = slideIndex+2;
+                    slideIndex = slides.length
+                }
+                for (i = 0; i < slides.length; i++) {
+                    myIndex.textContent = slideIndex;
+                    slides[i].style.display = "none";  
+                }
 
-            slides[slideIndex-1].style.display = "block";  
+                slides[slideIndex-1].style.display = "block";  
+
+                if(slideIndex == 1){
+                    console.log("n = 1")
+
+                    myIndexM2.textContent = slides.length-1;
+                    myIndexM1.textContent = slides.length;
+                    myIndexP1.textContent = slideIndex+1;
+                    myIndexP2.textContent = slideIndex+2;
+                } else if(slideIndex == 2){
+                    console.log("n = 2")
+
+                    myIndexM2.textContent = slides.length;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndexP1.textContent = slideIndex+1;
+                    myIndexP2.textContent = slideIndex+2;
+                } else if(slideIndex == slides.length-1){
+                    console.log("n = slide.length - 1")
+
+                    myIndexM2.textContent = slideIndex-2;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndexP1.textContent = slideIndex+1;
+                    myIndexP2.textContent = 1;
+                } else if(slideIndex == slides.length){
+                    console.log("n = slides.length")
+
+                    myIndexM2.textContent = slideIndex-2;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndexP1.textContent = 1;
+                    myIndexP2.textContent = 2;
+                } else{
+                    myIndexM2.textContent = slideIndex-2;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndexP1.textContent = slideIndex+1;
+                    myIndexP2.textContent = slideIndex+2;
+                }
             }
 
             document.addEventListener("DOMContentLoaded", function(){
