@@ -124,7 +124,7 @@
             <a class="navbar-brand" href="/remember/manageMyAdminAccount" >
                 <button class="backButton"></button>
             </a>
-            <a href="">
+            <a href="/remember/userMenu">
                 <div class="logo"></div>
             </a>
             <div class="dropdown" style="padding-right:1vw;">
@@ -191,7 +191,7 @@
                     <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1" style="width: 185px;">First Name</span>
                     </div>
-                    <input type="text" name="firstName" class="form-control" placeholder=""  id="inputFirstNameId" disabled>
+                    <input type="text" name="firstName" class="form-control" placeholder="{{user.firstName}}"  id="inputFirstNameId" disabled>
                     <a href = "/remember/manageMyAdminName">
                         <img src="/../../static/remember/images/settingsIcon1.png" style="width:35px;height:35px; margin-left:5px;margin-right: 5px;">
                     </a>
@@ -201,7 +201,7 @@
                     <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1" style="width: 185px;">Last Name</span>
                     </div>
-                    <input type="text" name="lastName" class="form-control" placeholder=""   id="inputLastNameId" disabled>
+                    <input type="text" name="lastName" class="form-control" placeholder="{{user.lastName}}"   id="inputLastNameId" disabled>
                     <a href = "/remember/manageMyAdminName">
                         <img src="/../../static/remember/images/settingsIcon1.png" style="width:35px;height:35px; margin-left:5px;margin-right: 5px;">
                     </a>

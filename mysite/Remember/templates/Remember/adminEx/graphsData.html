@@ -85,6 +85,22 @@
                 margin: auto;
             }
 
+            .container{
+                border: 5px solid black;
+                background-color: aliceblue;
+                padding: .5%;
+                margin-bottom: 5px;
+            }
+
+            
+            .line{
+                border: 0;
+                border-bottom: 5px dashed black;
+                opacity: .3;
+                padding:0;
+                margin:0;
+            }
+
         </style>
     </head>
 
@@ -101,7 +117,7 @@
             <a class="navbar-brand" href="/remember/adminMenu" >
                 <button class="backButton"></button>
             </a>
-            <a href="">
+            <a href="/remember/userMenu">
                 <div class="logo"></div>
             </a>
             <div class="dropdown" style="padding-right:1vw;">
@@ -123,19 +139,54 @@
             <span></span>
         </h1>
 
+        
+        <div class="container">
+            <div class="row flex-nowrap">
+                <div class="col-7 justify-content-left align-self-center">
+                    <h3>
+                        Average Score
+                    </h3>
+                </div>
+                <div class="col-5 justify-content-center text-center">
+                    <h3>
+                        {{avrageScore}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+
+
         <div class="card chart-container">
-            <canvas id="chart"></canvas>
+            <canvas id="chart1"></canvas>
         </div>
 
         <br>
+
+        <div class="container">
+            <div class="row flex-nowrap">
+                <div class="col-7 justify-content-left align-self-center">
+                    <h3>
+                        Average Time Taken
+                    </h3>
+                </div>
+                <div class="col-5 justify-content-center text-center">
+                    <h3>
+                        {{avrageTime}}
+                    </h3>
+                </div>
+            </div>
+        </div>
 
         <div class="card chart-container">
             <canvas id="chart2"></canvas>
         </div>
 
         <!-- Optional JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
-        <script>
+      <script>
            document.addEventListener("DOMContentLoaded", function(){
 
                 el_autohide = document.querySelector('.autohide');
@@ -162,10 +213,6 @@
                 // if
 
             }); 
-            </script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" crossorigin="anonymous"></script>
-            <script>
-
             
             
             var data = JSON.parse("{{scores|escapejs}}");
@@ -186,31 +233,50 @@
 
 
             //Chart 1
-            const ctx = document.getElementById("chart").getContext('2d');
+            const ctx = document.getElementById("chart1")
             const myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     // equivelent to x
                     labels: xData,
                     datasets: [{
-                        label: 'Last week',
+                        fill: false,
                         backgroundColor: 'rgba(161, 198, 247, 1)',
                         borderColor: 'rgb(47, 128, 237)',
-                    // equivelent to y per uper x
+                    // equivelent to y per upper x
                         data: yData,
                     }]
                 },
                 options: {
-                scales: {
-                    yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Total Results'
+                    },
+                    legend: {display: false},
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date Completed',
+                                font: {
+                                    size: '16px',
+                                    weight: 'bold',
+                                }
+                            },
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Score',
+                                font: {
+                                    size: '16px',
+                                    weight: 'bold',
+                                }
+                            },
+                        }
                     }
-                    }]
-                }
                 },
             });
-
 
             var data2 = JSON.parse("{{times|escapejs}}");
             console.log(data);
@@ -239,23 +305,55 @@
                     // equivelent to x
                     labels: xData2,
                     datasets: [{
-                        label: 'Last week',
+                        fill: false,
                         backgroundColor: 'rgba(161, 198, 247, 1)',
                         borderColor: 'rgb(47, 128, 237)',
                     // equivelent to y per uper x
-                        data: yData2,
+                    data: yData2,
+
                     }]
                 },
                 options: {
-                scales: {
-                    yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Total Results'
+                    },
+                    legend: {display: false},
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date Completed',
+                                font: {
+                                    size: '16px',
+                                    weight: 'bold',
+                                }
+                            },
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Time',
+                                font: {
+                                    size: '16px',
+                                    weight: 'bold',
+                                }
+                            },
+                            ticks: {
+                                beginAtZero:true,
+                                callback: function(value, index, values) {
+                                    for(let i = 0; i < data.length; i++)
+                                        return fmtMSS(value);
+                                }
+                            },
+                        }
                     }
-                    }]
-                }
                 },
             });
+
+            function fmtMSS(s){
+                return((s-(s%=60))/60+(9<s?':m':':0')+s + "s")
+            }
 
         </script>
 
