@@ -64,11 +64,11 @@ def login(request):
     if User.objects.filter(email = Email).exists():
         ourUser = User.objects.filter(email = Email)
         # print("email is in the system.")
-        # print(userPassword)
-        # print(ourUser[0].password)
-        # print(userPassword.encode('utf8'))
-        # print(type(userPassword.encode('utf8')))
-        # print(type(ourUser[0].password))
+        print(userPassword)
+        print(ourUser[0].password)
+        print(userPassword.encode('utf8'))
+        print(type(userPassword.encode('utf8')))
+        print(type(ourUser[0].password))
         if bcrypt.checkpw(userPassword.encode('utf8'), ourUser[0].password):
             # print("Password is good") 
             request.session['loggedInID'] = ourUser[0].id
@@ -724,22 +724,17 @@ def graphsData(request):
     ## scores over time
 
     scores = []
-    avrageScore = 0
     for result in results:
         x = str(result.completionTime.day) + "/" + str(result.completionTime.month) + "/" + str(result.completionTime.year) 
         score = [x,  str(result.score)]
         scores.append(score)
-        avrageScore = avrageScore + result.score
 
-    avrageScore = avrageScore / len(results)
-    avrageScore = round(avrageScore, 2)
     # print(scores)
 
 
     ## times over time
 
     times = []
-    avrageTime = 0
     for result in results:
         x = str(result.completionTime.day) + "/" + str(result.completionTime.month) + "/" + str(result.completionTime.year) 
         elapsedTime = result.completionTime - result.myQuestions[0].timeEnded 
@@ -748,11 +743,8 @@ def graphsData(request):
         formatedElapsedTime = elapsedTime.seconds
         time = [x, formatedElapsedTime]
         times.append(time)
-        avrageTime = avrageTime + formatedElapsedTime
 
-    avrageTime = avrageTime / len(results)
-    avrageTimeFormated = str(int(avrageTime / 60)) + " Minutes and " + str(int(avrageTime % 60)) +" Seconds"
-    count = len(results)
+    print(times)
 
     
 
@@ -760,8 +752,7 @@ def graphsData(request):
     passingScores = dumps(scores)
     passingTimes = dumps(times)
 
-    return render(request, 'Remember/adminEx/graphsData.html', {'userRelation' : relation, 
-    'results' : results, 'scores' : passingScores, 'times': passingTimes, 'avrageScore' : avrageScore, 'avrageTime' : avrageTimeFormated, "count": count})
+    return render(request, 'Remember/adminEx/graphsData.html', {'userRelation' : relation, 'results' : results, 'scores' : passingScores, 'times': passingTimes})
 
 ## loads the invite family page
 def inviteFamily(request):
@@ -873,7 +864,6 @@ def updateUser(request):
     myUser = User.objects.get(pk = request.session['loggedInID'])
 
     updateType = request.POST['updateType']
-    salt = bcrypt.gensalt()
 
 
     if updateType == "email":
@@ -887,7 +877,7 @@ def updateUser(request):
         passwordConfirm = request.POST['passwordConfirm']
         password = request.POST['password']
         if passwordConfirm == password:
-            myUser.password = bcrypt.hashpw(password.encode('utf8'), salt)
+            myUser.password = password
             myUser.save()
         else:
             print("Error Error 9000")
@@ -922,7 +912,6 @@ def updatePatient(request):
     myPatient = relation.patient
 
     updateType = request.POST['updateType']
-    salt = bcrypt.gensalt()
 
 
     if updateType == "email":
@@ -936,7 +925,7 @@ def updatePatient(request):
         passwordConfirm = request.POST['passwordConfirm']
         password = request.POST['password']
         if passwordConfirm == password:
-            myPatient.password = bcrypt.hashpw(password.encode('utf8'), salt)
+            myPatient.password = password
             myPatient.save()
         else:
             return render(request, 'Remember/adminEx/managePatientPassword.html', 
@@ -1131,18 +1120,12 @@ def submitPatient(request):
     password = request.POST['password']
     firstName = request.POST['firstName']
     lastName = request.POST['lastName']
-    passwordConfirm = request.POST['passwordC']
 
 
     check = Patient.objects.filter(username = email)
 
     if len(check) == 0:
         ## email is not in use
-        ##checking that the who passwords that where given are the same.
-        if password != passwordConfirm:
-            return render(request, 'Remember/adminEx/createPatient.html', 
-                { 'error_message': "The passwords you entered did not match.",}
-            )  
         # making and saving the new patient
         newPatient = Patient(firstName=firstName, password=bcrypt.hashpw(password.encode('utf8'), salt), lastName=lastName, username=email, mugshot=nameForDatabase)
         newPatient.save()
@@ -1181,7 +1164,6 @@ def familyMenu(request, relationID): #changed familyMainMenu to familyMenu to be
     relation = PatientClearanceAbstraction.objects.get(pk = request.session['relationshipID'])
 
     return render(request, 'Remember/familyEx/familyMenu.html', {'userRelation' : relation})
-
 
 
 
