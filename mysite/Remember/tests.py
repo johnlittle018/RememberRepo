@@ -530,4 +530,285 @@ class PatientTests(TestCase):
 
 
 
+class RememberUITestCases(TestCase):
 
+    def test_make_admin_account_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'}, follow = True)
+        code = response.status_code
+        print(code)
+        content = response.content
+        self.assertRedirects(response, '/remember/pickPatient/', status_code=302,
+                             target_status_code=200, fetch_redirect_response=True)
+        self.assertTrue(b'Select a Patient' in response.content)
+        self.assertTrue(b'form action="/remember/createPatient/" method="post"' in content)
+
+        #print(content)
+
+
+    def test_login_page_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+
+        response = c.post('/remember/login/', {'Email': 'didycz001@gannon.edu', 'password': 'hi'}, follow = True)
+        code = response.status_code
+        # print(code)
+        content = response.content
+        # print(content)
+        self.assertRedirects(response, '/remember/pickPatient/', status_code=302,
+                             target_status_code=200, fetch_redirect_response=True)
+        self.assertTrue(b'Select a Patient' in response.content)
+        self.assertTrue(b'form action="/remember/createPatient/" method="post"' in content)
+        #print(content)
+
+    def test_submit_patient_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+
+        response = c.post('/remember/login/', {'Email': 'didycz001@gannon.edu', 'password': 'hi'}, follow = True)
+        with open('./Remember/static/remember/images/iphoneImg.jpg', 'rb') as fp:
+            response = c.post('/remember/submitPatient/', {'email': 'astley@aol.com', 'password': 'nevergiveUup', 'passwordConfirm': 'nevergiveUup', 'firstName': 'Rick', 'lastName': 'Astley', 'uploadedPic': fp}, follow = True)
+        code = response.status_code
+        content = response.content
+        # print(content)
+        self.assertRedirects(response, '/remember/pickPatient/', status_code=302,
+                             target_status_code=200, fetch_redirect_response=True)
+        self.assertTrue(b'<h5 class="names">Rick</h5>' in content)
+        self.assertTrue(b'iphoneImg.jpg' in content)
+
+    def test_picked_patient_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+
+        response = c.post('/remember/login/', {'Email': 'didycz001@gannon.edu', 'password': 'hi'}, follow = True)
+        with open('./Remember/static/remember/images/iphoneImg.jpg', 'rb') as fp:
+            response = c.post('/remember/submitPatient/', {'email': 'astley@aol.com', 'password': 'nevergiveUup', 'passwordConfirm': 'nevergiveUup', 'firstName': 'Rick', 'lastName': 'Astley', 'uploadedPic': fp}, follow = True)
+        response = c.post('/remember/pickedPatient/',
+                          {'relation': '1'}, follow = True)
+        code = response.status_code
+        content = response.content
+        self.assertRedirects(response, '/remember/adminMenu/', status_code=302,
+                             target_status_code=200, fetch_redirect_response=True)
+        self.assertTrue(b'<h5 class="names">Edit Questionnaire</h5>' in content)
+        self.assertTrue(b'<h5 class="names">Review Results</h5>' in content)
+        self.assertTrue(b'<h5 class="names">Set Reminder</h5>' in content)
+        self.assertTrue(b'<h5 class="names">Rick\'s Account</h5>' in content)
+        self.assertTrue(b'<h5 class="names">Invite Admins</h5>' in content)
+        self.assertTrue(b'<span>Admin Menu -</span>' in content)
+        self.assertTrue(b'<span>Rick</span>' in content)
+
+    def test_submit_question_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+
+        response = c.post('/remember/login/', {'Email': 'didycz001@gannon.edu', 'password': 'hi'}, follow=True)
+        with open('./Remember/static/remember/images/iphoneImg.jpg', 'rb') as fp:
+            response = c.post('/remember/submitPatient/',
+                              {'email': 'astley@aol.com', 'password': 'nevergiveUup', 'passwordConfirm': 'nevergiveUup',
+                               'firstName': 'Rick', 'lastName': 'Astley', 'uploadedPic': fp}, follow=True)
+        response = c.post('/remember/pickedPatient/',
+                          {'relation': '1'}, follow=True)
+        with open('./Remember/static/remember/images/RememberLogo.png', 'rb') as fp:
+            response = c.post('/remember/submitQuestion/', {'uploadedPic': fp, 'pDescription': 'Do you Remember?',
+                                                            'theQuestion': 'What is this logo?', 'answer1': 'ours',
+                                                            'answer2': 'art', 'answer3': 'Fiverr Baybeee',
+                                                            'answer4': 'nothing of note', 'toggle': 1}, follow=True)
+        code = response.status_code
+        content = response.content
+        # print(content)
+        self.assertRedirects(response, '/remember/editQuestionnaire/', status_code=302,
+                             target_status_code=200, fetch_redirect_response=True)
+        self.assertTrue(b'<p class="boxContent">' in content)
+        self.assertTrue(b'Fiverr Baybeee' in content)
+        self.assertTrue(b'ours' in content)
+        self.assertTrue(b'art' in content)
+        self.assertTrue(b'Questionnaire - Rick' in content)
+
+    def test_login_page_patient_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+        response = c.post('/remember/login/', {'Email': 'didycz001@gannon.edu', 'password': 'hi'}, follow = True)
+        with open('./Remember/static/remember/images/iphoneImg.jpg', 'rb') as fp:
+            response = c.post('/remember/submitPatient/', {'email': 'astley@aol.com', 'password': 'nevergiveUup', 'passwordConfirm': 'nevergiveUup', 'firstName': 'Rick', 'lastName': 'Astley', 'uploadedPic': fp}, follow = True)
+        response = c.post('/remember/login/', {'Email': 'astley@aol.com', 'password': 'nevergiveUup'}, follow=True)
+        code = response.status_code
+        content = response.content
+        # print(content)
+        self.assertRedirects(response, '/remember/patientMenu/', status_code=302,
+                             target_status_code=200, fetch_redirect_response=True)
+        self.assertTrue(b"Menu - Rick's" in content)
+        self.assertTrue(b'<h5 class="names">Take Quiz</h5>' in content)
+
+    def test_take_questionnaire_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+
+        response = c.post('/remember/login/', {'Email': 'didycz001@gannon.edu', 'password': 'hi'}, follow=True)
+        with open('./Remember/static/remember/images/iphoneImg.jpg', 'rb') as fp:
+            response = c.post('/remember/submitPatient/',
+                              {'email': 'astley@aol.com', 'password': 'nevergiveUup', 'passwordConfirm': 'nevergiveUup',
+                               'firstName': 'Rick', 'lastName': 'Astley', 'uploadedPic': fp}, follow=True)
+        response = c.post('/remember/pickedPatient/',
+                          {'relation': '1'}, follow=True)
+        with open('./Remember/static/remember/images/RememberLogo.png', 'rb') as fp:
+            response = c.post('/remember/submitQuestion/', {'uploadedPic': fp, 'pDescription': 'Do you Remember?',
+                                                            'theQuestion': 'What is this logo?', 'answer1': 'ours',
+                                                            'answer2': 'art', 'answer3': 'Fiverr Baybeee',
+                                                            'answer4': 'nothing of note', 'toggle': 1}, follow=True)
+        response = c.post('/remember/takeQuestionnaire/', follow=True)
+        code = response.status_code
+        content = response.content
+        # print(content)
+        self.assertTrue(code == 200)
+        self.assertTrue(b'<button type="submit" value="1" class="btn btn-primary btn-lg customBtn" id="QuestionA"><h3>ours</h3></button>' in content)
+        self.assertTrue(b'<div class="d-flex justify-content-center">' in content)
+
+    def test_login_page_error_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+        response = c.post('/remember/login/', {'Email': 'd001@gannon.edu', 'password': 'hi'}, follow = True)    #invalid email
+        code = response.status_code
+        content = response.content
+        # print(content)
+        self.assertTrue(code == 200)
+        self.assertTrue(b"<strong>You have entered the wrong username or password, please try again</strong>" in content)
+        self.assertTrue(b'Log in' in content)
+
+    def test_submit_question_error_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+
+        response = c.post('/remember/login/', {'Email': 'didycz001@gannon.edu', 'password': 'hi'}, follow=True)
+        with open('./Remember/static/remember/images/iphoneImg.jpg', 'rb') as fp:
+            response = c.post('/remember/submitPatient/',
+                              {'email': 'astley@aol.com', 'password': 'nevergiveUup', 'passwordConfirm': 'nevergiveUup',
+                               'firstName': 'Rick', 'lastName': 'Astley', 'uploadedPic': fp}, follow=True)
+        response = c.post('/remember/pickedPatient/',
+                          {'relation': '1'}, follow=True)
+        with open('./Remember/static/remember/images/RememberLogo.png', 'rb') as fp:
+            response = c.post('/remember/submitQuestion/', {'uploadedPic': fp, 'pDescription': 'Do you Remember?',
+                                                            'theQuestion': 'What is this logo?', 'answer1': 'ours',
+                                                            'answer2': 'art', 'answer3': 'Fiverr Baybeee',
+                                                            'answer4': '', 'toggle': 1}, follow=True)
+        code = response.status_code
+        content = response.content
+        # print(content)
+        self.assertTrue(code == 200)
+        self.assertTrue(b'Questionnaire - Rick' in content)
+
+    def test_edit_patient_email_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+
+        response = c.post('/remember/login/', {'Email': 'didycz001@gannon.edu', 'password': 'hi'}, follow=True)
+        with open('./Remember/static/remember/images/iphoneImg.jpg', 'rb') as fp:
+            response = c.post('/remember/submitPatient/',
+                              {'email': 'astley@aol.com', 'password': 'nevergiveUup', 'passwordConfirm': 'nevergiveUup',
+                               'firstName': 'Rick', 'lastName': 'Astley', 'uploadedPic': fp}, follow=True)
+        response = c.post('/remember/pickedPatient/',
+                          {'relation': '1'}, follow=True)
+        response = c.post('/remember/managePatientEmail/',
+                          {'updateType': 'email'}, follow=True)
+        code = response.status_code
+        content = response.content
+        # print(content)
+        #self.assertRedirects(response, '/remember/managePatientEmail/', status_code=302,
+        #                     target_status_code=200, fetch_redirect_response=True)
+        self.assertTrue(b'Hidden Password' in content)
+        self.assertTrue(b'Rick' in content)
+        self.assertTrue(b'Astley' in content)
+
+    def test_edit_patient_password_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+
+        response = c.post('/remember/login/', {'Email': 'didycz001@gannon.edu', 'password': 'hi'}, follow=True)
+        with open('./Remember/static/remember/images/iphoneImg.jpg', 'rb') as fp:
+            response = c.post('/remember/submitPatient/',
+                              {'email': 'astley@aol.com', 'password': 'nevergiveUup', 'passwordConfirm': 'nevergiveUup',
+                               'firstName': 'Rick', 'lastName': 'Astley', 'uploadedPic': fp}, follow=True)
+        response = c.post('/remember/pickedPatient/',
+                          {'relation': '1'}, follow=True)
+        response = c.post('/remember/managePatientPassword/',
+                          {'updateType': 'password'}, follow=True)
+        code = response.status_code
+        content = response.content
+        # print(content)
+        # self.assertRedirects(response, '/remember/managePatientPassword/', status_code=302,
+        #                      target_status_code=200, fetch_redirect_response=True)
+        # self.assertTrue(b'astley @ aol.com>' in content)
+        self.assertTrue(b'Rick' in content)
+        self.assertTrue(b'Astley' in content)
+
+
+    def test_edit_patient_pic_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+
+        response = c.post('/remember/login/', {'Email': 'didycz001@gannon.edu', 'password': 'hi'}, follow=True)
+        with open('./Remember/static/remember/images/iphoneImg.jpg', 'rb') as fp:
+            response = c.post('/remember/submitPatient/',
+                              {'email': 'astley@aol.com', 'password': 'nevergiveUup', 'passwordConfirm': 'nevergiveUup',
+                               'firstName': 'Rick', 'lastName': 'Astley', 'uploadedPic': fp}, follow=True)
+        response = c.post('/remember/pickedPatient/',
+                          {'relation': '1'}, follow=True)
+        response = c.post('/remember/managePatientPic/',
+                          {'updateType': 'pic'}, follow=True)
+        code = response.status_code
+        content = response.content
+        # print(content)
+        # self.assertRedirects(response, '/remember/managePatientPic/', status_code=302,
+        #                      target_status_code=200, fetch_redirect_response=True)
+        # self.assertTrue(b'astley@aol.com>' in content)
+        self.assertTrue(b'Rick' in content)
+        self.assertTrue(b'Astley' in content)
+        self.assertTrue(b'Hidden Password' in content)
+
+    def test_edit_patient_name_UI(self):
+        c = Client()
+        response = c.post('/remember/createANewAdmin/',
+                          {'Email': 'didycz001@gannon.edu', 'password': 'hi', 'passwordConfirm': 'hi',
+                           'FName': 'Andrew', 'LName': 'Didycz'})
+
+        response = c.post('/remember/login/', {'Email': 'didycz001@gannon.edu', 'password': 'hi'}, follow=True)
+        with open('./Remember/static/remember/images/iphoneImg.jpg', 'rb') as fp:
+            response = c.post('/remember/submitPatient/',
+                              {'email': 'astley@aol.com', 'password': 'nevergiveUup', 'passwordConfirm': 'nevergiveUup',
+                               'firstName': 'Rick', 'lastName': 'Astley', 'uploadedPic': fp}, follow=True)
+        response = c.post('/remember/pickedPatient/',
+                          {'relation': '1'}, follow=True)
+        response = c.post('/remember/managePatientName/',
+                          {'updateType': 'name'}, follow=True)
+        code = response.status_code
+        content = response.content
+        # print(content)
+        # self.assertRedirects(response, '/remember/managePatientName/', status_code=302,
+        #                      target_status_code=200, fetch_redirect_response=True)
+        # self.assertTrue(b'astley@aol.com>' in content)
+        self.assertTrue(b'Hidden Password' in content)
+        self.assertTrue(b'Astley' in content)
+        self.assertTrue(b'Rick' in content)
