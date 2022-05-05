@@ -54,7 +54,7 @@ def loginPage(request):
 # checks info from the login page
 def login(request):
 
-    print("This is the login function")
+    # print("This is the login function")
 
     #pulling email and password from the calling login form
     Email = request.POST['Email']
@@ -1158,7 +1158,7 @@ def submitPatient(request):
 
     ## email is in use, throw error
     return render(request, 'Remember/adminEx/createPatient.html', 
-    { 'error_message': "THis is dumy data",}
+    { 'error_message': "The email you have entered is already registered.",}
     ) 
 
 
