@@ -57,11 +57,14 @@
             .btn.btn-secondary.dropdown-toggle {
                 background-color: rgb(225,225,225);  
             }
+            
             h1{
-                color: white;
-                font-family: 'Sans serif', Helvetica, sans-serif;
-                font-size: calc(2.5vw + 2.5vh);
-            }
+             color: white;
+             font-family: 'Sans serif', Helvetica, sans-serif;
+             font-size: calc(3vw + 2vh);
+             padding-top:2%;
+             padding-left: 12%;
+         }
 
             h2{
                 font-size: calc(1.7vw + 1.0vh);
@@ -108,6 +111,52 @@
                 font-size: calc(1.0vw + 1.5vh);
             }
 
+            .previousArrow{
+                width:50px; height: 30px; 
+                background: url(/../../static/remember/images/leftArrow.png) no-repeat;
+                background-size: contain;
+                border: none;
+                background-position: center;
+            }
+
+            .nextArrow{
+                width:50px; height: 30px; 
+                background: url(/../../static/remember/images/rightArrow.png) no-repeat;
+                background-size: contain;
+                border: none;
+                background-position: center;
+            }
+
+            .index{
+                padding-left: 0%;
+                padding-right: 0%;
+                margin-left: 5px;
+                margin-right: 5px;
+                font-weight: bold;
+                font-size: 30px;
+                padding: 3px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            .littleIndex{
+                padding-left: 0%;
+                padding-right: 0%;
+                margin-left: 1px;
+                margin-right: 1px;
+                font-weight: bold;
+                font-size: 15px;
+                color: rgb(125, 125, 125);
+                padding: 1px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            .flex-container {
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
 
         </style>
     </head>
@@ -124,7 +173,7 @@
             <a class="navbar-brand" href="/remember/patientMenu" >
                 <button class="backButton"></button>
             </a>
-            <a href="">
+            <a href="/remember/userMenu">
                 <div class="logo"></div>
             </a>
             <div class="dropdown" style="padding-right:1vw;">
@@ -144,9 +193,20 @@
          
         <div class="container d-flex flex-column mb-5 col-md-8">  
 
-            <div class="mb-2 align-self-end">
-                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">Previous</button>
-                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">Next</button>
+            <div class="mt-4 d-flex justify-content-center align-self-center " style="margin-bottom: 10px;">
+                <button type="button" class="btn btn-primary prev" onclick="plusSlides(-1)">
+                    <div class="previousArrow"></div>
+                </button>
+                <div class="flex-container" style="background-color:aliceblue">
+                    <div class="littleIndex align-self-center" id="indexCounter-2"></div>
+                    <div class="littleIndex align-self-center" id="indexCounter-1"></div>
+                    <div class="index align-self-center" id="indexCounter"></div>
+                    <div class="littleIndex align-self-center" id="indexCounter+1"></div>
+                    <div class="littleIndex align-self-center" id="indexCounter+2"></div>
+                </div>
+                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">
+                <div class="nextArrow"></div>
+                </button>
             </div>
 
             <div id="carouselExampleDark" class="carousel carousel-dark slide scrapbook align-self-center col-md-12" data-bs-interval="false">
@@ -169,32 +229,115 @@
                 </div>
             </div> 
 
-            <div class="mt-4 align-self-center">
-                <button type="button" class="btn btn-primary me-md-2 prev" onclick="plusSlides(-1)">Previous</button>
-                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">Next</button>
+            <div class="mt-4 d-flex justify-content-center align-self-center ">
+                <button type="button" class="btn btn-primary prev" onclick="plusSlides(-1)" style="margin-right: 5px">
+                    <div class="previousArrow"></div>
+                </button>
+                <button type="button" class="btn btn-primary next" onclick="plusSlides(1)">
+                    <div class="nextArrow"></div>
+                </button>
             </div>
              
 
         </div> 
               
         <script>
+            myIndexM2 = document.getElementById("indexCounter-2");
+            myIndexM1 = document.getElementById("indexCounter-1");
+            myIndex = document.getElementById("indexCounter");
+            myIndexP1 = document.getElementById("indexCounter+1");
+            myIndexP2 = document.getElementById("indexCounter+2");
 
             var slideIndex = 1;
             showSlides(slideIndex);
 
             function plusSlides(n) {
-            showSlides(slideIndex += n);
-            }
-            function showSlides(n) {
-            var i;
-            var slides = document.getElementsByClassName("carousel-item");
-            if (n > slides.length) {slideIndex = 1}    
-            if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
+                newIndex = slideIndex += n;
+                showSlides(newIndex);
+                }
 
-            slides[slideIndex-1].style.display = "block";  
+                function showSlides(n) {
+                var i;
+                var slides = document.getElementsByClassName("carousel-item");
+                //going fowards too far
+
+                if(slides.length == 1){
+                    myIndexM2.hidden = true
+                    myIndexM1.hidden = true
+                    myIndexP1.hidden = true
+                    myIndexP2.hidden = true
+                } else if(slides.length == 2){
+                    myIndexP2.hidden = true
+                    myIndexM2.hidden = true
+
+                }
+                if (n > slides.length) {
+                    slideIndex = 1
+                    myIndexM2.textContent = slideIndex-2;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndex.textContent = slideIndex;
+                    myIndexP1.textContent = slideIndex+1;
+                    myIndexP2.textContent = slideIndex+2;
+                }    
+                //going backwards too far
+                if (n < 1) {
+                    myIndexM2.textContent = slideIndex-2;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndex.textContent = slideIndex;
+                    myIndexP1.textContent = slideIndex+1;
+                    myIndexP2.textContent = slideIndex+2;
+                    slideIndex = slides.length
+                }
+                for (i = 0; i < slides.length; i++) {
+                    myIndex.textContent = slideIndex;
+                    slides[i].style.display = "none";  
+                }
+
+                slides[slideIndex-1].style.display = "block";  
+
+                if(slideIndex == 1){
+                    console.log("n = 1")
+
+                    myIndexM2.textContent = slides.length-1;
+                    myIndexM1.textContent = slides.length;
+                    myIndexP1.textContent = slideIndex+1;
+                    myIndexP2.textContent = slideIndex+2;
+                } else if(slideIndex == 2){
+                    console.log("slideIndex = 2")
+
+                    myIndexM2.textContent = slides.length;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndex.textContent = slideIndex;
+                    if(slideIndex+1 > slides.length){
+                        myIndexP1.textContent = 1;
+                    } else{
+                        myIndexP1.textContent = slideIndex+1;
+                    }
+                    if(slideIndex+1 == slides.length){
+                        myIndexP2.textContent = 1;
+                    } else {
+                        myIndexP2.textContent = slideIndex+2;
+                    }
+                } else if(slideIndex == slides.length-1){
+                    console.log("n = slide.length - 1")
+
+                    myIndexM2.textContent = slideIndex-2;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndexP1.textContent = slideIndex+1;
+                    myIndexP2.textContent = 1;
+                } else if(slideIndex == slides.length){
+                    console.log("n = slides.length")
+
+                    myIndexM2.textContent = slideIndex-2;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndexP1.textContent = 1;
+                    myIndexP2.textContent = 2;
+                } else{
+                    myIndexM2.textContent = slideIndex-2;
+                    myIndexM1.textContent = slideIndex-1;
+                    myIndexP1.textContent = slideIndex+1;
+                    myIndexP2.textContent = slideIndex+2;
+                }
             }
 
             document.addEventListener("DOMContentLoaded", function(){

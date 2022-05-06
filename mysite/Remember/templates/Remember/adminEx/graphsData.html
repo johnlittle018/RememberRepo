@@ -85,6 +85,22 @@
                 margin: auto;
             }
 
+            .container{
+                border: 5px solid black;
+                background-color: aliceblue;
+                padding: .5%;
+                margin-bottom: 5px;
+            }
+
+            
+            .line{
+                border: 0;
+                border-bottom: 5px dashed black;
+                opacity: .3;
+                padding:0;
+                margin:0;
+            }
+
         </style>
     </head>
 
@@ -101,7 +117,7 @@
             <a class="navbar-brand" href="/remember/adminMenu" >
                 <button class="backButton"></button>
             </a>
-            <a href="">
+            <a href="/remember/userMenu">
                 <div class="logo"></div>
             </a>
             <div class="dropdown" style="padding-right:1vw;">
@@ -110,6 +126,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                    <li><a class="dropdown-item" href="/remember/manageMyAdminAccount">Manage My Account</a></li>
                     <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
@@ -118,17 +135,58 @@
         <br>
         
         <h1> 
-            <span>Analytics -</span>
-            <span>{{userRelation.patient.name}}</span>
+            <span>Analytics - {{userRelation.patient.firstName}}</span>
+            <span></span>
         </h1>
 
+        
+        <div class="container">
+            <div class="row flex-nowrap">
+                <div class="col-7 justify-content-left align-self-center">
+                    <h3>
+                        Average Score
+                    </h3>
+                </div>
+                <div class="col-5 justify-content-center text-center">
+                    <h3>
+                        {{avrageScore}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+
+
         <div class="card chart-container">
-            <canvas id="chart"></canvas>
-          </div>
+            <canvas id="chart1"></canvas>
+        </div>
+
+        <br>
+
+        <div class="container">
+            <div class="row flex-nowrap">
+                <div class="col-7 justify-content-left align-self-center">
+                    <h3>
+                        Average Time Taken
+                    </h3>
+                </div>
+                <div class="col-5 justify-content-center text-center">
+                    <h3>
+                        {{avrageTime}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="card chart-container">
+            <canvas id="chart2"></canvas>
+        </div>
 
         <!-- Optional JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
-        <script>
+      <script>
            document.addEventListener("DOMContentLoaded", function(){
 
                 el_autohide = document.querySelector('.autohide');
@@ -155,32 +213,147 @@
                 // if
 
             }); 
-            </script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" crossorigin="anonymous"></script>
-            <script>
-            const ctx = document.getElementById("chart").getContext('2d');
+            
+            
+            var data = JSON.parse("{{scores|escapejs}}");
+            console.log(data);
+            // Making x data
+            xData = []
+            for (let i = 0; i < data.length; i++) {
+                xData.push(data[i][0])
+            }
+            // console.log(xData);
+
+            // making y data 
+            yData = []
+            for (let i = 0; i < data.length; i++) {
+                yData.push(data[i][1])
+            }
+            // console.log(yData);
+
+
+            //Chart 1
+            const ctx = document.getElementById("chart1")
             const myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                labels: ["3/6/2022", "3/7/2022", "3/8/2022",
-                "3/9/2022", "3/10/2022", "3/11/2022", "3/12/2022"],
-                datasets: [{
-                    label: 'Last week',
-                    backgroundColor: 'rgba(161, 198, 247, 1)',
-                    borderColor: 'rgb(47, 128, 237)',
-                    data: [87, 100, 70, 89, 69, 27, 10],
-                }]
+                    // equivelent to x
+                    labels: xData,
+                    datasets: [{
+                        fill: false,
+                        backgroundColor: 'rgba(161, 198, 247, 1)',
+                        borderColor: 'rgb(47, 128, 237)',
+                    // equivelent to y per upper x
+                        data: yData,
+                    }]
                 },
                 options: {
-                scales: {
-                    yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Total Results'
+                    },
+                    legend: {display: false},
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date Completed',
+                                font: {
+                                    size: '16px',
+                                    weight: 'bold',
+                                }
+                            },
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Score',
+                                font: {
+                                    size: '16px',
+                                    weight: 'bold',
+                                }
+                            },
+                        }
                     }
-                    }]
-                }
                 },
             });
+
+            var data2 = JSON.parse("{{times|escapejs}}");
+            console.log(data);
+            // Making x data
+            xData2 = []
+            for (let i = 0; i < data.length; i++) {
+                xData2.push(data2[i][0])
+            }
+            
+            console.log(xData2);
+
+            // making y data 
+            yData2 = []
+            for (let i = 0; i < data.length; i++) {
+                yData2.push(data2[i][1])
+            }
+            
+            console.log(yData2);
+
+
+            //Chart 2
+            const ctx2 = document.getElementById("chart2").getContext('2d');
+            const myChart2 = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    // equivelent to x
+                    labels: xData2,
+                    datasets: [{
+                        fill: false,
+                        backgroundColor: 'rgba(161, 198, 247, 1)',
+                        borderColor: 'rgb(47, 128, 237)',
+                    // equivelent to y per uper x
+                    data: yData2,
+
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Total Results'
+                    },
+                    legend: {display: false},
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date Completed',
+                                font: {
+                                    size: '16px',
+                                    weight: 'bold',
+                                }
+                            },
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Time',
+                                font: {
+                                    size: '16px',
+                                    weight: 'bold',
+                                }
+                            },
+                            ticks: {
+                                beginAtZero:true,
+                                callback: function(value, index, values) {
+                                    for(let i = 0; i < data.length; i++)
+                                        return fmtMSS(value);
+                                }
+                            },
+                        }
+                    }
+                },
+            });
+
+            function fmtMSS(s){
+                return((s-(s%=60))/60+(9<s?':m':':0')+s + "s")
+            }
 
         </script>
 

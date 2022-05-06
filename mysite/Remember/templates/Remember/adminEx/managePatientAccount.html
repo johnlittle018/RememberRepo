@@ -116,6 +116,7 @@
             }
 
             .custom-btn{
+                border: 5px solid black;
                 margin-left: 10vw;
                 margin-right: 10vw;
                 width:90vw;
@@ -145,7 +146,7 @@
             <a class="navbar-brand" href="/remember/adminMenu" >
                 <button class="backButton"></button>
             </a>
-            <a href="">
+            <a href="/remember/userMenu">
                 <div class="logo"></div>
             </a>
             <div class="dropdown" style="padding-right:1vw;">
@@ -154,7 +155,8 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
                     <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
-                  <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
+                    <li><a class="dropdown-item" href="/remember/manageMyAdminAccount">Manage My Account</a></li>
+                    <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -164,40 +166,40 @@
         </h1>
         
         <div class="d-flex flex-column justify-content-center removePadding">
-            <a href="/remember/managePatientPic" class="custom-link d-flex justify-content-center text-center">
-                <button type="button" class="btn btn-primary custom-btn">
+            <div class="d-flex justify-content-center text-center">
+                <button type="button" class="btn btn-primary custom-btn" onclick="window.location.href='/remember/managePatientPic';">
                     <h1>
                         Change {{userRelation.patient.firstName}}'s Profile Picture
                     </h1>
                 </button>
-            </a>
+            </div>
             <br>
 
-            <a href="/remember/managePatientEmail" class="custom-link d-flex justify-content-center text-center">
-                <button type="button" class="btn btn-primary custom-btn">
+            <div class="d-flex justify-content-center text-center">
+                <button type="button" class="btn btn-primary custom-btn" onclick="window.location.href='/remember/managePatientEmail';">
                     <h1>
                         Change {{userRelation.patient.firstName}}'s Email
                     </h1>
                 </button>
-            </a>
+            </div>
             <br>
 
-            <a href="/remember/managePatientPassword" class="custom-link d-flex justify-content-center text-center">
-                <button type="button" class="btn btn-primary custom-btn">
+            <div class="d-flex justify-content-center text-center">
+                <button type="button" class="btn btn-primary custom-btn" onclick="window.location.href='/remember/managePatientPassword';">
                     <h1>
                         Change {{userRelation.patient.firstName}}'s Password
                     </h1>
                 </button>
-            </a>
+            </div>
             <br>
             
-            <a href="/remember/managePatientName" class="custom-link d-flex justify-content-center text-center">
-                <button type="button" class="btn btn-primary custom-btn">
+            <div class="d-flex justify-content-center text-center">
+                <button type="button" class="btn btn-primary custom-btn" onclick="window.location.href='/remember/managePatientName';">
                     <h1>
                         Change {{userRelation.patient.firstName}}'s Name
                     </h1>
                 </button>
-            </a>
+            </div>
         </div>
 
 

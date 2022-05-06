@@ -78,10 +78,14 @@
           margin:0%;
       }
       .results{
-          border: 5px solid black;
+          border: 10px solid rgb(13,110,253);
           background-color: aliceblue;
           padding: 1%;
       }
+
+        .results:hover{
+            border-color:rgb(8,73,169);
+        }
 
       .individualCorrectAnswer{
           background-color: rgb(59, 153, 109);
@@ -109,6 +113,21 @@
           margin:0px;
       }
 
+    .fakeBtn{
+        width:130px;
+        height:55px;
+        background-color: rgb(13,110,253);
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        line-height: 55px;
+
+    }
+    .fakeBtn:hover{
+        background-color: rgb(8,73,169);
+    }
+
   </style>
 </head>
 
@@ -119,10 +138,10 @@
 
   <!-- All your html stuff here -->
   <nav class="autohide navbar navbar-light" style="padding-left: 1vw;padding-right: 1vw;">
-      <a class="navbar-brand" href="" >
+      <a class="navbar-brand" href="/remember/userMenu" >
           <button class="backButton"></button>
       </a>
-      <a href="">
+      <a href="/remember/userMenu">
           <div class="logo"></div>
       </a>
       <div class="dropdown" style="padding-right:1vw;">
@@ -151,7 +170,7 @@
                             <div class="row flex-nowrap">
                                 {% csrf_token %}
                                 <input type="hidden" name="quizID" value="{{result.quiz.id}}">
-                                <div class="col-12">
+                                <div class="col-8">
                                     <div class="d-flex justify-content-start">
                                         <h4>
                                             {{result.completionTime}}
@@ -179,7 +198,13 @@
 
                                         </p>
                                     </div>
-
+                                </div>
+                                <div class="col-4 align-self-center">
+                                    <div class="d-flex justify-content-center align-self-center fakeBtn"> View Result </div>
+                                </div>
+                            </div>
+                            <div class="row flex-nowrap">
+                                <div class="col-12">
                                     <div class="outerBorder" value = "" id="quizID{{result.quiz.id}}">
                                         <div class="d-flex justify-content-start">
 
@@ -193,22 +218,6 @@
                                         
                                         
                                     </div> 
-
-                                    <!--
-                                        <div class="outerBorder">
-                                        <div class="d-flex justify-content-start">
-
-                                        {% for q in result.myQuestions %}
-
-                                            <span class="individualWrongAnswer">2</span>
-                                            <span class="individualCorrectAnswer" id={{NumbOfQuestionnaireWithAssociatedQuestionNumber}}>1</span> 
-                                        
-                                        {% endfor %}
-                                        
-                                        </div>
-                                        
-                                    </div> 
-                                    -->
                                 </div>
                             </div>
                         </button>
@@ -263,6 +272,7 @@
             console.log("Boxes Count: " + myOuterBorder.length)
             console.log("Answer Count: " + myAnswerBlock.length)
 
+    //(r, 0 ,105)
 
             //  for(j = 0; j <= myAnswerBlock.length-1; j++){
             //     var questionsInQuiz = myAnswerBlock[j].getAttribute('value')

@@ -135,7 +135,6 @@
                 width:8vw;height:8vw;
                 background: transparent url(/../../static/remember/images/EditIcon.png) no-repeat;
                 background-position: center;
-                background-color: transparent;
                 mix-blend-mode: multiply;
                 background-size: cover;
                 border: none;
@@ -149,7 +148,6 @@
                 width:8vw;height:8vw;
                 background: transparent url(/../../static/remember/images/TrashcanIcon.png) no-repeat;
                 background-position: center;
-                background-color: transparent;
                 mix-blend-mode: multiply;
                 background-size: cover;
                 border: none;
@@ -186,7 +184,7 @@
                 <button class="backButton"></button>
             </a>
             
-            <a href="">
+            <a href="/remember/userMenu">
                 <div class="logo"></div>
             </a>
             <div class="dropdown" style="padding-right:1vw;">
@@ -195,6 +193,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                    <li><a class="dropdown-item" href="/remember/manageMyAdminAccount">Manage My Account</a></li>
                     <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
@@ -329,8 +328,8 @@
                             </form>
 
 
-                            <button type="button" class="btn BtnTrashcanIcon" data-bs-toggle="modal" data-bs-target="#{{question}}"></button>
-                            <div class="modal fade" id="{{question}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <button type="button" class="btn BtnTrashcanIcon" data-bs-toggle="modal" data-bs-target="#dbt{{question.id}}"></button>
+                            <div class="modal fade" id="dbt{{question.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -342,7 +341,7 @@
                                             <br>
                                             This action cannot be undone! 
                                             <br>
-                                            Question: {{question}}
+                                            Question: {{question.question_text}}
                                             
                                         </div>
                                         <div class="modal-footer">
@@ -390,7 +389,7 @@
 
         </br>
         
-        <button type="button" class="btn btn-primary btn-lg upButton" id="btn-back-to-top"></button>
+        <button type="button" class="btn btn-primary btn-lg upButton" id="btn-back-to-top"> </button>
 
 
          <!-- Optional JavaScript -->

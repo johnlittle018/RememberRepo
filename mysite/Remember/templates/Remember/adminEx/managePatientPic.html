@@ -138,6 +138,15 @@
                 position: relative;
             }
 
+            .chooseFileBtn{
+                border: 5px solid rgb(13,110,253);
+                font-weight: bold;
+            }
+
+            .chooseFileBtn:hover{
+                border-color:rgb(8,73,169);
+            }
+
 
             
 
@@ -157,7 +166,7 @@
             <a class="navbar-brand" href="/remember/managePatientAccount" >
                 <button class="backButton"></button>
             </a>
-            <a href="">
+            <a href="/remember/userMenu">
                 <div class="logo"></div>
             </a>
             <div class="dropdown" style="padding-right:1vw;">
@@ -166,7 +175,8 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
                     <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
-                  <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
+                    <li><a class="dropdown-item" href="/remember/manageMyAdminAccount">Manage My Account</a></li>
+                    <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -184,9 +194,14 @@
             </div>
 
 
-            <form action="{% url 'Remember:submitPatient' %}" method="post" enctype="multipart/form-data" >
+            <form action="{% url 'Remember:updatePatient' %}" method="post" enctype="multipart/form-data" >
                 {% csrf_token %}
                 
+
+
+                <input type="hidden" name="updateType" value="pic">
+
+
                 <br>
 
                 <div class="row justify-content-center">
@@ -201,7 +216,7 @@
                     <div class="col-6 align" style="text-align: center;">
                         <div class="p-2 bd-highlight">                    <!-- Upload image input-->
                             <input id="upload" type="file" required="required" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
-                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4" style="border: 2px solid black;"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4 chooseFileBtn">CHOOSE FILE</label>
                         </div>
                     </div>
                 </div>
@@ -253,7 +268,7 @@
                 {% endif %}   
                 
                 <div class="addHorizontalPadding">
-                    <button type="submit" value="submitPatient" required="required" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
+                    <button type="submit" value="updatePatient" required="required" class="btn btn-primary" style="margin-bottom: 1.5vw;">Submit</button>
                 </div>
 
 

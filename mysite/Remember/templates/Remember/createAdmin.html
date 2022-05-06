@@ -34,23 +34,6 @@
             margin: -1vw;
             }
 
-            h1 span:nth-of-type(2){animation-delay: .05s;}  /*e*/
-            h1 span:nth-of-type(3){animation-delay: .1s;}   /*l*/
-            h1 span:nth-of-type(4){animation-delay: .15s;}  /*c*/
-            h1 span:nth-of-type(5){animation-delay: .2s;}   /*o*/
-            h1 span:nth-of-type(6){animation-delay: .25s;}  /*m*/
-            h1 span:nth-of-type(7){animation-delay: .3s;}   /*e*/
-            h1 span:nth-of-type(8){animation-delay: .45s;}  /*T*/
-            h1 span:nth-of-type(9){animation-delay: .5s;}   /*o*/
-            h1 span:nth-of-type(10){animation-delay: .65s;} /*R*/
-            h1 span:nth-of-type(11){animation-delay: .7s;}  /*e*/
-            h1 span:nth-of-type(12){animation-delay: .75s;} /*m*/
-            h1 span:nth-of-type(13){animation-delay: .8s;}  /*e*/
-            h1 span:nth-of-type(14){animation-delay: .85s;} /*m*/
-            h1 span:nth-of-type(15){animation-delay: .9s;}  /*b*/
-            h1 span:nth-of-type(16){animation-delay: .95s;} /*e*/
-            h1 span:nth-of-type(17){animation-delay: 1s;}  /*r*/
-
             .logo{
                 /*width:124.65px; height: 108px; */ 
                 /* Original size width: 374; height: 324 */
@@ -64,10 +47,9 @@
              .login-form {
                 opacity: 0;
                 transform: translateY(30px);
-                animation: fadeInAnimation ease 0.5s;
+                animation: fadeInAnimation ease 2s;
                 animation-iteration-count: 1;
                 animation-fill-mode: forwards;
-                animation-delay: 2s;
             }
 
 
@@ -150,37 +132,50 @@
         <div class="mx-auto">
             <div class="d-flex justify-content-center">
                 <div class="login-form p-4">
-                    <form action="{% url 'Remember:login' %}" method="post">
+                    <form action="{% url 'Remember:createANewAdmin' %}" method="post">
                         
                         {% csrf_token %}
-
                         <h2 class="text-center">Create Admin <br> Account</h2>       
+
+                        <div class="form-group">
+                            <label for="exampleInputFName">First Name</label>
+                            <input type="text" name="FName" class="form-control" required="required" placeholder="First Name" >
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFName">Last Name</label>
+                            <input type="text" name="LName" class="form-control" required="required" placeholder="Last Name" >
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
-                            <input type="text" name="Email" class="form-control" placeholder="Your Email" >
+                            <input type="email" name="Email" class="form-control" required="required" placeholder="Your Email" >
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Your Password" >
+                            <input type="password" name="password" class="form-control" required="required" placeholder="Your Password" >
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPasswordConfirm1">Password</label>
-                            <input type="password" name="passwordConfirm" class="form-control" placeholder="Confirm Your Password" >
+                            <input type="password" name="passwordConfirm" class="form-control" required="required" placeholder="Confirm Your Password" >
                         </div>
-                        
-                        
+
+
+                        {% if error_message %}
+                        <div style="width:50%">
+                        <p style="color:red"><strong>{{error_message}}</strong></p>
+                        </div>
+                        {% endif %}    
+
+
                         
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block" value="login" >Create</button>
+                            <button type="submit" class="btn btn-primary btn-block" value="createANewAdmin" >Create</button>
                         </div>
+
+
                     </form>
 
 
-                    {% if error_message %}
-                    <div style="width:50%">
-                    <p style="color:red"><strong>You have entered the wrong username or password, please try again</strong></p>
-                    </div>
-                    {% endif %}   
+                    
                     
                     <br>
                 </div>

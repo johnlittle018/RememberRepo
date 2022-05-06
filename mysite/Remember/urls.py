@@ -19,6 +19,7 @@ urlpatterns = [
 
     
     ## Stuff for everyone
+    path('', views.loginPage, name='home'),
     path('loginPage/', views.loginPage, name='loginPage'),
     
     path('login/', views.login, name='login'),
@@ -32,6 +33,12 @@ urlpatterns = [
     path('changePassword/', views.changePassword, name='changePassword'),
 
     path('createAdmin/', views.createAdmin, name='createAdmin'),
+
+    path('userMenu/', views.userMenu, name='userMenu'),
+
+    path('updateUser/', views.updateUser, name='updateUser'),
+    
+    path('updatePatient/', views.updatePatient, name='updatePatient'),
 
    
 
@@ -54,7 +61,17 @@ urlpatterns = [
     path('questionnaireResults/', views.questionnaireResults, name='questionnaireResults'),
     path('viewReminder/', views.viewReminder, name='viewReminder'),
 
-   
+    path('manageMyAdminAccount/', views.manageMyAdminAccount, name='manageMyAdminAccount'),
+    path('manageMyAdminEmail/', views.manageMyAdminEmail, name='manageMyAdminEmail'),
+    path('manageMyAdminPassword/', views.manageMyAdminPassword, name='manageMyAdminPassword'),
+    path('manageMyAdminName/', views.manageMyAdminName, name='manageMyAdminName'),
+
+
+    
+    path('createANewAdmin/', views.createANewAdmin, name='createANewAdmin'),
+
+    
+
     
     
     ## Stuff for Patient

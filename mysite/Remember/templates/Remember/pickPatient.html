@@ -67,8 +67,7 @@
 
             .pictureButton{
                 background-color: white;
-                border-width: 4px;
-                border-color: black;
+                border: 10px solid rgb(13,110,253);
                 color: black;
                 padding: 0px 0px;
                 text-align: left;
@@ -78,6 +77,10 @@
                 margin: 10px 10px;
                 cursor: pointer;
             }
+
+            .pictureButton:hover{
+            border-color:rgb(8,73,169);
+        }
 
             .pictureStyle{
                 min-height: 150px;
@@ -117,7 +120,7 @@
             <a class="navbar-brand" style="padding-left: 50px;">
                 <!--Left here to keep the logo centered (No back arrow because they would logout)-->
             </a>
-            <a href="">
+            <a href="/remember/userMenu">
                 <div class="logo"></div>
             </a>
             <div class="dropdown" style="padding-right:1vw;">
@@ -126,6 +129,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                    <li><a class="dropdown-item" href="/remember/manageMyAdminAccount">Manage My Account</a></li>
                     <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>

@@ -125,6 +125,15 @@
                 border-color: rgb(25,135,84);
             }
 
+            .chooseFileBtn{
+                border: 5px solid rgb(13,110,253);
+                font-weight: bold;
+            }
+
+            .chooseFileBtn:hover{
+                border-color:rgb(8,73,169);
+            }
+
 
  
         </style>
@@ -143,7 +152,7 @@
             <a class="navbar-brand" href="/remember/editQuestionnaire">
                 <button class="backButton"></button>
             </a>
-            <a href="">
+            <a href="/remember/userMenu">
                 <div class="logo"></div>
             </a>
             <div class="dropdown" style="padding-right:1vw;">
@@ -152,6 +161,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/remember/helpPage">Help Page</a></li>
+                    <li><a class="dropdown-item" href="/remember/manageMyAdminAccount">Manage My Account</a></li>
                     <li><a class="dropdown-item" href="/remember/loginPage">Logout</a></li>
                 </ul>
             </div>
@@ -204,15 +214,15 @@
                             
                             <div class="col-12" style="text-align: center;">
                                 <p class="font-italic text-white text-center">The picture uploaded will be displayed inside the box below.</p>
-                                <div class="mt-4"><img id="imageResult" src=" {{question.picture}}" alt="" class="img-fluid rounded shadow-sm mx-auto d-block image-area">
+                                <div class="mt-4"><img id="imageResult" src="{{question.picture}}" alt="" class="img-fluid rounded shadow-sm mx-auto d-block image-area">
                                 </div>
                             </div>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-6 align" style="text-align: center;">
                                 <div class="p-2 bd-highlight">                    <!-- Upload image input-->
-                                    <input id="upload" type="file" required="required" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
-                                    <label for="upload" class="btn btn-light m-0 rounded-pill px-4" style="border: 2px solid black;"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                                    <input id="upload" type="file" name="uploadedPic" onchange="readURL(this);" class="form-control border-0">
+                                    <label for="upload" class="btn btn-light m-0 rounded-pill px-4 chooseFileBtn">CHOOSE FILE</label>
                                 </div>
                             </div>
                         </div>
@@ -337,6 +347,9 @@
         <script>
             document.addEventListener("DOMContentLoaded", function(){
 
+                imageResult = document.getElementById("imageResult");
+                readURL(imageResult.src)
+
                 el_autohide = document.querySelector('.autohide');
                 // add padding-top to bady (if necessary)
                 navbar_height = document.querySelector('.navbar').offsetHeight;
@@ -374,6 +387,8 @@
             * ========================================== */
 
             function readURL(input) {
+                console.log("Understanding...")
+
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
 
@@ -382,10 +397,17 @@
                             .attr('src', e.target.result);
                     };
                     reader.readAsDataURL(input.files[0]);
+                }else{
+                    console.log("Else...")
+                    $('#imageResult').attr('src', input);
+                    console.log("input " + input)
+
+
                 }
             }
 
             $(function () {
+                console.log("Another Func...")
                 $('#upload').on('change', function () {
                     readURL(input);
                 });
